@@ -1,3 +1,6 @@
 [submodule "LAPKT-public"]
 	path = LAPKT-public
 	url = https://github.com/recardona/LAPKT-public
+[submodule "pr-as-planning"]
+	path = pr-as-planning
+	url = https://github.com/recardona/pr-as-planning
