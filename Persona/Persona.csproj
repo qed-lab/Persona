@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{014DF401-99AA-43F8-B8F7-291A637CBC93}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Persona</RootNamespace>
+    <AssemblyName>Persona</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="PlanRecognizer.cs" />
+    <Compile Include="Mediation\Enums\ActionType.cs" />
+    <Compile Include="Mediation\Enums\PlanType.cs" />
+    <Compile Include="Mediation\Enums\Planner.cs" />
+    <Compile Include="Mediation\FileIO\BinarySerializer.cs" />
+    <Compile Include="Mediation\FileIO\Parser.cs" />
+    <Compile Include="Mediation\FileIO\Writer.cs" />
+    <Compile Include="Mediation\Interfaces\IAxiom.cs" />
+    <Compile Include="Mediation\Interfaces\IDependency.cs" />
+    <Compile Include="Mediation\Interfaces\IDomain.cs" />
+    <Compile Include="Mediation\Interfaces\IIntention.cs" />
+    <Compile Include="Mediation\Interfaces\IMediationEdge.cs" />
+    <Compile Include="Mediation\Interfaces\IObject.cs" />
+    <Compile Include="Mediation\Interfaces\IOperator.cs" />
+    <Compile Include="Mediation\Interfaces\IPlan.cs" />
+    <Compile Include="Mediation\Interfaces\IPredicate.cs" />
+    <Compile Include="Mediation\Interfaces\IProblem.cs" />
+    <Compile Include="Mediation\Interfaces\IState.cs" />
+    <Compile Include="Mediation\Interfaces\ITerm.cs" />
+    <Compile Include="Mediation\KnowledgeTools\EnvironmentModel.cs" />
+    <Compile Include="Mediation\KnowledgeTools\RobertsonMicrotheory.cs" />
+    <Compile Include="Mediation\MediationTree\DomainRevisor.cs" />
+    <Compile Include="Mediation\MediationTree\EventRevisor.cs" />
+    <Compile Include="Mediation\MediationTree\MediationTree.cs" />
+    <Compile Include="Mediation\MediationTree\MediationTreeData.cs" />
+    <Compile Include="Mediation\MediationTree\MediationTreeEdge.cs" />
+    <Compile Include="Mediation\MediationTree\MediationTreeNode.cs" />
+    <Compile Include="Mediation\PlanSpace\MediationEdge.cs" />
+    <Compile Include="Mediation\PlanSpace\PlanSpaceEdge.cs" />
+    <Compile Include="Mediation\PlanSpace\PlanSpaceMediator.cs" />
+    <Compile Include="Mediation\PlanSpace\PlanSpaceNode.cs" />
+    <Compile Include="Mediation\PlanSpace\PlanSpaceTools.cs" />
+    <Compile Include="Mediation\PlanTools\Axiom.cs" />
+    <Compile Include="Mediation\PlanTools\CausalLink.cs" />
+    <Compile Include="Mediation\PlanTools\Domain.cs" />
+    <Compile Include="Mediation\PlanTools\Flaw.cs" />
+    <Compile Include="Mediation\PlanTools\Intention.cs" />
+    <Compile Include="Mediation\PlanTools\Obj.cs" />
+    <Compile Include="Mediation\PlanTools\Operator.cs" />
+    <Compile Include="Mediation\PlanTools\Plan.cs" />
+    <Compile Include="Mediation\PlanTools\Predicate.cs" />
+    <Compile Include="Mediation\PlanTools\Problem.cs" />
+    <Compile Include="Mediation\PlanTools\State.cs" />
+    <Compile Include="Mediation\PlanTools\Term.cs" />
+    <Compile Include="Mediation\Planners\FDMulti.cs" />
+    <Compile Include="Mediation\Planners\FastDownward.cs" />
+    <Compile Include="Mediation\Planners\Glaive.cs" />
+    <Compile Include="Mediation\Planners\PlannerInterface.cs" />
+    <Compile Include="Mediation\Planners\SIWthenBFS.cs" />
+    <Compile Include="Mediation\Properties\AssemblyInfo.cs" />
+    <Compile Include="Mediation\StateSpace\PlanSimulator.cs" />
+    <Compile Include="Mediation\StateSpace\StateSpaceEdge.cs" />
+    <Compile Include="Mediation\StateSpace\StateSpaceMediator.cs" />
+    <Compile Include="Mediation\StateSpace\StateSpaceNode.cs" />
+    <Compile Include="Mediation\StateSpace\StateSpaceSearchTools.cs" />
+    <Compile Include="Mediation\StateSpace\StateSpaceTools.cs" />
+    <Compile Include="Mediation\Utilities\EnumerableExtension.cs" />
+    <Compile Include="Mediation\Utilities\Tuple.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mediation\PlanTools\Axiom.cs.meta" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
