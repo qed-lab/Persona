@@ -127,3 +127,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+Persona/bin
+Persona/obj
