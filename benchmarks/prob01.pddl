@@ -308,132 +308,132 @@
     		;; quests.  This is a 5 choose 3 = 10 combinations of goal sets.
     		
     		;; 5 choose 3: 
-    		(and		g1
-    					g2
-    					g3)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has alli tastycupcake))
     					
-    		(and		g1
-    					g2
-    					g4A)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
     					
-    		(and		g1
-    					g2
-    					g4B)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
     					
-    		(and		g1
-    					g2
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has james coin) (has james humanskull) (has james candle))
     					
-    		(and		g1
-    					g3
-    					g4A)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
 
-    		(and		g1
-    					g3
-    					g4B)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
 
-    		(and		g1
-    					g3
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has alli tastycupcake)
+    					(has james coin) (has james humanskull) (has james candle))
     		
-    		(and		g2
-    					g3
-    					g4A)
+    		(and		(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
 
-    		(and		g2
-    					g3
-    					g4B)
+    		(and		(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
     					
-    		(and		g2
-    					g3
-    					g5)
+    		(and		(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has james coin) (has james humanskull) (has james candle))
     					
-    		(and		g5
-    					g4A
-    					g3)
+    		(and		(has james coin) (has james humanskull) (has james candle)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has alli tastycupcake))
     					
-    		(and		g5
-    					g4B
-    					g3)
+    		(and		(has james coin) (has james humanskull) (has james candle)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has alli tastycupcake))
     					
-    		(and		g4A
-    					g1
-    					g5)
+    		(and		(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has ian knightsword) (has ian knightshield)
+    					(has james coin) (has james humanskull) (has james candle))
 
-    		(and		g4B
-    					g1
-    					g5)
+    		(and		(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has ian knightsword) (has ian knightshield)
+    					(has james coin) (has james humanskull) (has james candle))
     					
-    		(and		g4A
-    					g2
-    					g5)
+    		(and		(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has giovanna hairtonic)
+    					(has james coin) (has james humanskull) (has james candle))
 
-    		(and		g4B
-    					g2
-    					g5)
+    		(and		(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has giovanna hairtonic)
+    					(has james coin) (has james humanskull) (has james candle))
     					
     		;; The following win conditions are when the player decides to complete 4/5
     		;; quests.  This is a 5 choose 4 = 5 combinations of goal sets.		
     		
-    		(and		g1
-    					g2
-    					g3
-    					g4A)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
 
-    		(and		g1
-    					g2
-    					g3
-    					g4B)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
     						
-    		(and		g1
-    					g2
-    					g3
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has james coin) (has james humanskull) (has james candle))
     						
-    		(and		g1
-    					g2
-    					g4A
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
 
-    		(and		g1
-    					g2
-    					g4B
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
 
-    		(and		g1
-    					g3
-    					g4A
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
 
-    		(and		g1
-    					g3
-    					g4B
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
     						
-    		(and		g2
-    					g3
-    					g4A
-    					g5)
+    		(and		(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
     					
-			(and		g2
-    					g3
-    					g4B
-    					g5)
+			(and		(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
 			
     		;; The following win condition is when the player decides to complete 5/5
     		;; quests.  This is a 5 choose 5 = 1 goal set.
 
-    		(and		g1
-    					g2
-    					g3
-    					g4A
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
     					
-    		(and		g1
-    					g2
-    					g3
-    					g4B
-    					g5)
+    		(and		(has ian knightsword) (has ian knightshield)
+    					(has giovanna hairtonic)
+    					(has alli tastycupcake)
+    					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
+    					(has james coin) (has james humanskull) (has james candle))
     	)
     )
 )
