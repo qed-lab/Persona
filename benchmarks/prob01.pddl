@@ -222,6 +222,7 @@
                                 (wants-item arthur shinykey)
                                 (wants-item arthur loveletter)
                                 (wants-item arthur lovecontract)
+                                (wants-item arthur basementexitkey)
                                 (willing-to-give-item arthur loveletter)
                                 (willing-to-give-item arthur lovecontract)
                                 (willing-to-give-item arthur ash)
@@ -255,9 +256,9 @@
 
 
         ;; >>>> Wisdom Quest Configuration <<<<
-        (at james valley)        (wants-item james pileofcoins) ;; -> added dynamically
+        (at james valley)        (wants-item james coin) ;; -> added dynamically
                                  (wants-item james humanskull) ;; -> added dynamically
-                                 (wants-item james candelabra) ;; -> added dynamically
+                                 (wants-item james candle) ;; -> added dynamically
 
                                  (at coin bank)
                                  (at humanskull cliff)
