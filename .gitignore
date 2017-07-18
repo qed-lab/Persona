@@ -129,3 +129,4 @@ ENV/
 .mypy_cache/
 Persona/bin
 Persona/obj
+data
