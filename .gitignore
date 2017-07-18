@@ -130,3 +130,4 @@ ENV/
 Persona/bin
 Persona/obj
 data
+*.userprefs
