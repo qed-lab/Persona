@@ -168,11 +168,11 @@ namespace Mediation.FileIO
         }
 
         // Creates an action log CSV file with two columns: action, execution-status
-        public static void ActionLogToCSV(string file, List<Tuple<string,string>> actionLog)
+        public static void ActionLogToCSV(string file, List<Utilities.Tuple<string,string>> actionLog)
         {
             using (StreamWriter writer = new StreamWriter(file, false))
             {
-                foreach (Tuple<string,string> action in actionLog)
+                foreach (Utilities.Tuple<string,string> action in actionLog)
                 {
                     writer.WriteLine(action);
                 }
@@ -277,7 +277,7 @@ namespace Mediation.FileIO
         }
 
         // Create a summary of the tree generated.
-        public static void Summary(string directory, List<Tuple<String, String>> content)
+        public static void Summary(string directory, List<Utilities.Tuple<String, String>> content)
         {
             string file = directory + "index.html";
 
@@ -285,7 +285,7 @@ namespace Mediation.FileIO
             {
                 writer.WriteLine("<html>");
                 writer.WriteLine("<body>");
-                foreach (Tuple<String, String> tuple in content)
+                foreach (Utilities.Tuple<String, String> tuple in content)
                 {
                     writer.WriteLine("<b>" + tuple.First + "</b><br />");
                     writer.WriteLine(tuple.Second + "<br /><br />");
@@ -375,29 +375,29 @@ namespace Mediation.FileIO
         }
 
         // Generates a CSV file of test statistics.
-        public static void ToCSV(string directory, List<List<Tuple<String, String>>> summaries)
+        public static void ToCSV(string directory, List<List<Utilities.Tuple<String, String>>> summaries)
         {
             string file = directory + "summary.csv";
 
             using (StreamWriter writer = new StreamWriter(file, false))
             {
-                List<Tuple<String, String>> firstSummary = summaries[0];
-                Tuple<String, String> lastTuple = firstSummary[firstSummary.Count - 1];
+                List<Utilities.Tuple<String, String>> firstSummary = summaries[0];
+                Utilities.Tuple<String, String> lastTuple = firstSummary[firstSummary.Count - 1];
                 firstSummary.RemoveAt(firstSummary.Count - 1);
-                foreach (Tuple<String, String> tuple in firstSummary)
+                foreach (Utilities.Tuple<String, String> tuple in firstSummary)
                     writer.Write(tuple.First + ",");
                 writer.WriteLine(lastTuple.First);
-                foreach (Tuple<String, String> tuple in firstSummary)
+                foreach (Utilities.Tuple<String, String> tuple in firstSummary)
                     writer.Write(tuple.Second + ",");
                 writer.WriteLine(lastTuple.Second);
 
                 summaries.RemoveAt(0);
 
-                foreach (List<Tuple<String, String>> summary in summaries)
+                foreach (List<Utilities.Tuple<String, String>> summary in summaries)
                 {
                     lastTuple = summary[summary.Count - 1];
                     summary.RemoveAt(summary.Count - 1);
-                    foreach (Tuple<String, String> tuple in summary)
+                    foreach (Utilities.Tuple<String, String> tuple in summary)
                         writer.Write(tuple.Second + ",");
                     writer.WriteLine(lastTuple.Second);
                     summary.Add(lastTuple);
