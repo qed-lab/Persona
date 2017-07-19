@@ -17,13 +17,13 @@ namespace Mediation.FileIO
 {
 	public static class Parser
 	{
-		public static string path = @"X:\Developer\GME\";
+		public static string path = @"/Users/recardona/Developer/Persona/";
 
 		// Returns the project's top directory as a string.
 		public static string GetTopDirectory()
 		{
 			// Split the current directory path by \.
-			string[] splPath = Directory.GetCurrentDirectory().Split('\\');
+            string[] splPath = System.IO.Directory.GetCurrentDirectory().Split('/');
 
 			// Create a string to hold the directory path.
 			string topDir = "";
