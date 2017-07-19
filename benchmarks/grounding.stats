@@ -1,0 +1,5 @@
+Parsing=0.00176
+Instantiation=0.0654
+Fluent_Copying=0.00182
+Init_And_Goal_Copying=3.3e-05
+Operators_Copying=0.0036
