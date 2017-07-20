@@ -8,23 +8,60 @@ using System.Text;
 using System.Threading;
 
 using Mediation.FileIO;
+using Mediation.PlanTools;
 
 namespace Persona
 {
     public class PlanRecognizer
     {
-		static int Main(string[] args)
+		public static int Main(string[] args)
 		{
-            PlanRecognizer persona = new PlanRecognizer();
-            persona.CompileObservations();
-            persona.SIWthenBFSPlan();
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
+
+			// Load the domain
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/domain.pddl";
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+
+            // Load the problem
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/prob01.pddl";
+            Problem problem = Parser.GetProblem(problemPath);
+
+			foreach(string dataFolder in dataFolders)
+            {
+                string observationsPath = dataFolder + @"/chronology.pddl";
+                Plan chronology = Parser.GetPlan(observationsPath, domain, problem);
+                Console.WriteLine(chronology);
+            }
+
+            Console.WriteLine("END");
+
+            // PlanRecognizer persona = new PlanRecognizer();
+            // persona.RecognizePlan();
 			return 0;
 		}
 
-        public PlanRecognizer()
+        private Domain domain;
+        private Problem problem;
+        private Plan observations;
+
+        public PlanRecognizer(Domain domain, Problem problem, Plan observations)
         {
 
         }
+
+        public void RecognizePlan()
+        {
+            DateTime recognitionStart = DateTime.Now;
+
+            this.CompileObservations();
+            this.SIWthenBFSPlan();
+
+            DateTime recognitionEnd = DateTime.Now;
+            TimeSpan elapsedTime = recognitionEnd - recognitionStart;
+            Console.WriteLine(elapsedTime);
+        }
+
 
         /// <summary>
         /// Compiles the observations.
@@ -50,9 +87,9 @@ namespace Persona
             // Store the process' arguments.
             startInfo.Arguments =
                 "-d " + domainPath + " " +
-                "-i " + problemPath + " " +
-                "-o " + observationsPath + " " +
-                "-v";
+                "-i " + problemPath + " " + 
+                "-o " + observationsPath + " ";
+                         // + "-v";
 
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
