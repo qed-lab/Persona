@@ -703,7 +703,7 @@ namespace Mediation.FileIO
 			}
 
 			// Create a working copy of the domain file.
-			Writer.DomainToPDDL(Parser.GetTopDirectory() + @"Benchmarks/" + domain.Name.ToLower() + @"/domrob.pddl", domain);
+			// Writer.DomainToPDDL(Parser.GetTopDirectory() + @"Benchmarks/" + domain.Name.ToLower() + @"/domrob.pddl", domain);
 
 			return domain;
 		}
