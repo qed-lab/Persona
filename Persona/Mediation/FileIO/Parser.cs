@@ -234,12 +234,6 @@ namespace Mediation.FileIO
 			// Add the step to the plan.
 			plan.GoalStep = goal;
 
-			// Overwrite file.
-			using (StreamWriter writer = new StreamWriter(file, false))
-			{
-				writer.Write("");
-			}
-
 			return plan;
 		}
 
