@@ -55,8 +55,13 @@ namespace Mediation.PlanTools
 
 				// Loop through the predicates.
 				foreach (IPredicate predicate in value)
-                    // And insert them in the new hashtable.
-                    table.Add(predicate, true);
+                {
+                    if(!table.Contains(predicate)) 
+                    {
+						// And insert them in the new hashtable.
+						table.Add(predicate, true);    
+                    }
+                }
 			}
 		}
 
