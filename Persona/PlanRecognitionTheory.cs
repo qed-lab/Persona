@@ -31,10 +31,10 @@ namespace Persona
             {
                 string observationsPath = dataFolder + @"/chronology.pddl";
                 Plan chronology = Parser.GetPlan(observationsPath, domain, problem);
-                Console.WriteLine(chronology);
+
             }
 
-            Console.WriteLine("END");
+
 
             // PlanRecognizer persona = new PlanRecognizer();
             // persona.RecognizePlan();
