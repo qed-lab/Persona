@@ -48,17 +48,44 @@ namespace Mediation.FileIO
                 foreach (IIntention intent in problem.Intentions)
                     writer.WriteLine("\t\t(intends " + intent.Character + " " + intent.Predicate + ")");
                 writer.WriteLine("\t)");
-                if (problem.Goal.Count > 1)
-                    writer.Write("\t(:goal\n\t  (AND\n");
+
+                // Goal Writing
+
+                // If we have disjunctive goals,
+                if (problem.Goals.Count > 0)
+                {
+                    writer.Write("\t(:goal\n\t  (OR\n");
+
+                    foreach(List<IPredicate> conj in problem.Goals)
+                    {
+                        if (conj.Count > 1)
+                            writer.Write("\t\t  (AND\n");
+
+                        foreach (IPredicate pred in conj)
+                            writer.WriteLine("\t\t\t" + pred);
+
+                        if (conj.Count > 1)
+                            writer.Write("\t\t  )\n");
+                    }
+
+                    writer.Write("\t\t)\n\t)\n)\n");
+                }
+
+                // If we only have conjunctive goals,
                 else
-                    writer.Write("\t(:goal\n");
-                foreach (IPredicate pred in problem.Goal)
-                    writer.WriteLine("\t\t" + pred);
-                if (problem.Goal.Count > 1)
-                    writer.Write("\t  )\n\t)\n)");
-                else
-                    writer.Write("\t)\n)");
-                
+                {
+	                if (problem.Goal.Count > 1)
+	                    writer.Write("\t(:goal\n\t  (AND\n");
+	                else
+	                    writer.Write("\t(:goal\n");
+	                foreach (IPredicate pred in problem.Goal)
+	                    writer.WriteLine("\t\t" + pred);
+	                if (problem.Goal.Count > 1)
+	                    writer.Write("\t  )\n\t)\n)");
+	                else
+	                    writer.Write("\t)\n)\n");
+                }
+
                 writer.Close();
             }
         }
@@ -120,11 +147,11 @@ namespace Mediation.FileIO
                     
                     writer.WriteLine(")");
                     writer.WriteLine("\t\t:precondition");
-                    if (action.Preconditions.Count > 1)
+                    if (action.Preconditions.Count > 0)
                         writer.WriteLine("\t\t\t(and");
                     foreach (Predicate precon in action.Preconditions)
                         writer.WriteLine("\t\t\t\t" + precon.ToString());
-                    if (action.Preconditions.Count > 1)
+                    if (action.Preconditions.Count > 0)
                         writer.WriteLine("\t\t\t)");
                     writer.WriteLine("\t\t:effect");
                     if (action.Effects.Count + action.Conditionals.Count > 1)

@@ -339,7 +339,7 @@ namespace Mediation.FileIO
 						{
 							Predicate pred = new Predicate();
 
-							pred.Name = Regex.Replace(words[++i], @"\t|\n|\r|[()]", "");
+							pred.Name = Regex.Replace(words[++i], @"\t|\n|\r|[()]|\s", "");
 
 							while (words[i][words[i].Length - 1] != ')')
 							{
@@ -833,12 +833,34 @@ namespace Mediation.FileIO
 						}
 					}
 
-					// Add the goal state.
+                    // Add the goal state.
+                    List<IPredicate> conj = new List<IPredicate>();
+                    bool isDisjunction = false;
+
 					while (i++ < words.Length - 1)
 					{
+                        string word = words[i];
+
 						if (words[i][0] == '(')
 						{
-							if (!words[i].ToLower().Equals("(and"))
+                            if(words[i].ToLower().Equals("(or"))
+                            {
+                                isDisjunction = true;
+                                continue;
+                            }
+
+                            else if(words[i].ToLower().Equals("(and"))
+                            {
+                                if (conj.Count > 0)
+                                {
+                                    problem.Goals.Add(conj);
+									conj = new List<IPredicate>();
+                                }
+                                    
+                                continue;
+                            }
+
+                            else
 							{
 								// Create a new predicate object.
 								Predicate pred = new Predicate();
@@ -856,15 +878,22 @@ namespace Mediation.FileIO
 								// Set the predicate's name.
 								pred.Name = Regex.Replace(words[i], @"\t|\n|\r|[()]", "");
 
-								// Add the predicate to the goal state.
+                                // Add the predicate to the goal state.
+                                if (isDisjunction)
+                                    conj.Add(pred);
+
 								problem.Goal.Add(pred);
 							}
 						}
+
 						else
 						{
 							// Add the predicate's terms.
 							if (!words[i].Equals(")"))
-								problem.Goal.Last().Terms.Add(new Term("", Regex.Replace(words[i], @"\t|\n|\r|[()]", "")));
+                            {
+                                problem.Goal.Last().Terms.Add(new Term("", Regex.Replace(words[i], @"\t|\n|\r|[()]", "")));
+                            }
+								
 						}
 					}
 				}
