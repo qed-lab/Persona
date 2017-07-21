@@ -20,6 +20,7 @@ namespace Mediation.PlanTools
         private List<IPredicate> initial;
         private List<IIntention> intentions;
         private List<IPredicate> goal;
+        private List<List<IPredicate>> goals;
         private Hashtable typeList;
         private Hashtable objectsByType;
 
@@ -47,7 +48,7 @@ namespace Mediation.PlanTools
         // Access the problem's player.
         public string Player
         {
-            get 
+            get
             {
                 if (player.Equals(""))
                     player = FindPlayer();
@@ -83,6 +84,14 @@ namespace Mediation.PlanTools
         {
             get { return goal; }
             set { goal = value; }
+        }
+
+        // Access the problem's possible goal states.
+        // Represents a disjunction of a conjunction of literals.
+        public List<List<IPredicate>> Goals
+        {
+            get { return goals; }
+            set { goals = value; }
         }
 
         // Access the problem's type list.
@@ -165,6 +174,7 @@ namespace Mediation.PlanTools
             initial = new List<IPredicate>();
             intentions = new List<IIntention>();
             goal = new List<IPredicate>();
+            goals = new List<List<IPredicate>>();
         }
 
         public Problem(string name, string originalName, string domain, string player, List<IObject> objects, List<IPredicate> initial, List<IPredicate> goal)
@@ -177,6 +187,7 @@ namespace Mediation.PlanTools
             this.initial = initial;
             intentions = new List<IIntention>();
             this.goal = goal;
+            goals = new List<List<IPredicate>>();
         }
 
         public Problem(string name, string originalName, string domain, string player, List<IObject> objects, List<IPredicate> initial, List<IIntention> intentions, List<IPredicate> goal)
@@ -189,6 +200,7 @@ namespace Mediation.PlanTools
             this.initial = initial;
             this.intentions = intentions;
             this.goal = goal;
+            goals = new List<List<IPredicate>>();
         }
 
         // Finds the player in the initial state.
