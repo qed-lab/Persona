@@ -166,7 +166,7 @@ namespace Persona
 			string plannerPath = Parser.GetTopDirectory() + @"LAPKT-public/planners/siw_plus-then-bfs_f-ffparser/siw-then-bfsf";
             string domainPath = Parser.GetTopDirectory() + @"benchmarks/pr-domain.pddl";
             string problemPath = Parser.GetTopDirectory() + @"benchmarks/pr-problem.pddl";
-            string outputPath = Parser.GetTopDirectory() + @"benchmarks/plan.pddl";
+            string outputPath = Parser.GetTopDirectory() + @"benchmarks/recognized-plan.pddl";
 
 			// Store and change the current working directory.
 			string oldWD = System.IO.Directory.GetCurrentDirectory();
