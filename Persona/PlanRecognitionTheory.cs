@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading;
 
 using Mediation.FileIO;
+using Mediation.Interfaces;
 using Mediation.PlanTools;
 
 namespace Persona
 {
-    public class PlanRecognizer
+    public class PlanRecognitionTheory
     {
 		public static int Main(string[] args)
 		{
@@ -27,11 +28,24 @@ namespace Persona
             string problemPath = Parser.GetTopDirectory() + @"benchmarks/prob01.pddl";
             Problem problem = Parser.GetProblem(problemPath);
 
+            // Load each chronology
 			foreach(string dataFolder in dataFolders)
             {
                 string observationsPath = dataFolder + @"/chronology.pddl";
-                Plan chronology = Parser.GetPlan(observationsPath, domain, problem);
+                Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
+                Plan chronology = RemoveUselessActions(fullChronology);
 
+                //// Chunk the chronology into groups of 10% (10%, 20%, etc.)
+                //for (int binId = 1; binId <= 9; binId++)
+                //{
+                //    int binSize = (int) Math.Floor(chronology.Steps.Count / 10d);
+                //    Plan binChronology = chronology.Prefix(binSize) as Plan;
+
+
+                //}
+
+                PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, chronology);
+                theory.Solve();
             }
 
 
@@ -41,16 +55,47 @@ namespace Persona
 			return 0;
 		}
 
+        private static Plan RemoveUselessActions(Plan observations)
+        {
+            List<IOperator> newSteps = new List<IOperator>();
+
+            foreach(IOperator step in observations.Steps)
+            {
+                // These are useless actions in the plan because they...
+                if (
+                    // ...do not effect a state change
+                    !step.Name.Equals("talk-to") &&
+                    !step.Name.Equals("look-at") &&
+
+                    // ...are just for flavor
+                    (!step.ToString().Equals("(give alli ash arthur junkyard)")) &&
+
+                    // ...cannot be used directly by the player
+                    !step.Name.Equals("donothing") &&
+                    !step.Name.Equals("win-the-game")) {
+
+                    newSteps.Add((IOperator)step.Clone());
+
+                }
+            }
+
+            IState newInitial = observations.Initial.Clone() as IState;
+            return new Plan(observations.Domain, observations.Problem, newSteps, newInitial);
+        }
+
         private Domain domain;
         private Problem problem;
         private Plan observations;
+        private Plan solution;
 
-        public PlanRecognizer(Domain domain, Problem problem, Plan observations)
+        public PlanRecognitionTheory(Domain domain, Problem problem, Plan observations)
         {
-
+            this.domain = domain;
+            this.problem = problem;
+            this.observations = observations;
         }
 
-        public void RecognizePlan()
+        public void Solve()
         {
             DateTime recognitionStart = DateTime.Now;
 
@@ -73,9 +118,14 @@ namespace Persona
 
             // Setup the observation compiler's / compiler argument paths.
             string compilerPath = Parser.GetTopDirectory() + @"pr-as-planning/obs-compiler/pr2plan";
-            string domainPath = Parser.GetTopDirectory() + @"benchmarks/domain.pddl";
-            string problemPath = Parser.GetTopDirectory() + @"benchmarks/prob01.pddl";
-            string observationsPath = Parser.GetTopDirectory() + @"benchmarks/chronology.pddl";
+
+            // Write the domain, problem, and observations to files.
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/domrob.pddl";
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/probrob.pddl";
+            string observationsPath = Parser.GetTopDirectory() + @"benchmarks/chronrob.pddl";
+            Writer.DomainToPDDL(domainPath, domain);
+            Writer.ProblemToPDDL(problemPath, domain, problem, problem.Initial);
+            Writer.PlanToPDDL(observationsPath, observations.Steps);
 
             // Store and change the current working directory.
             string oldWD = System.IO.Directory.GetCurrentDirectory();
@@ -88,8 +138,7 @@ namespace Persona
             startInfo.Arguments =
                 "-d " + domainPath + " " +
                 "-i " + problemPath + " " + 
-                "-o " + observationsPath + " ";
-                         // + "-v";
+                "-o " + observationsPath + " " + "-v";
 
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
@@ -117,7 +166,7 @@ namespace Persona
 			string plannerPath = Parser.GetTopDirectory() + @"LAPKT-public/planners/siw_plus-then-bfs_f-ffparser/siw-then-bfsf";
             string domainPath = Parser.GetTopDirectory() + @"benchmarks/pr-domain.pddl";
             string problemPath = Parser.GetTopDirectory() + @"benchmarks/pr-problem.pddl";
-            string outputPath = Parser.GetTopDirectory() + @"benchmarks/plan.ipc";
+            string outputPath = Parser.GetTopDirectory() + @"benchmarks/plan.pddl";
 
 			// Store and change the current working directory.
 			string oldWD = System.IO.Directory.GetCurrentDirectory();
@@ -145,6 +194,10 @@ namespace Persona
 			// Restore the old working directory.
 			System.IO.Directory.SetCurrentDirectory(oldWD);
 
+            // Parse and store the solution.
+            //Domain compiledDomain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+            //Problem compiledProblem = Parser.GetProblem(problemPath);
+            //this.solution = Parser.GetPlan(outputPath, compiledDomain, compiledProblem);
 
 			Console.WriteLine("PlanRecognizer.SIWthenBFSPlan() has finished!");
         }
