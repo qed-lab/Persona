@@ -131,3 +131,12 @@ Persona/bin
 Persona/obj
 data
 *.userprefs
+*.details
+*.stats
+*.list
+pr-problem.pddl
+pr-domain.pddl
+probrob.pddl
+chronrob.pddl
+domrob.pddl
+recognized-plan.pddl
