@@ -585,5 +585,21 @@ namespace Mediation.PlanTools
 
             return new Plan(domain, problem, newSteps, newInitial);
         }
+
+        // Creates a clone of the plan's prefix up to the given length in steps.
+        // Length must positive and not greater than the length of this plan.
+        public Object Prefix (int length)
+        {
+            if (length < 0 || length > this.steps.Count)
+                throw new ArgumentException("Length must be positive and not greater than the length of this plan");
+
+            List<IOperator> newSteps = new List<IOperator>();
+
+            for (int i = 0; i < length; i++)
+                newSteps.Add((IOperator) steps.ElementAt(i).Clone());
+
+            IState newInitial = initial.Clone() as IState;
+            return new Plan(domain, problem, newSteps, newInitial);
+        }
     }
 }
