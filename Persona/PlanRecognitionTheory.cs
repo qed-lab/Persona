@@ -55,6 +55,7 @@ namespace Persona
 			return 0;
 		}
 
+        // Removes actions that don't matter for the substance of the game.
         private static Plan RemoveUselessActions(Plan observations)
         {
             List<IOperator> newSteps = new List<IOperator>();
@@ -195,9 +196,9 @@ namespace Persona
 			System.IO.Directory.SetCurrentDirectory(oldWD);
 
             // Parse and store the solution.
-            //Domain compiledDomain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
-            //Problem compiledProblem = Parser.GetProblem(problemPath);
-            //this.solution = Parser.GetPlan(outputPath, compiledDomain, compiledProblem);
+            Domain compiledDomain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+            Problem compiledProblem = Parser.GetProblem(problemPath);
+            this.solution = Parser.GetPlan(outputPath, compiledDomain, compiledProblem);
 
 			Console.WriteLine("PlanRecognizer.SIWthenBFSPlan() has finished!");
         }
