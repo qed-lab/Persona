@@ -173,7 +173,7 @@ namespace Mediation.FileIO
 					step.Name = words[1];
 
 					// Find the corresponding operator in the domain.
-					temp = (Operator) domain.Operators.Find(x => x.Name.Equals(step.Name));
+					temp = (Operator) domain.Operators.Find(x => x.Name.Equals(step.Name, StringComparison.InvariantCultureIgnoreCase));
 
 					// Create a counter for the loop.
 					int i = 0;
