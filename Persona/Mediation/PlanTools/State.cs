@@ -467,5 +467,6 @@ namespace Mediation.PlanTools
 
 			return new State((Hashtable)table.Clone(), newLastStep, newNextStep, newApplicables);
 		}
+
 	}
 }

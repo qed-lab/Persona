@@ -75,37 +75,61 @@ namespace Persona
         /// Gets or sets the forward precision.
         /// </summary>
         /// <value>The forward precision.</value>
-        public double Precision { get; set; }
+        public double PlanRecognitionPrecision { get; set; }
 
         /// <summary>
         /// Gets or sets the forward recall.
         /// </summary>
         /// <value>The forward recall.</value>
-        public double Recall { get; set; }
+        public double PlanRecognitionRecall { get; set; }
 
         /// <summary>
         /// Gets or sets the forward f1 score.
         /// </summary>
         /// <value>The forward f1 score.</value>
-        public double F1Score { get; set; }
+        public double PlanRecognitionF1Score { get; set; }
+
+		/// <summary>
+		/// Gets or sets the levenshtein distance.
+		/// </summary>
+		/// <value>The levenshtein distance.</value>
+		public int PlanRecognitionLevenshteinDistance { get; set; }
+
+        /// <summary>
+        /// Gets or sets the goal recognition precision.
+        /// </summary>
+        /// <value>The goal recognition precision.</value>
+        public double GoalRecognitionPrecision { get; set; }
+
+        /// <summary>
+        /// Gets or sets the goal recognition recall.
+        /// </summary>
+        /// <value>The goal recognition recall.</value>
+        public double GoalRecognitionRecall { get; set; }
+
+        /// <summary>
+        /// Gets or sets the goal recognition f1 score.
+        /// </summary>
+        /// <value>The goal recognition f1 score.</value>
+        public double GoalRecognitionF1Score { get; set; }
+
+        /// <summary>
+        /// Gets or sets the goal recognition levenshtein distance.
+        /// </summary>
+        /// <value>The goal recognition levenshtein distance.</value>
+        public int GoalRecognitionLevenshteinDistance { get; set; }
 
         /// <summary>
         /// Gets or sets the predicted goal.
         /// </summary>
         /// <value>The predicted goal.</value>
-        public IList<IPredicate> PredictedGoal { get; set; }
+        public List<IPredicate> PredictedGoal { get; set; }
 
         /// <summary>
         /// Gets or sets the actual goal.
         /// </summary>
         /// <value>The actual goal.</value>
-        public IList<IPredicate> ActualGoal { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:Persona.DataLogEntry"/> is correct goal.
-        /// </summary>
-        /// <value><c>true</c> if is correct goal; otherwise, <c>false</c>.</value>
-        public bool IsCorrectGoal { get; set; }
+        public List<IPredicate> ActualGoal { get; set; }
 
         /// <summary>
         /// Gets or sets the predicted plan.
@@ -114,21 +138,30 @@ namespace Persona
         public Plan PredictedPlan { get; set; }
 
         /// <summary>
+        /// Gets or sets the filtered predicted plan.
+        /// </summary>
+        /// <value>The filtered predicted plan.</value>
+        public Plan FilteredPredictedPlan { get; set; }
+
+        /// <summary>
         /// Gets or sets the actual plan.
         /// </summary>
         /// <value>The actual plan.</value>
         public Plan ActualPlan { get; set; }
 
-        /// <summary>
-        /// Gets or sets the levenshtein distance.
-        /// </summary>
-        /// <value>The levenshtein distance.</value>
-        public int LevenshteinDistance { get; set; }
+
 
         /// <summary>
         /// The csv header.
         /// </summary>
-        private static readonly string csvHeader = "PlayerId, SystemConfiguration, NumberOfGoals, NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation, NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation, NumberOfObservationsInput, NumberOfPlayerActionsTaken, Runtime, ForwardPrecision, ForwardRecall, ForwardF1Score, PredictedGoal, ActualGoal, IsCorrectGoal, predictedPlan, actualPlan, levenshteinDistance";
+        private static readonly string csvHeader = 
+            "PlayerId, SystemConfiguration, NumberOfGoals, " +
+            "NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation, " +
+            "NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation, " +
+            "NumberOfObservationsInput, NumberOfPlayerActionsTaken, " +
+            "Runtime, " +
+            "PlanRecognitionPrecision, PlanRecognitionRecall, PlanRecognitionF1Score, PlanRecognitionLevenshteinDistance, " +
+            "GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance";
 
 		/// <summary>
 		/// Returns the CSV header of the data log entries.
@@ -145,7 +178,16 @@ namespace Persona
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Persona.DataLogEntry"/>.</returns>
         public string ToCSVString()
         {
-            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}", PlayerId, SystemConfiguration, NumberOfGoals, NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation, NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation, NumberOfObservationsInput, NumberOfPlayerActionsTaken, Runtime, Precision, Recall, F1Score, PredictedGoal, ActualGoal, IsCorrectGoal, PredictedPlan, ActualPlan, LevenshteinDistance);
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}",
+                                 PlayerId, SystemConfiguration, NumberOfGoals,
+                                 NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation,
+                                 NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation,
+                                 NumberOfObservationsInput, NumberOfPlayerActionsTaken,
+                                 Runtime,
+                                 PlanRecognitionPrecision, PlanRecognitionRecall, PlanRecognitionF1Score, PlanRecognitionLevenshteinDistance,
+                                 GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance);
+
+            // These are printed to file: PredictedPlan, ActualPlan, PredictedGoal, ActualGoal
         }
 
     }

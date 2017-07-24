@@ -9,6 +9,8 @@ using Mediation.StateSpace;
 using Mediation.PlanSpace;
 using Mediation.Utilities;
 
+using Persona;
+
 namespace Mediation.FileIO
 {
     public static class Writer
@@ -220,6 +222,35 @@ namespace Mediation.FileIO
 
                 writer.Close();
             }
+        }
+
+        // Creates a PDDL-like list of literals.
+        public static void LiteralsToPDDL(string file, List<IPredicate> literals)
+        {
+			using (StreamWriter writer = new StreamWriter(file, false))
+			{
+                foreach (IPredicate l in literals)
+				{
+					writer.WriteLine(l);
+				}
+
+				writer.Close();
+			}
+        }
+
+        public static void DataLogToFile(string file, List<DataLogEntry> log)
+        {
+			using (StreamWriter writer = new StreamWriter(file, false))
+			{
+                writer.WriteLine(DataLogEntry.CSVheader());
+
+                foreach (DataLogEntry l in log)
+				{
+                    writer.WriteLine(l.ToCSVString());
+				}
+
+				writer.Close();
+			}
         }
             
         // Given a mediation node, creates an HTML representation.

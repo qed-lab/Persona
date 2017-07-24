@@ -67,7 +67,7 @@ namespace Persona
 
                 // Iterate the player chronology of observations.
                 for (int obsId = 1;
-                     obsId < 3; // < playerChronology.Steps.Count; 
+                     obsId < playerChronology.Steps.Count; 
                      obsId++)
                 {
                     // Start the data entry.
@@ -94,6 +94,9 @@ namespace Persona
                     dataLog.Add(logEntry);
                 }
 
+                // Write the log to a file.
+                string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
+                Writer.DataLogToFile(logPath, dataLog);
 
                 // Restore the old working directory.
                 Directory.SetCurrentDirectory(oldWD);
@@ -134,20 +137,27 @@ namespace Persona
             dataLogEntry.Runtime = elapsedTime.TotalMilliseconds;
 
             // Compute additional metrics.
-            dataLogEntry.Precision = Utilities.Precision(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
-            dataLogEntry.Recall = Utilities.Recall(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
-            dataLogEntry.F1Score = Utilities.FScore(dataLogEntry.Precision, dataLogEntry.Recall);
+            dataLogEntry.PlanRecognitionPrecision = Utilities.PlanRecognitionPrecision(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
+            dataLogEntry.PlanRecognitionRecall = Utilities.PlanRecognitionRecall(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
+            dataLogEntry.PlanRecognitionF1Score = Utilities.FScore(dataLogEntry.PlanRecognitionPrecision, dataLogEntry.PlanRecognitionRecall);
             dataLogEntry.PredictedGoal = Utilities.ExtractRecognizedGoal(this.solution);
             dataLogEntry.ActualGoal = Utilities.ExtractActualGoal(dataLogEntry.ActualPlan);
-            dataLogEntry.IsCorrectGoal = (dataLogEntry.PredictedGoal.Equals(dataLogEntry.ActualGoal));
+            dataLogEntry.GoalRecognitionPrecision = Utilities.GoalRecognitionPrecision(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
+            dataLogEntry.GoalRecognitionRecall = Utilities.GoalRecognitionRecall(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
+            dataLogEntry.GoalRecognitionF1Score = Utilities.FScore(dataLogEntry.GoalRecognitionPrecision, dataLogEntry.GoalRecognitionRecall);
             dataLogEntry.PredictedPlan = this.solution;
+            dataLogEntry.FilteredPredictedPlan = this.solutionUsingOriginalDomainOperators;
+            dataLogEntry.PlanRecognitionLevenshteinDistance = Plan.LevenshteinDistance(dataLogEntry.FilteredPredictedPlan, 
+                                                                                       dataLogEntry.ActualPlan);
 
-            // Get the suffix of the recognized plan.
-            Plan predictedSuffix = this.solution.Suffix(dataLogEntry.NumberOfPlayerActionsTaken) as Plan;
-            Plan actualSuffix = dataLogEntry.ActualPlan.Suffix(dataLogEntry.NumberOfPlayerActionsTaken) as Plan;
+            dataLogEntry.GoalRecognitionLevenshteinDistance = Utilities.PredicateLevenshteinDistance(dataLogEntry.PredictedGoal,
+                                                                                                     dataLogEntry.ActualGoal);
 
-            // Compute the edit distance.
-            dataLogEntry.LevenshteinDistance = Plan.LevenshteinDistance(predictedSuffix, actualSuffix);
+            string recognizedGoalOutput = Directory.GetCurrentDirectory() + @"/recognized-goal-" + dataLogEntry.NumberOfPlayerActionsTaken + @".pddl";
+            string actualGoalOutput = Directory.GetCurrentDirectory() + @"/actual-goal.pddl";
+
+            Writer.LiteralsToPDDL(recognizedGoalOutput, dataLogEntry.PredictedGoal);
+            Writer.LiteralsToPDDL(actualGoalOutput, dataLogEntry.ActualGoal);
         }
 
 
@@ -220,6 +230,10 @@ namespace Persona
             Problem compiledProblem = Parser.GetProblem(problemPath);
             this.solution = Parser.GetPlan(outputPath, compiledDomain, compiledProblem);
 
+            // Store some additional metrics.
+            dataLogEntry.NumberOfOperatorsPostCompilation = compiledDomain.Operators.Count;
+            dataLogEntry.NumberOfPredicatesPostCompilation = compiledDomain.Predicates.Count;
+
             // Re-write the output.
             outputPath = Directory.GetCurrentDirectory() + @"/recognized-plan-"
                                   + dataLogEntry.NumberOfPlayerActionsTaken
@@ -228,7 +242,6 @@ namespace Persona
             System.IO.File.WriteAllText(outputPath, string.Empty);
             System.IO.File.WriteAllText(outputPath, Utilities.ToLiftedPlan(this.solution));
             this.solutionUsingOriginalDomainOperators = Parser.GetPlan(outputPath, domain, problem);
-            Console.WriteLine(this.solution);
         }
     }
 }

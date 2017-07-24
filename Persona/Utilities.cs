@@ -17,7 +17,7 @@ namespace Persona
         /// 
         /// Assumes that the recognized plan is not empty (returns -1.0 otherwise).
 		/// </summary>
-		public static double Precision(Plan recognizedPlan, Plan actualPlan)
+		public static double PlanRecognitionPrecision(Plan recognizedPlan, Plan actualPlan)
         {
             if (recognizedPlan.Steps.Count == 0)
                 return -1.0;
@@ -47,13 +47,42 @@ namespace Persona
             return (numberOfCorrectPredictions / (double) numberOfPredictions);
         }
 
+        // Computes Precision of Goal Rec
+		public static double GoalRecognitionPrecision(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
+		{
+			if (recognizedGoal.Count == 0)
+				return -1.0;
+
+            bool[] recognizedGoalBitArray = GoalBitArray(recognizedGoal);
+            bool[] actualGoalBitArray = GoalBitArray(actualGoal);
+
+            double numberOfCorrectPredictions = 0;
+
+            int numberOfPredictions = 0;
+            foreach (bool goalBit in recognizedGoalBitArray)
+                if (goalBit)
+                    numberOfPredictions++;
+
+            // Iterate over the recognized goal bit arrays.
+            for (int goalId = 0; goalId < recognizedGoalBitArray.Length; goalId++)
+            {
+                if(recognizedGoalBitArray[goalId] == true && actualGoalBitArray[goalId] == true)
+                {
+                    numberOfCorrectPredictions++;
+                }
+            }
+
+            return (numberOfCorrectPredictions / (double) numberOfPredictions);
+		}
+
+
         /// <summary>
         /// Computes the recall of the forward inferences in the recognized plan.
         /// Recall is the number of correct predictions divided by the number of actual steps.
         /// 
         /// Assumes that the actual plan is not empty (returns -1.0 otherwise).
         /// </summary>
-        public static double Recall(Plan recognizedPlan, Plan actualPlan)
+        public static double PlanRecognitionRecall(Plan recognizedPlan, Plan actualPlan)
         {
             if (actualPlan.Steps.Count == 0)
                 return -1.0;
@@ -81,6 +110,36 @@ namespace Persona
 
             return (numberOfCorrectPredictions / (double)numberOfActualSteps);
         }
+
+		// Computes Recall of Goal Rec
+		public static double GoalRecognitionRecall(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
+		{
+            if (actualGoal.Count == 0)
+				return -1.0;
+
+			bool[] recognizedGoalBitArray = GoalBitArray(recognizedGoal);
+			bool[] actualGoalBitArray = GoalBitArray(actualGoal);
+
+			double numberOfCorrectPredictions = 0;
+
+            int numberOfActualGoals = 0;
+			foreach (bool goalBit in actualGoalBitArray)
+				if (goalBit)
+					numberOfActualGoals++;
+
+			// Iterate over the recognized goal bit arrays.
+			for (int goalId = 0; goalId < recognizedGoalBitArray.Length; goalId++)
+			{
+				if (recognizedGoalBitArray[goalId] == true && actualGoalBitArray[goalId] == true)
+				{
+					numberOfCorrectPredictions++;
+				}
+			}
+
+			return (numberOfCorrectPredictions / (double)numberOfActualGoals);
+		}
+
+
 
         /// <summary>
         /// Computes the F-Score. Defaults to F1.
@@ -153,49 +212,49 @@ namespace Persona
 			foreach(Operator step in actualPlan.Steps) 
             {
                 // Equip Quest
-                if (step.Name.Equals("(give arthur knightsword ian fort)"))
+                if (step.ToString().Equals("(give arthur knightsword ian fort)"))
                     equipQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "ian", "knightsword"));
 
-                if (step.Name.Equals("(give arthur knightshield ian fort)"))
+                if (step.ToString().Equals("(give arthur knightshield ian fort)"))
                     equipQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "ian", "knightshield"));
 
                 // Fetch Quest
-                if (step.Name.Equals("(give arthur hairtonic giovanna shop)"))
+                if (step.ToString().Equals("(give arthur hairtonic giovanna shop)"))
                     fetchQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "giovanna", "hairtonic"));
 
                 // Pilgrimage Quest
-                if (step.Name.Equals("(give arthur tastycupcake alli junkyard)"))
+                if (step.ToString().Equals("(give arthur tastycupcake alli junkyard)"))
                     pilgrimageQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "alli", "tastycupcake"));
 
                 // Love Quest
-                if (step.Name.Equals("(give arthur loveletter jordan mansion)"))
+                if (step.ToString().Equals("(give arthur loveletter jordan mansion)"))
                     loveQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "jordan", "loveletter"));
 
-                if (step.Name.Equals("(give arthur rubyring dorian townarch)"))
+                if (step.ToString().Equals("(give arthur rubyring dorian townarch)"))
                 { 
                     // Only add the rubyring if the bouquet literal hasn't already been added.
                     if (!loveQuestLiterals.Contains(bouquet))
                         loveQuestLiterals.Add(rubyring);
                 }
 
-                if (step.Name.Equals("(give arthur bouquet dorian townarch)"))
+                if (step.ToString().Equals("(give arthur bouquet dorian townarch)"))
                 {
 					// Only add the bouquet if the rubyring literal hasn't already been added.
 					if (!loveQuestLiterals.Contains(rubyring))
                         loveQuestLiterals.Add(bouquet);
                 }
 
-                if (step.Name.Equals("(give arthur lovecontract jordan mansion)"))
+                if (step.ToString().Equals("(give arthur lovecontract jordan mansion)"))
                     loveQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "jordan", "lovecontract"));
 
                 // Wisdom Quest
-                if (step.Name.Equals("(give arthur coin james valley)"))
+                if (step.ToString().Equals("(give arthur coin james valley)"))
                     wisdomQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "james", "coin"));
 
-                if (step.Name.Equals("(give arthur humanskull james valley)"))
+                if (step.ToString().Equals("(give arthur humanskull james valley)"))
                     wisdomQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "james", "humanskull"));
 
-                if (step.Name.Equals("(give arthur candle james valley)"))
+                if (step.ToString().Equals("(give arthur candle james valley)"))
                     wisdomQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "james", "candle"));
 
             }
@@ -317,5 +376,140 @@ namespace Persona
             double num;
             return double.TryParse(s, out num);
         }
-    }
+
+
+
+
+
+
+
+
+
+
+        // Returns a List of strings that denote the symbols of this list of predicates.
+        // For example, if the list of strings was composed of the following predicates:
+        // (has bob ball)
+        // (at alice home)
+        //
+        // this method would return the following:
+        // ("has", "bob", "ball", "at", "alice", "home")
+        //
+        public static List<string> PredicatesToSymbolString(List<IPredicate> predicates)
+        {
+            List<string> symbols = new List<string>();
+
+            foreach(IPredicate p in predicates)
+            {
+                symbols.Add(p.Name);
+
+                foreach (Term t in p.Terms)
+                    symbols.Add(t.ToString());
+            }
+
+            return symbols;
+        }
+
+        /// <summary>
+        /// Predicates the levenshtein distance.
+        /// </summary>
+        public static int PredicateLevenshteinDistance(List<IPredicate> p1, List<IPredicate> p2)
+        {
+			List<string> sourceSymbolString = PredicatesToSymbolString(p1);
+			List<string> targetSymbolString = PredicatesToSymbolString(p2);
+
+			if (sourceSymbolString.Count == 0)
+			{
+				if (targetSymbolString.Count == 0)
+					return 0;
+
+				else
+					return targetSymbolString.Count;
+			}
+
+			if (targetSymbolString.Count == 0)
+				return sourceSymbolString.Count;
+
+			if (sourceSymbolString.Count > targetSymbolString.Count)
+			{
+				var temp = targetSymbolString;
+				targetSymbolString = sourceSymbolString;
+				sourceSymbolString = temp;
+			}
+
+			int m = targetSymbolString.Count;
+			int n = sourceSymbolString.Count;
+			int[,] distance = new int[2, m + 1];
+
+			// Initialize the distance matrix.
+			for (var j = 1; j <= m; j++)
+				distance[0, j] = j;
+
+
+			int currentRow = 0;
+			for (int i = 1; i <= n; ++i)
+			{
+				currentRow = i & 1;
+				distance[currentRow, 0] = i;
+				int previousRow = currentRow ^ 1;
+
+				for (int j = 1; j <= m; j++)
+				{
+					int cost = (targetSymbolString[j - 1].Equals(sourceSymbolString[i - 1]) ? 0 : 1);
+					distance[currentRow, j] = Math.Min(
+						Math.Min(
+							distance[previousRow, j] + 1,
+							distance[currentRow, j - 1] + 1
+						),
+						distance[previousRow, j - 1] + cost
+					);
+				}
+			}
+
+			return distance[currentRow, m];
+		}
+
+		public static bool[] GoalBitArray(List<IPredicate> goal)
+		{
+			// A boolean array that identifies whether the goal represented by (index + 1)
+			// is present in the given list of predicates.
+			bool[] goalsPresent = new bool[5];
+
+			// These are all the predicates representing the respective goals.
+
+			// g1 - Equip Quest
+			Predicate g1_1 = Predicate.BuildPositiveGroundLiteral("has", "ian", "knightsword");
+			Predicate g1_2 = Predicate.BuildPositiveGroundLiteral("has", "ian", "knightshield");
+
+			// g2 - Fetch Quest
+			Predicate g2 = Predicate.BuildPositiveGroundLiteral("has", "giovanna", "hairtonic");
+
+			// g3 - Pilgrimage Quest
+			Predicate g3 = Predicate.BuildPositiveGroundLiteral("has", "alli", "tastycupcake");
+
+			// g4 - Love Quest
+			Predicate g4_1 = Predicate.BuildPositiveGroundLiteral("has", "jordan", "loveletter");
+
+			Predicate g4_2a = Predicate.BuildPositiveGroundLiteral("has", "dorian", "rubyring");
+			Predicate g4_2b = Predicate.BuildPositiveGroundLiteral("has", "dorian", "bouquet");
+
+			Predicate g4_3 = Predicate.BuildPositiveGroundLiteral("has", "jordan", "lovecontract");
+
+			// g5 - Wisdom Quest
+			Predicate g5_1 = Predicate.BuildPositiveGroundLiteral("has", "james", "coin");
+			Predicate g5_2 = Predicate.BuildPositiveGroundLiteral("has", "james", "humanskull");
+			Predicate g5_3 = Predicate.BuildPositiveGroundLiteral("has", "james", "candle");
+
+
+			// Check for membership for each set of goals and flag as appropriate.
+			goalsPresent[0] = (goal.Contains(g1_1) && goal.Contains(g1_2)) ? true : false;
+			goalsPresent[1] = goal.Contains(g2) ? true : false;
+			goalsPresent[2] = goal.Contains(g3) ? true : false;
+			goalsPresent[3] = (goal.Contains(g4_1) && (goal.Contains(g4_2a) || goal.Contains(g4_2b)) && goal.Contains(g4_3)) ? true : false;
+			goalsPresent[4] = (goal.Contains(g5_1) && goal.Contains(g5_2) && goal.Contains(g5_3)) ? true : false;
+
+			// Return the bit array.
+			return goalsPresent;
+		}
+
+	}
 }
