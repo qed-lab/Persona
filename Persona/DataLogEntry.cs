@@ -75,19 +75,19 @@ namespace Persona
         /// Gets or sets the forward precision.
         /// </summary>
         /// <value>The forward precision.</value>
-        public double ForwardPrecision { get; set; }
+        public double Precision { get; set; }
 
         /// <summary>
         /// Gets or sets the forward recall.
         /// </summary>
         /// <value>The forward recall.</value>
-        public double ForwardRecall { get; set; }
+        public double Recall { get; set; }
 
         /// <summary>
         /// Gets or sets the forward f1 score.
         /// </summary>
         /// <value>The forward f1 score.</value>
-        public double ForwardF1Score { get; set; }
+        public double F1Score { get; set; }
 
         /// <summary>
         /// Gets or sets the predicted goal.
@@ -145,7 +145,7 @@ namespace Persona
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Persona.DataLogEntry"/>.</returns>
         public string ToCSVString()
         {
-            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}", PlayerId, SystemConfiguration, NumberOfGoals, NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation, NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation, NumberOfObservationsInput, NumberOfPlayerActionsTaken, Runtime, ForwardPrecision, ForwardRecall, ForwardF1Score, PredictedGoal, ActualGoal, IsCorrectGoal, PredictedPlan, ActualPlan, LevenshteinDistance);
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}", PlayerId, SystemConfiguration, NumberOfGoals, NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation, NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation, NumberOfObservationsInput, NumberOfPlayerActionsTaken, Runtime, Precision, Recall, F1Score, PredictedGoal, ActualGoal, IsCorrectGoal, PredictedPlan, ActualPlan, LevenshteinDistance);
         }
 
     }
