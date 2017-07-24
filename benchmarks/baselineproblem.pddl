@@ -158,8 +158,8 @@
         ;; The bar contains the basement, which connects to the storage room.
         (at basemententrance bar)         (leadsto basemententrance basement)
         (at basementexit basement)        (leadsto basementexit bar)
-        (closed basementexit)
-        (locked basementexit)
+        (closed basemententrance)			  
+
 
         (connected storage basement)      (doorway storage basement)
         (connected basement storage)      (doorway basement storage)
@@ -213,12 +213,11 @@
 
         ;; ---- Initial Configuration ----
 
+        (at mel bar) 
+        (has mel basementbucket)    
+
         ;; >>>> Player Configuration <<<<
-        (at mel storage)        (wants-item mel basementbucket) ;; -> added dynamically
-                                (willing-to-give-item mel basementexitkey)
-
-
-        (at arthur storage)     (wants-item arthur ash)
+        (at arthur bar)         (wants-item arthur ash)
                                 (wants-item arthur shinykey)
                                 (wants-item arthur loveletter)
                                 (wants-item arthur lovecontract)
@@ -226,11 +225,6 @@
                                 (willing-to-give-item arthur loveletter)
                                 (willing-to-give-item arthur lovecontract)
                                 (willing-to-give-item arthur ash)
-
-        ;; >>>> Tutorial <<<<
-        (at basementbucket storage)
-        (has mel basementexitkey)
-
 
 
         ;; >>>> Pilgrimage Quest Configuration <<<<
