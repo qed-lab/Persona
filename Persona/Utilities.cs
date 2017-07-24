@@ -81,32 +81,6 @@ namespace Persona
             return (numberOfCorrectPredictions / (double)numberOfActualSteps);
         }
 
-
-        /// <summary>
-        /// Computes the F1 score of the forward inferences in the recognized plan.
-        /// 
-        /// Assumes that the neither the recognized plan nor the actual plan is empty (returns -1.0 otherwise).
-        /// </summary>
-        public static double ForwardF1Score(Plan recognizedPlan, Plan actualPlan, int startIndex)
-        {
-            double f1Score = 0.0;
-
-            // Calculate precision.
-            double precision = ForwardPrecision(recognizedPlan, actualPlan, startIndex);
-            if (precision < 0.0)
-                return -1.0;
-
-            // Calculate recall.
-            double recall = ForwardRecall(recognizedPlan, actualPlan, startIndex);
-            if (recall < 0.0)
-                return -1.0;
-
-
-            f1Score = 2 * (precision * recall) / (precision + recall);
-
-            return f1Score;
-        }
-
         /// <summary>
         /// Computes the F-Score. Defaults to F1.
         /// </summary>
