@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using Mediation.PlanTools;
 using Mediation.Interfaces;
@@ -219,16 +220,102 @@ namespace Persona
         }
 
 
+		// Removes actions that don't matter for the substance of the game.
+		public static Plan RemoveUselessActions(Plan observations)
+		{
+			List<IOperator> newSteps = new List<IOperator>();
+
+			foreach (IOperator step in observations.Steps)
+			{
+                // These are useless actions in the plan because they...
+                if (
+                    // ...do not effect a state change
+                    !step.Name.Equals("talk-to") &&
+                    !step.Name.Equals("look-at") &&
+
+                    // ...are just for flavor
+                    (!step.ToString().Equals("(give alli ash arthur junkyard)")) &&
+
+                    // ...cannot be used directly by the player
+                    !step.Name.Equals("donothing") &&
+                    !step.Name.Equals("win-the-game") &&
+
+                    // ...are part of the tutorial
+                    !step.ToString().Equals("(pickup arthur basementbucket storage)") &&
+                    !step.ToString().Equals("(drop arthur basementbucket storage)") &&
+                    !step.ToString().Equals("(pickup arthur basementbucket storage)") &&
+                    !step.ToString().Equals("(give arthur basementbucket mel storage)") &&
+                    !step.ToString().Equals("(give mel basementexitkey arthur storage)") &&
+                    !step.ToString().Equals("(move-through-doorway arthur storage basement)") &&
+                    !step.ToString().Equals("(unlock-entrance arthur basementexitkey basementexit basement)") &&
+                    !step.ToString().Equals("(open arthur basementexit basement)") &&
+                    !step.ToString().Equals("(move-through-entrance arthur basement basementexit bar)") &&
+                    !step.ToString().Equals("(close arthur basemententrance bar)")
+                )
+				{
+					newSteps.Add((IOperator)step.Clone());
+				}
+			}
+
+			IState newInitial = observations.Initial.Clone() as IState;
+			return new Plan(observations.Domain, observations.Problem, newSteps, newInitial);
+		}
 
 
+        public static string ToLiftedPlan(Plan recognizedPlan)
+        {
+            StringBuilder sb = new StringBuilder();
+            char[] underscore = new char[] { '_' };
+
+            // Go through each of the steps
+            foreach(Operator step in recognizedPlan.Steps)
+            {
+                // Skip the "reach-goal" step.
+                if (!step.Name.Contains("reach") && !step.Name.Contains("REACH"))
+                {
+                    // Begin the operator name
+                    sb.Append("(");
+
+                    // Split the name of the step by underscore.
+                    string[] symbols = step.Name.Split(underscore);
+
+                    // Iterate each symbol and append it.
+                    for (int i = 0; i < symbols.Length; i++)
+                    {
+                        // If the symbol is not "EXPLAIN", "OBS", or a number,
+                        if (!symbols[i].Equals("EXPLAIN", StringComparison.InvariantCultureIgnoreCase) &&
+                           !symbols[i].Equals("OBS", StringComparison.InvariantCultureIgnoreCase) &&
+                           !IsNumber(symbols[i]))
+
+                        {
+                            // Append the symbol in lower case.
+                            sb.Append(symbols[i].ToLower());
+
+                            // If we're not at the end, add a space.
+                            if (i + 1 != symbols.Length)
+                                sb.Append(" ");
+                        }
+                    }
+
+                    // End the operator name
+                    sb.Append(")");
 
 
+                    // Add a newline.
+                    sb.Append("\n");
+                }
+            }
 
+            return sb.ToString();
+        }
 
-
-
-
-
-
+        /// <summary>
+        /// Checks if the given string represents a number.
+        /// </summary>
+        public static bool IsNumber(string s)
+        {
+            double num;
+            return double.TryParse(s, out num);
+        }
     }
 }
