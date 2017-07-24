@@ -17,42 +17,120 @@ namespace Persona
     {
 		public static int Main(string[] args)
 		{
-            string dataPath = Parser.GetTopDirectory() + @"data/";
-            string[] dataFolders = Directory.GetDirectories(dataPath);
+			// RunBaseline();
 
-			// Load the domain
-            string domainPath = Parser.GetTopDirectory() + @"benchmarks/domain.pddl";
-            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
-
-            // Load the problem
-            string problemPath = Parser.GetTopDirectory() + @"benchmarks/prob01.pddl";
-            Problem problem = Parser.GetProblem(problemPath);
-
-            // Load each chronology
-			foreach(string dataFolder in dataFolders)
-            {
-                string observationsPath = dataFolder + @"/chronology.pddl";
-                Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
-                Plan chronology = RemoveUselessActions(fullChronology);
-
-                //// Chunk the chronology into groups of 10% (10%, 20%, etc.)
-                //for (int binId = 1; binId <= 9; binId++)
-                //{
-                //    int binSize = (int) Math.Floor(chronology.Steps.Count / 10d);
-                //    Plan binChronology = chronology.Prefix(binSize) as Plan;
+			// PlanRecognizer persona = new PlanRecognizer();
+			// persona.RecognizePlan();
 
 
-                //}
+			// Load the baseline domain
+			string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+			Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
 
-                PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, chronology);
-                theory.Solve();
-            }
+			// Load the baseline problem
+			string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+			Problem problem = Parser.GetProblem(problemPath);
+
+			// Load each folder.
+			string dataPath = Parser.GetTopDirectory() + @"benchmarks/chronology.pddl";
+			Plan fullChronology = Parser.GetPlan(dataPath, domain, problem);
 
 
+			string obstest = Parser.GetTopDirectory() + @"benchmarks/chronology-test.pddl";
+			Plan testChronology = Parser.GetPlan(obstest, domain, problem);
 
-            // PlanRecognizer persona = new PlanRecognizer();
-            // persona.RecognizePlan();
+
+            Console.WriteLine("obs v. obstest: " + Plan.LevenshteinDistance(fullChronology, testChronology));
+
+      
+
+
 			return 0;
+		}
+
+        /// <summary>
+        /// Runs the baseline version of the plan recognition pipeline.
+        /// </summary>
+        private static void RunBaseline()
+        {
+            // Record the kind of the system that is running here.
+            string config = "Baseline";
+
+			// Load the baseline domain
+			string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+			Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+
+			// Load the baseline problem
+			string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+			Problem problem = Parser.GetProblem(problemPath);
+
+			// Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+			string[] dataFolders = Directory.GetDirectories(dataPath);
+
+			// For each player
+			foreach (string dataFolder in dataFolders)
+			{
+                string[] dataPathString = dataFolder.Split(new char[]{'/'});
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+				// Store and change the current working directory.
+				string oldWD = System.IO.Directory.GetCurrentDirectory();
+                System.IO.Directory.SetCurrentDirectory(dataFolder);
+
+                // Load the player's chronology
+				string observationsPath = dataFolder + @"/chronology.pddl";
+				Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
+				Plan playerChronology = RemoveUselessActions(fullChronology);
+
+                // Create the data log.
+                List<DataLogEntry> dataLog = new List<DataLogEntry>();
+
+                // Iterate the player chronology of observations.
+                for (int obsId = 1; obsId < playerChronology.Steps.Count; obsId++)
+                {
+                    // Start the data entry.
+                    DataLogEntry logEntry = new DataLogEntry();
+                    logEntry.PlayerId = playerId;
+                    logEntry.SystemConfiguration = config;
+                    logEntry.NumberOfGoals = problem.Goals.Count;
+                    logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
+                    logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
+                    logEntry.NumberOfObservationsInput = obsId;
+                    logEntry.NumberOfPlayerActionsTaken = obsId;
+
+                    // Get the first n actions of the player chronology, where n = obsId.
+                    Plan prefix = playerChronology.Prefix(obsId) as Plan;
+
+                    // Assemble a plan recognition theory to solve.
+                    PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, prefix);
+
+                    theory.Solve(logEntry);
+
+                }
+
+
+
+
+
+
+
+				//// Chunk the chronology into groups of 10% (10%, 20%, etc.)
+				//for (int binId = 1; binId <= 9; binId++)
+				//{
+				//    int binSize = (int) Math.Floor(chronology.Steps.Count / 10d);
+				//    Plan binChronology = chronology.Prefix(binSize) as Plan;
+
+
+				//}
+
+				// Restore the old working directory.
+				System.IO.Directory.SetCurrentDirectory(oldWD);
+
+				//PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, playerChronology);
+				//theory.Solve();
+			}
+
 		}
 
         // Removes actions that don't matter for the substance of the game.
@@ -84,6 +162,23 @@ namespace Persona
             return new Plan(observations.Domain, observations.Problem, newSteps, newInitial);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private Domain domain;
         private Problem problem;
         private Plan observations;
@@ -94,9 +189,13 @@ namespace Persona
             this.domain = domain;
             this.problem = problem;
             this.observations = observations;
+            this.solution = null;
         }
 
-        public void Solve()
+        /// <summary>
+        /// Solve this plan recognition theory, and story results in dataLogEntry.
+        /// </summary>
+        public void Solve(DataLogEntry dataLogEntry)
         {
             DateTime recognitionStart = DateTime.Now;
 
@@ -118,19 +217,16 @@ namespace Persona
 
 
             // Setup the observation compiler's / compiler argument paths.
-            string compilerPath = Parser.GetTopDirectory() + @"pr-as-planning/obs-compiler/pr2plan";
+            string compilerPath = Parser.GetTopDirectory() + @"Persona/pr-as-planning/obs-compiler/pr2plan";
 
             // Write the domain, problem, and observations to files.
-            string domainPath = Parser.GetTopDirectory() + @"benchmarks/domrob.pddl";
-            string problemPath = Parser.GetTopDirectory() + @"benchmarks/probrob.pddl";
-            string observationsPath = Parser.GetTopDirectory() + @"benchmarks/chronrob.pddl";
+            string domainPath = Parser.GetTopDirectory() + @"Persona/benchmarks/domrob.pddl";
+            string problemPath = Parser.GetTopDirectory() + @"Persona/benchmarks/probrob.pddl";
+            string observationsPath = Parser.GetTopDirectory() + @"Persona/benchmarks/chronrob.pddl";
             Writer.DomainToPDDL(domainPath, domain);
             Writer.ProblemToPDDL(problemPath, domain, problem, problem.Initial);
             Writer.PlanToPDDL(observationsPath, observations.Steps);
 
-            // Store and change the current working directory.
-            string oldWD = System.IO.Directory.GetCurrentDirectory();
-            System.IO.Directory.SetCurrentDirectory(Parser.GetTopDirectory() + @"benchmarks");
 
             // Start the compiler.
             ProcessStartInfo startInfo = new ProcessStartInfo(compilerPath);
@@ -148,8 +244,6 @@ namespace Persona
                 proc.WaitForExit();
             }
 
-            // Restore the old working directory.
-            System.IO.Directory.SetCurrentDirectory(oldWD);
 
 
             Console.WriteLine("PlanRecognizer.CompileObservations() has finished!");

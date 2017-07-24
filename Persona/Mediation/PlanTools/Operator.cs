@@ -12,8 +12,43 @@ namespace Mediation.PlanTools
     [Serializable]
     public class Operator : IOperator
     {
-        private static int Counter = -1;
+        /// <summary>
+        /// Returns the match of the instance operator relative to the target.
+        /// Match is returned as a percentage [0.0 being no match, 1.0 being perfect match].
+        /// </summary>
+        public static double PercentageMatch(IOperator instance, IOperator target)
+        {
+            // Begin with 0/1 things matched.
+            int numberOfMatchingFeatures = 0;
+            int numberOfFeatures = 1;
 
+            // Only continue checking if there is a name match.
+            if(instance.Name.Equals(target.Name))
+            {
+                // The name matches, so increase the match count.
+                numberOfMatchingFeatures++;
+
+                // Go through each of the terms of the target and attempt to find
+                // a match with the instance.
+                for (int termIndex = 0; termIndex < target.Terms.Count; termIndex++)
+                {
+                    // Another term, another feature:
+                    numberOfFeatures++;
+
+                    // Get the terms at the given index in both operators.
+                    string instanceTerm = instance.TermAt(termIndex);
+                    string targetTerm = instance.TermAt(termIndex);
+
+                    // If there's a match, count it!
+                    if (instanceTerm.Equals(targetTerm))
+                        numberOfMatchingFeatures++;
+                }
+            }
+
+            return ( (double) numberOfMatchingFeatures / (double) numberOfFeatures);
+        }
+
+        private static int Counter = -1;
         private IPredicate predicate;
         private List<IPredicate> preconditions;
         private List<IPredicate> effects;

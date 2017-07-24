@@ -85,6 +85,9 @@
     <Compile Include="Mediation\StateSpace\StateSpaceTools.cs" />
     <Compile Include="Mediation\Utilities\EnumerableExtension.cs" />
     <Compile Include="Mediation\Utilities\Tuple.cs" />
+    <Compile Include="DataLogEntry.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -601,5 +601,119 @@ namespace Mediation.PlanTools
             IState newInitial = initial.Clone() as IState;
             return new Plan(domain, problem, newSteps, newInitial);
         }
+
+        // Creates a clone of the plan's suffix, starting from the given step index all the way until the end of this plan.
+        // Length must be positive and not greater than the length of this plan.
+        public Object Suffix(int startingStepIndex)
+        {
+			if (startingStepIndex < 0 || startingStepIndex > this.steps.Count)
+				throw new ArgumentException("StartingStepIndex must be positive and not greater than the length of this plan");
+
+			List<IOperator> newSteps = new List<IOperator>();
+
+            for (int i = startingStepIndex; i < this.Steps.Count; i++)
+				newSteps.Add((IOperator)steps.ElementAt(i).Clone());
+
+            // Update the initial state up until the first operator of the suffix.
+            State newInitial = initial.Clone() as State;
+            for (int i = 0; i < startingStepIndex; i++)
+            {
+                Operator step = steps.ElementAt(i) as Operator;
+                newInitial.Predicates = newInitial.ApplyAction(step, problem.Objects);
+            }
+
+            // Update the problem.
+            Problem newProblem = this.Problem.Clone() as Problem;
+            newProblem.Initial = newInitial.Predicates;
+
+            return new Plan(domain, newProblem, newSteps, newInitial);
+		}
+
+        /// <summary>
+        /// Returns a List of strings that denote the symbols of this plan. 
+        /// For example, if the plan was composed of the following steps:
+        /// (give alice ball bob playground)
+        /// (goto alice playground home), 
+        /// 
+        /// this method would return the following:
+        /// ("give", "alice", "ball", "bob", "playground", "goto", "alice", "playground", "home")
+        /// 
+        /// </summary>
+        /// <returns>The symbol string.</returns>
+        public List<string> ToSymbolString()
+        {
+            List<string> symbols = new List<string>();
+
+            foreach(Operator step in this.Steps)
+            {
+                symbols.Add(step.Name);
+
+                foreach (Term term in step.Terms)
+                    symbols.Add(term.ToString());
+
+            }
+
+            return symbols;
+        }
+
+        /// <summary>
+        /// Levenshteins the distance.
+        /// </summary>
+        public static int LevenshteinDistance(Plan source, Plan target)
+        {
+            List<string> sourceSymbolString = source.ToSymbolString();
+            List<string> targetSymbolString = target.ToSymbolString();
+
+            if (sourceSymbolString.Count == 0)
+			{
+                if (targetSymbolString.Count == 0)
+					return 0;
+
+				else
+                    return targetSymbolString.Count;
+			}
+
+			if (targetSymbolString.Count == 0)
+				return sourceSymbolString.Count;
+
+			if (sourceSymbolString.Count > targetSymbolString.Count)
+			{
+                var temp = targetSymbolString;
+                targetSymbolString = sourceSymbolString;
+                sourceSymbolString = temp;
+			}
+
+            int m = targetSymbolString.Count;
+            int n = sourceSymbolString.Count;
+			int[,] distance = new int[2, m + 1];
+
+			// Initialize the distance matrix.
+			for (var j = 1; j <= m; j++)
+				distance[0, j] = j;
+
+
+			int currentRow = 0;
+			for (int i = 1; i <= n; ++i)
+			{
+				currentRow = i & 1;
+				distance[currentRow, 0] = i;
+				int previousRow = currentRow ^ 1;
+
+				for (int j = 1; j <= m; j++)
+				{
+                    int cost = (targetSymbolString[j - 1].Equals(sourceSymbolString[i - 1]) ? 0 : 1);
+					distance[currentRow, j] = Math.Min(
+						Math.Min(
+							distance[previousRow, j] + 1,
+							distance[currentRow, j - 1] + 1
+						),
+						distance[previousRow, j - 1] + cost
+					);
+				}
+			}
+
+			return distance[currentRow, m];
+        }
+
     }
 }
