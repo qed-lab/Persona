@@ -111,7 +111,7 @@ namespace Persona
 
             foreach (Operator step in recognizedPlan.Steps)
             {
-                if (StringExtensions.Contains(step.Name, "(reach-goal-", StringComparison.OrdinalIgnoreCase))
+                if (StringExtensions.Contains(step.Name, "reach-goal-", StringComparison.OrdinalIgnoreCase))
                 {
                     goalOperator = step;
                     break;
@@ -119,8 +119,11 @@ namespace Persona
             }
 
             /// Copy over the goal literals (encoded as the preconditions).
-            foreach (IPredicate pre in goalOperator.Preconditions) {
-                goalLiterals.Add(pre.Clone() as Predicate);
+            /// Each predicate is guaranteed to be of the form "has ?character ?item"
+            foreach (IPredicate pre in goalOperator.Preconditions) 
+            {
+                string[] symbols = pre.Name.ToLower().Split(new char[] { '_' });
+                goalLiterals.Add(Predicate.BuildPositiveGroundLiteral(symbols[0], symbols[1], symbols[2]));
             }
 
             return goalLiterals;
