@@ -11,13 +11,12 @@ namespace Persona
     {
 		/// <summary>
 		/// Computes the precision of the forward inferences in the recognized plan.
-        /// "Forward" is relative to the given startIndex.
         /// Precision is the number of correct predictions divided by the total
 		/// number of predictions made. 
         /// 
         /// Assumes that the recognized plan is not empty (returns -1.0 otherwise).
 		/// </summary>
-		public static double ForwardPrecision(Plan recognizedPlan, Plan actualPlan, int startIndex)
+		public static double Precision(Plan recognizedPlan, Plan actualPlan)
         {
             if (recognizedPlan.Steps.Count == 0)
                 return -1.0;
@@ -26,7 +25,7 @@ namespace Persona
             int numberOfPredictions = recognizedPlan.Steps.Count;
 
             // Iterate over the recognized plan.
-            for (int stepId = startIndex; stepId < recognizedPlan.Steps.Count; stepId++)
+            for (int stepId = 0; stepId < recognizedPlan.Steps.Count; stepId++)
             {
                 IOperator recognizedStep = recognizedPlan.Steps.ElementAt(stepId);
 
@@ -49,12 +48,11 @@ namespace Persona
 
         /// <summary>
         /// Computes the recall of the forward inferences in the recognized plan.
-        /// "Forward" is relative to the given startIndex.
         /// Recall is the number of correct predictions divided by the number of actual steps.
         /// 
         /// Assumes that the actual plan is not empty (returns -1.0 otherwise).
         /// </summary>
-        public static double ForwardRecall(Plan recognizedPlan, Plan actualPlan, int startIndex)
+        public static double Recall(Plan recognizedPlan, Plan actualPlan)
         {
             if (actualPlan.Steps.Count == 0)
                 return -1.0;
@@ -63,7 +61,7 @@ namespace Persona
             int numberOfActualSteps = actualPlan.Steps.Count;
 
             // Iterate over the recognized plan.
-            for (int stepId = startIndex; stepId < recognizedPlan.Steps.Count; stepId++)
+            for (int stepId = 0; stepId < recognizedPlan.Steps.Count; stepId++)
             {
                 IOperator recognizedStep = recognizedPlan.Steps.ElementAt(stepId);
 
