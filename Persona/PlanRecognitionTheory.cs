@@ -63,7 +63,9 @@ namespace Persona
 				Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
 
                 // Create the data log.
-                List<DataLogEntry> dataLog = new List<DataLogEntry>();
+                string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
+                StreamWriter writer = new StreamWriter(logPath, false);
+                writer.WriteLine(DataLogEntry.CSVheader());
 
                 // Iterate the player chronology of observations.
                 for (int obsId = 1;
@@ -91,12 +93,11 @@ namespace Persona
                     theory.Solve(logEntry);
 
                     // Add the entry to the log.
-                    dataLog.Add(logEntry);
+                    writer.WriteLine(logEntry.ToCSVString());
                 }
 
-                // Write the log to a file.
-                string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
-                Writer.DataLogToFile(logPath, dataLog);
+                // Close the log.
+                writer.Close();
 
                 // Restore the old working directory.
                 Directory.SetCurrentDirectory(oldWD);
@@ -116,6 +117,7 @@ namespace Persona
             this.problem = problem;
             this.observations = observations;
             this.solution = null;
+            this.solutionUsingOriginalDomainOperators = null;
         }
 
         /// <summary>

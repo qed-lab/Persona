@@ -76,8 +76,11 @@ namespace Mediation.FileIO
 			// Add the step to the plan.
 			plan.InitialStep = init;
 
-			// Read the file into an array.
+
+
+
 			string[] input = System.IO.File.ReadAllLines(file);
+
 
 
 			// How to split the file elements.
@@ -106,6 +109,9 @@ namespace Mediation.FileIO
 			foreach (string lineraw in input)
 			{
 				string line = lineraw.ToLower();
+
+                if (line.Contains(";"))
+                    continue;
 
 				// Split line into elements.
 				string[] words = line.Split(delimiterChars);
