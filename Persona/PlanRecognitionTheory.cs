@@ -129,7 +129,7 @@ namespace Persona
             DateTime recognitionStart = DateTime.Now;
 
             this.CompileObservations();
-            this.SIWthenBFSPlan(dataLogEntry);
+            this.FastDownwardPlan(dataLogEntry);
 
             // End recording runtime.
             DateTime recognitionEnd = DateTime.Now;
@@ -186,8 +186,8 @@ namespace Persona
             // Store the process' arguments.
             startInfo.Arguments =
                 "-d " + domainPath + " " +
-                "-i " + problemPath + " " + 
-                "-o " + observationsPath + " " + "-v";
+                "-i " + problemPath + " " +
+                         "-o " + observationsPath; // + " " + "-v";
 
             startInfo.WindowStyle = ProcessWindowStyle.Maximized;
 
@@ -200,32 +200,41 @@ namespace Persona
         /// <summary>
         /// Solves the compiled plan.
         /// </summary>
-        public void SIWthenBFSPlan(DataLogEntry dataLogEntry)
+        public void FastDownwardPlan(DataLogEntry dataLogEntry)
         {
             // Setup the planner's / planner argument paths.
-			string plannerPath = Parser.GetTopDirectory() + @"LAPKT-public/planners/siw_plus-then-bfs_f-ffparser/siw-then-bfsf";
+            // string plannerPath = Parser.GetTopDirectory() + @"LAPKT-public/planners/siw_plus-then-bfs_f-ffparser/siw-then-bfsf";
+
+
+            string plannerPath = Parser.GetTopDirectory() + @"fast-downward/fast-downward.py";
             string domainPath = Directory.GetCurrentDirectory() + @"/pr-domain.pddl";
             string problemPath = Directory.GetCurrentDirectory() + @"/pr-problem.pddl";
-            string outputPath = Directory.GetCurrentDirectory() + @"/recognized-plan-"+ dataLogEntry.NumberOfPlayerActionsTaken + @".pddl";
+            string sas_plan = Directory.GetCurrentDirectory() + @"/sas_plan.1";
+            string output_sas = Directory.GetCurrentDirectory() + @"/output.sas";
+
 
 			// Create the planner process.
 			ProcessStartInfo startInfo = new ProcessStartInfo(plannerPath);
 
             // Store the process' arguments.
-            startInfo.Arguments =
-                "--domain " + domainPath + " " +
-                "--problem " + problemPath + " " +
-                "--output " + outputPath;
-
+            startInfo.Arguments = @"--alias seq-sat-lama-2011 " + domainPath + " " + problemPath;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             // Erase old data.
-            System.IO.File.WriteAllText(outputPath, string.Empty);
+            System.IO.File.WriteAllText(output_sas, string.Empty);
+            System.IO.File.WriteAllText(sas_plan, string.Empty);
 
 			// Start the process and wait for it to finish.
 			using (Process proc = Process.Start(startInfo)) {
 				proc.WaitForExit();
 			}
+
+            // Rename the file to keep for posterity.
+            string outputPath = Directory.GetCurrentDirectory() + @"/recognized-plan-" + dataLogEntry.NumberOfPlayerActionsTaken + @".pddl";
+            if (File.Exists(outputPath))
+                File.Delete(outputPath);
+
+            System.IO.File.Move(sas_plan, outputPath);
 
             // Parse and store the solution.
             Domain compiledDomain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);

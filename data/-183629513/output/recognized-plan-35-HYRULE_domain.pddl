@@ -40,7 +40,6 @@
 (pickup arthur candle mansion)
 (move-through-entrance arthur mansion mansionexit cliff)
 (move-through-doorway arthur cliff townsquare)
-(drop arthur candle townsquare)
 (move-through-door arthur townsquare towngate townarch)
 (move-through-doorway arthur townarch docks)
 (drop arthur mushroom docks)
