@@ -1,0 +1,6 @@
+(has james candle)
+(has james humanskull)
+(has james coin)
+(has giovanna hairtonic)
+(has ian knightshield)
+(has ian knightsword)

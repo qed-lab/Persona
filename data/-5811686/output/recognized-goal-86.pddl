@@ -1,0 +1,7 @@
+(has alli tastycupcake)
+(has jordan lovecontract)
+(has dorian bouquet)
+(has jordan loveletter)
+(has james candle)
+(has james humanskull)
+(has james coin)

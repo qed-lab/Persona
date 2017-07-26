@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -61,9 +61,6 @@ namespace Persona
 				string observationsPath = dataFolder + @"/chronology.pddl";
 				Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
 				Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
-
-                List<List<IOperator>> chains = playerChronology.CausalChains;
-                IOperator template = chains.ElementAt(0).ElementAt(0).Template() as IOperator;
 
 
                 // Create the data log.
