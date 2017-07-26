@@ -18,6 +18,7 @@ namespace Mediation.PlanTools
         private List<CausalLink> dependencies;
         private List<CausalLink> trabassos;
         private List<IOperator> trabassoSummary;
+        private List<List<IOperator>> causalChains;
         private IState initial;
         private IState goal;
 
@@ -69,6 +70,17 @@ namespace Mediation.PlanTools
                 return trabassos;
             }
             set { trabassos = value; }
+        }
+
+        // Access the plan's causal chains.  These causal chains are made up by chains of steps connected through trabassos.
+        public List<List<IOperator>> CausalChains
+        {
+            get {
+                if (causalChains == null)
+                    causalChains = GetTrabassoCausalChains();
+
+                return causalChains;
+            }
         }
 
         // Access the plan's initial state.
@@ -277,7 +289,8 @@ namespace Mediation.PlanTools
         }
 
         // Draws dependencies between steps in the plan.
-        private void CreateDependencies ()
+        private void 
+        CreateDependencies ()
         {
             // Reset the causal links.
             dependencies = new List<CausalLink>();
@@ -715,5 +728,80 @@ namespace Mediation.PlanTools
 			return distance[currentRow, m];
         }
 
+        private List<List<IOperator>> GetTrabassoCausalChains()
+        {
+            List<List<IOperator>> chains = new List<List<IOperator>>();
+
+            // Get all the steps.
+            List<IOperator> plan = new List<IOperator>();
+            foreach(Operator step in steps) {
+                plan.Add(step.Clone() as IOperator);
+            }
+
+            // While we have steps we're considering,
+            while(plan.Count > 0)
+            {
+                // Get the last step in the plan.
+                IOperator step = plan.Last();
+
+                // Initialize the frontier of trabasso links with this step.
+                List<IOperator> frontier = new List<IOperator>();
+                frontier.Add(step);
+
+                // Create a list of visited steps.
+                List<IOperator> visited = new List<IOperator>();
+
+                // While we have steps in the frontier of search,
+                while (frontier.Count > 0)
+                {
+                    // Get and remove the first element from the frontier.
+                    IOperator s = frontier.First();
+                    frontier.RemoveAt(0);
+
+                    // Find all trabassos with head equal to the above step.
+                    List<CausalLink> trabassosWithHeadS = Trabassos.FindAll(t => t.Head.Equals(s));
+
+                    // For each such trabasso,
+                    foreach(CausalLink trabasso in trabassosWithHeadS)
+                    {
+                        // Get the tail of the trabasso
+                        IOperator tail = trabasso.Tail;
+
+                        // If we haven't already visited that step, add it to the frontier.
+                        if (!visited.Contains(tail) && !frontier.Contains(tail))
+                        {
+							// Add the tail of the trabasso to the frontier.
+							frontier.Add(trabasso.Tail);
+						}
+
+                    }
+
+                    // Mark the step as visited.
+                    visited.Add(s);
+                }
+
+                // The visited steps constitute one chain.
+                chains.Add(visited);
+
+                // Remove from the plan all steps that have been visited.
+                plan.RemoveAll(s => visited.Contains(s));
+            }
+
+            return chains;
+        }
+
+        // Whether or not the given steps belong to same causal chain.
+        public bool BelongToSameCausalChain(IOperator stepA, IOperator stepB)
+        {
+            // Go through each causal chain and check whether the given steps both are part of the same one.
+            foreach(List<IOperator> causalChain in CausalChains)
+            {
+                if (causalChain.Contains(stepA) && causalChain.Contains(stepB))
+                    return true;
+            }
+
+            // If we haven't found a chain that contains both steps, then they do not belong to the same one.
+            return false;
+        }
     }
 }

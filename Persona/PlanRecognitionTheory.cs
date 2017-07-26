@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -62,6 +62,10 @@ namespace Persona
 				Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
 				Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
 
+                List<List<IOperator>> chains = playerChronology.CausalChains;
+                IOperator template = chains.ElementAt(0).ElementAt(0).Template() as IOperator;
+
+
                 // Create the data log.
                 string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
                 StreamWriter writer = new StreamWriter(logPath, false);
@@ -105,7 +109,98 @@ namespace Persona
 
 		}
 
-        private Domain domain;
+        /// <summary>
+        /// Runs the windowed version of the plan recognition pipeline.
+        /// </summary>
+        private static void RunWindowed()
+        {
+            // Record the kind of the system that is running here.
+            string config = "Windowed";
+
+            // Load the baseline domain
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+
+            // Load the baseline problem
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+            Problem problem = Parser.GetProblem(problemPath);
+
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
+
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Get the player's ID.
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+                // Create an output folder.
+                string outputFolder = dataFolder + @"/output/";
+                System.IO.Directory.CreateDirectory(outputFolder);
+
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                System.IO.Directory.SetCurrentDirectory(outputFolder);
+
+                // Load the player's chronology
+                string observationsPath = dataFolder + @"/chronology.pddl";
+                Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
+                Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
+
+
+
+
+                // Create the data log.
+                string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
+                StreamWriter writer = new StreamWriter(logPath, false);
+                writer.WriteLine(DataLogEntry.CSVheader());
+
+                // Iterate the player chronology of observations.
+                for (int obsId = 1;
+                     obsId < playerChronology.Steps.Count;
+                     obsId++)
+                {
+                    // Start the data entry.
+                    DataLogEntry logEntry = new DataLogEntry();
+                    logEntry.PlayerId = playerId;
+                    logEntry.SystemConfiguration = config;
+                    logEntry.NumberOfGoals = problem.Goals.Count;
+                    logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
+                    logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
+                    logEntry.NumberOfObservationsInput = obsId;
+                    logEntry.NumberOfPlayerActionsTaken = obsId;
+                    logEntry.ActualPlan = playerChronology;
+
+                    // Get the first n actions of the player chronology, where n = obsId.
+                    Plan prefix = playerChronology.Prefix(obsId) as Plan;
+
+                    // Assemble a plan recognition theory to solve.
+                    PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, prefix);
+
+                    // Solve the theory.
+                    theory.Solve(logEntry);
+
+                    // Add the entry to the log.
+                    writer.WriteLine(logEntry.ToCSVString());
+                }
+
+                // Close the log.
+                writer.Close();
+
+                // Restore the old working directory.
+                Directory.SetCurrentDirectory(oldWD);
+            }
+        }
+
+
+
+
+
+
+
+		private Domain domain;
         private Problem problem;
         private Plan observations;
         private Plan solution;
