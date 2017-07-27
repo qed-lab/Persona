@@ -37,6 +37,9 @@ namespace Mediation.Interfaces
 		// Actions have an actor.
 		string Actor { get; }
 
+        // Actions have a location.
+        string Location { get; }
+
 		// Actions may have a list of consenting agents.
 		List<ITerm> ConsentingAgents { get; set; }
 
@@ -51,5 +54,7 @@ namespace Mediation.Interfaces
 
 		// An operator template is a clone of this operator with no bindings.
 		Object Template();
+
+
 	}
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 using Mediation.Interfaces;
 using Mediation.PlanTools;
@@ -9,44 +11,167 @@ namespace Persona
     {
         // Returns a plan representing observations that fit into a window.
         // The window is seven steps wide by default.
-        public static Plan Windowed(Plan observations, int windowSize = 7)
+        public static List<IOperator> Windowed(Plan observations, int windowSize = 7)
         {
             if (observations.Steps.Count <= windowSize)
-                return observations;
+                return observations.Steps;
 
             else
             {
                 // The starting index is size - window.
                 int startingStepIndex = observations.Steps.Count - windowSize;
-                return observations.Suffix(startingStepIndex) as Plan;
+                return (observations.Suffix(startingStepIndex) as Plan).Steps;
             }
         }
 
 
-        public static Plan Indexter(Plan observations, Domain domain, Problem problem)
+        public static List<IOperator> Indexter(Plan chronology, Domain domain, Problem problem, double salienceThreshold)
         {
-            return null;
+            // This is what we're after: the steps in the chronology that we think are salient in the mind of the player
+            List<IOperator> salientSteps = new List<IOperator>();
+
+            // Get the last step of the chronology. It acts as a cue to memory.
+            IOperator last = chronology.Steps.Last();
+
+            // I assume the last step is salient by virtue of being the last step
+            salientSteps.Add(last);
+
+            // For every other step of the chronology,
+            for (int index = 0; index < chronology.Steps.Count - 1; index++)
+            {
+                IOperator step = chronology.Steps.ElementAt(index);
+                double recallability = Recallability(step, last, chronology);
+
+                if (recallability > salienceThreshold)
+                    salientSteps.Add(last);
+            }
+            return salientSteps;
         }
 
 
 
-        private static int IndexOverlap(IOperator target, IOperator cue, Plan observations)
+        /// <summary>
+        /// Computes the recallability of the target step given the specified cue and chronology.
+        /// Recallability is as is defined by the Indexter model.
+        /// </summary>
+        private static double Recallability(IOperator target, IOperator cue, Plan chronology)
+        {
+            // This is what we're interested in.
+            double recallability = 0.0;
+
+            // Find the overlap between the cue and the target
+            double cueOverlap = IndexOverlap(target, cue, chronology);
+
+            // Get the cue's index.
+            int cueIndex = chronology.Steps.IndexOf(cue);
+
+            // For each step other than the cue, accumulate the overlap.
+            double otherOverlap = 0.0;
+
+            for (int stepIndex = 0; stepIndex < chronology.Steps.Count; stepIndex++)
+            {
+                if (stepIndex != cueIndex)
+                {
+                    IOperator otherStep = chronology.Steps.ElementAt(stepIndex);
+                    otherOverlap += IndexOverlap(target, otherStep, chronology);
+                }
+            }
+
+            // Guard against dividing by zero.
+            if (otherOverlap > 0)
+                recallability = cueOverlap / otherOverlap;
+
+            return recallability;
+        }
+
+
+        // Returns the number of index overlaps between the target and cue steps in the given chronology.
+        private static int IndexOverlap(IOperator target, IOperator cue, Plan chronology)
         {
             int overlap = 0;
 
             // Space overlap: x & y both contain location terms and they're equivalent.
+            if (HasSpaceOverlap(target, cue, chronology))
+                overlap++;
 
-
-              
-
-
-
-
+            if (HasTimeOverlap(target, cue, chronology))
+                overlap++;
 
             return overlap;
         }
 
+        #region Space
 
-        
+        // Returns true if x and y overlap in space within the given plan.
+        private static bool HasSpaceOverlap(IOperator x, IOperator y, Plan plan)
+        {
+            // get the location terms of each operator
+            string xLocation = x.Name.Equals("unlock-door") ? UnlockDoorLocation(x, plan) : x.Location;
+            string yLocation = y.Name.Equals("unlock-door") ? UnlockDoorLocation(y, plan) : y.Location;
+
+            // if both terms are bound and are equal to each other, there's an overlap.
+            return (xLocation.Equals(yLocation));
+        }
+
+        // Auxiliary method to get the location of the given unlock-door operator.
+        // This method checks the plan to see what was the last move action that occurred
+        // and gets the constant term bound to the ?to variable within the action.
+        private static string UnlockDoorLocation(IOperator unlockDoor, Plan plan)
+        {
+            string unlockDoorLocation = "unknown";
+
+            // Get the operator index.
+            int operatorIndex = plan.Steps.IndexOf(unlockDoor);
+
+            // Traverse the steps toward the start, and stop at the first
+            // move operator you find.
+            IOperator mostRecentMoveStep = new Operator();
+
+            for (int i = (operatorIndex - 1); i >= 0; i--)
+            {
+                // The most recent move operator will contain move in the name.
+                if (plan.Steps.ElementAt(i).Name.Contains("move"))
+                {
+                    // Save it, and break out of the for loop
+                    mostRecentMoveStep = plan.Steps.ElementAt(i);
+                    break;
+                }
+            }
+
+            // Find the term in this operator that is bound to the term called "?to"
+            ITerm toTerm = mostRecentMoveStep.Terms.Find(
+                t => t.Variable.Equals("?to")
+            );
+
+            if (toTerm != null && toTerm.Bound)
+                unlockDoorLocation = toTerm.Constant;
+
+            return unlockDoorLocation;
+        }
+
+        #endregion
+
+        #region Time
+
+        // Returns true if x and y overlap in time within the given plan.
+        private static bool HasTimeOverlap(IOperator x, IOperator y, Plan plan)
+        {
+            return plan.BelongToSameTemporalChain(x, y);
+        }
+
+        #endregion
+
+        #region Causality
+
+        // Returns true if x and y overlap in causality within the given plan.
+        private static bool HasCausalOverlap(IOperator x, IOperator y, Plan plan)
+        {
+            return plan.BelongToSameCausalChain(x, y);
+        }
+
+        #endregion
+
+
+
     }
 }

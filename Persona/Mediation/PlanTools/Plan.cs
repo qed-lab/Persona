@@ -19,6 +19,7 @@ namespace Mediation.PlanTools
         private List<CausalLink> trabassos;
         private List<IOperator> trabassoSummary;
         private List<List<IOperator>> causalChains;
+        private List<List<IOperator>> temporalChains;
         private IState initial;
         private IState goal;
 
@@ -80,6 +81,17 @@ namespace Mediation.PlanTools
                     causalChains = GetTrabassoCausalChains();
 
                 return causalChains;
+            }
+        }
+
+        // Access the plan's temporal chains. These chains are made up by chains of steps that belong to the same temporal frame.
+        public List<List<IOperator>> TemporalChains
+        {
+            get {
+                if (temporalChains == null)
+                    temporalChains = GetTemporalChains();
+
+                return temporalChains;
             }
         }
 
@@ -728,6 +740,7 @@ namespace Mediation.PlanTools
 			return distance[currentRow, m];
         }
 
+        // Returns all the causal chains defined through trabassos in the plan.
         private List<List<IOperator>> GetTrabassoCausalChains()
         {
             List<List<IOperator>> chains = new List<List<IOperator>>();
@@ -803,5 +816,60 @@ namespace Mediation.PlanTools
             // If we haven't found a chain that contains both steps, then they do not belong to the same one.
             return false;
         }
+
+        // Whether or not the given steps belong to the same temporal chain.
+        public bool BelongToSameTemporalChain(IOperator stepA, IOperator stepB)
+        {
+            // Go through each temporal chain and check whether the given steps both are part of the same one.
+            foreach(List<IOperator> temporalChain in TemporalChains)
+            {
+                if (temporalChain.Contains(stepA) && temporalChain.Contains(stepB))
+                    return true;
+            }
+
+            // If we haven't found a chain that contains both steps, then they do not belong to the same one.
+            return false;
+        }
+
+        // Returns all the temporal chains of this plan.
+		private List<List<IOperator>> GetTemporalChains()
+		{
+			List<List<IOperator>> chains = new List<List<IOperator>>();
+
+			// Get all the steps.
+			List<IOperator> planSteps = new List<IOperator>();
+			foreach (Operator step in steps) {
+				planSteps.Add(step.Clone() as IOperator);
+			}
+
+            // Go through all the steps.
+            List<IOperator> temporalChain = new List<IOperator>();
+
+            for (int i = 0; i < planSteps.Count; i++)
+            {
+                // Get the next step.
+                IOperator step = planSteps.ElementAt(i);
+
+				// Add the step to this chain.
+				temporalChain.Add(step);
+
+                // If the step is a kind of 'move', it marks a new
+                // temporal frame. Create a new chain and add the step 
+                // the new chain.
+                if(step.Name.Contains("move")) {
+
+                    // Add the chain to the others
+                    chains.Add(temporalChain);
+
+                    // Start a new chain
+                    temporalChain = new List<IOperator>();
+
+                    // Add the step to this chain
+                    temporalChain.Add(step);
+                }
+            }
+
+            return chains;
+		}
     }
 }

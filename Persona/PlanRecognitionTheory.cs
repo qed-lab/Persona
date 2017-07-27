@@ -146,9 +146,6 @@ namespace Persona
                 Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
                 Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
 
-
-
-
                 // Create the data log.
                 string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
                 StreamWriter writer = new StreamWriter(logPath, false);
@@ -173,8 +170,11 @@ namespace Persona
                     // Get the first n actions of the player chronology, where n = obsId.
                     Plan prefix = playerChronology.Prefix(obsId) as Plan;
 
+                    // Get a window of the last m = 7 actions of the above prefix.
+                    Plan window = new Plan(domain, problem, ObservationFilter.Windowed(prefix));
+
                     // Assemble a plan recognition theory to solve.
-                    PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, prefix);
+                    PlanRecognitionTheory theory = new PlanRecognitionTheory(domain, problem, window);
 
                     // Solve the theory.
                     theory.Solve(logEntry);
@@ -190,12 +190,6 @@ namespace Persona
                 Directory.SetCurrentDirectory(oldWD);
             }
         }
-
-
-
-
-
-
 
 		private Domain domain;
         private Problem problem;

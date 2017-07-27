@@ -56,6 +56,7 @@ namespace Mediation.PlanTools
         private List<ITerm> consenting;
         private List<IPredicate> exceptionalEffects;
         private int id;
+        private string location;
 
         private Hashtable bindings;
 
@@ -132,6 +133,33 @@ namespace Mediation.PlanTools
             get { return TermAt(0); }
         }
 
+        // Access the operator's location. If the operator does not have a
+        // location, this property returns "unknown."
+        public string Location
+        {
+            get {
+                if (string.IsNullOrEmpty(location))
+                {
+                    ITerm locationTerm = Terms.Find(
+                        t =>
+                            t.GetType().Equals("location")
+                        && (t.Variable.Equals("?location") || t.Variable.Equals("?from"))
+                    );
+
+                    if (locationTerm != null && locationTerm.Bound)
+                        location = locationTerm.Constant;
+
+                    else
+                        location = "unknown";
+                
+                    return location;
+                }
+
+                else
+                    return location;
+            }
+        }
+
         // Access the consenting agents.
         public List<ITerm> ConsentingAgents
         {
@@ -162,6 +190,7 @@ namespace Mediation.PlanTools
 
         public Operator ()
         {
+            location = "";
             predicate = new Predicate();
             preconditions = new List<IPredicate>();
             effects = new List<IPredicate>();
@@ -173,6 +202,7 @@ namespace Mediation.PlanTools
 
         public Operator(string name)
         {
+            location = "";
             predicate = new Predicate(name, new List<ITerm>(), true);
             preconditions = new List<IPredicate>();
             effects = new List<IPredicate>();
@@ -184,6 +214,7 @@ namespace Mediation.PlanTools
 
         public Operator(string name, List<IPredicate> preconditions, List<IPredicate> effects)
         {
+            location = "";
             predicate = new Predicate(name, new List<ITerm>(), true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -196,6 +227,7 @@ namespace Mediation.PlanTools
 
         public Operator(Predicate predicate, List<IPredicate> preconditions, List<IPredicate> effects)
         {
+            location = "";
             this.predicate = predicate;
             this.preconditions = preconditions;
             this.effects = effects;
@@ -208,6 +240,7 @@ namespace Mediation.PlanTools
 
         public Operator (string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects)
         {
+            location = "";
             this.predicate = new Predicate(name, terms, true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -220,6 +253,7 @@ namespace Mediation.PlanTools
 
         public Operator(string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects, int id)
         {
+            location = "";
             this.predicate = new Predicate(name, terms, true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -232,6 +266,7 @@ namespace Mediation.PlanTools
 
         public Operator(string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects, List<IAxiom> conditionals, int id)
         {
+            location = "";
             this.predicate = new Predicate(name, terms, true);
             this.preconditions = preconditions;
             this.effects = effects;
