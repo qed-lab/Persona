@@ -1,9 +1,10 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 
 using Mediation.Interfaces;
 using Mediation.PlanTools;
+using Mediation.Planners;
 
 namespace Persona
 {
@@ -24,7 +25,8 @@ namespace Persona
             }
         }
 
-
+        // Returns a plan representing observations that Indexter deems to be salient
+        // in the player's mind for processing.
         public static List<IOperator> Indexter(Plan chronology, Domain domain, Problem problem, double salienceThreshold)
         {
             // This is what we're after: the steps in the chronology that we think are salient in the mind of the player
@@ -45,10 +47,9 @@ namespace Persona
                 if (recallability > salienceThreshold)
                     salientSteps.Add(last);
             }
+
             return salientSteps;
         }
-
-
 
         /// <summary>
         /// Computes the recallability of the target step given the specified cue and chronology.
@@ -60,13 +61,13 @@ namespace Persona
             double recallability = 0.0;
 
             // Find the overlap between the cue and the target
-            double cueOverlap = IndexOverlap(target, cue, chronology);
+            double cueOverlap = IndexOverlap(target, cue, chronology) + 1;
 
             // Get the cue's index.
             int cueIndex = chronology.Steps.IndexOf(cue);
 
             // For each step other than the cue, accumulate the overlap.
-            double otherOverlap = 0.0;
+            double otherOverlap = 1.0;
 
             for (int stepIndex = 0; stepIndex < chronology.Steps.Count; stepIndex++)
             {
@@ -94,7 +95,19 @@ namespace Persona
             if (HasSpaceOverlap(target, cue, chronology))
                 overlap++;
 
+            // Time overlap: x & y both belong to the same temporal frame (delimited by move operators)
             if (HasTimeOverlap(target, cue, chronology))
+                overlap++;
+
+            // Causal overlap: x & y both belong to the same causal chain
+            if (HasCausalOverlap(target, cue, chronology))
+                overlap++;
+
+            if (HasIntentionalOverlap(target, cue, chronology))
+                overlap++;
+
+            // Entity overlap: x & y both contain an entity that overlaps (a character or an item)
+            if (HasEntityOverlap(target, cue, chronology))
                 overlap++;
 
             return overlap;
@@ -171,7 +184,75 @@ namespace Persona
 
         #endregion
 
+        #region Intentionality
 
+        // Plan cache!
+        private static Dictionary<Problem, Plan> planCache = new Dictionary<Problem, Plan>();
+
+        // Returns true if x and y overlap in intention.  My definition of intention
+        // overlap is based on both operators belonging to the optimal path to achieve
+        // individual goals. 
+        private static bool HasIntentionalOverlap(IOperator x, IOperator y, Plan plan)
+        {
+            // Prepare a list of plans to look through.
+            List<Plan> optimalPlansTowardGoals = new List<Plan>();
+
+            // Find all the goals adopted by the player.
+            List<List<IPredicate>> goals = Utilities.ExtractGoals(plan.Problem);
+
+            // For each goal that has been adopted, 
+            foreach(List<IPredicate> goal in goals)
+            {
+                // Create a new problem with the given goal
+                Problem goalProblem = (plan.Problem.Clone() as Problem);
+                goalProblem.Goal = goal;
+
+                // See if we've already computed a plan for this problem.
+                // If so, add it to the list of optimal plans to check.
+                if (planCache.ContainsKey(goalProblem))
+                    optimalPlansTowardGoals.Add(planCache[goalProblem]);
+
+                // Otherwise, compute it, cache it, and add it to the list 
+                // of optimal plans to check
+                else
+                {
+                    Plan goalPlan = SIWthenBFS.Plan(plan.Domain, goalProblem);
+                    planCache[goalProblem] = goalPlan;
+                    optimalPlansTowardGoals.Add(goalPlan);
+                }
+            }
+
+            // For all the compiled plans, check if the two operators belong to any same plan.
+            foreach (Plan intentionalPlan in optimalPlansTowardGoals)
+            {
+                // If they do belong to the same plan, return true
+                if (intentionalPlan.Steps.Contains(x) && intentionalPlan.Steps.Contains(y))
+                    return true;
+            }
+
+            // Otherwise, return false
+            return false;
+        }
+
+        #endregion
+
+        #region Entity
+
+        // Returns true if x and y overlap in entity.  This definition of overlap
+        // is very conservative: if they overlap in any ONE entity, it is considered
+        // an overlap.
+        private static bool HasEntityOverlap(IOperator x, IOperator y, Plan plan)
+        {
+            foreach(ITerm term in x.Entities)
+            {
+                if (y.Entities.Contains(term))
+                    return true;
+            }
+
+            return false;
+        }
+
+        #endregion
 
     }
 }

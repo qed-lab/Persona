@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -112,7 +112,7 @@ namespace Persona
         private static void RunWindowed()
         {
             // Record the kind of the system that is running here.
-            string config = "Windowed";
+            string config = "windowed";
 
             // Load the baseline domain
             string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
@@ -134,7 +134,7 @@ namespace Persona
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
                 // Create an output folder.
-                string outputFolder = dataFolder + @"/output/";
+                string outputFolder = dataFolder + @"/output_" + config + @"/";
                 System.IO.Directory.CreateDirectory(outputFolder);
 
                 // Store and change the current working directory.

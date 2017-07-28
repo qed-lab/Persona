@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +39,9 @@ namespace Mediation.Interfaces
 
         // Actions have a location.
         string Location { get; }
+
+        // Actions may have entites.
+        List<ITerm> Entities { get; }
 
 		// Actions may have a list of consenting agents.
 		List<ITerm> ConsentingAgents { get; set; }
