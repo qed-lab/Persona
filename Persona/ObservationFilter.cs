@@ -55,7 +55,7 @@ namespace Persona
         /// Computes the recallability of the target step given the specified cue and chronology.
         /// Recallability is as is defined by the Indexter model.
         /// </summary>
-        private static double Recallability(IOperator target, IOperator cue, Plan chronology)
+        public static double Recallability(IOperator target, IOperator cue, Plan chronology)
         {
             // This is what we're interested in.
             double recallability = 0.0;
@@ -187,7 +187,7 @@ namespace Persona
         #region Intentionality
 
         // Plan cache!
-        private static Dictionary<Problem, Plan> planCache = new Dictionary<Problem, Plan>();
+        private static Dictionary<List<IPredicate>, Plan> planCache = new Dictionary<List<IPredicate>, Plan>();
 
         // Returns true if x and y overlap in intention.  My definition of intention
         // overlap is based on both operators belonging to the optimal path to achieve
@@ -207,17 +207,19 @@ namespace Persona
                 Problem goalProblem = (plan.Problem.Clone() as Problem);
                 goalProblem.Goal = goal;
 
+
+
                 // See if we've already computed a plan for this problem.
                 // If so, add it to the list of optimal plans to check.
-                if (planCache.ContainsKey(goalProblem))
-                    optimalPlansTowardGoals.Add(planCache[goalProblem]);
+                if (planCache.ContainsKey(goal))
+                    optimalPlansTowardGoals.Add(planCache[goal]);
 
                 // Otherwise, compute it, cache it, and add it to the list 
                 // of optimal plans to check
                 else
                 {
                     Plan goalPlan = SIWthenBFS.Plan(plan.Domain, goalProblem);
-                    planCache[goalProblem] = goalPlan;
+                    planCache[goal] = goalPlan;
                     optimalPlansTowardGoals.Add(goalPlan);
                 }
             }

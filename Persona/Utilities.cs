@@ -316,7 +316,7 @@ namespace Persona
         /// This returns a list of disjunctive goals, themselves made from a
         /// list of conjuncted predicates.
 		/// </summary>
-		public static List<List<IPredicate>> ExtractGoal(Problem problem)
+		public static List<List<IPredicate>> ExtractGoals(Problem problem)
         {
             List<List<IPredicate>> goals = new List<List<IPredicate>>();
 
@@ -529,7 +529,7 @@ namespace Persona
 		{
 			// A boolean array that identifies whether the goal represented by (index + 1)
 			// is present in the given list of predicates.
-			bool[] goalsPresent = new bool[5];
+			bool[] goalsPresent = new bool[6];
 
             // These are all the predicates representing the respective goals.
 

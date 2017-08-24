@@ -27,7 +27,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PlanRecognitionTheory.cs" />
+    <Compile Include="PlanRecognitionProblem.cs" />
     <Compile Include="Mediation\Enums\ActionType.cs" />
     <Compile Include="Mediation\Enums\PlanType.cs" />
     <Compile Include="Mediation\Enums\Planner.cs" />
@@ -89,6 +89,8 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="ObservationFilter.cs" />
+    <Compile Include="PersonaEvaluation.cs" />
+    <Compile Include="ReachabilityAnalysis.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

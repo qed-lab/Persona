@@ -12,9 +12,9 @@ namespace Mediation.Planners
 		{
             // Set up the domain path.
             string plannerPath = Parser.GetTopDirectory() + @"LAPKT-public/planners/siw_plus-then-bfs_f-ffparser/siw-then-bfsf";
-            string domainPath = Parser.GetTopDirectory() + @"benchmarks/domrob.pddl";
-            string problemPath = Parser.GetTopDirectory() + @"benchmarks/probrob.pddl";
-            string outputPath = Parser.GetTopDirectory() + @"benchmarks/plan.pddl";
+            string domainPath = Parser.GetTopDirectory() + @"Persona/benchmarks/domrob.pddl";
+            string problemPath = Parser.GetTopDirectory() + @"Persona/benchmarks/probrob.pddl";
+            string outputPath = Parser.GetTopDirectory() + @"Persona/benchmarks/plan.pddl";
 
 			// Create new PDDL problem and domain files.
             Writer.ProblemToPDDL(problemPath, domain, problem, problem.Initial);
@@ -26,7 +26,7 @@ namespace Mediation.Planners
 			// Store the process' arguments.
 			startInfo.Arguments = 
                 "--domain " + domainPath + " " +
-                "--problem " + problemPath +
+                "--problem " + problemPath + " " +
                 "--output " + outputPath;
 
 			startInfo.WindowStyle = ProcessWindowStyle.Hidden;
