@@ -294,6 +294,7 @@ namespace Persona
 
                     // ...are just for flavor
                     (!step.ToString().Equals("(give alli ash arthur junkyard)")) &&
+                    (!step.ToString().Equals("(drop arthur ash fort)")) &&
 
                     // ...cannot be used directly by the player
                     !step.Name.Equals("donothing") &&
