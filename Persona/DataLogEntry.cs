@@ -120,6 +120,12 @@ namespace Persona
         public int GoalRecognitionLevenshteinDistance { get; set; }
 
         /// <summary>
+        /// Gets or sets the indexter calculation time.
+        /// </summary>
+        /// <value>The indexter calculation time.</value>
+        public double IndexterCalculationTime { get; set; }
+
+        /// <summary>
         /// Gets or sets the predicted goal.
         /// </summary>
         /// <value>The predicted goal.</value>
@@ -161,7 +167,7 @@ namespace Persona
             "NumberOfObservationsInput, NumberOfPlayerActionsTaken, " +
             "Runtime, " +
             "PlanRecognitionPrecision, PlanRecognitionRecall, PlanRecognitionF1Score, PlanRecognitionLevenshteinDistance, " +
-            "GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance";
+            "GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance, IndexterCalculationTime";
 
 		/// <summary>
 		/// Returns the CSV header of the data log entries.
@@ -178,14 +184,15 @@ namespace Persona
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Persona.DataLogEntry"/>.</returns>
         public string ToCSVString()
         {
-            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}",
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}",
                                  PlayerId, SystemConfiguration, NumberOfGoals,
                                  NumberOfOperatorsPreCompilation, NumberOfPredicatesPreCompilation,
                                  NumberOfOperatorsPostCompilation, NumberOfPredicatesPostCompilation,
                                  NumberOfObservationsInput, NumberOfPlayerActionsTaken,
                                  Runtime,
                                  PlanRecognitionPrecision, PlanRecognitionRecall, PlanRecognitionF1Score, PlanRecognitionLevenshteinDistance,
-                                 GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance);
+                                 GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance,
+                                 IndexterCalculationTime);
 
             // These are printed to file: PredictedPlan, ActualPlan, PredictedGoal, ActualGoal
         }

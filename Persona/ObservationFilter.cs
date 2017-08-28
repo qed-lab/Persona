@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Mediation.Interfaces;
 using Mediation.PlanTools;
 using Mediation.Planners;
+using Priority_Queue;
 
 namespace Persona
 {
@@ -27,10 +28,21 @@ namespace Persona
 
         // Returns a plan representing observations that Indexter deems to be salient
         // in the player's mind for processing.
-        public static List<IOperator> Indexter(Plan chronology, Domain domain, Problem problem, double salienceThreshold)
+        public static List<IOperator> Indexter(Plan chronology, Domain domain, Problem problem, double salienceThreshold, DataLogEntry dataLogEntry)
         {
             // This is what we're after: the steps in the chronology that we think are salient in the mind of the player
             List<IOperator> salientSteps = new List<IOperator>();
+
+            // The salience threshold is the top percentage of steps we want returned from the Chronology.
+            // For example, if the threshold is set to 0.25, then we are returning the steps within the top
+            // 25% of salience values.
+            //
+            // If the input threshold is negative or greater than 1.0, just return an empty list of steps.
+            if (salienceThreshold < 0.0 || salienceThreshold > 1.0)
+                return salientSteps;
+
+            // Create a priority queue for steps.
+            SimplePriorityQueue<IOperator, double> saliencePriorityQueue = new SimplePriorityQueue<IOperator, double>();
 
             // Get the last step of the chronology. It acts as a cue to memory.
             IOperator last = chronology.Steps.Last();
@@ -38,14 +50,42 @@ namespace Persona
             // I assume the last step is salient by virtue of being the last step
             salientSteps.Add(last);
 
+
+
             // For every other step of the chronology,
             for (int index = 0; index < chronology.Steps.Count - 1; index++)
             {
                 IOperator step = chronology.Steps.ElementAt(index);
-                double recallability = Recallability(step, last, chronology);
 
-                if (recallability > salienceThreshold)
-                    salientSteps.Add(last);
+                // Record how long it takes to do the recallability calculation.
+                DateTime recallabilityStart = DateTime.Now;
+                double recallability = Recallability(step, last, chronology);
+                DateTime recallabilityEnd = DateTime.Now;
+
+                // Store that time.
+                TimeSpan recallabilityElapsedTime = recallabilityEnd - recallabilityStart;
+                dataLogEntry.IndexterCalculationTime = recallabilityElapsedTime.TotalMilliseconds;
+
+                saliencePriorityQueue.Enqueue(step, recallability);
+            }
+
+            // This is the percentage of steps to skip.
+            double salienceThresholdComplement = 1.0 - salienceThreshold;
+
+            // Get the number of things to dequeue and ignore.
+            int numberOfStepsToSkip = (int) Math.Floor(salienceThresholdComplement * saliencePriorityQueue.Count);
+
+            // Skip the corresponding steps.
+            for (int indexToSkip = 0; indexToSkip < numberOfStepsToSkip; indexToSkip++) {
+                saliencePriorityQueue.Dequeue();
+            }
+
+            // Get the rest of the steps, which should be considered salient.
+            int remainingSteps = saliencePriorityQueue.Count;
+
+            for (int salientStepIndex = 0; salientStepIndex < remainingSteps; salientStepIndex++) {
+                IOperator salientStep = saliencePriorityQueue.Dequeue();
+                salientSteps.Add(salientStep);
             }
 
             return salientSteps;

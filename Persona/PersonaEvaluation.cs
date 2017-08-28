@@ -11,10 +11,16 @@ namespace Persona
 {
     public class PersonaEvaluation
     {
+        enum IndexterSalienceThreshold
+        {
+            STRICT,
+            AVERAGE
+        };
+
         public static int Main(string[] args)
         {
             // ReachabilityAnalysis.CompressRecallabilityDataFiles();
-            RunBaseline();
+            RunCognitive(IndexterSalienceThreshold.STRICT);
             return 0;
         }
 
@@ -190,6 +196,100 @@ namespace Persona
                 Directory.SetCurrentDirectory(oldWD);
             }
         }
+
+        private static void RunCognitive(IndexterSalienceThreshold level)
+        {
+			// Record the kind of the system that is running here.
+			string config = "cognitive";
+
+			// Load the baseline domain
+			string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+			Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+
+			// Load the baseline problem
+			string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+			Problem problem = Parser.GetProblem(problemPath);
+
+			// Load each folder.
+			string dataPath = Parser.GetTopDirectory() + @"data/";
+			string[] dataFolders = Directory.GetDirectories(dataPath);
+
+			// For each player
+			foreach (string dataFolder in dataFolders)
+			{
+				// Get the player's ID.
+				string[] dataPathString = dataFolder.Split(new char[] { '/' });
+				int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+				// Create an output folder.
+				string outputFolder = dataFolder + @"/output_" + config + @"/";
+				System.IO.Directory.CreateDirectory(outputFolder);
+
+				// Store and change the current working directory.
+				string oldWD = Directory.GetCurrentDirectory();
+				System.IO.Directory.SetCurrentDirectory(outputFolder);
+
+				// Load the player's chronology
+				string observationsPath = dataFolder + @"/chronology.pddl";
+				Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
+				Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
+
+				// Create the data log.
+				string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
+				StreamWriter writer = new StreamWriter(logPath, false);
+				writer.WriteLine(DataLogEntry.CSVheader());
+
+				// Iterate the player chronology of observations.
+				for (int obsId = 1;
+					 obsId < playerChronology.Steps.Count;
+					 obsId++)
+				{
+					// Start the data entry.
+					DataLogEntry logEntry = new DataLogEntry();
+					logEntry.PlayerId = playerId;
+					logEntry.SystemConfiguration = config;
+					logEntry.NumberOfGoals = problem.Goals.Count;
+					logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
+					logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
+					logEntry.NumberOfPlayerActionsTaken = obsId;
+					logEntry.ActualPlan = playerChronology;
+
+					// Get the first n actions of the player chronology, where n = obsId.
+					Plan prefix = playerChronology.Prefix(obsId) as Plan;
+
+                    // Compile a list of the salient steps.
+                    List<IOperator> salientSteps;
+
+
+                    if(level == IndexterSalienceThreshold.STRICT)
+                        salientSteps = ObservationFilter.Indexter(prefix, domain, problem, 0.25, logEntry);
+
+                    else 
+                        salientSteps = ObservationFilter.Indexter(prefix, domain, problem, 0.50, logEntry);
+
+					Plan window = new Plan(domain, problem, salientSteps);
+					logEntry.NumberOfObservationsInput = window.Steps.Count;
+
+					// Assemble a plan recognition theory to solve.
+					PlanRecognitionProblem theory = new PlanRecognitionProblem(domain, problem, window);
+
+					// Solve the theory.
+					theory.Solve(logEntry);
+
+					// Add the entry to the log.
+					writer.WriteLine(logEntry.ToCSVString());
+				}
+
+				// Close the log.
+				writer.Close();
+
+				// Restore the old working directory.
+				Directory.SetCurrentDirectory(oldWD);
+			}
+        }
+
+
+
 
 		/// <summary>
 		/// Runs the windowed version of the plan recognition pipeline.
