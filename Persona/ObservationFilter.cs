@@ -50,8 +50,6 @@ namespace Persona
             // I assume the last step is salient by virtue of being the last step
             salientSteps.Add(last);
 
-
-
             // For every other step of the chronology,
             for (int index = 0; index < chronology.Steps.Count - 1; index++)
             {
@@ -88,6 +86,7 @@ namespace Persona
                 salientSteps.Add(salientStep);
             }
 
+            salientSteps = salientSteps.OrderBy(o => o.ID).ToList();
             return salientSteps;
         }
 
