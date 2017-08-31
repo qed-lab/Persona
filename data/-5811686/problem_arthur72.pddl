@@ -75,7 +75,7 @@
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur humanskull)
 		(has jordan loveletter)
 		(has arthur mirror)
@@ -127,7 +127,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

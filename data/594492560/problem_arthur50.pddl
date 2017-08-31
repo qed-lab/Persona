@@ -70,7 +70,7 @@
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has arthur bouquet)
 		(has dorian lovecontract)
@@ -108,7 +108,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

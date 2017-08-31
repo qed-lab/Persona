@@ -44,7 +44,7 @@
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rope)
 		(has arthur shinykey)
 		(has arthur tastycupcake)
@@ -83,7 +83,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 	  )
 	)

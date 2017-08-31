@@ -67,7 +67,7 @@
 		(doorbetween towngate townsquare townarch)
 		(doorway townarch docks)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway docks junkyard)
@@ -118,7 +118,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

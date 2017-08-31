@@ -65,7 +65,7 @@
 		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur ash)
 		(has alli tastycupcake)
 		(has arthur bouquet)
@@ -101,7 +101,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has alli tastycupcake)

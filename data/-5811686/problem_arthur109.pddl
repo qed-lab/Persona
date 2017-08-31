@@ -77,7 +77,7 @@
 		(doorway basement storage)
 		(doorway docks junkyard)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway townsquare valley)
 		(has mel basementbucket)
@@ -125,7 +125,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

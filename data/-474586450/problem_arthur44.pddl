@@ -53,7 +53,7 @@
 		(doorway docks junkyard)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rope)
 		(has arthur shinykey)
 		(has dorian lovecontract)
@@ -86,7 +86,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 	  )

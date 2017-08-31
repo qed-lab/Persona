@@ -78,7 +78,7 @@
 		(doorway junkyard docks)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james candle)
 		(has ian knightsword)
 		(has ian knightshield)
@@ -121,7 +121,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

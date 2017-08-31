@@ -55,7 +55,7 @@
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has arthur mushroom)
 		(has mel basementbucket)
@@ -87,7 +87,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 	  )

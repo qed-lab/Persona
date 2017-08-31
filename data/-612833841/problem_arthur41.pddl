@@ -55,7 +55,7 @@
 		(doorbetween towngate townsquare townarch)
 		(doorway basement storage)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway townsquare valley)
 		(doorway townarch docks)
@@ -96,7 +96,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 	  )
 	)

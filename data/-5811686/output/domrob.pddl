@@ -19,7 +19,7 @@
 		(doorway ?x - location ?y - location)
 		(doorbetween ?x - door ?y - location ?z - location)
 		(tutorial-has-been-completed)
-		(game-has-been-won)
+		
 		(player ?x - character)
 		(wants-item ?x - character ?y - item)
 		(willing-to-give-item ?x - character ?y - item)
@@ -246,6 +246,6 @@
 				(player ?character)
 			)
 		:effect
-				(game-has-been-won)
+				
 	)
 )

@@ -80,7 +80,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has arthur ash)
 		(has arthur rubyring)
@@ -123,7 +123,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

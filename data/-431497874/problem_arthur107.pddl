@@ -74,7 +74,7 @@
 		(doorway valley townsquare)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has mel basementbucket)
 		(has dorian bouquet)
@@ -113,7 +113,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has jordan lovecontract)

@@ -72,7 +72,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare cliff)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james humanskull)
 		(has dorian rubyring)
 		(has dorian lovecontract)
@@ -123,7 +123,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

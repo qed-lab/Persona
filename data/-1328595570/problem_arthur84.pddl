@@ -64,7 +64,7 @@
 		(doorway townsquare cliff)
 		(doorway valley townsquare)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has alli tastycupcake)
 		(has arthur mirror)
@@ -119,7 +119,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 		(has james coin)

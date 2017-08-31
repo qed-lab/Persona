@@ -68,7 +68,7 @@
 		(doorway docks junkyard)
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has mel basementbucket)
 		(has arthur humanskull)
@@ -101,7 +101,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has jordan lovecontract)

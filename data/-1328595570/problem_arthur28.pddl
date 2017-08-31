@@ -46,7 +46,7 @@
 		(doorway docks townarch)
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has dorian lovecontract)
 		(has arthur knightsword)
@@ -88,7 +88,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 	  )
 	)

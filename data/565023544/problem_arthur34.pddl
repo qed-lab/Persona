@@ -62,7 +62,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare valley)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has mel basementbucket)
 		(has arthur shinykey)
@@ -96,7 +96,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

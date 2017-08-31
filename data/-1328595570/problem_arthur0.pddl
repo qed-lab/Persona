@@ -25,6 +25,6 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-		(game-has-been-won)
+		
 	)
 )
