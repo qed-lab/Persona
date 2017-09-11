@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 using Mediation.PlanTools;
 using Mediation.Interfaces;
+using Mediation.FileIO;
 
 namespace Persona
 {
@@ -45,6 +47,7 @@ namespace Persona
             {"love_B", new List<IPredicate>{ALL_GOAL_LITERALS["love_letter"], ALL_GOAL_LITERALS["love_bouquet"], ALL_GOAL_LITERALS["love_contract"]}},
             {"wisdom", new List<IPredicate>{ALL_GOAL_LITERALS["wisdom_coin"], ALL_GOAL_LITERALS["wisdom_humanskull"], ALL_GOAL_LITERALS["wisdom_candle"]}}
         };
+
 
 		/// <summary>
 		/// Computes the precision of the forward inferences in the recognized plan.
@@ -147,6 +150,7 @@ namespace Persona
             return (numberOfCorrectPredictions / (double)numberOfActualSteps);
         }
 
+
 		// Computes Recall of Goal Rec
 		public static double GoalRecognitionRecall(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
 		{
@@ -174,7 +178,6 @@ namespace Persona
 
 			return (numberOfCorrectPredictions / (double)numberOfActualGoals);
 		}
-
 
 
         /// <summary>
@@ -434,6 +437,7 @@ namespace Persona
             return sb.ToString();
         }
 
+
         /// <summary>
         /// Checks if the given string represents a number.
         /// </summary>
@@ -442,6 +446,7 @@ namespace Persona
             double num;
             return double.TryParse(s, out num);
         }
+
 
         // Returns a List of strings that denote the symbols of this list of predicates.
         // For example, if the list of strings was composed of the following predicates:
@@ -465,6 +470,7 @@ namespace Persona
 
             return symbols;
         }
+
 
         /// <summary>
         /// Predicates the levenshtein distance.
@@ -525,6 +531,7 @@ namespace Persona
 			return distance[currentRow, m];
 		}
 
+
 		public static bool[] GoalBitArray(List<IPredicate> goal)
 		{
 			// A boolean array that identifies whether the goal represented by (index + 1)
@@ -567,5 +574,131 @@ namespace Persona
 			return goalsPresent;
 		}
 
+
+        /// <summary>
+        /// This method corrects a problem in the data collection.
+        /// If a term appears in a literal within the problem's initial or goal state,
+        /// then the term itself should appear in the list of objects in the game.
+        /// </summary>
+        public static void CorrectDetectedObjectsInGameProblemFiles()
+        {
+            // Load the baseline domain
+            string baselineDomainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            Domain baselineDomain = Parser.GetDomain(baselineDomainPath, Mediation.Enums.PlanType.StateSpace);
+
+            // Load the baseline problem
+            string baselineProblemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+            Problem baselineProblem = Parser.GetProblem(baselineProblemPath);
+
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
+
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Create an output folder.
+                string outputFolder = dataFolder + @"/corrected_problems/";
+                System.IO.Directory.CreateDirectory(outputFolder);
+
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(outputFolder);
+
+                // Load every problem file for this player
+                int problemNumber = 0;
+                string problemName = dataFolder + @"/problem_arthur" + problemNumber + @".pddl";
+
+                while (File.Exists(problemName))
+                {
+                    // Create the problem object to work on
+                    Problem problem = Parser.GetProblem(problemName);
+
+                    // For every literal in the initial state,
+                    foreach (IPredicate initialStateLiteral in problem.Initial)
+                    {
+                        // Check that the literal's terms exist in the problem's objects
+                        foreach (ITerm initialStateTerm in initialStateLiteral.Terms)
+                        {
+                            bool termFoundInObjects = false;
+                            foreach (IObject problemObject in problem.Objects)
+                            {
+                                if (problemObject.Name.Equals(initialStateTerm.Constant))
+                                {
+                                    termFoundInObjects = true;
+                                    break;
+                                }
+                            }
+
+                            // If not, copy that term from the baseline problem into the player's problem
+                            if (!termFoundInObjects)
+                            {
+                                // Find the corresponding object in the baseline problem
+                                IObject baselineProblemObject = baselineProblem.Objects.Find(o => o.Name.Equals(initialStateTerm.Constant));
+
+                                // Add it to this problem
+                                problem.Objects.Add(baselineProblemObject.Clone() as IObject);
+                            }
+                        }
+                    }
+
+                    // For every literal in the goal state,
+                    foreach (IPredicate goalStateLiteral in problem.Goal)
+                    {
+                        // Check that the literal's terms exist in the problem's objects
+                        foreach (ITerm goalStateTerm in goalStateLiteral.Terms)
+                        {
+                            bool termFoundInObjects = false;
+                            foreach (IObject problemObject in problem.Objects)
+                            {
+                                if (problemObject.Name.Equals(goalStateTerm.Constant))
+                                {
+                                    termFoundInObjects = true;
+                                    break;
+                                }
+                            }
+
+                            // If not, copy that term from the baseline problem into the player's problem 
+                            if (!termFoundInObjects)
+                            {
+                                // Find the corresponding object in the baseline problem
+                                IObject baselineProblemObject = baselineProblem.Objects.Find(o => o.Name.Equals(goalStateTerm.Constant));
+
+                                // Add it to this problem
+                                problem.Objects.Add(baselineProblemObject.Clone() as IObject);
+                            }
+                        }
+                    }
+
+                    Problem problemClone = problem.Clone() as Problem;
+
+                    // Remove useless predicates from the problem goal
+                    foreach (IPredicate goalStateLiteral in problem.Goal)
+                    {
+                        string toString = goalStateLiteral.ToString();
+
+                        if (toString.Equals("(not (locked basementexit))"))
+                            problemClone.Goal.Remove(goalStateLiteral);
+
+                        if (toString.Equals("(has arthur ash)"))
+                            problemClone.Goal.Remove(goalStateLiteral);
+                    }
+
+
+                    // Write the clone problem out to a file
+                    problemClone.Domain = "arthur_HYRULE";
+                    baselineDomain.Name = "arthur_HYRULE";
+                    Writer.ProblemToPDDL(outputFolder + @"/problem_arthur" + problemNumber + @".pddl", 
+                                         baselineDomain, problemClone, problemClone.Initial);
+
+                    // Go to the next file
+                    problemNumber++;
+                    problemName = dataFolder + @"/problem_arthur" + problemNumber + @".pddl";
+                }
+
+                Directory.SetCurrentDirectory(oldWD);
+
+            }
+        }
 	}
 }
