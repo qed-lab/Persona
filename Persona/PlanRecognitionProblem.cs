@@ -48,22 +48,31 @@ namespace Persona
             // Store the runtime.
             dataLogEntry.Runtime = elapsedTime.TotalMilliseconds;
 
-            // Compute additional metrics.
-            dataLogEntry.PlanRecognitionPrecision = Utilities.PlanRecognitionPrecision(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
-            dataLogEntry.PlanRecognitionRecall = Utilities.PlanRecognitionRecall(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
-            dataLogEntry.PlanRecognitionF1Score = Utilities.FScore(dataLogEntry.PlanRecognitionPrecision, dataLogEntry.PlanRecognitionRecall);
-            dataLogEntry.PredictedGoal = Utilities.ExtractRecognizedGoal(this.solution);
-            dataLogEntry.ActualGoal = Utilities.ExtractActualGoal(dataLogEntry.ActualPlan);
-            dataLogEntry.GoalRecognitionPrecision = Utilities.GoalRecognitionPrecision(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
-            dataLogEntry.GoalRecognitionRecall = Utilities.GoalRecognitionRecall(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
-            dataLogEntry.GoalRecognitionF1Score = Utilities.FScore(dataLogEntry.GoalRecognitionPrecision, dataLogEntry.GoalRecognitionRecall);
-            dataLogEntry.PredictedPlan = this.solution;
-            dataLogEntry.FilteredPredictedPlan = this.solutionUsingOriginalDomainOperators;
-            dataLogEntry.PlanRecognitionLevenshteinDistance = Plan.LevenshteinDistance(dataLogEntry.FilteredPredictedPlan, 
-                                                                                       dataLogEntry.ActualPlan);
+            // This means that no solution was found!
+            if(this.solution.Steps.Count == 0) {
+                dataLogEntry.SetSentinelValuesForFailure();
+            }
 
-            dataLogEntry.GoalRecognitionLevenshteinDistance = Utilities.PredicateLevenshteinDistance(dataLogEntry.PredictedGoal,
-                                                                                                     dataLogEntry.ActualGoal);
+            else
+            {
+				// Compute additional metrics.
+				dataLogEntry.PlanRecognitionPrecision = Utilities.PlanRecognitionPrecision(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
+				dataLogEntry.PlanRecognitionRecall = Utilities.PlanRecognitionRecall(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
+				dataLogEntry.PlanRecognitionF1Score = Utilities.FScore(dataLogEntry.PlanRecognitionPrecision, dataLogEntry.PlanRecognitionRecall);
+				dataLogEntry.PredictedGoal = Utilities.ExtractRecognizedGoal(this.solution);
+				dataLogEntry.ActualGoal = Utilities.ExtractActualGoal(dataLogEntry.ActualPlan);
+				dataLogEntry.GoalRecognitionPrecision = Utilities.GoalRecognitionPrecision(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
+				dataLogEntry.GoalRecognitionRecall = Utilities.GoalRecognitionRecall(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
+				dataLogEntry.GoalRecognitionF1Score = Utilities.FScore(dataLogEntry.GoalRecognitionPrecision, dataLogEntry.GoalRecognitionRecall);
+				dataLogEntry.PredictedPlan = this.solution;
+				dataLogEntry.FilteredPredictedPlan = this.solutionUsingOriginalDomainOperators;
+				dataLogEntry.PlanRecognitionLevenshteinDistance = Plan.LevenshteinDistance(dataLogEntry.FilteredPredictedPlan,
+																						   dataLogEntry.ActualPlan);
+
+				dataLogEntry.GoalRecognitionLevenshteinDistance = Utilities.PredicateLevenshteinDistance(dataLogEntry.PredictedGoal,
+																										 dataLogEntry.ActualGoal);
+
+			}
 
             string recognizedGoalOutput = Directory.GetCurrentDirectory() + @"/recognized-goal-" + dataLogEntry.NumberOfPlayerActionsTaken + @".pddl";
             string actualGoalOutput = Directory.GetCurrentDirectory() + @"/actual-goal.pddl";
