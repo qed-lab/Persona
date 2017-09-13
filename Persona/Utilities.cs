@@ -574,6 +574,80 @@ namespace Persona
 			return goalsPresent;
 		}
 
+        public static List<List<IPredicate>> DisjunctifyGoals(List<IPredicate> goal)
+        {
+            // Number of goals adopted
+            List<string> goalsAdopted = new List<string>();
+
+			// These are all the predicates representing the respective goals.
+
+			// g1 - Equip Quest
+			IPredicate g1_1 = ALL_GOAL_LITERALS["equip_sword"];
+			IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
+
+			// g2 - Fetch Quest
+			IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
+
+			// g3 - Pilgrimage Quest
+			IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
+
+			// g4 - Love Quest
+			IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
+			IPredicate g4_2a = ALL_GOAL_LITERALS["love_rubyring"];
+			IPredicate g4_2b = ALL_GOAL_LITERALS["love_bouquet"];
+			IPredicate g4_3 = ALL_GOAL_LITERALS["love_contract"];
+
+			// g5 - Wisdom Quest
+			IPredicate g5_1 = ALL_GOAL_LITERALS["wisdom_coin"];
+			IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
+			IPredicate g5_3 = ALL_GOAL_LITERALS["wisdom_candle"];
+
+            // Check to see how many goals have been adopted. It is sufficient
+            // to check that the first literal of the respective goal has been
+            // adopted.
+            if (goal.Contains(g1_1))
+                goalsAdopted.Add("g1");
+
+            if (goal.Contains(g2))
+                goalsAdopted.Add("g2");
+
+            if (goal.Contains(g3))
+                goalsAdopted.Add("g3");
+
+            if (goal.Contains(g4_1))
+                goalsAdopted.Add("g4");
+
+            if (goal.Contains(g5_1))
+                goalsAdopted.Add("g5");
+
+
+            if(goalsAdopted.Count <= 3)
+            {
+                // If three goals were adopted, then add them as a single conjunction
+
+            }
+
+            else if(goalsAdopted.Count == 4)
+            {
+                // If four goals were adopted, then there are:
+                // (4 choose 3) + 1 potential goals in a disjunction
+
+            }
+
+            else // 5 goals adopted
+            {
+                // If five goals were adopted, then there are:
+                // (5 choose 3) + (5 choose 4) + 1 potential goals in a disjunction
+                
+            }
+
+
+
+        }
+
+
+
+
 
         /// <summary>
         /// This method corrects a problem in the data collection.
@@ -672,7 +746,7 @@ namespace Persona
 
                     Problem problemClone = problem.Clone() as Problem;
 
-                    // Remove useless predicates from the problem goal
+                    // Remove useless literals from the problem goal
                     foreach (IPredicate goalStateLiteral in problem.Goal)
                     {
                         string toString = goalStateLiteral.ToString();
@@ -683,6 +757,9 @@ namespace Persona
                         if (toString.Equals("(has arthur ash)"))
                             problemClone.Goal.Remove(goalStateLiteral);
                     }
+
+                    // Look at the reamining literals in the problem goal
+
 
 
                     // Write the clone problem out to a file
