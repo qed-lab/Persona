@@ -155,6 +155,18 @@ namespace Persona
         /// <value>The actual plan.</value>
         public Plan ActualPlan { get; set; }
 
+        // Method to set values to -1.0 for the case of failure.
+        public void SetSentinelValuesForFailure()
+        {
+            PlanRecognitionPrecision = -1.0;
+            PlanRecognitionRecall = -1.0;
+            PlanRecognitionF1Score = -1.0;
+            PlanRecognitionLevenshteinDistance = -1;
+            GoalRecognitionPrecision = -1.0;
+            GoalRecognitionRecall = -1.0;
+            GoalRecognitionF1Score = -1.0;
+            GoalRecognitionLevenshteinDistance = -1;
+        }
 
 
         /// <summary>
