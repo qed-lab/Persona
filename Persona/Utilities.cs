@@ -8,6 +8,8 @@ using Mediation.PlanTools;
 using Mediation.Interfaces;
 using Mediation.FileIO;
 
+using GG.Combinatorics;
+
 namespace Persona
 {
     public static class Utilities
@@ -576,8 +578,15 @@ namespace Persona
 
         public static List<List<IPredicate>> DisjunctifyGoals(List<IPredicate> goal)
         {
-            // Number of goals adopted
-            List<string> goalsAdopted = new List<string>();
+            // This is what we're going to return.
+            List<List<IPredicate>> disjunctedGoals = new List<List<IPredicate>>();
+
+            // These are five lists of predicates, representing each of the goals.
+            List<IPredicate> equipQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> fetchQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> pilgrimageQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> loveQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> wisdomQuestAdoptedGoals = new List<IPredicate>();
 
 			// These are all the predicates representing the respective goals.
 
@@ -605,44 +614,106 @@ namespace Persona
             // Check to see how many goals have been adopted. It is sufficient
             // to check that the first literal of the respective goal has been
             // adopted.
+
+            // If the equip quest is adopted, both goals are present.
             if (goal.Contains(g1_1))
-                goalsAdopted.Add("g1");
-
-            if (goal.Contains(g2))
-                goalsAdopted.Add("g2");
-
-            if (goal.Contains(g3))
-                goalsAdopted.Add("g3");
-
-            if (goal.Contains(g4_1))
-                goalsAdopted.Add("g4");
-
-            if (goal.Contains(g5_1))
-                goalsAdopted.Add("g5");
-
-
-            if(goalsAdopted.Count <= 3)
             {
-                // If three goals were adopted, then add them as a single conjunction
+                equipQuestAdoptedGoals.Add(g1_1);
+                equipQuestAdoptedGoals.Add(g1_2);
+            }
+                
+            // If the fetch quest is adopted, the goal is present.
+            if (goal.Contains(g2))
+                fetchQuestAdoptedGoals.Add(g2);
 
+            // If the pilgrimage quest is adopted, the goal is present.
+            if (goal.Contains(g3))
+                pilgrimageQuestAdoptedGoals.Add(g3);
+            
+            // The love quest is broken up into parts. 
+            // Such that if the love quest is adopted, not all goals are immediately added.
+            if (goal.Contains(g4_1))
+                loveQuestAdoptedGoals.Add(g4_1);
+
+            // The second part of the love quest adds two potential predicates at once.
+            if (goal.Contains(g4_2a) || goal.Contains(g4_2b))
+            {
+                loveQuestAdoptedGoals.Add(g4_2a);
+                loveQuestAdoptedGoals.Add(g4_2b);
             }
 
-            else if(goalsAdopted.Count == 4)
+            if (goal.Contains(g4_3))
+                loveQuestAdoptedGoals.Add(g4_3);
+
+            // The wisdom quest is also broken up into parts.
+            // Such that if the wisdom quest is adopted, not all goals are immediately added.
+            if (goal.Contains(g5_1))
+                wisdomQuestAdoptedGoals.Add(g5_1);
+
+            if (goal.Contains(g5_2))
+                wisdomQuestAdoptedGoals.Add(g5_2);
+
+            if (goal.Contains(g5_3))
+                wisdomQuestAdoptedGoals.Add(g5_3);
+
+            int questBranchesAdopted = 0;
+            questBranchesAdopted += (equipQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (fetchQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (pilgrimageQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (loveQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (wisdomQuestAdoptedGoals.Count > 0) ? 1 : 0;
+
+
+            if(questBranchesAdopted <= 3)
+            {
+                // If three goals were adopted, then add them as a single conjunction
+                List<IPredicate> conj = new List<IPredicate>();
+
+                // Take all the goals, wholecloth:
+                conj.AddRange(goal);
+
+                // Add them to the disjuncts
+                disjunctedGoals.Add(conj);
+            }
+
+            else if(questBranchesAdopted == 4)
             {
                 // If four goals were adopted, then there are:
                 // (4 choose 3) + 1 potential goals in a disjunction
+                if (equipQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(equipQuestAdoptedGoals);
 
-            }
+                if (fetchQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(fetchQuestAdoptedGoals);
 
-            else // 5 goals adopted
-            {
+                if (pilgrimageQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(pilgrimageQuestAdoptedGoals);
+
+                if (loveQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(loveQuestAdoptedGoals);
+
+                if (wisdomQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(wisdomQuestAdoptedGoals);
+
+
+
+
+
+
+
+
+
+			}
+
+            else // questBranchesAdopted == 5 
+			{
                 // If five goals were adopted, then there are:
                 // (5 choose 3) + (5 choose 4) + 1 potential goals in a disjunction
                 
             }
 
 
-
+            return disjunctedGoals;
         }
 
 

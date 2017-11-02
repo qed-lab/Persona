@@ -100,11 +100,12 @@
     <Compile Include="Priority Queue\SimplePriorityQueue.cs" />
     <Compile Include="Priority Queue\StablePriorityQueue.cs" />
     <Compile Include="Priority Queue\StablePriorityQueueNode.cs" />
-    <Compile Include="Combinatorics\CombinationGenerator.cs" />
-    <Compile Include="Combinatorics\MathHelper.cs" />
-    <Compile Include="Combinatorics\PermutationGenerator.cs" />
-    <Compile Include="Combinatorics\Partitions\IntegerPartitionGenerator.cs" />
-    <Compile Include="Combinatorics\Partitions\SetPartitionGenerator.cs" />
+    <Compile Include="Combinatorics\Combinations.cs" />
+    <Compile Include="Combinatorics\GenerateOption.cs" />
+    <Compile Include="Combinatorics\IMetaCollection.cs" />
+    <Compile Include="Combinatorics\Permutations.cs" />
+    <Compile Include="Combinatorics\SmallPrimeUtility.cs" />
+    <Compile Include="Combinatorics\Variations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -116,10 +117,9 @@
   <ItemGroup>
     <Folder Include="Priority Queue\" />
     <Folder Include="Combinatorics\" />
-    <Folder Include="Combinatorics\Partitions\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Combinatorics\LICENSE" />
+    <None Include="Combinatorics\LICENCE" />
     <None Include="Combinatorics\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
