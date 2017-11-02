@@ -68,7 +68,7 @@
 		(connected docks townarch)
 		(doorbetween towngate townsquare townarch)
 		(doorbetween towngate townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway townsquare valley)
 		(doorway storage basement)
@@ -114,7 +114,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

@@ -63,7 +63,7 @@
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has arthur candle)
 		(has arthur lovecontract)
@@ -117,7 +117,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 		(has james coin)

@@ -50,7 +50,7 @@
 		(doorway storage basement)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has dorian lovecontract)
 		(has arthur knightsword)
@@ -88,7 +88,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

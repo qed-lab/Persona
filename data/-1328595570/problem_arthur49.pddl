@@ -54,7 +54,7 @@
 		(doorway townsquare valley)
 		(doorway valley townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has arthur mushroom)
 		(has dorian lovecontract)
@@ -103,7 +103,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 		(has james coin)

@@ -73,7 +73,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has mel basementbucket)
 		(has dorian loveletter)
@@ -121,7 +121,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

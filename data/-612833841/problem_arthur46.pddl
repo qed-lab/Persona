@@ -61,7 +61,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur mirror)
 		(has mel basementbucket)
@@ -102,7 +102,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 	  )
 	)

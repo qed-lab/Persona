@@ -58,7 +58,7 @@
 		(doorbetween towngate townsquare townarch)
 		(doorway docks townarch)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway cliff townsquare)
@@ -97,7 +97,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

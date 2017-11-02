@@ -48,7 +48,7 @@
 		(doorway storage basement)
 		(doorway townsquare cliff)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has alli ash)
 		(has arthur mirror)
@@ -82,7 +82,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 	  )
 	)

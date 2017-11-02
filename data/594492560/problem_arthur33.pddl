@@ -62,7 +62,7 @@
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur shinykey)
 		(has arthur bouquet)
@@ -98,7 +98,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

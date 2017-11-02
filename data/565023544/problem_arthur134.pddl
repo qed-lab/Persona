@@ -76,7 +76,7 @@
 		(doorway storage basement)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has james humanskull)
 		(has arthur candle)
@@ -125,7 +125,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

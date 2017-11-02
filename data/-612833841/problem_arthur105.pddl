@@ -81,7 +81,7 @@
 		(doorway docks townarch)
 		(doorway townsquare cliff)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james candle)
 		(has mel basementbucket)
 		(has james humanskull)
@@ -127,7 +127,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

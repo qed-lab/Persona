@@ -80,7 +80,7 @@
 		(doorway junkyard docks)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli tastycupcake)
 		(has arthur bouquet)
 		(has mel basementbucket)
@@ -123,7 +123,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

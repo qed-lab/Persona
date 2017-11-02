@@ -64,7 +64,7 @@
 		(connected docks townarch)
 		(doorbetween towngate townsquare townarch)
 		(doorbetween towngate townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(doorway basement storage)
@@ -113,7 +113,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

@@ -80,7 +80,7 @@
 		(doorway townarch docks)
 		(doorway basement storage)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway storage basement)
 		(has arthur knightsword)
@@ -124,7 +124,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

@@ -79,7 +79,7 @@
 		(doorway docks townarch)
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has jordan loveletter)
 		(has ian knightshield)
@@ -118,7 +118,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

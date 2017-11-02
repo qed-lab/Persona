@@ -80,7 +80,7 @@
 		(doorway docks townarch)
 		(doorway cliff townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has arthur bouquet)
 		(has mel basementbucket)
@@ -123,7 +123,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

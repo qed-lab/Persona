@@ -49,7 +49,7 @@
 		(doorway townsquare cliff)
 		(doorway docks junkyard)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur shinykey)
 		(has arthur ash)
@@ -79,7 +79,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

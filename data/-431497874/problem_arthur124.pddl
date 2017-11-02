@@ -64,7 +64,7 @@
 		(connected townsquare valley)
 		(doorbetween towngate townarch townsquare)
 		(doorbetween towngate townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway valley townsquare)
 		(doorway storage basement)
@@ -112,7 +112,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has jordan lovecontract)

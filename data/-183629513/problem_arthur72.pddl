@@ -68,7 +68,7 @@
 		(doorway junkyard docks)
 		(doorway docks townarch)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has arthur knightsword)
 		(has arthur coin)
@@ -107,7 +107,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

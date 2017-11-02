@@ -81,7 +81,7 @@
 		(doorway storage basement)
 		(doorway valley townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightsword)
 		(has arthur humanskull)
 		(has james coin)
@@ -130,7 +130,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

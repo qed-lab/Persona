@@ -70,7 +70,7 @@
 		(doorway docks townarch)
 		(doorway townsquare cliff)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(doorway docks junkyard)
 		(doorway townarch docks)
@@ -130,7 +130,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

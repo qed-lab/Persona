@@ -63,7 +63,7 @@
 		(doorway basement storage)
 		(doorway townsquare valley)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
 		(doorway storage basement)
@@ -109,7 +109,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

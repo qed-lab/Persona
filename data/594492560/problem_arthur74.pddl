@@ -71,7 +71,7 @@
 		(doorway townsquare cliff)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has mel basementbucket)
 		(has arthur knightshield)
@@ -109,7 +109,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

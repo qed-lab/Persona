@@ -78,7 +78,7 @@
 		(doorway townarch docks)
 		(doorway junkyard docks)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james coin)
 		(has arthur ash)
 		(has arthur bouquet)
@@ -124,7 +124,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

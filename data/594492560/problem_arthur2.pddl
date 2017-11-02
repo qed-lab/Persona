@@ -24,6 +24,6 @@
 		(willing-to-give-item mel basementexitkey)
 	)
 	(:goal
-		(game-has-been-won)
+		
 	)
 )

@@ -27,7 +27,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PlanRecognitionTheory.cs" />
+    <Compile Include="PlanRecognitionProblem.cs" />
     <Compile Include="Mediation\Enums\ActionType.cs" />
     <Compile Include="Mediation\Enums\PlanType.cs" />
     <Compile Include="Mediation\Enums\Planner.cs" />
@@ -89,6 +89,23 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="ObservationFilter.cs" />
+    <Compile Include="PersonaEvaluation.cs" />
+    <Compile Include="ReachabilityAnalysis.cs" />
+    <Compile Include="Priority Queue\FastPriorityQueue.cs" />
+    <Compile Include="Priority Queue\FastPriorityQueueNode.cs" />
+    <Compile Include="Priority Queue\GenericPriorityQueue.cs" />
+    <Compile Include="Priority Queue\GenericPriorityQueueNode.cs" />
+    <Compile Include="Priority Queue\IFixedSizePriorityQueue.cs" />
+    <Compile Include="Priority Queue\IPriorityQueue.cs" />
+    <Compile Include="Priority Queue\SimplePriorityQueue.cs" />
+    <Compile Include="Priority Queue\StablePriorityQueue.cs" />
+    <Compile Include="Priority Queue\StablePriorityQueueNode.cs" />
+    <Compile Include="Combinatorics\Combinations.cs" />
+    <Compile Include="Combinatorics\GenerateOption.cs" />
+    <Compile Include="Combinatorics\IMetaCollection.cs" />
+    <Compile Include="Combinatorics\Permutations.cs" />
+    <Compile Include="Combinatorics\SmallPrimeUtility.cs" />
+    <Compile Include="Combinatorics\Variations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -96,6 +113,14 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Priority Queue\" />
+    <Folder Include="Combinatorics\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Combinatorics\LICENCE" />
+    <None Include="Combinatorics\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

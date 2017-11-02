@@ -50,7 +50,7 @@
 		(doorway basement storage)
 		(doorway storage basement)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway docks junkyard)
 		(doorway townarch docks)
@@ -87,7 +87,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 	  )
 	)

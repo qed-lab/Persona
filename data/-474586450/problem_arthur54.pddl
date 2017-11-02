@@ -51,7 +51,7 @@
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(has arthur loveletter)
 		(has arthur knightsword)
@@ -87,7 +87,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 	  )

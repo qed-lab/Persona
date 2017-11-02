@@ -64,7 +64,7 @@
 		(doorbetween towngate townsquare townarch)
 		(doorbetween towngate townarch townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
@@ -116,7 +116,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

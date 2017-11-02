@@ -81,7 +81,7 @@
 		(doorway junkyard docks)
 		(doorway valley townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur silver)
 		(has mel basementbucket)
 		(has ian knightshield)
@@ -124,7 +124,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has alli tastycupcake)

@@ -77,7 +77,7 @@
 		(doorway junkyard docks)
 		(doorway docks junkyard)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has arthur hairtonic)
 		(has james humanskull)
@@ -115,7 +115,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

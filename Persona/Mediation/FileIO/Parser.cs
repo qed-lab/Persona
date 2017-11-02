@@ -412,7 +412,8 @@ namespace Mediation.FileIO
 							domain.Operators.Last().Predicate.Terms.Add(term);
 						}
 
-					// Create a list to hold the preconditions.
+                    // Create a list to hold the preconditions.
+                    i--;
 					List<IPredicate> preconditions = new List<IPredicate>();
 
 					// Add the operator's preconditions.

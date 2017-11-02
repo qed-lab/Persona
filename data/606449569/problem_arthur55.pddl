@@ -53,7 +53,7 @@
 		(connected townsquare cliff)
 		(doorbetween towngate townsquare townarch)
 		(doorbetween towngate townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway basement storage)
 		(doorway townsquare valley)
@@ -97,7 +97,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

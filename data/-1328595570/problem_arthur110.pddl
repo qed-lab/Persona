@@ -57,7 +57,7 @@
 		(doorbetween towngate townsquare townarch)
 		(doorbetween towngate townarch townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway valley townsquare)
 		(doorway junkyard docks)
@@ -116,7 +116,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 		(has james coin)

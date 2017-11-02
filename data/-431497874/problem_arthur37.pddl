@@ -58,7 +58,7 @@
 		(doorway townarch docks)
 		(doorway basement storage)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur loveletter)
 		(has dorian lovecontract)
@@ -88,7 +88,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 	  )

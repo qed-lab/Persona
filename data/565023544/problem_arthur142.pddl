@@ -77,7 +77,7 @@
 		(doorway docks townarch)
 		(doorway basement storage)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightshield)
 		(has mel basementbucket)
 		(has alli ash)
@@ -122,7 +122,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

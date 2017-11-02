@@ -53,7 +53,7 @@
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway docks junkyard)
 		(has dorian lovecontract)
@@ -103,7 +103,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 		(has james coin)

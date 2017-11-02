@@ -60,7 +60,7 @@
 		(doorway townsquare valley)
 		(doorway basement storage)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
@@ -103,7 +103,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

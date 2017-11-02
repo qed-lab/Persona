@@ -71,7 +71,7 @@
 		(doorway docks townarch)
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has jordan loveletter)
 		(has jordan lovecontract)
@@ -108,7 +108,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

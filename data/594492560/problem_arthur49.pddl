@@ -70,7 +70,7 @@
 		(doorway valley townsquare)
 		(doorway cliff townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur bouquet)
 		(has arthur shinykey)
 		(has mel basementbucket)
@@ -108,7 +108,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has james coin)

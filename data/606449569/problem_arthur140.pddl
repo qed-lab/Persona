@@ -72,7 +72,7 @@
 		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(doorway townsquare cliff)
@@ -126,7 +126,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

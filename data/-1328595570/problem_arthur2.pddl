@@ -31,6 +31,6 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-		(game-has-been-won)
+		
 	)
 )

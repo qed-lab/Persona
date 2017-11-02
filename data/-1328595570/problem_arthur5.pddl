@@ -48,6 +48,6 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-		(game-has-been-won)
+		
 	)
 )

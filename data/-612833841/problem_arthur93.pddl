@@ -80,7 +80,7 @@
 		(doorway valley townsquare)
 		(doorway docks townarch)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has alli ash)
 		(has mel basementbucket)
@@ -128,7 +128,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

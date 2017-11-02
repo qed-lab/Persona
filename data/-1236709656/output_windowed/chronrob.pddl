@@ -1,0 +1,7 @@
+(move-through-doorway arthur valley townsquare)
+(move-through-door arthur townsquare towngate townarch)
+(move-through-doorway arthur townarch docks)
+(pickup arthur mirror docks)
+(move-through-doorway arthur docks junkyard)
+(move-through-doorway arthur junkyard docks)
+(move-through-doorway arthur docks townarch)

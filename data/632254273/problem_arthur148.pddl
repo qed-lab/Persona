@@ -80,7 +80,7 @@
 		(doorway townarch docks)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian rubyring)
 		(has jordan loveletter)
 		(has mel basementbucket)
@@ -121,7 +121,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has giovanna hairtonic)

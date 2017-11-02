@@ -50,7 +50,7 @@
 		(doorway docks junkyard)
 		(doorway docks townarch)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(has arthur mushroom)
 		(has dorian lovecontract)
@@ -89,7 +89,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 		(has alli tastycupcake)

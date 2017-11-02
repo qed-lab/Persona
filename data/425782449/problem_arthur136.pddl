@@ -78,7 +78,7 @@
 		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has mel basementbucket)
 		(has dorian bouquet)
@@ -118,7 +118,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has jordan loveletter)

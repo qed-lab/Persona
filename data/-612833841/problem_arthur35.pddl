@@ -53,7 +53,7 @@
 		(doorway junkyard docks)
 		(doorway docks townarch)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has alli ash)
 		(has arthur mirror)
@@ -87,7 +87,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 	  )
 	)

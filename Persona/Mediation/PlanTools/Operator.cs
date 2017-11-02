@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +55,9 @@ namespace Mediation.PlanTools
         private List<IAxiom> conditionals;
         private List<ITerm> consenting;
         private List<IPredicate> exceptionalEffects;
+        private List<ITerm> entites;
         private int id;
+        private string location;
 
         private Hashtable bindings;
 
@@ -132,6 +134,60 @@ namespace Mediation.PlanTools
             get { return TermAt(0); }
         }
 
+        // Access the operator's location. If the operator does not have a
+        // location, this property returns "unknown."
+        public string Location
+        {
+            get {
+                if (string.IsNullOrEmpty(location))
+                {
+                    ITerm locationTerm = Terms.Find(
+                        t =>
+                            t.GetType().Equals("location")
+                        && (t.Variable.Equals("?location") || t.Variable.Equals("?from"))
+                    );
+
+                    if (locationTerm != null && locationTerm.Bound)
+                        location = locationTerm.Constant;
+
+                    else
+                        location = "unknown";
+                
+                    return location;
+                }
+
+                else
+                    return location;
+            }
+        }
+
+        // Actions may have entites that it deals with.  This is an ontology-specific
+        // property, which may not apply broadly to all planning domains.  In essence
+        // this property looks up all terms of type "character" or "item" in the operator
+        // and returns them.
+        public List<ITerm> Entities
+        {
+            get {
+                // Lazy init
+                if(entites == null)
+                {
+                    // Create an empty list of terms
+                    entites = new List<ITerm>();
+
+                    // For each term in this operator,
+                    foreach(ITerm term in Terms)
+                    {
+                        // check if the term's type is "character" or "item"
+                        // add the term as an entity if it is.
+                        if (term.Type.Equals("character") || term.Type.Equals("item"))
+                            entites.Add(term);
+                    }
+                }
+
+                return entites;
+            }
+        }
+
         // Access the consenting agents.
         public List<ITerm> ConsentingAgents
         {
@@ -162,6 +218,7 @@ namespace Mediation.PlanTools
 
         public Operator ()
         {
+            location = "";
             predicate = new Predicate();
             preconditions = new List<IPredicate>();
             effects = new List<IPredicate>();
@@ -169,10 +226,12 @@ namespace Mediation.PlanTools
             bindings = new Hashtable();
             id = System.Threading.Interlocked.Increment(ref Counter);
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         public Operator(string name)
         {
+            location = "";
             predicate = new Predicate(name, new List<ITerm>(), true);
             preconditions = new List<IPredicate>();
             effects = new List<IPredicate>();
@@ -180,10 +239,12 @@ namespace Mediation.PlanTools
             bindings = new Hashtable();
             id = System.Threading.Interlocked.Increment(ref Counter);
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         public Operator(string name, List<IPredicate> preconditions, List<IPredicate> effects)
         {
+            location = "";
             predicate = new Predicate(name, new List<ITerm>(), true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -192,10 +253,12 @@ namespace Mediation.PlanTools
             id = System.Threading.Interlocked.Increment(ref Counter);
             consenting = new List<ITerm>();
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         public Operator(Predicate predicate, List<IPredicate> preconditions, List<IPredicate> effects)
         {
+            location = "";
             this.predicate = predicate;
             this.preconditions = preconditions;
             this.effects = effects;
@@ -204,10 +267,12 @@ namespace Mediation.PlanTools
             id = System.Threading.Interlocked.Increment(ref Counter);
             consenting = new List<ITerm>();
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         public Operator (string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects)
         {
+            location = "";
             this.predicate = new Predicate(name, terms, true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -216,10 +281,12 @@ namespace Mediation.PlanTools
             id = System.Threading.Interlocked.Increment(ref Counter);
             consenting = new List<ITerm>();
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         public Operator(string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects, int id)
         {
+            location = "";
             this.predicate = new Predicate(name, terms, true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -228,10 +295,12 @@ namespace Mediation.PlanTools
             this.id = id;
             consenting = new List<ITerm>();
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         public Operator(string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects, List<IAxiom> conditionals, int id)
         {
+            location = "";
             this.predicate = new Predicate(name, terms, true);
             this.preconditions = preconditions;
             this.effects = effects;
@@ -240,6 +309,7 @@ namespace Mediation.PlanTools
             this.id = id;
             consenting = new List<ITerm>();
             exceptionalEffects = new List<IPredicate>();
+            entites = null;
         }
 
         // Updates terms from a bindings table.

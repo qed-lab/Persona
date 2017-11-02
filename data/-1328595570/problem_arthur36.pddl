@@ -50,7 +50,7 @@
 		(doorway townsquare cliff)
 		(doorway docks townarch)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur tastycupcake)
 		(has arthur book)
 		(has dorian lovecontract)
@@ -94,7 +94,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 	  )

@@ -79,7 +79,7 @@
 		(doorway docks junkyard)
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur ash)
 		(has arthur knightsword)
 		(has dorian lovecontract)
@@ -126,7 +126,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

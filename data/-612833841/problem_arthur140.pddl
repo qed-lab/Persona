@@ -77,7 +77,7 @@
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
 		(has jordan loveletter)
@@ -120,7 +120,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has giovanna hairtonic)
 		(has james coin)

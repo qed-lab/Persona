@@ -24,6 +24,6 @@
 		(willing-to-give-item arthur loveletter)
 	)
 	(:goal
-		(game-has-been-won)
+		
 	)
 )

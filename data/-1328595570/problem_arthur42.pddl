@@ -51,7 +51,7 @@
 		(doorway townarch docks)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway valley townsquare)
 		(has arthur shinykey)
@@ -101,7 +101,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(has jordan loveletter)
 		(has giovanna hairtonic)
 		(has james coin)

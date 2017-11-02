@@ -43,7 +43,7 @@
 		(doorbetween towngate townarch townsquare)
 		(doorway storage basement)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway docks junkyard)
 		(doorway basement storage)
@@ -80,7 +80,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has jordan loveletter)
 	  )

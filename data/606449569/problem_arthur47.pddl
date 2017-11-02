@@ -52,7 +52,7 @@
 		(doorway storage basement)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has arthur mushroom)
 		(has arthur shinykey)
@@ -84,7 +84,7 @@
 	)
 	(:goal
 	  (AND
-		(game-has-been-won)
+		
 		(not (locked basementexit))
 		(has alli tastycupcake)
 		(has arthur ash)

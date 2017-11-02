@@ -1,15 +1,56 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 using Mediation.PlanTools;
 using Mediation.Interfaces;
+using Mediation.FileIO;
+
+using GG.Combinatorics;
 
 namespace Persona
 {
     public static class Utilities
     {
+        // A dictionary of the literals involved in each of the quests.
+        public static readonly Dictionary<string, IPredicate> ALL_GOAL_LITERALS = new Dictionary<string, IPredicate>
+        {
+            // Equip Quest
+            {"equip_sword", Predicate.BuildPositiveGroundLiteral("has", "ian", "knightsword")},
+            {"equip_shield", Predicate.BuildPositiveGroundLiteral("has", "ian", "knightshield")},
+
+            // Fetch Quest
+            {"fetch", Predicate.BuildPositiveGroundLiteral("has", "giovanna", "hairtonic")},
+
+            // Pilgrimage Quest
+            {"pilgrimage", Predicate.BuildPositiveGroundLiteral("has", "alli", "tastycupcake")},
+
+            // Love Quest
+            {"love_letter", Predicate.BuildPositiveGroundLiteral("has", "jordan", "loveletter")},
+            {"love_rubyring", Predicate.BuildPositiveGroundLiteral("has", "dorian", "rubyring")},
+            {"love_bouquet", Predicate.BuildPositiveGroundLiteral("has", "dorian", "bouquet")},
+            {"love_contract", Predicate.BuildPositiveGroundLiteral("has", "jordan", "lovecontract")},
+
+            // Wisdom Quest
+            {"wisdom_coin", Predicate.BuildPositiveGroundLiteral("has", "james", "coin")},
+            {"wisdom_humanskull", Predicate.BuildPositiveGroundLiteral("has", "james", "humanskull")},
+            {"wisdom_candle", Predicate.BuildPositiveGroundLiteral("has", "james", "candle")}
+        };
+
+        // A dictionary of quest names to list of associated quest literals.
+        public static readonly Dictionary<string, List<IPredicate>> GOAL_LITERAL_LISTS = new Dictionary<string, List<IPredicate>>
+        {
+            {"equip", new List<IPredicate>{ALL_GOAL_LITERALS["equip_sword"], ALL_GOAL_LITERALS["equip_shield"]}},
+            {"fetch", new List<IPredicate>{ALL_GOAL_LITERALS["fetch"]}},
+            {"pilgrimage", new List<IPredicate>{ALL_GOAL_LITERALS["pilgrimage"]}},
+            {"love_A", new List<IPredicate>{ALL_GOAL_LITERALS["love_letter"], ALL_GOAL_LITERALS["love_rubyring"], ALL_GOAL_LITERALS["love_contract"]}},
+            {"love_B", new List<IPredicate>{ALL_GOAL_LITERALS["love_letter"], ALL_GOAL_LITERALS["love_bouquet"], ALL_GOAL_LITERALS["love_contract"]}},
+            {"wisdom", new List<IPredicate>{ALL_GOAL_LITERALS["wisdom_coin"], ALL_GOAL_LITERALS["wisdom_humanskull"], ALL_GOAL_LITERALS["wisdom_candle"]}}
+        };
+
+
 		/// <summary>
 		/// Computes the precision of the forward inferences in the recognized plan.
         /// Precision is the number of correct predictions divided by the total
@@ -111,6 +152,7 @@ namespace Persona
             return (numberOfCorrectPredictions / (double)numberOfActualSteps);
         }
 
+
 		// Computes Recall of Goal Rec
 		public static double GoalRecognitionRecall(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
 		{
@@ -138,7 +180,6 @@ namespace Persona
 
 			return (numberOfCorrectPredictions / (double)numberOfActualGoals);
 		}
-
 
 
         /// <summary>
@@ -203,59 +244,55 @@ namespace Persona
             List<IPredicate> loveQuestLiterals = new List<IPredicate>();
             List<IPredicate> wisdomQuestLiterals = new List<IPredicate>();
 
-			
-            // Predicates used in the love quest.
-            Predicate rubyring = Predicate.BuildPositiveGroundLiteral("has", "dorian", "rubyring");
-			Predicate bouquet = Predicate.BuildPositiveGroundLiteral("has", "dorian", "bouquet");
 
 			// Check each step to see which goals are pursued.
 			foreach(Operator step in actualPlan.Steps) 
             {
                 // Equip Quest
                 if (step.ToString().Equals("(give arthur knightsword ian fort)"))
-                    equipQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "ian", "knightsword"));
+                    equipQuestLiterals.Add(ALL_GOAL_LITERALS["equip_sword"]);
 
                 if (step.ToString().Equals("(give arthur knightshield ian fort)"))
-                    equipQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "ian", "knightshield"));
+                    equipQuestLiterals.Add(ALL_GOAL_LITERALS["equip_shield"]);
 
                 // Fetch Quest
                 if (step.ToString().Equals("(give arthur hairtonic giovanna shop)"))
-                    fetchQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "giovanna", "hairtonic"));
+                    fetchQuestLiterals.Add(ALL_GOAL_LITERALS["fetch"]);
 
                 // Pilgrimage Quest
                 if (step.ToString().Equals("(give arthur tastycupcake alli junkyard)"))
-                    pilgrimageQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "alli", "tastycupcake"));
+                    pilgrimageQuestLiterals.Add(ALL_GOAL_LITERALS["pilgrimage"]);
 
                 // Love Quest
                 if (step.ToString().Equals("(give arthur loveletter jordan mansion)"))
-                    loveQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "jordan", "loveletter"));
+                    loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_letter"]);
 
                 if (step.ToString().Equals("(give arthur rubyring dorian townarch)"))
                 { 
                     // Only add the rubyring if the bouquet literal hasn't already been added.
-                    if (!loveQuestLiterals.Contains(bouquet))
-                        loveQuestLiterals.Add(rubyring);
+                    if (!loveQuestLiterals.Contains(ALL_GOAL_LITERALS["love_bouquet"]))
+                        loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_rubyring"]);
                 }
 
                 if (step.ToString().Equals("(give arthur bouquet dorian townarch)"))
                 {
 					// Only add the bouquet if the rubyring literal hasn't already been added.
-					if (!loveQuestLiterals.Contains(rubyring))
-                        loveQuestLiterals.Add(bouquet);
+					if (!loveQuestLiterals.Contains(ALL_GOAL_LITERALS["love_rubyring"]))
+                        loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_bouquet"]);
                 }
 
                 if (step.ToString().Equals("(give arthur lovecontract jordan mansion)"))
-                    loveQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "jordan", "lovecontract"));
+                    loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_contract"]);
 
                 // Wisdom Quest
                 if (step.ToString().Equals("(give arthur coin james valley)"))
-                    wisdomQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "james", "coin"));
+                    wisdomQuestLiterals.Add(ALL_GOAL_LITERALS["wisdom_coin"]);
 
                 if (step.ToString().Equals("(give arthur humanskull james valley)"))
-                    wisdomQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "james", "humanskull"));
+                    wisdomQuestLiterals.Add(ALL_GOAL_LITERALS["wisdom_humanskull"]);
 
                 if (step.ToString().Equals("(give arthur candle james valley)"))
-                    wisdomQuestLiterals.Add(Predicate.BuildPositiveGroundLiteral("has", "james", "candle"));
+                    wisdomQuestLiterals.Add(ALL_GOAL_LITERALS["wisdom_candle"]);
 
             }
 
@@ -276,6 +313,40 @@ namespace Persona
                 goalLiterals.AddRange(wisdomQuestLiterals);
 
             return goalLiterals;
+        }
+
+
+		/// <summary>
+		/// Extracts the actual goal from the given actual plan. 
+        /// This returns a list of disjunctive goals, themselves made from a
+        /// list of conjuncted predicates.
+		/// </summary>
+		public static List<List<IPredicate>> ExtractGoals(Problem problem)
+        {
+            List<List<IPredicate>> goals = new List<List<IPredicate>>();
+
+            // Find which goals have been adopted.
+            bool[] adoptedGoals = GoalBitArray(problem.Goal);
+
+            if (adoptedGoals[0])
+                goals.Add(GOAL_LITERAL_LISTS["equip"]);
+
+            if (adoptedGoals[1])
+                goals.Add(GOAL_LITERAL_LISTS["fetch"]);
+
+            if (adoptedGoals[2])
+                goals.Add(GOAL_LITERAL_LISTS["pilgrimage"]);
+
+            if (adoptedGoals[3])
+                goals.Add(GOAL_LITERAL_LISTS["love_A"]);
+
+            if (adoptedGoals[4])
+                goals.Add(GOAL_LITERAL_LISTS["love_B"]);
+
+            if (adoptedGoals[5])
+                goals.Add(GOAL_LITERAL_LISTS["wisdom"]);
+
+			return goals;
         }
 
 
@@ -369,6 +440,7 @@ namespace Persona
             return sb.ToString();
         }
 
+
         /// <summary>
         /// Checks if the given string represents a number.
         /// </summary>
@@ -377,14 +449,6 @@ namespace Persona
             double num;
             return double.TryParse(s, out num);
         }
-
-
-
-
-
-
-
-
 
 
         // Returns a List of strings that denote the symbols of this list of predicates.
@@ -409,6 +473,7 @@ namespace Persona
 
             return symbols;
         }
+
 
         /// <summary>
         /// Predicates the levenshtein distance.
@@ -469,48 +534,320 @@ namespace Persona
 			return distance[currentRow, m];
 		}
 
+
 		public static bool[] GoalBitArray(List<IPredicate> goal)
 		{
 			// A boolean array that identifies whether the goal represented by (index + 1)
 			// is present in the given list of predicates.
-			bool[] goalsPresent = new bool[5];
+			bool[] goalsPresent = new bool[6];
 
-			// These are all the predicates representing the respective goals.
+            // These are all the predicates representing the respective goals.
 
-			// g1 - Equip Quest
-			Predicate g1_1 = Predicate.BuildPositiveGroundLiteral("has", "ian", "knightsword");
-			Predicate g1_2 = Predicate.BuildPositiveGroundLiteral("has", "ian", "knightshield");
+            // g1 - Equip Quest
+            IPredicate g1_1 = ALL_GOAL_LITERALS["equip_sword"];
+			IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
 
 			// g2 - Fetch Quest
-			Predicate g2 = Predicate.BuildPositiveGroundLiteral("has", "giovanna", "hairtonic");
+			IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
 
 			// g3 - Pilgrimage Quest
-			Predicate g3 = Predicate.BuildPositiveGroundLiteral("has", "alli", "tastycupcake");
+			IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
 
 			// g4 - Love Quest
-			Predicate g4_1 = Predicate.BuildPositiveGroundLiteral("has", "jordan", "loveletter");
+			IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
+            IPredicate g4_2a = ALL_GOAL_LITERALS["love_rubyring"];
+            IPredicate g4_2b = ALL_GOAL_LITERALS["love_bouquet"];
+            IPredicate g4_3 = ALL_GOAL_LITERALS["love_contract"];
 
-			Predicate g4_2a = Predicate.BuildPositiveGroundLiteral("has", "dorian", "rubyring");
-			Predicate g4_2b = Predicate.BuildPositiveGroundLiteral("has", "dorian", "bouquet");
-
-			Predicate g4_3 = Predicate.BuildPositiveGroundLiteral("has", "jordan", "lovecontract");
-
-			// g5 - Wisdom Quest
-			Predicate g5_1 = Predicate.BuildPositiveGroundLiteral("has", "james", "coin");
-			Predicate g5_2 = Predicate.BuildPositiveGroundLiteral("has", "james", "humanskull");
-			Predicate g5_3 = Predicate.BuildPositiveGroundLiteral("has", "james", "candle");
+            // g5 - Wisdom Quest
+            IPredicate g5_1 = ALL_GOAL_LITERALS["wisdom_coin"];
+			IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
+            IPredicate g5_3 = ALL_GOAL_LITERALS["wisdom_candle"];
 
 
 			// Check for membership for each set of goals and flag as appropriate.
 			goalsPresent[0] = (goal.Contains(g1_1) && goal.Contains(g1_2)) ? true : false;
 			goalsPresent[1] = goal.Contains(g2) ? true : false;
 			goalsPresent[2] = goal.Contains(g3) ? true : false;
-			goalsPresent[3] = (goal.Contains(g4_1) && (goal.Contains(g4_2a) || goal.Contains(g4_2b)) && goal.Contains(g4_3)) ? true : false;
-			goalsPresent[4] = (goal.Contains(g5_1) && goal.Contains(g5_2) && goal.Contains(g5_3)) ? true : false;
+			goalsPresent[3] = (goal.Contains(g4_1) && goal.Contains(g4_2a) && goal.Contains(g4_3)) ? true : false;
+            goalsPresent[4] = (goal.Contains(g4_1) && goal.Contains(g4_2b) && goal.Contains(g4_3)) ? true : false;
+			goalsPresent[5] = (goal.Contains(g5_1) && goal.Contains(g5_2) && goal.Contains(g5_3)) ? true : false;
 
 			// Return the bit array.
 			return goalsPresent;
 		}
 
+        public static List<List<IPredicate>> DisjunctifyGoals(List<IPredicate> goal)
+        {
+            // This is what we're going to return.
+            List<List<IPredicate>> disjunctedGoals = new List<List<IPredicate>>();
+
+            // These are five lists of predicates, representing each of the goals.
+            List<IPredicate> equipQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> fetchQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> pilgrimageQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> loveQuestAdoptedGoals = new List<IPredicate>();
+            List<IPredicate> wisdomQuestAdoptedGoals = new List<IPredicate>();
+
+			// These are all the predicates representing the respective goals.
+
+			// g1 - Equip Quest
+			IPredicate g1_1 = ALL_GOAL_LITERALS["equip_sword"];
+			IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
+
+			// g2 - Fetch Quest
+			IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
+
+			// g3 - Pilgrimage Quest
+			IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
+
+			// g4 - Love Quest
+			IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
+			IPredicate g4_2a = ALL_GOAL_LITERALS["love_rubyring"];
+			IPredicate g4_2b = ALL_GOAL_LITERALS["love_bouquet"];
+			IPredicate g4_3 = ALL_GOAL_LITERALS["love_contract"];
+
+			// g5 - Wisdom Quest
+			IPredicate g5_1 = ALL_GOAL_LITERALS["wisdom_coin"];
+			IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
+			IPredicate g5_3 = ALL_GOAL_LITERALS["wisdom_candle"];
+
+            // Check to see how many goals have been adopted. It is sufficient
+            // to check that the first literal of the respective goal has been
+            // adopted.
+
+            // If the equip quest is adopted, both goals are present.
+            if (goal.Contains(g1_1))
+            {
+                equipQuestAdoptedGoals.Add(g1_1);
+                equipQuestAdoptedGoals.Add(g1_2);
+            }
+                
+            // If the fetch quest is adopted, the goal is present.
+            if (goal.Contains(g2))
+                fetchQuestAdoptedGoals.Add(g2);
+
+            // If the pilgrimage quest is adopted, the goal is present.
+            if (goal.Contains(g3))
+                pilgrimageQuestAdoptedGoals.Add(g3);
+            
+            // The love quest is broken up into parts. 
+            // Such that if the love quest is adopted, not all goals are immediately added.
+            if (goal.Contains(g4_1))
+                loveQuestAdoptedGoals.Add(g4_1);
+
+            // The second part of the love quest adds two potential predicates at once.
+            if (goal.Contains(g4_2a) || goal.Contains(g4_2b))
+            {
+                loveQuestAdoptedGoals.Add(g4_2a);
+                loveQuestAdoptedGoals.Add(g4_2b);
+            }
+
+            if (goal.Contains(g4_3))
+                loveQuestAdoptedGoals.Add(g4_3);
+
+            // The wisdom quest is also broken up into parts.
+            // Such that if the wisdom quest is adopted, not all goals are immediately added.
+            if (goal.Contains(g5_1))
+                wisdomQuestAdoptedGoals.Add(g5_1);
+
+            if (goal.Contains(g5_2))
+                wisdomQuestAdoptedGoals.Add(g5_2);
+
+            if (goal.Contains(g5_3))
+                wisdomQuestAdoptedGoals.Add(g5_3);
+
+            int questBranchesAdopted = 0;
+            questBranchesAdopted += (equipQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (fetchQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (pilgrimageQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (loveQuestAdoptedGoals.Count > 0) ? 1 : 0;
+            questBranchesAdopted += (wisdomQuestAdoptedGoals.Count > 0) ? 1 : 0;
+
+
+            if(questBranchesAdopted <= 3)
+            {
+                // If three goals were adopted, then add them as a single conjunction
+                List<IPredicate> conj = new List<IPredicate>();
+
+                // Take all the goals, wholecloth:
+                conj.AddRange(goal);
+
+                // Add them to the disjuncts
+                disjunctedGoals.Add(conj);
+            }
+
+            else if(questBranchesAdopted == 4)
+            {
+                // If four goals were adopted, then there are:
+                // (4 choose 3) + 1 potential goals in a disjunction
+                if (equipQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(equipQuestAdoptedGoals);
+
+                if (fetchQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(fetchQuestAdoptedGoals);
+
+                if (pilgrimageQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(pilgrimageQuestAdoptedGoals);
+
+                if (loveQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(loveQuestAdoptedGoals);
+
+                if (wisdomQuestAdoptedGoals.Count > 0)
+                    disjunctedGoals.Add(wisdomQuestAdoptedGoals);
+
+
+
+
+
+
+
+
+
+			}
+
+            else // questBranchesAdopted == 5 
+			{
+                // If five goals were adopted, then there are:
+                // (5 choose 3) + (5 choose 4) + 1 potential goals in a disjunction
+                
+            }
+
+
+            return disjunctedGoals;
+        }
+
+
+
+
+
+        /// <summary>
+        /// This method corrects a problem in the data collection.
+        /// If a term appears in a literal within the problem's initial or goal state,
+        /// then the term itself should appear in the list of objects in the game.
+        /// </summary>
+        public static void CorrectDetectedObjectsInGameProblemFiles()
+        {
+            // Load the baseline domain
+            string baselineDomainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            Domain baselineDomain = Parser.GetDomain(baselineDomainPath, Mediation.Enums.PlanType.StateSpace);
+
+            // Load the baseline problem
+            string baselineProblemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+            Problem baselineProblem = Parser.GetProblem(baselineProblemPath);
+
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
+
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Create an output folder.
+                string outputFolder = dataFolder + @"/corrected_problems/";
+                System.IO.Directory.CreateDirectory(outputFolder);
+
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(outputFolder);
+
+                // Load every problem file for this player
+                int problemNumber = 0;
+                string problemName = dataFolder + @"/problem_arthur" + problemNumber + @".pddl";
+
+                while (File.Exists(problemName))
+                {
+                    // Create the problem object to work on
+                    Problem problem = Parser.GetProblem(problemName);
+
+                    // For every literal in the initial state,
+                    foreach (IPredicate initialStateLiteral in problem.Initial)
+                    {
+                        // Check that the literal's terms exist in the problem's objects
+                        foreach (ITerm initialStateTerm in initialStateLiteral.Terms)
+                        {
+                            bool termFoundInObjects = false;
+                            foreach (IObject problemObject in problem.Objects)
+                            {
+                                if (problemObject.Name.Equals(initialStateTerm.Constant))
+                                {
+                                    termFoundInObjects = true;
+                                    break;
+                                }
+                            }
+
+                            // If not, copy that term from the baseline problem into the player's problem
+                            if (!termFoundInObjects)
+                            {
+                                // Find the corresponding object in the baseline problem
+                                IObject baselineProblemObject = baselineProblem.Objects.Find(o => o.Name.Equals(initialStateTerm.Constant));
+
+                                // Add it to this problem
+                                problem.Objects.Add(baselineProblemObject.Clone() as IObject);
+                            }
+                        }
+                    }
+
+                    // For every literal in the goal state,
+                    foreach (IPredicate goalStateLiteral in problem.Goal)
+                    {
+                        // Check that the literal's terms exist in the problem's objects
+                        foreach (ITerm goalStateTerm in goalStateLiteral.Terms)
+                        {
+                            bool termFoundInObjects = false;
+                            foreach (IObject problemObject in problem.Objects)
+                            {
+                                if (problemObject.Name.Equals(goalStateTerm.Constant))
+                                {
+                                    termFoundInObjects = true;
+                                    break;
+                                }
+                            }
+
+                            // If not, copy that term from the baseline problem into the player's problem 
+                            if (!termFoundInObjects)
+                            {
+                                // Find the corresponding object in the baseline problem
+                                IObject baselineProblemObject = baselineProblem.Objects.Find(o => o.Name.Equals(goalStateTerm.Constant));
+
+                                // Add it to this problem
+                                problem.Objects.Add(baselineProblemObject.Clone() as IObject);
+                            }
+                        }
+                    }
+
+                    Problem problemClone = problem.Clone() as Problem;
+
+                    // Remove useless literals from the problem goal
+                    foreach (IPredicate goalStateLiteral in problem.Goal)
+                    {
+                        string toString = goalStateLiteral.ToString();
+
+                        if (toString.Equals("(not (locked basementexit))"))
+                            problemClone.Goal.Remove(goalStateLiteral);
+
+                        if (toString.Equals("(has arthur ash)"))
+                            problemClone.Goal.Remove(goalStateLiteral);
+                    }
+
+                    // Look at the reamining literals in the problem goal
+
+
+
+                    // Write the clone problem out to a file
+                    problemClone.Domain = "arthur_HYRULE";
+                    baselineDomain.Name = "arthur_HYRULE";
+                    Writer.ProblemToPDDL(outputFolder + @"/problem_arthur" + problemNumber + @".pddl", 
+                                         baselineDomain, problemClone, problemClone.Initial);
+
+                    // Go to the next file
+                    problemNumber++;
+                    problemName = dataFolder + @"/problem_arthur" + problemNumber + @".pddl";
+                }
+
+                Directory.SetCurrentDirectory(oldWD);
+
+            }
+        }
 	}
 }
