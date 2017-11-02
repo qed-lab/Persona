@@ -1,0 +1,7 @@
+(pickup arthur tastycupcake hut)
+(move-through-entrance arthur hut hutexit townarch)
+(move-through-doorway arthur townarch docks)
+(move-through-doorway arthur docks junkyard)
+(move-through-doorway arthur townarch docks)
+(move-through-doorway arthur docks junkyard)
+(move-through-doorway arthur townarch docks)
