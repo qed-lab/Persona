@@ -8,8 +8,6 @@ using Mediation.PlanTools;
 using Mediation.Interfaces;
 using Mediation.FileIO;
 
-using GG.Combinatorics;
-
 namespace Persona
 {
     public static class Utilities

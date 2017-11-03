@@ -1,0 +1,5 @@
+(has ian knightsword)
+(has ian knightshield)
+(has james coin)
+(has james humanskull)
+(has james candle)
