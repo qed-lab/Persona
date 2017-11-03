@@ -1,0 +1,6 @@
+(has jordan lovecontract)
+(has dorian bouquet)
+(has jordan loveletter)
+(has giovanna hairtonic)
+(has ian knightshield)
+(has ian knightsword)
