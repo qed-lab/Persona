@@ -847,5 +847,29 @@ namespace Persona
 
             }
         }
+
+        // Returns the arthur domain and problem pair that correspond to the given index.
+        public static Tuple<Domain, Problem> GetIndexedArthurDomainAndProblem(string dataFolder, int index)
+        {
+            string domainPath = dataFolder + @"/domain_arthur" + index + @".pddl";
+            string problemPath = dataFolder + @"/corrected_problems/problem_arthur" + index + @".pddl";
+
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+            Problem problem = Parser.GetProblem(problemPath);
+
+            return new Tuple<Domain, Problem>(domain, problem);
+        }
+
+        // Returns the baseline versions of the arthur domain and problem.
+        public static Tuple<Domain, Problem> GetBaselineArthurDomainAndProblem()
+        {
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+            Problem problem = Parser.GetProblem(problemPath);
+
+            return new Tuple<Domain, Problem>(domain, problem);
+        }
 	}
 }
