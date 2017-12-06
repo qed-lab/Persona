@@ -8,7 +8,7 @@ using Mediation.Interfaces;
 namespace Mediation.PlanTools
 {
     [Serializable]
-    class Intention : IIntention
+    class Intention : IIntention, IEquatable<Intention>
     {
         private string character;
         private IPredicate predicate;
@@ -27,7 +27,7 @@ namespace Mediation.PlanTools
             set { predicate = value; }
         }
 
-        public Intention ()
+        public Intention()
         {
             character = "";
             predicate = new Predicate();
@@ -40,7 +40,7 @@ namespace Mediation.PlanTools
         }
 
         // Creates a clone of the intention.
-        public Object Clone ()
+        public Object Clone()
         {
             string newCharacter = Character;
 
@@ -58,5 +58,34 @@ namespace Mediation.PlanTools
 
             return sb.ToString();
         }
+
+        #region Equality
+
+        // Checks if the two intentions are equal.
+        public bool Equals(Intention other)
+        {
+            if (other == null)
+                return false;
+
+            return this.Character.Equals(other.Character) && 
+                       this.Predicate.Equals(other.Predicate);
+        }
+
+        // Checks if the object is equal to this intention.
+        public override bool Equals(Object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (this.GetType() != obj.GetType())
+                return false;
+
+            return this.Equals(obj as Intention);
+        }
+
+        #endregion
     }
 }

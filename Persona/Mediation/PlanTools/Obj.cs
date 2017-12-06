@@ -8,7 +8,7 @@ using Mediation.Interfaces;
 namespace Mediation.PlanTools
 {
     [Serializable]
-    public class Obj : IObject
+    public class Obj : IObject, IEquatable<Obj>
     {
         private string name;
         private string subType;
@@ -35,7 +35,7 @@ namespace Mediation.PlanTools
             set { types = value; }
         }
 
-        public Obj ()
+        public Obj()
         {
             name = "";
             subType = "";
@@ -49,7 +49,7 @@ namespace Mediation.PlanTools
             types = new List<string>();
         }
 
-        public Obj (string name, string subType)
+        public Obj(string name, string subType)
         {
             this.name = name;
             this.subType = subType;
@@ -85,5 +85,35 @@ namespace Mediation.PlanTools
 
             return new Obj(newName, newSubType, newTypes);
         }
+
+        #region Equality
+
+        // Checks if the two Objs are equal.
+        public bool Equals(Obj other)
+        {
+            if (other == null)
+                return false;
+
+            return this.Name.Equals(other.Name) &&
+                   this.SubType.Equals(other.Name) &&
+                   Persona.Utilities.GenericListEquals(this.Types, other.Types);
+        }
+
+        // Checks if the object is equal to this Obj.
+        public override bool Equals(Object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (this.GetType() != obj.GetType())
+                return false;
+            
+            return this.Equals(obj as Obj);
+        }
+
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ using Mediation.Interfaces;
 namespace Mediation.PlanTools
 {
 	[Serializable]
-	public class Predicate : IPredicate
+    public class Predicate : IPredicate, IEquatable<Predicate>
 	{
 		private string name;
 		private List<ITerm> terms;
@@ -349,56 +349,73 @@ namespace Mediation.PlanTools
 			return new Predicate(newName, newTerms, newSign, (Hashtable)observing.Clone());
 		}
 
-		// Checks if two predicates are equal.
+        #region Equality
+
+        // Returns a hashcode.
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                // Suitable nullity checks etc, of course :)
+                hash = hash * 23 + Name.GetHashCode();
+
+                foreach (ITerm term in Terms)
+                    hash = hash * 23 + term.GetHashCode();
+
+                return hash;
+            }
+        }
+
+        // Checks if two predicates are equal.
+        public bool Equals(Predicate other)
+        {
+            if (other == null)
+                return false;
+
+            // If the predicates share a name, sign, and arity,
+            if (this.Name.Equals(other.Name) && 
+                this.Sign == other.Sign && 
+                this.Arity == other.Arity)
+            {
+                // Loop through the terms,
+                for (int i = 0; i < this.Arity; i++)
+                {
+                    // If any two terms are not equal, fail
+                    if (!this.TermAt(i).Equals(other.TermAt(i)))
+                        return false;
+                }
+
+                // Otherwise, success!
+                return true;
+            }
+
+            return false;
+        }
+
+		// Checks if the object is equal to this predicate.
 		public override bool Equals(Object obj)
 		{
-			// Store the object as a Predicate.
-			Predicate predicate = obj as Predicate;
+            if (ReferenceEquals(null, obj))
+                return false;
 
-			// If the predicates share a name and sign.
-			if (predicate.Name.Equals(Name) && predicate.Sign == Sign)
-			{
-				// If the predicates have the same number of terms.
-				if (predicate.Arity == Arity)
-				{
-					// Loop through the terms.
-					for (int i = 0; i < Arity; i++)
-					{
-						// If any two terms do not unify,
-						// fail.
-						if (!predicate.TermAt(i).Equals(TermAt(i)))
-							return false;
-					}
+            if (ReferenceEquals(this, obj))
+                return true;
 
-					// Otherwise, success!
-					return true;
-				}
-			}
+            if (this.GetType() != obj.GetType())
+                return false;
 
-			// Otherwise, fail.
-			return false;
+            return this.Equals(obj as Predicate);
 		}
 
-		// Returns a hashcode.
-		public override int GetHashCode()
-		{
-			unchecked // Overflow is fine, just wrap
-			{
-				int hash = 17;
-				// Suitable nullity checks etc, of course :)
-				hash = hash * 23 + Name.GetHashCode();
+        #endregion
 
-				foreach (ITerm term in Terms)
-					hash = hash * 23 + term.GetHashCode();
-
-				return hash;
-			}
-		}
-
-		// Returns a lexicographic comparison.
-		public int CompareTo(IPredicate obj)
+        // Returns a lexicographic comparison.
+        public int CompareTo(IPredicate obj)
 		{
 			return this.name.CompareTo(obj.Name);
 		}
-	}
+
+       
+    }
 }

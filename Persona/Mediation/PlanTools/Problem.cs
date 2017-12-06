@@ -10,7 +10,7 @@ using Mediation.Interfaces;
 namespace Mediation.PlanTools
 {
     [Serializable]
-    public class Problem : IProblem
+    public class Problem : IProblem, IEquatable<Problem>
     {
         private string name;
         private string originalName;
@@ -164,7 +164,7 @@ namespace Mediation.PlanTools
             }
         }
 
-        public Problem ()
+        public Problem()
         {
             name = "";
             originalName = "";
@@ -277,8 +277,10 @@ namespace Mediation.PlanTools
                 newGoal.Add(pred.Clone() as Predicate);
 
             // Return the new domain object.
-            return new Problem (newName, newOriginalName, newDomain, newPlayer, newObjects, newInitial, newIntentions, newGoal);
+            return new Problem(newName, newOriginalName, newDomain, newPlayer, newObjects, newInitial, newIntentions, newGoal);
         }
+
+        #region Equality
 
         // Returns a hashcode.
         public override int GetHashCode()
@@ -305,5 +307,60 @@ namespace Mediation.PlanTools
                 return hash;
             }
         }
+
+        // Checks if the two problems are equal.
+        public bool Equals(Problem other)
+        {
+            if (other == null)
+                return false;
+
+            // compare domain names
+            if (!this.Domain.Equals(other.Domain))
+                return false;
+
+            // compare problem names
+            if (!this.Name.Equals(other.Name))
+                return false;
+
+            // compare objects
+            if (!Persona.Utilities.GenericListEquals(this.Objects, other.Objects))
+                return false;
+
+            // compare initial states
+            if (!Persona.Utilities.GenericListEquals(this.Initial, other.Initial))
+                return false;
+
+            // compare goal states
+            if (!Persona.Utilities.GenericListEquals(this.Goal, other.Goal))
+                return false;
+
+            // compare intentions
+            if (!Persona.Utilities.GenericListEquals(this.Intentions, other.Intentions))
+                return false;
+
+            // TODO
+            // missing a comparison of the disjunctive goal structure
+            if (!Persona.Utilities.GenericListEquals(this.Goals, other.Goals))
+                return false;
+
+            return true;
+        }
+
+        // Checks if the object is equal to this problem.
+        public override bool Equals(Object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (this.GetType() != obj.GetType())
+                return false;
+
+            return this.Equals(obj as Problem);
+        }
+
+        #endregion
     }
 }

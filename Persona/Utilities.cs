@@ -871,5 +871,30 @@ namespace Persona
 
             return new Tuple<Domain, Problem>(domain, problem);
         }
+
+        // Compares the list of T to see if they are equal (i.e. contain the same elements).
+        public static bool GenericListEquals<T>(List<T> first, List<T> second)
+        {
+            List<T> firstNotSecond = first.Except(second).ToList<T>();
+            List<T> secondNotFirst = second.Except(first).ToList<T>();
+
+            return !firstNotSecond.Any<T>() && !secondNotFirst.Any<T>();
+        }
+
 	}
+
+    static class Extensions
+    {
+        /// <summary>
+        /// Clone the specified list.
+        /// Borrowed from https://stackoverflow.com/a/222640.
+        /// </summary>
+        /// <returns>The clone.</returns>
+        /// <param name="listToClone">List to clone.</param>
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        {
+            return listToClone.Select(item => (T)item.Clone()).ToList();
+        }
+    }
+
 }
