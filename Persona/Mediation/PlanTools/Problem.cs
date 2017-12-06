@@ -21,6 +21,7 @@ namespace Mediation.PlanTools
         private List<IIntention> intentions;
         private List<IPredicate> goal;
         private List<List<IPredicate>> goals;
+        private List<List<List<IPredicate>>> goalCombinations;
         private Hashtable typeList;
         private Hashtable objectsByType;
 
@@ -94,10 +95,20 @@ namespace Mediation.PlanTools
             set { goals = value; }
         }
 
+        /// <summary>
+        /// A list that represents all combinations (choose 4, choose 3) of 
+        /// goals that have been adopted by the player.
+        /// </summary>
+        public List<List<List<IPredicate>>> GoalCombinations
+        {
+            get { return goalCombinations; }
+            set { goalCombinations = value; }
+        }
+
         // Access the problem's type list.
         public Hashtable TypeList
         {
-            get 
+            get
             {
                 typeList = new Hashtable();
 
