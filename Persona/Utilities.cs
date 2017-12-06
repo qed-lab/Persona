@@ -391,6 +391,26 @@ namespace Persona
 		}
 
 
+        // Removes actions that aren't carried out by the player.
+        public static Plan RemoveNonPlayerActions(Plan observations)
+        {
+            List<IOperator> newSteps = new List<IOperator>();
+
+            foreach (IOperator step in observations.Steps)
+            {
+                // If the main actor of the step is the player, 
+                // add it to the list.
+                if (step.Actor.Equals("arthur"))
+                {
+                    newSteps.Add((IOperator)step.Clone());
+                }
+            }
+
+            IState newInitial = observations.Initial.Clone() as IState;
+            return new Plan(observations.Domain, observations.Problem, newSteps, newInitial);
+        }
+
+
         public static string ToLiftedPlan(Plan recognizedPlan)
         {
             StringBuilder sb = new StringBuilder();
