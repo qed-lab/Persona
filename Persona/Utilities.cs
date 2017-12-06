@@ -675,67 +675,244 @@ namespace Persona
             if (goal.Contains(g5_3))
                 wisdomQuestAdoptedGoals.Add(g5_3);
 
-            int questBranchesAdopted = 0;
-            questBranchesAdopted += (equipQuestAdoptedGoals.Count > 0) ? 1 : 0;
-            questBranchesAdopted += (fetchQuestAdoptedGoals.Count > 0) ? 1 : 0;
-            questBranchesAdopted += (pilgrimageQuestAdoptedGoals.Count > 0) ? 1 : 0;
-            questBranchesAdopted += (loveQuestAdoptedGoals.Count > 0) ? 1 : 0;
-            questBranchesAdopted += (wisdomQuestAdoptedGoals.Count > 0) ? 1 : 0;
 
+            // For each quest type, only add the list of the corresponding quest's
+            // goal literals if the list is non-empty. This way, the number of elements
+            // in disjunctedGoals indicates how many quests have been adopted.
+            if (equipQuestAdoptedGoals.Count > 0)
+                disjunctedGoals.Add(equipQuestAdoptedGoals);
 
-            if(questBranchesAdopted <= 3)
-            {
-                // If three goals were adopted, then add them as a single conjunction
-                List<IPredicate> conj = new List<IPredicate>();
+            if (fetchQuestAdoptedGoals.Count > 0)
+                disjunctedGoals.Add(fetchQuestAdoptedGoals);
 
-                // Take all the goals, wholecloth:
-                conj.AddRange(goal);
+            if (pilgrimageQuestAdoptedGoals.Count > 0)
+                disjunctedGoals.Add(pilgrimageQuestAdoptedGoals);
 
-                // Add them to the disjuncts
-                disjunctedGoals.Add(conj);
-            }
+            if (loveQuestAdoptedGoals.Count > 0)
+                disjunctedGoals.Add(loveQuestAdoptedGoals);
 
-            else if(questBranchesAdopted == 4)
-            {
-                // If four goals were adopted, then there are:
-                // (4 choose 3) + 1 potential goals in a disjunction
-                if (equipQuestAdoptedGoals.Count > 0)
-                    disjunctedGoals.Add(equipQuestAdoptedGoals);
-
-                if (fetchQuestAdoptedGoals.Count > 0)
-                    disjunctedGoals.Add(fetchQuestAdoptedGoals);
-
-                if (pilgrimageQuestAdoptedGoals.Count > 0)
-                    disjunctedGoals.Add(pilgrimageQuestAdoptedGoals);
-
-                if (loveQuestAdoptedGoals.Count > 0)
-                    disjunctedGoals.Add(loveQuestAdoptedGoals);
-
-                if (wisdomQuestAdoptedGoals.Count > 0)
-                    disjunctedGoals.Add(wisdomQuestAdoptedGoals);
-
-
-
-
-
-
-
-
-
-			}
-
-            else // questBranchesAdopted == 5 
-			{
-                // If five goals were adopted, then there are:
-                // (5 choose 3) + (5 choose 4) + 1 potential goals in a disjunction
-                
-            }
-
+            if (wisdomQuestAdoptedGoals.Count > 0)
+                disjunctedGoals.Add(wisdomQuestAdoptedGoals);
+            
 
             return disjunctedGoals;
         }
 
 
+        /// <summary>
+        /// Returns a list of quadruples that represent the combinatorial selection of disjuncted goals.
+        /// The combination is disjunctedGoals.Count choose 4.
+        /// </summary>
+        public static List<List<List<IPredicate>>> ExtractGoalQuadruples(List<List<IPredicate>> disjunctedGoals)
+        {
+            List<List<List<IPredicate>>> quadruples = new List<List<List<IPredicate>>>();
+
+            if(disjunctedGoals.Count <= 4)
+            {
+                quadruples.Add(disjunctedGoals);
+            }
+
+            else
+            {
+                for (int i = 0; i < disjunctedGoals.Count; i++)
+                {
+                    List<IPredicate> g1 = disjunctedGoals.ElementAt(i);
+
+                    for (int j = 0; j < disjunctedGoals.Count; j++)
+                    {
+                        List<IPredicate> g2 = disjunctedGoals.ElementAt(j);
+
+                        // If the element equals the one we already had, skip it.
+                        if (Persona.Utilities.GenericListEquals(g1, g2))
+                            continue;
+
+                        else
+                        {
+                            for (int k = 0; k < disjunctedGoals.Count; k++)
+                            {
+                                List<IPredicate> g3 = disjunctedGoals.ElementAt(k);
+
+                                if (Persona.Utilities.GenericListEquals(g1, g3) ||
+                                    Persona.Utilities.GenericListEquals(g2, g3))
+                                    continue;
+
+                                else
+                                {
+                                    for (int l = 0; l < disjunctedGoals.Count; l++)
+                                    {
+                                        List<IPredicate> g4 = disjunctedGoals.ElementAt(l);
+
+                                        if (Persona.Utilities.GenericListEquals(g1, g4) ||
+                                            Persona.Utilities.GenericListEquals(g2, g4) ||
+                                            Persona.Utilities.GenericListEquals(g3, g4))
+                                            continue;
+
+
+                                        // We have found four unique goal sets.  
+                                        else
+                                        {
+                                            // g1, g2, g3, and g4 are uniquely conjuncted.
+                                            List<List<IPredicate>> newQuadruple = new List<List<IPredicate>>();
+
+                                            // Add the goals to the triple.
+                                            newQuadruple.Add(g1);
+                                            newQuadruple.Add(g2);
+                                            newQuadruple.Add(g3);
+                                            newQuadruple.Add(g4);
+
+                                            // Check that this goal hasn't already been added to the list.
+                                            foreach (List<List<IPredicate>> quadruple in quadruples)
+                                            {
+                                                // If we detect that we have already added a tripple like this to the
+                                                // running list, get out and continue.
+                                                if (Persona.Utilities.GenericListEquals(quadruple, newQuadruple))
+                                                    goto QuadrupleDetected;
+                                            }
+
+                                            quadruples.Add(newQuadruple);
+                                            continue;
+
+                                        // Continue with the next iteration in l.
+                                        QuadrupleDetected:
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return quadruples;
+        }
+
+
+
+
+
+        /// <summary>
+        /// Returns a list of triples that represent the combinatorial selection of disjuncted goals.
+        /// The combination is disjunctedGoals.Count choose 3.
+        /// </summary>
+        public static List<List<List<IPredicate>>> ExtractGoalTriples(List<List<IPredicate>> disjunctedGoals)
+        {
+            // This is a list of lists of lists of predicates.
+            // List<...> -> maps to an "or"
+            // List<List<...>> -> each middle list maps to an "and"
+            // List<List<List<...>>> -> each inner list represents a set of literals that define the goal conditions
+
+            // e.g.
+            // { {a, b}, {c, d}, {e, f} }
+            //
+            // (or (and a b)
+            //     (and c d)
+            //     (and e f)
+
+            List<List<List<IPredicate>>> triples = new List<List<List<IPredicate>>>();
+
+            // If there are three goals or less, there's only at most one triple.
+            if(disjunctedGoals.Count <= 3)
+            {
+                triples.Add(disjunctedGoals);
+            }
+
+            // 
+            else
+            {
+                for (int i = 0; i < disjunctedGoals.Count; i++)
+                {
+                    List<IPredicate> g1 = disjunctedGoals.ElementAt(i);
+
+                    for (int j = 0; j < disjunctedGoals.Count; j++)
+                    {
+                        List<IPredicate> g2 = disjunctedGoals.ElementAt(j);
+
+                        // If the element equals the one we already had, skip it.
+                        if (Persona.Utilities.GenericListEquals(g1, g2))
+                            continue;
+
+                        else
+                        {
+                            for (int k = 0; k < disjunctedGoals.Count; k++)
+                            {
+                                List<IPredicate> g3 = disjunctedGoals.ElementAt(k);
+
+                                if (Persona.Utilities.GenericListEquals(g1, g3) ||
+                                    Persona.Utilities.GenericListEquals(g2, g3))
+                                    continue;
+
+                                // We have found three unique goal sets.  
+                                else
+                                {
+                                    // g1, g2, and g3 are uniquely conjuncted.
+                                    List<List<IPredicate>> newTriple = new List<List<IPredicate>>();
+
+                                    // Add the goals to the triple.
+                                    newTriple.Add(g1);
+                                    newTriple.Add(g2);
+                                    newTriple.Add(g3);
+
+                                    // Check that this goal hasn't already been added to the list.
+                                    foreach (List<List<IPredicate>> triple in triples)
+                                    {
+                                        // If we detect that we have already added a tripple like this to the
+                                        // running list, get out and continue.
+                                        if (Persona.Utilities.GenericListEquals(triple, newTriple))
+                                            goto TripleDetected;
+                                    }
+
+                                    triples.Add(newTriple);
+                                    continue;
+
+                                // Continue with the next iteration in k.
+                                TripleDetected:
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return triples;
+        }
+
+
+        public static string GoalCombinationsToPDDL(List<List<List<IPredicate>>> goalCombinations)
+        {
+            StringBuilder pddl = new StringBuilder();
+            /*
+             *  (:goal
+             *      (or
+             *          (and 
+             *              (has arthur ash)
+             *          )
+             */
+
+            pddl.Append("\t(:goal\n\t\t (or\n");
+
+            foreach(List<List<IPredicate>> goalList in goalCombinations)
+            {
+                pddl.Append("\t\t\t(and\n");
+
+                foreach(List<IPredicate> goal in goalList)
+                {
+                    pddl.Append("\t\t\t\t");
+                    foreach(IPredicate literal in goal)
+                    {
+                        pddl.Append(literal + " ");
+                    }
+                    pddl.Append("\n");
+                }
+
+                pddl.Append("\t\t\t)\n\n");
+
+            }
+
+            pddl.Append("\t\t)\n\t)\n");
+            return pddl.ToString();
+        }
 
 
 
