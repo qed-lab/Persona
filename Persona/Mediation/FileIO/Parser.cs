@@ -909,6 +909,44 @@ namespace Mediation.FileIO
 			// Kind of a hack.
 			problem.OriginalName = problem.Name;
 
+            // Setup the goal combinations.
+            problem.Goals = Persona.Utilities.DisjunctifyGoals(problem.Goal);
+
+
+            if (problem.Goals.Count <= 3)
+                problem.GoalCombinations.Add(problem.Goals);
+
+            // If 4 goals have been adopted, then we have (4 choose 3) + 1 goals.
+            else if(problem.Goals.Count == 4)
+            {
+                // (4 choose 3)
+                List<List<List<IPredicate>>> goalTriples = Persona.Utilities.ExtractGoalTriples(problem.Goals);
+                problem.GoalCombinations.AddRange(goalTriples);
+
+                // + 1 goals.
+                problem.GoalCombinations.Add(problem.Goals);
+            }
+
+            // If 5 goals have been adopted, then we have (5 choose 3) + (5 choose 4) + 1 goals.
+            else if(problem.Goals.Count == 5)
+            {
+                // (5 choose 3)
+                List<List<List<IPredicate>>> goalTriples = Persona.Utilities.ExtractGoalTriples(problem.Goals);
+                problem.GoalCombinations.AddRange(goalTriples);
+
+                // + (5 choose 4)
+                List<List<List<IPredicate>>> goalQuadruples = Persona.Utilities.ExtractGoalQuadruples(problem.Goals);
+                problem.GoalCombinations.AddRange(goalQuadruples);
+
+                // + 1 goals.
+                problem.GoalCombinations.Add(problem.Goals);
+            }
+
+            else
+            {
+                Console.WriteLine("ERROR IN PARSING");
+            }
+
 			return problem;
 		}
 
