@@ -186,6 +186,7 @@ namespace Mediation.PlanTools
             intentions = new List<IIntention>();
             goal = new List<IPredicate>();
             goals = new List<List<IPredicate>>();
+            goalCombinations = new List<List<List<IPredicate>>>();
         }
 
         public Problem(string name, string originalName, string domain, string player, List<IObject> objects, List<IPredicate> initial, List<IPredicate> goal)
@@ -199,6 +200,7 @@ namespace Mediation.PlanTools
             intentions = new List<IIntention>();
             this.goal = goal;
             goals = new List<List<IPredicate>>();
+            goalCombinations = new List<List<List<IPredicate>>>();
         }
 
         public Problem(string name, string originalName, string domain, string player, List<IObject> objects, List<IPredicate> initial, List<IIntention> intentions, List<IPredicate> goal)
@@ -212,6 +214,7 @@ namespace Mediation.PlanTools
             this.intentions = intentions;
             this.goal = goal;
             goals = new List<List<IPredicate>>();
+            goalCombinations = new List<List<List<IPredicate>>>();
         }
 
         // Finds the player in the initial state.
