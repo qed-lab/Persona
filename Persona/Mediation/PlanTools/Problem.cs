@@ -389,11 +389,6 @@ namespace Mediation.PlanTools
             if (!Persona.Utilities.GenericListEquals(this.Intentions, other.Intentions))
                 return false;
 
-            // TODO
-            // missing a comparison of the disjunctive goal structure
-            if (!Persona.Utilities.GenericListEquals(this.Goals, other.Goals))
-                return false;
-
             return true;
         }
 

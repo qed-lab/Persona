@@ -33,7 +33,6 @@ namespace Persona
             // Test
             TestGoalCombinations();
 
-
             return 0;
         }
 
@@ -446,7 +445,6 @@ namespace Persona
 			}
         }
 
-
 		/// <summary>
 		/// Runs the windowed version of the plan recognition pipeline.
 		/// </summary>
@@ -537,7 +535,6 @@ namespace Persona
             }
 		}
 
-
         private static void TestPlanFail()
         {
             // Load a domain that will fail
@@ -550,7 +547,6 @@ namespace Persona
 
 
         }
-
 
         private static void TestGoalCombinations()
         {
@@ -577,11 +573,6 @@ namespace Persona
             Console.WriteLine(Utilities.GoalCombinationsToPDDL(goalCombinations));
 
         }
-
-
-
-
-
 
     }
 }
