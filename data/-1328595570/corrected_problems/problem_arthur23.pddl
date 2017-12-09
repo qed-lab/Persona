@@ -70,6 +70,10 @@
 		(willing-to-give-item arthur tastycupcake)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

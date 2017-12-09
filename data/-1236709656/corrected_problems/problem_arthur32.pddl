@@ -70,6 +70,10 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-		(has alli tastycupcake)
+		
+		
+			(has alli tastycupcake) 
+		
+
 	)
-)
+

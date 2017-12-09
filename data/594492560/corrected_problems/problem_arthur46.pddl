@@ -107,11 +107,12 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has james coin)
-		(has ian knightsword)
-		(has ian knightshield)
-	  )
+		
+		(and
+			(has ian knightsword) (has ian knightshield) 
+			(has jordan loveletter) 
+			(has james coin) 
+		)
+
 	)
-)
+

@@ -112,9 +112,11 @@
 		(willing-to-give-item arthur bouquet)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has alli tastycupcake)
-	  )
+		
+		(and
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+		)
+
 	)
-)
+

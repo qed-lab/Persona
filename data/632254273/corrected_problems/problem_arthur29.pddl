@@ -75,6 +75,10 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

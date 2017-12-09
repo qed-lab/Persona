@@ -112,10 +112,11 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-	  (AND
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has james coin) (has james humanskull) 
+		)
+
 	)
-)
+

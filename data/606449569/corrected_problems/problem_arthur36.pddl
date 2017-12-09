@@ -79,6 +79,10 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-		(has alli tastycupcake)
+		
+		
+			(has alli tastycupcake) 
+		
+
 	)
-)
+

@@ -55,6 +55,10 @@
 		(willing-to-give-item arthur loveletter)
 	)
 	(:goal
-		(has alli tastycupcake)
+		
+		
+			(has alli tastycupcake) 
+		
+
 	)
-)
+

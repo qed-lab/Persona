@@ -121,12 +121,12 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-	  (AND
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-		(has ian knightsword)
-		(has ian knightshield)
-	  )
+		
+		(and
+			(has ian knightsword) (has ian knightshield) 
+			(has giovanna hairtonic) 
+			(has james coin) (has james humanskull) 
+		)
+
 	)
-)
+

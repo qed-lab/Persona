@@ -890,15 +890,37 @@ namespace Persona
              *          )
              */
 
-            pddl.Append("\t(:goal\n\t\t (or\n");
+            pddl.Append("\t(:goal\n\t\t");
+
+            if (goalCombinations.Count > 3)
+                pddl.Append("(or\n");
+
+            else
+                pddl.Append("\n");
 
             foreach(List<List<IPredicate>> goalList in goalCombinations)
             {
-                pddl.Append("\t\t\t(and\n");
+                if (goalCombinations.Count > 3)
+                    pddl.Append("\t\t\t(and\n");
+
+                else
+                {
+                    if(goalCombinations.Count == 1 && goalCombinations.ElementAt(0).Count == 1)
+                        pddl.Append("\t\t\n");
+
+                    else
+                        pddl.Append("\t\t(and\n");
+                }
+                    
 
                 foreach(List<IPredicate> goal in goalList)
                 {
-                    pddl.Append("\t\t\t\t");
+                    if (goalCombinations.Count > 3)
+                        pddl.Append("\t\t\t\t");
+
+                    else
+                        pddl.Append("\t\t\t");
+                    
                     foreach(IPredicate literal in goal)
                     {
                         pddl.Append(literal + " ");
@@ -906,11 +928,21 @@ namespace Persona
                     pddl.Append("\n");
                 }
 
-                pddl.Append("\t\t\t)\n\n");
+                if (goalCombinations.Count > 3)
+                    pddl.Append("\t");
+
+                if (goalCombinations.Count == 1 && goalCombinations.ElementAt(0).Count == 1)
+                    pddl.Append("\t\t\n\n");
+
+                else
+                    pddl.Append("\t\t)\n\n");
 
             }
 
-            pddl.Append("\t\t)\n\t)\n");
+            if (goalCombinations.Count > 3)
+                pddl.Append("\t\t)\n");
+
+            pddl.Append("\t)\n");
             return pddl.ToString();
         }
 
@@ -1044,6 +1076,7 @@ namespace Persona
 
             }
         }
+
 
         // Returns the arthur domain and problem pair that correspond to the given index.
         public static Tuple<Domain, Problem> GetIndexedArthurDomainAndProblem(string dataFolder, int index)

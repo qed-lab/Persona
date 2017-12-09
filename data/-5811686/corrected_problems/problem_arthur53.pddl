@@ -115,12 +115,38 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has ian knightsword)
-		(has ian knightshield)
-		(has james coin)
-	  )
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has james coin) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+		)
 	)
-)
+

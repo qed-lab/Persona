@@ -113,6 +113,10 @@
 		(willing-to-give-item arthur humanskull)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

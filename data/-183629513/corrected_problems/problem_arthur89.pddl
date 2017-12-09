@@ -125,11 +125,12 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has jordan loveletter) 
+			(has james coin) (has james humanskull) 
+		)
+
 	)
-)
+

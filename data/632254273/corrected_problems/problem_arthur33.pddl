@@ -80,6 +80,10 @@
 		(willing-to-give-item arthur mirror)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

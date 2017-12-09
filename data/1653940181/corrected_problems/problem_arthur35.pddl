@@ -103,6 +103,10 @@
 		(willing-to-give-item arthur rope)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

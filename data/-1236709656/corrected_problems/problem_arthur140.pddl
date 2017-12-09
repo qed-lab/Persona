@@ -118,16 +118,110 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has james coin)
-		(has ian knightsword)
-		(has ian knightshield)
-		(has giovanna hairtonic)
-		(has james humanskull)
-		(has james candle)
-		(has jordan lovecontract)
-	  )
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+		)
 	)
-)
+

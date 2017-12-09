@@ -111,9 +111,11 @@
 		(willing-to-give-item arthur mirror)
 	)
 	(:goal
-	  (AND
-		(has giovanna hairtonic)
-		(has james coin)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has james coin) 
+		)
+
 	)
-)
+

@@ -88,6 +88,10 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

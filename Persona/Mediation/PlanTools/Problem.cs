@@ -290,8 +290,45 @@ namespace Mediation.PlanTools
             foreach (IPredicate pred in goal)
                 newGoal.Add(pred.Clone() as Predicate);
 
-            // Return the new domain object.
-            return new Problem(newName, newOriginalName, newDomain, newPlayer, newObjects, newInitial, newIntentions, newGoal);
+            // Create the new problem object.
+            Problem clone = new Problem(newName, newOriginalName, newDomain, newPlayer, newObjects, newInitial, newIntentions, newGoal);
+
+            // Clone the goals structure.
+            List<List<IPredicate>> newGoals = new List<List<IPredicate>>();
+            foreach(List<IPredicate> g in goals)
+            {
+                List<IPredicate> newG = new List<IPredicate>();
+                foreach (IPredicate goalPred in goal) {
+                    newG.Add(goalPred.Clone() as Predicate);
+                }
+
+                newGoals.Add(newG);
+            }
+
+            clone.goals = newGoals;
+
+            // Clone the goal combinations structure.
+            List<List<List<IPredicate>>> newGoalCombinations = new List<List<List<IPredicate>>>();
+            foreach(List<List<IPredicate>> combination in goalCombinations)
+            {
+                List<List<IPredicate>> newCombination = new List<List<IPredicate>>();
+                foreach(List<IPredicate> g in combination)
+                {
+                    List<IPredicate> newG = new List<IPredicate>();
+                    foreach(IPredicate literal in g)
+                    {
+                        newG.Add(literal.Clone() as Predicate);
+                    }
+                    newCombination.Add(newG);
+                }
+
+                newGoalCombinations.Add(newCombination);
+            }
+
+            clone.goalCombinations = newGoalCombinations;
+
+            // Return the new problem object.
+            return clone;
         }
 
         #region Equality

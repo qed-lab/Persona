@@ -108,12 +108,38 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has james coin)
-		(has ian knightsword)
-		(has ian knightshield)
-	  )
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has james coin) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+		)
 	)
-)
+

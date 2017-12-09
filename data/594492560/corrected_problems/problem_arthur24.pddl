@@ -83,6 +83,10 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

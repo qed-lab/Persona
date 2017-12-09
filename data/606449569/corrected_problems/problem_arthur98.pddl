@@ -113,10 +113,12 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+		)
+
 	)
-)
+

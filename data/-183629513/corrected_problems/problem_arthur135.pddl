@@ -131,13 +131,38 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-		(has james candle)
-		(has alli tastycupcake)
-	  )
+		(or
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+		)
 	)
-)
+

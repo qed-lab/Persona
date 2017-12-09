@@ -72,6 +72,10 @@
 		(willing-to-give-item arthur mirror)
 	)
 	(:goal
-		(has alli tastycupcake)
+		
+		
+			(has alli tastycupcake) 
+		
+
 	)
-)
+

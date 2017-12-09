@@ -121,11 +121,38 @@
 		(willing-to-give-item arthur knightsword)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has james coin)
-		(has alli tastycupcake)
-		(has giovanna hairtonic)
-	  )
+		(or
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) 
+			)
+
+		)
 	)
-)
+

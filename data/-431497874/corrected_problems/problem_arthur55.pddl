@@ -90,9 +90,10 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has jordan lovecontract)
-	  )
+		
+		
+			(has jordan loveletter) (has jordan lovecontract) 
+		
+
 	)
-)
+

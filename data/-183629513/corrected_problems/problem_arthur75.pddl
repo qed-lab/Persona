@@ -108,9 +108,11 @@
 		(willing-to-give-item arthur loveletter)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has jordan loveletter) 
+		)
+
 	)
-)
+

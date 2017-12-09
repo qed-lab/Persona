@@ -115,9 +115,11 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has james coin)
-	  )
+		
+		(and
+			(has jordan loveletter) 
+			(has james coin) 
+		)
+
 	)
-)
+

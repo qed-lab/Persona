@@ -118,10 +118,12 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has james coin)
-	  )
+		
+		(and
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+			(has james coin) 
+		)
+
 	)
-)
+

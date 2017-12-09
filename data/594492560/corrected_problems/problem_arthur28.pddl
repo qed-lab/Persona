@@ -90,6 +90,10 @@
 		(willing-to-give-item arthur bouquet)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

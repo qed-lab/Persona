@@ -102,12 +102,12 @@
 		(willing-to-give-item arthur shinykey)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has james coin)
-		(has ian knightsword)
-		(has ian knightshield)
-		(has jordan lovecontract)
-	  )
+		
+		(and
+			(has ian knightsword) (has ian knightshield) 
+			(has jordan loveletter) (has jordan lovecontract) 
+			(has james coin) 
+		)
+
 	)
-)
+

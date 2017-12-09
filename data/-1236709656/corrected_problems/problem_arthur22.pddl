@@ -54,6 +54,10 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-		(has alli tastycupcake)
+		
+		
+			(has alli tastycupcake) 
+		
+
 	)
-)
+

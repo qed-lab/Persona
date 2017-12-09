@@ -100,10 +100,12 @@
 		(willing-to-give-item arthur book)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has james coin)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has jordan loveletter) 
+			(has james coin) 
+		)
+
 	)
-)
+

@@ -112,10 +112,12 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has alli tastycupcake)
-		(has james coin)
-	  )
+		
+		(and
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+			(has james coin) 
+		)
+
 	)
-)
+

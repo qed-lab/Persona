@@ -113,9 +113,11 @@
 		(willing-to-give-item arthur silver)
 	)
 	(:goal
-	  (AND
-		(has giovanna hairtonic)
-		(has james coin)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has james coin) 
+		)
+
 	)
-)
+

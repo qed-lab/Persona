@@ -74,6 +74,10 @@
 		(willing-to-give-item arthur tastycupcake)
 	)
 	(:goal
-		(has alli tastycupcake)
+		
+		
+			(has alli tastycupcake) 
+		
+
 	)
-)
+

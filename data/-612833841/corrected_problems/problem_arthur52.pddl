@@ -112,6 +112,10 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-		(has giovanna hairtonic)
+		
+		
+			(has giovanna hairtonic) 
+		
+
 	)
-)
+

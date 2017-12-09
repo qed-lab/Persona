@@ -104,9 +104,11 @@
 		(willing-to-give-item arthur coin)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-	  )
+		
+		(and
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+		)
+
 	)
-)
+

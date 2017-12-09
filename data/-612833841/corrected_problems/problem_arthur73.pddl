@@ -121,13 +121,38 @@
 		(willing-to-give-item arthur mirror)
 	)
 	(:goal
-	  (AND
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-		(has ian knightsword)
-		(has ian knightshield)
-		(has jordan loveletter)
-	  )
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+		)
 	)
-)
+

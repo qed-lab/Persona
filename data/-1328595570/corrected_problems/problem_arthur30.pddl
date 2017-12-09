@@ -88,6 +88,10 @@
 		(willing-to-give-item arthur rubyring)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

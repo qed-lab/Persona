@@ -112,6 +112,10 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-		(has giovanna hairtonic)
+		
+		
+			(has giovanna hairtonic) 
+		
+
 	)
-)
+

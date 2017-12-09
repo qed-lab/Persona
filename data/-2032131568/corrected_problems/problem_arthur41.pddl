@@ -74,6 +74,10 @@
 		(willing-to-give-item arthur hairtonic)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

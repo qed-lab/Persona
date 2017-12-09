@@ -82,6 +82,10 @@
 		(willing-to-give-item arthur loveletter)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

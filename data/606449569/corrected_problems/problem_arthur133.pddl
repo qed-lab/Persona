@@ -126,14 +126,110 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-		(has ian knightsword)
-		(has ian knightshield)
-	  )
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+		)
 	)
-)
+

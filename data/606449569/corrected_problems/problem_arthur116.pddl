@@ -123,12 +123,38 @@
 		(willing-to-give-item arthur lovecontract)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-	  )
+		(or
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) 
+				(has james coin) (has james humanskull) 
+			)
+
+		)
 	)
-)
+

@@ -56,21 +56,7 @@ namespace Mediation.FileIO
                 // If we have disjunctive goals,
                 if (problem.Goals.Count > 0)
                 {
-                    writer.Write("\t(:goal\n\t  (OR\n");
-
-                    foreach(List<IPredicate> conj in problem.Goals)
-                    {
-                        if (conj.Count > 1)
-                            writer.Write("\t\t  (AND\n");
-
-                        foreach (IPredicate pred in conj)
-                            writer.WriteLine("\t\t\t" + pred);
-
-                        if (conj.Count > 1)
-                            writer.Write("\t\t  )\n");
-                    }
-
-                    writer.Write("\t\t)\n\t)\n)\n");
+                    writer.WriteLine(Persona.Utilities.GoalCombinationsToPDDL(problem.GoalCombinations));
                 }
 
                 // If we only have conjunctive goals,
@@ -83,7 +69,7 @@ namespace Mediation.FileIO
 	                foreach (IPredicate pred in problem.Goal)
 	                    writer.WriteLine("\t\t" + pred);
 	                if (problem.Goal.Count > 1)
-	                    writer.Write("\t  )\n\t)\n)");
+	                    writer.Write("\t)\n\t)\n)");
 	                else
 	                    writer.Write("\t)\n)\n");
                 }

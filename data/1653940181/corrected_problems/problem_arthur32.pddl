@@ -93,6 +93,10 @@
 		(willing-to-give-item arthur knightsword)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+

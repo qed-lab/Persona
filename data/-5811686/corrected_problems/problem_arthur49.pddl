@@ -114,11 +114,12 @@
 		(willing-to-give-item arthur silver)
 	)
 	(:goal
-	  (AND
-		(has alli tastycupcake)
-		(has jordan loveletter)
-		(has ian knightsword)
-		(has ian knightshield)
-	  )
+		
+		(and
+			(has ian knightsword) (has ian knightshield) 
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+		)
+
 	)
-)
+

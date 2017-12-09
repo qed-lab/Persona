@@ -111,13 +111,12 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has giovanna hairtonic)
-		(has jordan lovecontract)
-		(has james coin)
-		(has james humanskull)
-		(has james candle)
-	  )
+		
+		(and
+			(has giovanna hairtonic) 
+			(has jordan loveletter) (has jordan lovecontract) 
+			(has james coin) (has james humanskull) (has james candle) 
+		)
+
 	)
-)
+

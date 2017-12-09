@@ -99,11 +99,11 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has jordan lovecontract)
-		(has james coin)
-		(has james humanskull)
-	  )
+		
+		(and
+			(has jordan loveletter) (has jordan lovecontract) 
+			(has james coin) (has james humanskull) 
+		)
+
 	)
-)
+

@@ -123,10 +123,12 @@
 		(willing-to-give-item arthur loveletter)
 	)
 	(:goal
-	  (AND
-		(has jordan loveletter)
-		(has james coin)
-		(has alli tastycupcake)
-	  )
+		
+		(and
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+			(has james coin) 
+		)
+
 	)
-)
+

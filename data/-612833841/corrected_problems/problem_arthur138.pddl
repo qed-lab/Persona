@@ -119,15 +119,38 @@
 		(willing-to-give-item arthur ash)
 	)
 	(:goal
-	  (AND
-		(has giovanna hairtonic)
-		(has james coin)
-		(has james humanskull)
-		(has ian knightsword)
-		(has ian knightshield)
-		(has jordan loveletter)
-		(has james candle)
-		(has jordan lovecontract)
-	  )
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+		)
 	)
-)
+

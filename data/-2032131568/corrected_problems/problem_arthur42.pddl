@@ -79,6 +79,10 @@
 		(willing-to-give-item arthur mushroom)
 	)
 	(:goal
-		(has jordan loveletter)
+		
+		
+			(has jordan loveletter) 
+		
+
 	)
-)
+
