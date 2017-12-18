@@ -613,7 +613,7 @@ namespace Mediation.PlanTools
 
         // Creates a clone of the plan's prefix up to the given length in steps.
         // Length must positive and not greater than the length of this plan.
-        public Object Prefix (int length)
+        public Object Prefix(int length)
         {
             if (length < 0 || length > this.steps.Count)
                 throw new ArgumentException("Length must be positive and not greater than the length of this plan");
@@ -653,6 +653,35 @@ namespace Mediation.PlanTools
 
             return new Plan(domain, newProblem, newSteps, newInitial);
 		}
+
+        // Creates a clone of the plan including all steps up until and including the specified id.
+        // Assumes that all steps in the plan are ordered in ascending step order.
+        public Object PlanUpToStepId(int stepId)
+        {
+            if (stepId < this.steps.ElementAt(0).ID || stepId > this.steps.ElementAt(this.Steps.Count - 1).ID)
+                throw new ArgumentException("stepId is not within the bounds of this plan's steps");
+
+            List<IOperator> newSteps = new List<IOperator>();
+
+            for (int i = 0; i < this.steps.Count; i++)
+            {
+                // Get the step.
+                Operator step = steps.ElementAt(i) as Operator;
+
+                // If this operator's step id is greater than the input parameter,
+                // we're done adding steps.
+                if (step.ID > stepId)
+                    break;
+
+
+                // Otherwise, add it to the list.
+                else
+                    newSteps.Add(step);
+            }
+
+            IState newInitial = initial.Clone() as IState;
+            return new Plan(domain, problem, newSteps, newInitial);
+        }
 
         /// <summary>
         /// Returns a List of strings that denote the symbols of this plan. 
