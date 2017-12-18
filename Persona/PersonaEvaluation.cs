@@ -301,7 +301,7 @@ namespace Persona
         }
 
         /// <summary>
-        /// Runs the windowed version of the pipeline with domain expansion.
+        /// Runs the baseline version of the pipeline with domain expansion.
         /// </summary>
         private static void RunBaselineWithConservativeDomainExpansion()
         {
@@ -342,26 +342,47 @@ namespace Persona
 				writer.WriteLine(DataLogEntry.CSVheader());
 
                 // Get the initial domain and problem files.
-                Tuple<Domain, Problem> microtheory = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, 0);
+                Tuple<Domain, Problem> playerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, 0);
                 Plan prefix = null;
 
 
-                // Iterate over all player micro-theory domain / problem files.  The system produced a pair of
+                // Iterate over all player knowledge model domain / problem files.  The system produced a pair of
                 // micro-theory based domain and problem files for every *player* action (including ones that
                 // are deemed useless by the Utilities.RemoveUselessActions(...) above).  So, iterate the domain
                 // and problem files, using as the index a given step of the player only chronology.
+
+                // In essence, we want to:
+                // (1) find when the player has learned new information, and
+                // (2) take the player's chronology up until the information 
+                //     was learned and use it to perform plan recognition.
                 for (int i = 1; i < playerOnlyChronology.Steps.Count; i++)
                 {
-                    // This is where it gets tricky.
-                    // Up to here, we have:
-                    // revisedChronology \subset playerOnlyChronology \subset fullChronology.
+                    Tuple<Domain, Problem> newPlayerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, i);
 
-                    // Because of this, it's possible that the steps we're iterating through in the player only chronology
-                    // aren't in the revised chronology at all.  In other words, it may be that:
-                    // > there is no prefix worth considering, or
-                    // > there is no change in the prefix worth considering
+                    // Compare the player models for equality.
+                    if (playerModel.Item1.Equals(newPlayerModel.Item1) && 
+                        playerModel.Item2.Equals(newPlayerModel.Item2))
+                    {
+                        // If they're equal, that means that no new information 
+                        // has been learned.
+                        continue;
+                    }
 
-                    // Therefore, we have to check 
+                    // We have new information.
+                    else
+                    {
+                        playerModel = newPlayerModel;
+
+
+
+
+
+
+
+
+
+                    }
+
 
 
 
