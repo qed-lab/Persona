@@ -272,7 +272,6 @@ namespace Persona
                     // Compile a list of the salient steps.
                     List<IOperator> salientSteps;
 
-
                     if(level == IndexterSalienceThreshold.STRICT)
                         salientSteps = ObservationFilter.Indexter(prefix, domain, problem, 0.25, logEntry);
 
@@ -343,7 +342,9 @@ namespace Persona
 
                 // Get the initial domain and problem files.
                 Tuple<Domain, Problem> playerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, 0);
-                Plan prefix = null;
+
+                // Create a variable for the solution plan.
+                Plan solution = null;
 
 
                 // Iterate over all player knowledge model domain / problem files.  The system produced a pair of
@@ -371,8 +372,58 @@ namespace Persona
                     // We have new information.
                     else
                     {
+                        // Assign the new player model.
                         playerModel = newPlayerModel;
 
+                        // If the player model has no goals, there is nothing to solve.
+                        if (playerModel.Item2.Goals.Count == 0)
+                            continue;
+
+                        else
+                        {
+                            // Get the step id that we're considering for the player.
+                            int stepId = playerOnlyChronology.Steps[i].ID;
+
+                            // Get the domain and problem.
+                            Domain domain = playerModel.Item1;
+                            Problem problem = playerModel.Item2;
+
+                            // Get all the steps up to an including the above id.
+                            Plan observations = revisedChronology.PlanUpToStepId(stepId) as Plan;
+
+                            // Assemble a plan recognition theory to solve.
+                            PlanRecognitionProblem theory = new PlanRecognitionProblem(
+                                playerModel.Item1, // domain
+                                playerModel.Item2, // problem
+                                observations       // observations
+                            );
+
+                            // Start the data log entry.
+                            DataLogEntry logEntry = new DataLogEntry();
+
+                            logEntry.PlayerId = playerId;
+                            logEntry.SystemConfiguration = config;
+                            logEntry.NumberOfGoals = problem.Goals.Count;
+                            logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
+                            logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
+                            logEntry.NumberOfPlayerActionsTaken = i + 1;
+                            logEntry.ActualPlan = playerChronology;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
 
 
 

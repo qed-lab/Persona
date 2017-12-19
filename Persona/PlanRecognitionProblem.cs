@@ -30,9 +30,68 @@ namespace Persona
             this.solutionUsingOriginalDomainOperators = null;
         }
 
-        /// <summary>
-        /// Solve this plan recognition theory, and story results in dataLogEntry.
-        /// </summary>
+        // Solve this plan recognition theory, and story results in dataLogEntry.
+        public Tuple<Plan,Plan> SolveConservative(DataLogEntry dataLogEntry, Plan solutionPlanIfFailure, Plan filteredSolutionPlanIfFailure)
+        {
+            // Begin recording runtime.
+            DateTime recognitionStart = DateTime.Now;
+
+            this.CompileObservations();
+            this.SIWthenBFSPlan(dataLogEntry);
+
+            // End recording runtime.
+            DateTime recognitionEnd = DateTime.Now;
+            TimeSpan elapsedTime = recognitionEnd - recognitionStart;
+
+            // Store the runtime.
+            dataLogEntry.Runtime = elapsedTime.TotalMilliseconds;
+
+            // This means that no solution was found!
+            if (this.solution.Steps.Count == 0 && 
+                solutionPlanIfFailure == null && 
+                filteredSolutionPlanIfFailure == null) 
+            {
+                dataLogEntry.SetSentinelValuesForFailure();
+            }
+
+            else
+            {
+                // If there is no solution, set the input plans.
+                if(this.solution.Steps.Count == 0)
+                {
+                    this.solution = solutionPlanIfFailure;
+                    this.solutionUsingOriginalDomainOperators = filteredSolutionPlanIfFailure;
+                }
+
+                // Compute additional metrics.
+                dataLogEntry.PlanRecognitionPrecision = Utilities.PlanRecognitionPrecision(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
+                dataLogEntry.PlanRecognitionRecall = Utilities.PlanRecognitionRecall(this.solutionUsingOriginalDomainOperators, dataLogEntry.ActualPlan);
+                dataLogEntry.PlanRecognitionF1Score = Utilities.FScore(dataLogEntry.PlanRecognitionPrecision, dataLogEntry.PlanRecognitionRecall);
+                dataLogEntry.PredictedGoal = Utilities.ExtractRecognizedGoal(this.solution);
+                dataLogEntry.ActualGoal = Utilities.ExtractActualGoal(dataLogEntry.ActualPlan);
+                dataLogEntry.GoalRecognitionPrecision = Utilities.GoalRecognitionPrecision(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
+                dataLogEntry.GoalRecognitionRecall = Utilities.GoalRecognitionRecall(dataLogEntry.PredictedGoal, dataLogEntry.ActualGoal);
+                dataLogEntry.GoalRecognitionF1Score = Utilities.FScore(dataLogEntry.GoalRecognitionPrecision, dataLogEntry.GoalRecognitionRecall);
+                dataLogEntry.PredictedPlan = this.solution;
+                dataLogEntry.FilteredPredictedPlan = this.solutionUsingOriginalDomainOperators;
+                dataLogEntry.PlanRecognitionLevenshteinDistance = Plan.LevenshteinDistance(dataLogEntry.FilteredPredictedPlan,
+                                                                                           dataLogEntry.ActualPlan);
+
+                dataLogEntry.GoalRecognitionLevenshteinDistance = Utilities.PredicateLevenshteinDistance(dataLogEntry.PredictedGoal,
+                                                                                                         dataLogEntry.ActualGoal);
+
+            }
+
+            string recognizedGoalOutput = Directory.GetCurrentDirectory() + @"/recognized-goal-" + dataLogEntry.NumberOfPlayerActionsTaken + @".pddl";
+            string actualGoalOutput = Directory.GetCurrentDirectory() + @"/actual-goal.pddl";
+
+            Writer.LiteralsToPDDL(recognizedGoalOutput, dataLogEntry.PredictedGoal);
+            Writer.LiteralsToPDDL(actualGoalOutput, dataLogEntry.ActualGoal);
+
+            return new Tuple<Plan, Plan>(this.solution, this.solutionUsingOriginalDomainOperators);
+        }
+
+        // Solve this plan recognition theory, and story results in dataLogEntry.
         public void Solve(DataLogEntry dataLogEntry)
         {
             // Begin recording runtime.
