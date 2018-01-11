@@ -142,9 +142,9 @@ namespace Persona
 
 
         /// <summary>
-        /// Compiles the observations.
+        /// Compiles the observations. Returns true if compilation was successful, false otherwise.
         /// </summary>
-        public void CompileObservations()
+        public bool CompileObservations()
         {
             // Setup the observation compiler's / compiler argument paths.
             string compilerPath = Parser.GetTopDirectory() + @"pr-as-planning/obs-compiler/pr2plan";
@@ -168,10 +168,25 @@ namespace Persona
                 "-o " + observationsPath + " " + "-v";
 
             startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
 
             // Start the process and wait for it to be done.
             using(Process proc = Process.Start(startInfo)) {
+
+                // Wait until it's done.
                 proc.WaitForExit();
+
+                // Read the first line of the output from the process.
+                string firstLine = proc.StandardOutput.ReadLine();
+                firstLine = proc.StandardOutput.ReadLine();
+
+                if (firstLine.Contains("goal can be simplified to FALSE"))
+                    return false;
+
+                else
+                    return true;
+
             }
         }
 
