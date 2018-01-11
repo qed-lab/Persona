@@ -57,6 +57,7 @@ namespace Mediation.FileIO
                 if (problem.Goals.Count > 0)
                 {
                     writer.WriteLine(Persona.Utilities.GoalCombinationsToPDDL(problem.GoalCombinations));
+                    writer.WriteLine(")");
                 }
 
                 // If we only have conjunctive goals,
