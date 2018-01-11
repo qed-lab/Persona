@@ -20,18 +20,19 @@ namespace Persona
 
         public static int Main(string[] args)
         {
-            // ReachabilityAnalysis.CompressRecallabilityDataFiles();
+            // Configurations
+            // RunBaseline();
+            RunWindowed();
             // RunCognitive(IndexterSalienceThreshold.STRICT);
+            // RunBaselineWithConservativeDomainExpansion();
+
+            // Utility
+            // ReachabilityAnalysis.CompressRecallabilityDataFiles();
             // Utilities.CorrectDetectedObjectsInGameProblemFiles();
             // PlanFailTest();
 
-            // RunBaseline();
-            // RunWindowed();
-            // RunBaselineWithConservativeDomainExpansion();
-
-
             // Test
-            TestGoalCombinations();
+            // TestGoalCombinations();
 
             return 0;
         }
@@ -345,7 +346,7 @@ namespace Persona
 
                 // Create a variable for the solution plan.
                 Plan solution = null;
-
+                Plan filteredSolution = null;
 
                 // Iterate over all player knowledge model domain / problem files.  The system produced a pair of
                 // micro-theory based domain and problem files for every *player* action (including ones that
@@ -403,105 +404,24 @@ namespace Persona
 
                             logEntry.PlayerId = playerId;
                             logEntry.SystemConfiguration = config;
+                            logEntry.NumberOfObservationsInput = observations.Steps.Count;
                             logEntry.NumberOfGoals = problem.Goals.Count;
                             logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
                             logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
                             logEntry.NumberOfPlayerActionsTaken = i + 1;
-                            logEntry.ActualPlan = playerChronology;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // Iterate the player chronology of observations.
-                for (int i = 0; i < revisedChronology.Steps.Count; i++)
-                {
-                    // Get the current observation step's ID.
-                    int currentStepId = revisedChronology.Steps.ElementAt(i).ID;
-
-                    // Get the next observation step's ID; there may not be a next one, so check for bounds.
-                    int nextStepId = i + 1 < revisedChronology.Steps.Count ? revisedChronology.Steps.ElementAt(i + 1).ID : currentStepId;
-
-                    // The current and next observation steps are not guaranteed to be continuous (because of the RemoveUselessActions)
-                    // Further, the domain may have expanded in between the current and next steps. So, load all the domains / problems
-                    // between the current and next (exclusive) observation steps and attempt to solve with them.
-
-                    // Iterate the full chronology of observations between the observation steps.
-                    for (int j = currentStepId; j < nextStepId; j++)
-                    {
-                        // Get the domain and problem @ index j.
-                        Tuple<Domain, Problem> expanded = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, j);
-
-                        // If the player has not adopted any goals, skip.
-                        if (expanded.Item2.Goal.Count == 0)
-                            continue;
-
-                        // Otherwise, we can solve this.
-                        else
-                        {
-                            // Get the plan up until this observation.
-                            prefix = revisedChronology.Prefix(i) as Plan;
-
-                            // Construct the plan recognition theory with this prefix and the loaded domain and problem.
-                            PlanRecognitionProblem theory = new PlanRecognitionProblem(expanded.Item1, expanded.Item2, prefix);
-
-                            // Start the data entry.
-                            DataLogEntry logEntry = new DataLogEntry();
-                            logEntry.PlayerId = playerId;
-                            logEntry.SystemConfiguration = config;
-                            logEntry.NumberOfObservationsInput = prefix.Steps.Count;
-                            logEntry.NumberOfGoals = expanded.Item2.Goals.Count;
-                            logEntry.NumberOfOperatorsPreCompilation = expanded.Item1.Operators.Count;
-                            logEntry.NumberOfPredicatesPreCompilation = expanded.Item1.Predicates.Count;
-                            logEntry.NumberOfPlayerActionsTaken = i + 1;
                             logEntry.ActualPlan = revisedChronology;
 
-                            // Solve the plan recognition theory.
-                            theory.Solve(logEntry);
+                            // Solve the plan recognition theory in a conservative mode.
+                            // If the theory that is calling the method cannot be solved, then the input
+                            // parameters <solution, filteredSolution> will be used to calculate the logEntry metrics.
+                            // Basically, this encodes the idea that if a player cannot solve the plan recognition problem
+                            // given the information that they have acquired, the player will stick with the plan they 
+                            // previously were able to compute.
+                            Tuple<Plan,Plan> result = theory.SolveConservative(logEntry, solution, filteredSolution);
+
+                            // Re-assign the solution / filtered solution.
+                            solution = result.Item1;
+                            filteredSolution = result.Item2;
 
                             // Add the entry to the log.
                             writer.WriteLine(logEntry.ToCSVString());
