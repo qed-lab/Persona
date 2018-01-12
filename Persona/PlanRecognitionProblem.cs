@@ -48,8 +48,8 @@ namespace Persona
 
             // This means that no solution was found!
             if (this.solution.Steps.Count == 0 && 
-                solutionPlanIfFailure == null && 
-                filteredSolutionPlanIfFailure == null) 
+                (solutionPlanIfFailure == null || filteredSolutionPlanIfFailure == null)
+               )
             {
                 dataLogEntry.SetSentinelValuesForFailure();
             }
@@ -191,15 +191,22 @@ namespace Persona
         }
 
         /// <summary>
-        /// Solves the compiled plan.
+        /// Solves the compiled plan.  Returns true if the planning was successful, false otherwise.
         /// </summary>
-        public void SIWthenBFSPlan(DataLogEntry dataLogEntry)
+        public bool SIWthenBFSPlan(DataLogEntry dataLogEntry)
         {
             // Setup the planner's / planner argument paths.
 			string plannerPath = Parser.GetTopDirectory() + @"LAPKT-public/planners/siw_plus-then-bfs_f-ffparser/siw-then-bfsf";
             string domainPath = Directory.GetCurrentDirectory() + @"/pr-domain.pddl";
             string problemPath = Directory.GetCurrentDirectory() + @"/pr-problem.pddl";
             string outputPath = Directory.GetCurrentDirectory() + @"/recognized-plan-"+ dataLogEntry.NumberOfPlayerActionsTaken + @".pddl";
+
+            // Check to see if the plan recognition files exist.  If they don't, it means that compilation was not successful.
+            if(!File.Exists(domainPath) || !File.Exists(problemPath))
+            {
+                this.solution = new Plan();
+                return false;
+            }
 
 			// Create the planner process.
 			ProcessStartInfo startInfo = new ProcessStartInfo(plannerPath);
@@ -223,7 +230,8 @@ namespace Persona
             // Parse and store the solution.
             Domain compiledDomain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
             Problem compiledProblem = Parser.GetProblem(problemPath);
-            this.solution = Parser.GetPlan(outputPath, compiledDomain, compiledProblem);
+            Plan solutionPlan = Parser.GetPlan(outputPath, compiledDomain, compiledProblem);
+            this.solution = solutionPlan;
 
             // Store some additional metrics.
             dataLogEntry.NumberOfOperatorsPostCompilation = compiledDomain.Operators.Count;
@@ -237,6 +245,7 @@ namespace Persona
             System.IO.File.WriteAllText(outputPath, string.Empty);
             System.IO.File.WriteAllText(outputPath, Utilities.ToLiftedPlan(this.solution));
             this.solutionUsingOriginalDomainOperators = Parser.GetPlan(outputPath, domain, problem);
+            return true;
         }
     }
 }

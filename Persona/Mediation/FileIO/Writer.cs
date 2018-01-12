@@ -216,10 +216,13 @@ namespace Mediation.FileIO
         {
 			using (StreamWriter writer = new StreamWriter(file, false))
 			{
-                foreach (IPredicate l in literals)
-				{
-					writer.WriteLine(l);
-				}
+                if (literals != null)
+                {
+                    foreach (IPredicate l in literals)
+                    {
+                        writer.WriteLine(l);
+                    }
+                }
 
 				writer.Close();
 			}

@@ -22,9 +22,9 @@ namespace Persona
         {
             // Configurations
             // RunBaseline();
-            RunWindowed();
+            // RunWindowed();
             // RunCognitive(IndexterSalienceThreshold.STRICT);
-            // RunBaselineWithConservativeDomainExpansion();
+            RunBaselineWithConservativeDomainExpansion();
 
             // Utility
             // ReachabilityAnalysis.CompressRecallabilityDataFiles();
@@ -343,6 +343,8 @@ namespace Persona
 
                 // Get the initial domain and problem files.
                 Tuple<Domain, Problem> playerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, 0);
+                Domain playerModelDomain = playerModel.Item1;
+                Problem playerModelProblem = playerModel.Item2;
 
                 // Create a variable for the solution plan.
                 Plan solution = null;
@@ -360,6 +362,8 @@ namespace Persona
                 for (int i = 1; i < playerOnlyChronology.Steps.Count; i++)
                 {
                     Tuple<Domain, Problem> newPlayerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, i);
+                    Domain newPlayerModelDomain = newPlayerModel.Item1;
+                    Problem newPlayerModelProblem = newPlayerModel.Item2;
 
                     // Compare the player models for equality.
                     if (playerModel.Item1.Equals(newPlayerModel.Item1) && 
