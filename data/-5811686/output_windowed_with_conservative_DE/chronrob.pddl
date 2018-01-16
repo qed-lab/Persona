@@ -1,0 +1,7 @@
+(pickup arthur coin bank)
+(pickup arthur silver bank)
+(move-through-entrance arthur bank bankexit townsquare)
+(move-through-doorway arthur townsquare valley)
+(open arthur fortentrance valley)
+(move-through-entrance arthur valley fortentrance fort)
+(pickup arthur bucket fort)
