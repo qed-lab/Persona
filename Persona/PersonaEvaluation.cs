@@ -359,8 +359,11 @@ namespace Persona
                 // (1) find when the player has learned new information, and
                 // (2) take the player's chronology up until the information 
                 //     was learned and use it to perform plan recognition.
-                for (int i = 1; i < playerOnlyChronology.Steps.Count; i++)
+                for (int i = 1; i < playerOnlyChronology.Steps.Count - 1; i++) 
                 {
+                    // The -1 is needed because the last player action ends the game before the new domain and problem are produced.
+                    // Thus, we need to stop just one short of the last step.
+
                     Tuple<Domain, Problem> newPlayerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, i);
                     Domain newPlayerModelDomain = newPlayerModel.Item1;
                     Problem newPlayerModelProblem = newPlayerModel.Item2;

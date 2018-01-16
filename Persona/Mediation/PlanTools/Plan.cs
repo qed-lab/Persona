@@ -659,7 +659,7 @@ namespace Mediation.PlanTools
         public Object PlanUpToStepId(int stepId)
         {
             if (stepId < this.steps.ElementAt(0).ID || stepId > this.steps.ElementAt(this.Steps.Count - 1).ID)
-                throw new ArgumentException("stepId is not within the bounds of this plan's steps");
+                Console.WriteLine("WARNING: stepId is not within the bounds of this plan's steps");
 
             List<IOperator> newSteps = new List<IOperator>();
 

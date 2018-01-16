@@ -921,11 +921,20 @@ namespace Persona
 
                     else
                         pddl.Append("\t\t\t");
+
+                    // Just in case we've adopted a multi-part quest, 
+                    if (goalCombinations.Count == 1 && goal.Count > 1)
+                        pddl.Append("(and ");
                     
                     foreach(IPredicate literal in goal)
                     {
                         pddl.Append(literal + " ");
                     }
+
+                    // Just in case we've adopted a multi-part quest, 
+                    if (goalCombinations.Count == 1 && goal.Count > 1)
+                        pddl.Append(")");
+
                     pddl.Append("\n");
                 }
 
