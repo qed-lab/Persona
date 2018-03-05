@@ -1,0 +1,7 @@
+(move-through-entrance arthur docks barentrance bar)
+(open arthur basemententrance bar)
+(move-through-entrance arthur bar basemententrance basement)
+(move-through-doorway arthur basement storage)
+(move-through-entrance arthur bar barexit docks)
+(move-through-doorway arthur docks townarch)
+(move-through-door arthur townarch towngate townsquare)
