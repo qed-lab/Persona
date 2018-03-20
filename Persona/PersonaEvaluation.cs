@@ -482,6 +482,9 @@ namespace Persona
                 string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
+                if (playerId != -2032131568 )
+                    continue;
+
                 // Create an output folder.
                 string outputFolder = dataFolder + @"/output_" + config + @"/";
                 System.IO.Directory.CreateDirectory(outputFolder);

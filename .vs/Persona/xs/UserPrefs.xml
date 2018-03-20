@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{014DF401-99AA-43F8-B8F7-291A637CBC93}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Persona/Mediation/FileIO/Parser.cs">
+    <Files>
+      <File FileName="Persona/Mediation/Utilities/EnumerableExtension.cs" Line="1" Column="1" />
+      <File FileName="Persona/Utilities.cs" Line="1097" Column="1" />
+      <File FileName="Persona/PersonaEvaluation.cs" Line="485" Column="43" />
+      <File FileName="Persona/Mediation/PlanTools/Plan.cs" Line="663" Column="1" />
+      <File FileName="Persona/PlanRecognitionProblem.cs" Line="247" Column="1" />
+      <File FileName="Persona/Mediation/FileIO/Writer.cs" Line="59" Column="69" />
+      <File FileName="Persona/Mediation/FileIO/Parser.cs" Line="194" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Persona PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

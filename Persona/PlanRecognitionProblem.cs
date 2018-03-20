@@ -243,7 +243,9 @@ namespace Persona
                                   + @"-" + domain.Name + @"_domain.pddl";
 
             System.IO.File.WriteAllText(outputPath, string.Empty);
-            System.IO.File.WriteAllText(outputPath, Utilities.ToLiftedPlan(this.solution));
+
+            string liftedPlanText = Utilities.ToLiftedPlan(this.solution);
+            System.IO.File.WriteAllText(outputPath, liftedPlanText);
             this.solutionUsingOriginalDomainOperators = Parser.GetPlan(outputPath, domain, problem);
             return true;
         }
