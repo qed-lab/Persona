@@ -30,12 +30,12 @@ namespace Persona
 
             // RunBaselineWithConservativeDomainExpansion();
 
-            RunWindowedWithConservativeDomainExpansion();
+            // RunWindowedWithConservativeDomainExpansion();
 
             // TODO: 
             // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.AVERAGE);
 
-            // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.STRICT);
+            RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.STRICT);
 
 
 
@@ -617,7 +617,7 @@ namespace Persona
         private static void RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold level)
         {
             // Record the kind of the system that is running here.
-            string config = "cognitive_with_conservative_DE";
+            string config = "cognitive_with_conservative_DE_" + level.ToString();
 
             // Load the baseline domain and problem
             Tuple<Domain, Problem> baseline = Utilities.GetBaselineArthurDomainAndProblem();
@@ -632,6 +632,9 @@ namespace Persona
                 // Get the player's ID.
                 string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+                if (playerId != 594492560)
+                    continue;
 
                 // Create an output folder.
                 string outputFolder = dataFolder + @"/output_" + config + @"/";

@@ -205,6 +205,7 @@ namespace Persona
             if(!File.Exists(domainPath) || !File.Exists(problemPath))
             {
                 this.solution = new Plan();
+                // Console.WriteLine("Compilation was not successful.");
                 return false;
             }
 

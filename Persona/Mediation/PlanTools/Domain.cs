@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.IO;
 
 using Mediation.Interfaces;
 using Mediation.Enums;
@@ -13,7 +14,9 @@ using Persona;
 namespace Mediation.PlanTools
 {
     [Serializable]
+#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode(); fields in this class are mutable.
     public class Domain : IDomain, IEquatable<Domain>
+#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         public string staticStart;
 
@@ -219,6 +222,114 @@ namespace Mediation.PlanTools
 
             foreach (Operator op in operators)
                 sb.AppendLine(op.ToString());
+
+            return sb.ToString();
+        }
+
+        // Creates a domain PDDL file.
+        public string ToPDDLString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            using (StringWriter writer = new StringWriter(sb))
+            {
+                writer.WriteLine("(define");
+                writer.WriteLine("\t(domain " + this.Name + ")");
+                writer.WriteLine("\t(:requirements :adl :typing :universal-preconditions)");
+                writer.WriteLine("\t(:types ");
+                foreach (string objTypes in this.ObjectTypes)
+                {
+                    writer.Write("\t\t");
+                    foreach (string subtype in this.GetSubTypesOf(objTypes))
+                        writer.Write(subtype + " ");
+                    writer.WriteLine("- " + objTypes);
+                }
+                writer.WriteLine("\t)");
+                writer.WriteLine("\t(:constants )");
+                writer.WriteLine("\t(:predicates");
+                foreach (Predicate pred in this.Predicates)
+                {
+                    writer.Write("\t\t(" + pred.Name);
+                    foreach (Term term in pred.Terms)
+                    {
+                        writer.Write(" " + term.Variable);
+                        if (term.Type != "")
+                            writer.Write(" - " + term.Type);
+                    }
+                    writer.WriteLine(")");
+                }
+                writer.WriteLine("\t)");
+                //writer.WriteLine(domain.staticStart);
+
+                foreach (Operator action in this.Operators)
+                {
+                    writer.WriteLine(Environment.NewLine + "\t(:action " + action.Name);
+                    writer.Write("\t\t:parameters (");
+
+                    int index = 0;
+                    foreach (Term term in action.Terms)
+                    {
+                        writer.Write(term.Variable);
+                        if (!term.Type.Equals(""))
+                        {
+                            writer.Write(" - " + term.Type);
+                        }
+
+                        if (index != action.Terms.Count - 1)
+                        {
+                            writer.Write(" "); // add space between parameters as needed
+                        }
+
+                        index++;
+                    }
+
+                    writer.WriteLine(")");
+                    writer.WriteLine("\t\t:precondition");
+                    if (action.Preconditions.Count > 0)
+                        writer.WriteLine("\t\t\t(and");
+                    foreach (Predicate precon in action.Preconditions)
+                        writer.WriteLine("\t\t\t\t" + precon.ToString());
+                    if (action.Preconditions.Count > 0)
+                        writer.WriteLine("\t\t\t)");
+                    writer.WriteLine("\t\t:effect");
+                    if (action.Effects.Count + action.Conditionals.Count > 1)
+                        writer.WriteLine("\t\t\t(and");
+                    foreach (Predicate effect in action.Effects)
+                        writer.WriteLine("\t\t\t\t" + effect.ToString());
+                    foreach (Axiom cond in action.Conditionals)
+                    {
+                        if (cond.Arity > 0)
+                        {
+                            writer.Write("\t\t\t\t(forall (");
+                            foreach (ITerm term in cond.Terms)
+                                writer.Write(term + " ");
+                            writer.WriteLine(")");
+                        }
+                        writer.WriteLine("\t\t\t\t(when");
+                        if (cond.Preconditions.Count > 1)
+                            writer.WriteLine("\t\t\t\t(and");
+                        foreach (Predicate precon in cond.Preconditions)
+                            writer.WriteLine("\t\t\t\t\t" + precon.ToString());
+                        if (cond.Preconditions.Count > 1)
+                            writer.WriteLine("\t\t\t\t)");
+                        if (cond.Effects.Count > 1)
+                            writer.WriteLine("\t\t\t\t(and");
+                        foreach (Predicate effect in cond.Effects)
+                            writer.WriteLine("\t\t\t\t\t" + effect.ToString());
+                        if (cond.Effects.Count > 1)
+                            writer.WriteLine("\t\t\t\t)");
+                        writer.WriteLine("\t\t\t\t)");
+                        if (cond.Arity > 0)
+                            writer.WriteLine("\t\t\t\t)");
+                    }
+                    if (action.Effects.Count + action.Conditionals.Count > 1)
+                        writer.WriteLine("\t\t\t)");
+                    writer.WriteLine("\t)");
+                }
+
+                writer.WriteLine(")");
+                writer.Close();
+            }
 
             return sb.ToString();
         }

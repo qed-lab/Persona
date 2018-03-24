@@ -178,6 +178,9 @@ namespace Mediation.FileIO
 					// Set the predicate to the first element.
 					step.Name = words[1];
 
+                    if (step.Name.Contains("reach") || step.Name.Contains("REACH"))
+                        continue;
+
 					// Find the corresponding operator in the domain.
 					temp = (Operator) domain.Operators.Find(x => x.Name.Equals(step.Name, StringComparison.InvariantCultureIgnoreCase));
 

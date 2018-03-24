@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO;
+using System;
 
 using Mediation.PlanTools;
 using Mediation.FileIO;
@@ -38,8 +39,7 @@ namespace Mediation.Planners
 			using (Process proc = Process.Start(startInfo)) {
 				proc.WaitForExit();
 			}
-				
-			// Parse the results into a plan object.
+
             return Parser.GetPlan(outputPath, domain, problem);
 		}
 

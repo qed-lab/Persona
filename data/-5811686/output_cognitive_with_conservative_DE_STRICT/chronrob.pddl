@@ -1,0 +1,7 @@
+(open arthur forgeentrance townarch)
+(move-through-entrance arthur forge forgeexit townarch)
+(move-through-door arthur townarch towngate townsquare)
+(move-through-doorway arthur townsquare valley)
+(open arthur fortentrance valley)
+(move-through-entrance arthur valley fortentrance fort)
+(move-through-entrance arthur fort fortexit valley)

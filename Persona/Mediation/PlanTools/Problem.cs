@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 
 using Mediation.Interfaces;
+using System.IO;
 
 namespace Mediation.PlanTools
 {
@@ -251,6 +252,74 @@ namespace Mediation.PlanTools
             sb.AppendLine("Goal State of Problem " + name);
             foreach (IPredicate pred in goal)
                 sb.AppendLine(pred.ToString());
+
+            return sb.ToString();
+        }
+
+        // Given a state, creates a problem PDDL file.
+        public string ToPDDLString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            using (StringWriter writer = new StringWriter(sb))
+            {
+                writer.WriteLine("(define (problem rob)");
+                writer.WriteLine("(:domain " + this.domain + ")");
+                writer.Write("\t(:objects \n");
+                if (!this.Objects[0].SubType.Equals(""))
+                    foreach (string type in this.TypeList.Keys)
+                    {
+                        writer.Write("\t\t");
+                        List<IObject> objs = this.TypeList[type] as List<IObject>;
+                        for (int i = 0; i < objs.Count; i++)
+                        {
+                            writer.Write(" " + objs[i].Name);
+                            if (i == objs.Count - 1)
+                                writer.WriteLine(" - " + type);
+                        }
+                    }
+                else
+                {
+                    writer.Write("\t\t");
+                    foreach (IObject obj in this.Objects)
+                        writer.Write(" " + obj.Name);
+                }
+
+                writer.WriteLine("\t)");
+                writer.Write("\t(:init\n");
+                this.initial.Sort();
+                foreach (IPredicate pred in this.initial)
+                    writer.WriteLine("\t\t" + pred);
+                foreach (IIntention intent in this.Intentions)
+                    writer.WriteLine("\t\t(intends " + intent.Character + " " + intent.Predicate + ")");
+                writer.WriteLine("\t)");
+
+                // Goal Writing
+
+                // If we have disjunctive goals,
+                if (this.Goals.Count > 0)
+                {
+                    writer.WriteLine(Persona.Utilities.GoalCombinationsToPDDL(this.GoalCombinations));
+                    writer.WriteLine(")");
+                }
+
+                // If we only have conjunctive goals,
+                else
+                {
+                    if (this.Goal.Count > 1)
+                        writer.Write("\t(:goal\n\t  (AND\n");
+                    else
+                        writer.Write("\t(:goal\n");
+                    foreach (IPredicate pred in this.Goal)
+                        writer.WriteLine("\t\t" + pred);
+                    if (this.Goal.Count > 1)
+                        writer.Write("\t)\n\t)\n)");
+                    else
+                        writer.Write("\t)\n)\n");
+                }
+
+                writer.Close();
+            }
 
             return sb.ToString();
         }
