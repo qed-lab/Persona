@@ -633,7 +633,7 @@ namespace Persona
                 string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-                if (playerId != 594492560)
+                if (playerId != 1653940181)
                     continue;
 
                 // Create an output folder.
