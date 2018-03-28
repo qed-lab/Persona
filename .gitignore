@@ -134,3 +134,7 @@ Persona/obj
 *.stats
 *.list
 
+# Movies
+.mp4
+
+
