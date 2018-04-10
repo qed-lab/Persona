@@ -1,7 +1,10 @@
 ﻿<Properties StartupConfiguration="{014DF401-99AA-43F8-B8F7-291A637CBC93}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Persona/PersonaEvaluation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Persona/Utilities.cs">
     <Files>
-      <File FileName="Persona/PersonaEvaluation.cs" Line="636" Column="42" />
+      <File FileName="Persona/PersonaEvaluation.cs" Line="1" Column="1" />
+      <File FileName="Persona/DataLogEntry.cs" Line="1" Column="1" />
+      <File FileName="Persona/Utilities.cs" Line="82" Column="68" />
+      <File FileName="Persona/Mediation/PlanTools/Operator.cs" Line="19" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

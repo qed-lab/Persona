@@ -39,4 +39,4 @@ PlayerId, SystemConfiguration, NumberOfGoals, NumberOfOperatorsPreCompilation, N
 565023544, cognitive_with_conservative_DE_STRICT, 4, 11, 12, 305, 327, 31, 65, 148.864, 0.392857142857143, 0.0743243243243243, 0.125, 559, -1, 0, 0, 15, 104.776
 565023544, cognitive_with_conservative_DE_STRICT, 4, 11, 12, 305, 327, 32, 66, 143.852, 0.392857142857143, 0.0743243243243243, 0.125, 559, -1, 0, 0, 15, 109.543
 565023544, cognitive_with_conservative_DE_STRICT, 4, 11, 12, 305, 327, 33, 67, 153.215, 0.392857142857143, 0.0743243243243243, 0.125, 559, -1, 0, 0, 15, 106.891
-565023544, cognitive_with_conservative_DE_STRICT, 4, 11, 12, 305, 327, 33, 68, 156.347, 0.392857142857143, 0.074324
+565023544, cognitive_with_conservative_DE_STRICT, 4, 11, 12, 305, 327, 33, 68, 156.347, 0.392857142857143, 0.074324, -1, -1, -1, -1, -1, -1, -1
