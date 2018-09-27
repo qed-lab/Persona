@@ -22,9 +22,11 @@ namespace Persona
         {
             // Configurations
 
-            // RunBaseline();
+            RunBaseline(-1567780657);
 
             // RunWindowed();
+
+            // RunCognitive(IndexterSalienceThreshold.AVERAGE);
 
             // RunCognitive(IndexterSalienceThreshold.STRICT);
 
@@ -32,12 +34,9 @@ namespace Persona
 
             // RunWindowedWithConservativeDomainExpansion();
 
-            // TODO: 
             // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.AVERAGE);
 
-            RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.STRICT);
-
-
+            // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.STRICT);
 
             // Utility
             // ReachabilityAnalysis.CompressRecallabilityDataFiles();
@@ -50,11 +49,12 @@ namespace Persona
             return 0;
         }
 
+        #region Full Domain
 
         /// <summary>
         /// Runs the baseline version of the plan recognition pipeline.
         /// </summary>
-        private static void RunBaseline()
+        private static void RunBaseline(int targetPlayerId)
         {
             // Record the kind of the system that is running here.
             string config = "baseline";
@@ -75,10 +75,10 @@ namespace Persona
             foreach (string dataFolder in dataFolders)
             {
                 // Get the player's ID.
-                string[] dataPathString = dataFolder.Split(new char[]{'/'});
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-                if (playerId != 632254273)
+                if (playerId != targetPlayerId)
                     continue;
 
                 // Create an output folder.
@@ -102,7 +102,7 @@ namespace Persona
 
                 // Iterate the player chronology of observations.
                 for (int obsId = 1;
-                     obsId < playerChronology.Steps.Count; 
+                     obsId < playerChronology.Steps.Count;
                      obsId++)
                 {
                     // Start the data entry.
@@ -141,7 +141,7 @@ namespace Persona
         /// <summary>
         /// Runs the windowed version of the plan recognition pipeline.
         /// </summary>
-        private static void RunWindowed()
+        private static void RunWindowed(int targetPlayerId)
         {
             // Record the kind of the system that is running here.
             string config = "windowed";
@@ -164,6 +164,9 @@ namespace Persona
                 // Get the player's ID.
                 string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+                if (playerId != targetPlayerId)
+                    continue;
 
                 // Create an output folder.
                 string outputFolder = dataFolder + @"/output_" + config + @"/";
@@ -226,125 +229,136 @@ namespace Persona
         /// <summary>
         /// Runs the cognitive version of the architecure.
         /// </summary>
-        private static void RunCognitive(IndexterSalienceThreshold level)
+        private static void RunCognitive(int targetPlayerId, IndexterSalienceThreshold level)
         {
-			// Record the kind of the system that is running here.
-			string config = "cognitive";
+            // Record the kind of the system that is running here.
+            string config = "cognitive";
 
-			// Load the baseline domain
-			string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
-			Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+            // Load the baseline domain
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
 
-			// Load the baseline problem
-			string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
-			Problem problem = Parser.GetProblem(problemPath);
+            // Load the baseline problem
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+            Problem problem = Parser.GetProblem(problemPath);
 
-			// Load each folder.
-			string dataPath = Parser.GetTopDirectory() + @"data/";
-			string[] dataFolders = Directory.GetDirectories(dataPath);
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
 
-			// For each player
-			foreach (string dataFolder in dataFolders)
-			{
-				// Get the player's ID.
-				string[] dataPathString = dataFolder.Split(new char[] { '/' });
-				int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Get the player's ID.
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-				// Create an output folder.
-				string outputFolder = dataFolder + @"/output_" + config + @"/";
-				System.IO.Directory.CreateDirectory(outputFolder);
+                if (playerId != targetPlayerId)
+                    continue;
 
-				// Store and change the current working directory.
-				string oldWD = Directory.GetCurrentDirectory();
-				System.IO.Directory.SetCurrentDirectory(outputFolder);
+                // Create an output folder.
+                string outputFolder = dataFolder + @"/output_" + config + @"/";
+                System.IO.Directory.CreateDirectory(outputFolder);
 
-				// Load the player's chronology
-				string observationsPath = dataFolder + @"/chronology.pddl";
-				Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
-				Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                System.IO.Directory.SetCurrentDirectory(outputFolder);
 
-				// Create the data log.
-				string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
-				StreamWriter writer = new StreamWriter(logPath, false);
-				writer.WriteLine(DataLogEntry.CSVheader());
+                // Load the player's chronology
+                string observationsPath = dataFolder + @"/chronology.pddl";
+                Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
+                Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
 
-				// Iterate the player chronology of observations.
-				for (int obsId = 1;
-					 obsId < playerChronology.Steps.Count;
-					 obsId++)
-				{
-					// Start the data entry.
-					DataLogEntry logEntry = new DataLogEntry();
-					logEntry.PlayerId = playerId;
-					logEntry.SystemConfiguration = config;
-					logEntry.NumberOfGoals = problem.Goals.Count;
-					logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
-					logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
-					logEntry.NumberOfPlayerActionsTaken = obsId;
-					logEntry.ActualPlan = playerChronology;
+                // Create the data log.
+                string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
+                StreamWriter writer = new StreamWriter(logPath, false);
+                writer.WriteLine(DataLogEntry.CSVheader());
 
-					// Get the first n actions of the player chronology, where n = obsId.
-					Plan prefix = playerChronology.Prefix(obsId) as Plan;
+                // Iterate the player chronology of observations.
+                for (int obsId = 1;
+                     obsId < playerChronology.Steps.Count;
+                     obsId++)
+                {
+                    // Start the data entry.
+                    DataLogEntry logEntry = new DataLogEntry();
+                    logEntry.PlayerId = playerId;
+                    logEntry.SystemConfiguration = config;
+                    logEntry.NumberOfGoals = problem.Goals.Count;
+                    logEntry.NumberOfOperatorsPreCompilation = domain.Operators.Count;
+                    logEntry.NumberOfPredicatesPreCompilation = domain.Predicates.Count;
+                    logEntry.NumberOfPlayerActionsTaken = obsId;
+                    logEntry.ActualPlan = playerChronology;
+
+                    // Get the first n actions of the player chronology, where n = obsId.
+                    Plan prefix = playerChronology.Prefix(obsId) as Plan;
 
                     // Compile a list of the salient steps.
                     List<IOperator> salientSteps;
 
-                    if(level == IndexterSalienceThreshold.STRICT)
+                    if (level == IndexterSalienceThreshold.STRICT)
                         salientSteps = ObservationFilter.Indexter(prefix, domain, problem, 0.25, logEntry);
 
-                    else 
+                    else
                         salientSteps = ObservationFilter.Indexter(prefix, domain, problem, 0.50, logEntry);
 
-					Plan window = new Plan(domain, problem, salientSteps);
-					logEntry.NumberOfObservationsInput = window.Steps.Count;
+                    Plan window = new Plan(domain, problem, salientSteps);
+                    logEntry.NumberOfObservationsInput = window.Steps.Count;
 
-					// Assemble a plan recognition theory to solve.
-					PlanRecognitionProblem theory = new PlanRecognitionProblem(domain, problem, window);
+                    // Assemble a plan recognition theory to solve.
+                    PlanRecognitionProblem theory = new PlanRecognitionProblem(domain, problem, window);
 
-					// Solve the theory.
-					theory.Solve(logEntry);
+                    // Solve the theory.
+                    theory.Solve(logEntry);
 
-					// Add the entry to the log.
-					writer.WriteLine(logEntry.ToCSVString());
-				}
+                    // Add the entry to the log.
+                    writer.WriteLine(logEntry.ToCSVString());
+                }
 
-				// Close the log.
-				writer.Close();
+                // Close the log.
+                writer.Close();
 
-				// Restore the old working directory.
-				Directory.SetCurrentDirectory(oldWD);
-			}
+                // Restore the old working directory.
+                Directory.SetCurrentDirectory(oldWD);
+            }
         }
+
+
+        #endregion
+
+        #region Conservative Domain Expansion
 
         /// <summary>
         /// Runs the baseline version of the pipeline with domain expansion.
         /// </summary>
-        private static void RunBaselineWithConservativeDomainExpansion()
+        private static void RunBaselineWithConservativeDomainExpansion(int targetPlayerId)
         {
-			// Record the kind of the system that is running here.
+            // Record the kind of the system that is running here.
             string config = "baseline_with_conservative_DE";
 
             // Load the baseline domain and problem
             Tuple<Domain, Problem> baseline = Utilities.GetBaselineArthurDomainAndProblem();
 
-			// Load each folder.
-			string dataPath = Parser.GetTopDirectory() + @"data/";
-			string[] dataFolders = Directory.GetDirectories(dataPath);
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
 
-			// For each player
-			foreach (string dataFolder in dataFolders)
-			{
-				// Get the player's ID.
-				string[] dataPathString = dataFolder.Split(new char[] { '/' });
-				int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Get the player's ID.
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-				// Create an output folder.
-				string outputFolder = dataFolder + @"/output_" + config + @"/";
-				System.IO.Directory.CreateDirectory(outputFolder);
+                if (playerId != targetPlayerId)
+                    continue;
 
-				// Store and change the current working directory.
-				string oldWD = Directory.GetCurrentDirectory();
-				System.IO.Directory.SetCurrentDirectory(outputFolder);
+                // Create an output folder.
+                string outputFolder = dataFolder + @"/output_" + config + @"/";
+                System.IO.Directory.CreateDirectory(outputFolder);
+
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                System.IO.Directory.SetCurrentDirectory(outputFolder);
 
                 // Load the player's chronology
                 string observationsPath = dataFolder + @"/chronology.pddl";
@@ -352,10 +366,10 @@ namespace Persona
                 Plan revisedChronology = Utilities.RemoveUselessActions(fullChronology);
                 Plan playerOnlyChronology = Utilities.RemoveNonPlayerActions(fullChronology);
 
-				// Create the data log.
-				string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
-				StreamWriter writer = new StreamWriter(logPath, false);
-				writer.WriteLine(DataLogEntry.CSVheader());
+                // Create the data log.
+                string logPath = Directory.GetCurrentDirectory() + @"/data.csv";
+                StreamWriter writer = new StreamWriter(logPath, false);
+                writer.WriteLine(DataLogEntry.CSVheader());
 
                 // Get the initial domain and problem files.
                 Tuple<Domain, Problem> playerModel = Utilities.GetIndexedArthurDomainAndProblem(dataFolder, 0);
@@ -375,7 +389,7 @@ namespace Persona
                 // (1) find when the player has learned new information, and
                 // (2) take the player's chronology up until the information 
                 //     was learned and use it to perform plan recognition.
-                for (int i = 1; i < playerOnlyChronology.Steps.Count - 1; i++) 
+                for (int i = 1; i < playerOnlyChronology.Steps.Count - 1; i++)
                 {
                     // The -1 is needed because the last player action ends the game before the new domain and problem are produced.
                     // Thus, we need to stop just one short of the last step.
@@ -385,7 +399,7 @@ namespace Persona
                     Problem newPlayerModelProblem = newPlayerModel.Item2;
 
                     // Compare the player models for equality.
-                    if (playerModel.Item1.Equals(newPlayerModel.Item1) && 
+                    if (playerModel.Item1.Equals(newPlayerModel.Item1) &&
                         playerModel.Item2.Equals(newPlayerModel.Item2))
                     {
                         // If they're equal, that means that no new information 
@@ -440,7 +454,7 @@ namespace Persona
                             // Basically, this encodes the idea that if a player cannot solve the plan recognition problem
                             // given the information that they have acquired, the player will stick with the plan they 
                             // previously were able to compute.
-                            Tuple<Plan,Plan> result = theory.SolveConservative(logEntry, solution, filteredSolution);
+                            Tuple<Plan, Plan> result = theory.SolveConservative(logEntry, solution, filteredSolution);
 
                             // Re-assign the solution / filtered solution.
                             solution = result.Item1;
@@ -457,13 +471,13 @@ namespace Persona
 
                 // Restore the old working directory.
                 Directory.SetCurrentDirectory(oldWD);
-			}
+            }
         }
 
         /// <summary>
         /// Runs the baseline version of the pipeline with domain expansion.
         /// </summary>
-        private static void RunWindowedWithConservativeDomainExpansion()
+        private static void RunWindowedWithConservativeDomainExpansion(int targetPlayerId)
         {
             // Record the kind of the system that is running here.
             string config = "windowed_with_conservative_DE";
@@ -482,7 +496,7 @@ namespace Persona
                 string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-                if (playerId != -2032131568 )
+                if (playerId != targetPlayerId)
                     continue;
 
                 // Create an output folder.
@@ -614,7 +628,7 @@ namespace Persona
         /// <summary>
         /// Runs the baseline version of the pipeline with domain expansion.
         /// </summary>
-        private static void RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold level)
+        private static void RunCognitiveWithConservativeDomainExpansion(int targetPlayerId, IndexterSalienceThreshold level)
         {
             // Record the kind of the system that is running here.
             string config = "cognitive_with_conservative_DE_" + level.ToString();
@@ -633,7 +647,7 @@ namespace Persona
                 string[] dataPathString = dataFolder.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-                if (playerId != 1653940181)
+                if (playerId != targetPlayerId)
                     continue;
 
                 // Create an output folder.
@@ -770,98 +784,100 @@ namespace Persona
             }
         }
 
+        #endregion
 
+        #region Auxiliary Tests
 
+        /// <summary>
+        /// Runs the windowed version of the plan recognition pipeline.
+        /// </summary>
+        private static void SalienceThresholdTest()
+        {
+            // Record the kind of the system that is running here.
+            string config = "salience-test";
 
-		/// <summary>
-		/// Runs the windowed version of the plan recognition pipeline.
-		/// </summary>
-		private static void SalienceThresholdTest()
-		{
-			// Record the kind of the system that is running here.
-			string config = "salience-test";
+            // Load the baseline domain
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
 
-			// Load the baseline domain
-			string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
-			Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
-
-			// Load the baseline problem
-			string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
-			Problem problem = Parser.GetProblem(problemPath);
+            // Load the baseline problem
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+            Problem problem = Parser.GetProblem(problemPath);
 
             // Create a dictionary to hold values.
             Dictionary<int, List<double>> stepsToRecallabilityScoresAcrossPlayers =
                 new Dictionary<int, List<double>>();
 
-			// Load each folder.
-			string dataPath = Parser.GetTopDirectory() + @"data/";
-			string[] dataFolders = Directory.GetDirectories(dataPath);
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
 
-			// For each player
-			foreach (string dataFolder in dataFolders)
-			{
-				// Get the player's ID.
-				string[] dataPathString = dataFolder.Split(new char[] { '/' });
-				int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Get the player's ID.
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
 
-				// Create an output folder.
+                // Create an output folder.
                 string outputFolder = Parser.GetTopDirectory() + @"Persona/benchmarks/output_" + config + @"/";
-				System.IO.Directory.CreateDirectory(outputFolder);
+                System.IO.Directory.CreateDirectory(outputFolder);
 
-				// Store and change the current working directory.
-				string oldWD = Directory.GetCurrentDirectory();
-				System.IO.Directory.SetCurrentDirectory(outputFolder);
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                System.IO.Directory.SetCurrentDirectory(outputFolder);
 
-				// Load the player's chronology
-				string observationsPath = dataFolder + @"/chronology.pddl";
-				Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
-				Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
+                // Load the player's chronology
+                string observationsPath = dataFolder + @"/chronology.pddl";
+                Plan fullChronology = Parser.GetPlan(observationsPath, domain, problem);
+                Plan playerChronology = Utilities.RemoveUselessActions(fullChronology);
 
-				// Create the data log.
-				for (int i = 3; i < playerChronology.Steps.Count; i++)
+                // Create the data log.
+                for (int i = 3; i < playerChronology.Steps.Count; i++)
                 {
                     // Create a data file for each length prefix.
-					Plan prefix = playerChronology.Prefix(i) as Plan;
+                    Plan prefix = playerChronology.Prefix(i) as Plan;
 
-					// Get the last step of the chronology.
-					// Get the last step of the chronology. It acts as a cue to memory.
-					IOperator last = prefix.Steps.Last();
+                    // Get the last step of the chronology.
+                    // Get the last step of the chronology. It acts as a cue to memory.
+                    IOperator last = prefix.Steps.Last();
 
-					// For every other step of the chronology,
-					for (int index = 0; index < prefix.Steps.Count - 1; index++)
-					{
-						IOperator step = playerChronology.Steps.ElementAt(index);
-						double recallability = ObservationFilter.Recallability(step, last, prefix);
+                    // For every other step of the chronology,
+                    for (int index = 0; index < prefix.Steps.Count - 1; index++)
+                    {
+                        IOperator step = playerChronology.Steps.ElementAt(index);
+                        double recallability = ObservationFilter.Recallability(step, last, prefix);
 
-                        if (!stepsToRecallabilityScoresAcrossPlayers.ContainsKey(i)) {
+                        if (!stepsToRecallabilityScoresAcrossPlayers.ContainsKey(i))
+                        {
                             stepsToRecallabilityScoresAcrossPlayers[i] = new List<double>();
                         }
 
-						List<double> recallabilityScores = stepsToRecallabilityScoresAcrossPlayers[i];
-						recallabilityScores.Add(recallability);
-					}
+                        List<double> recallabilityScores = stepsToRecallabilityScoresAcrossPlayers[i];
+                        recallabilityScores.Add(recallability);
+                    }
                 }
 
-				// Restore the old working directory.
-				Directory.SetCurrentDirectory(oldWD);
-			}
+                // Restore the old working directory.
+                Directory.SetCurrentDirectory(oldWD);
+            }
 
             // Print out the recallability scores in different files.
-            foreach(KeyValuePair<int, List<double>> entry in stepsToRecallabilityScoresAcrossPlayers)
+            foreach (KeyValuePair<int, List<double>> entry in stepsToRecallabilityScoresAcrossPlayers)
             {
                 string logPath = Directory.GetCurrentDirectory() + @"/recallability-data-" + entry.Key + "-steps.csv";
-				StreamWriter writer = new StreamWriter(logPath, false);
+                StreamWriter writer = new StreamWriter(logPath, false);
 
                 List<double> recallabilityScores = stepsToRecallabilityScoresAcrossPlayers[entry.Key];
 
                 writer.WriteLine(entry.Key);
-				foreach (double recallability in recallabilityScores)
-				{
-					writer.WriteLine(recallability);
-				}
-				writer.Close();
+                foreach (double recallability in recallabilityScores)
+                {
+                    writer.WriteLine(recallability);
+                }
+                writer.Close();
             }
-		}
+        }
 
         private static void TestPlanFail()
         {
@@ -901,6 +917,8 @@ namespace Persona
             Console.WriteLine(Utilities.GoalCombinationsToPDDL(goalCombinations));
 
         }
+
+        #endregion
 
     }
 }
