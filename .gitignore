@@ -138,3 +138,8 @@ Persona/obj
 *.mp4
 
 
+.vs/Persona/xs/sqlite3/db.lock
+.vs/Persona/xs/sqlite3/storage.ide
+.vs/Persona/xs/sqlite3/storage.ide-shm
+.vs/Persona/xs/sqlite3/storage.ide-wal
+UserPrefs.xml
