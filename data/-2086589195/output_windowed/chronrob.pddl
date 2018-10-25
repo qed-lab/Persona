@@ -1,0 +1,7 @@
+(move-through-doorway arthur docks townarch)
+(move-through-doorway arthur townarch townsquare)
+(move-through-entrance arthur townsquare shopentrance shop)
+(give arthur hairtonic giovanna shop)
+(move-through-entrance arthur shop shopexit townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)
