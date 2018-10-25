@@ -1,0 +1,151 @@
+(look-at arthur mel storage), success
+(talk-to arthur mel storage), proximity error
+(talk-to arthur mel storage), success
+(pickup arthur basementbucket storage), success
+(talk-to arthur mel storage), success
+(drop arthur basementbucket storage), success
+(pickup arthur basementbucket storage), proximity error
+(pickup arthur basementbucket storage), proximity error
+(pickup arthur basementbucket storage), proximity error
+(pickup arthur basementbucket storage), success
+(give arthur basementbucket mel storage), success
+(give mel basementexitkey arthur storage), success
+(move-through-doorway arthur storage basement), success
+(look-at arthur basementexit basement), success
+(unlock-entrance arthur basementexitkey basementexit basement), success
+(look-at arthur basementexit basement), success
+(open arthur basementexit basement), success
+(move-through-entrance arthur basement basementexit bar), success
+(close arthur basemententrance bar), proximity error
+(close arthur basemententrance bar), success
+(pickup arthur shinykey bar), proximity error
+(pickup arthur shinykey bar), success
+(look-at arthur oscar bar), success
+(talk-to arthur oscar bar), success
+(talk-to arthur oscar bar), success
+(open arthur barexit bar), success
+(move-through-entrance arthur bar barexit docks), success
+(pickup arthur mushroom docks), success
+(move-through-doorway arthur docks townarch), success
+(talk-to arthur karina townarch), success
+(talk-to arthur dorian townarch), success
+(give dorian loveletter arthur townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(move-through-doorway arthur townarch docks), success
+(move-through-doorway arthur docks junkyard), success
+(talk-to arthur alli junkyard), proximity error
+(talk-to arthur alli junkyard), success
+(pickup arthur mirror junkyard), proximity error
+(pickup arthur mirror junkyard), success
+(move-through-doorway arthur junkyard docks), success
+(move-through-doorway arthur docks townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(move-through-doorway arthur townsquare valley), success
+(talk-to arthur james valley), success
+(move-through-doorway arthur valley townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(pickup arthur bouquet cliff), success
+(open arthur mansionentrance cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(talk-to arthur avery mansion), success
+(talk-to arthur jordan mansion), success
+(talk-to arthur roger mansion), success
+(pickup arthur candle mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(look-at arthur loveletter cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(open arthur bankentrance townsquare), failure
+(talk-to arthur dave townsquare), success
+(talk-to arthur frank townsquare), success
+(give arthur shinykey frank townsquare), failure
+(open arthur shopentrance townsquare), success
+(move-through-entrance arthur townsquare shopentrance shop), success
+(talk-to arthur giovanna shop), success
+(move-through-entrance arthur shop shopexit townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(move-through-entrance arthur townarch forgeentrance forge), failure
+(open arthur forgeentrance townarch), success
+(move-through-entrance arthur townarch forgeentrance forge), success
+(talk-to arthur peter forge), success
+(look-at arthur matthias forge), success
+(talk-to arthur matthias forge), success
+(look-at arthur peter forge), success
+(move-through-entrance arthur forge forgeexit townarch), success
+(look-at arthur dorian townarch), success
+(talk-to arthur dorian townarch), success
+(open arthur hutentrance townarch), success
+(move-through-entrance arthur townarch hutentrance hut), success
+(talk-to arthur michael hut), success
+(pickup arthur hairtonic hut), success
+(drop arthur mushroom hut), success
+(pickup arthur tastycupcake hut), proximity error
+(pickup arthur tastycupcake hut), success
+(move-through-entrance arthur hut hutexit townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(unlock-entrance arthur shinykey bankentrance townsquare), success
+(open arthur bankentrance townsquare), success
+(move-through-entrance arthur townsquare bankentrance bank), success
+(pickup arthur coin bank), success
+(move-through-entrance arthur bank bankexit townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(look-at arthur avery mansion), success
+(look-at arthur jordan mansion), success
+(look-at arthur roger mansion), success
+(look-at arthur avery mansion), success
+(talk-to arthur avery mansion), success
+(look-at arthur jordan mansion), success
+(talk-to arthur roger mansion), success
+(give arthur loveletter avery mansion), failure
+(look-at arthur jordan mansion), success
+(give arthur loveletter roger mansion), failure
+(give arthur loveletter jordan mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(move-through-doorway arthur cliff townsquare), proximity error
+(look-at arthur doorway toward townsquare cliff), success
+(move-through-doorway arthur cliff townsquare), proximity error
+(move-through-doorway arthur cliff townsquare), proximity error
+(move-through-doorway arthur cliff townsquare), proximity error
+(move-through-doorway arthur cliff townsquare), success
+(talk-to arthur dave townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(talk-to arthur dorian townarch), success
+(give arthur bouquet dorian townarch), success
+(give dorian lovecontract arthur townarch), success
+(move-through-entrance arthur townarch forgeentrance forge), success
+(talk-to arthur peter forge), proximity error
+(talk-to arthur peter forge), success
+(move-through-entrance arthur forge forgeexit townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(drop arthur hairtonic cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(give arthur lovecontract jordan mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(pickup arthur hairtonic cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(move-through-doorway arthur townsquare valley), success
+(give arthur coin james valley), success
+(move-through-doorway arthur valley townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(pickup arthur humanskull cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(move-through-doorway arthur townsquare valley), success
+(give arthur humanskull james valley), success
+(give arthur candle james valley), success
+(open arthur fortentrance valley), success
+(move-through-entrance arthur valley fortentrance fort), success
+(talk-to arthur ian fort), success
+(talk-to arthur phillip fort), success
+(talk-to arthur camille fort), success
+(move-through-entrance arthur fort fortexit valley), success
+(move-through-doorway arthur valley townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(move-through-doorway arthur townarch docks), success
+(move-through-doorway arthur docks junkyard), success
+(give arthur tastycupcake alli junkyard), success
+(give alli ash arthur junkyard), success
+(move-through-doorway arthur junkyard docks), success
+(move-through-entrance arthur docks barentrance bar), success
+(talk-to arthur mel bar), success

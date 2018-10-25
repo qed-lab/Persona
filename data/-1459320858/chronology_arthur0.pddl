@@ -1,0 +1,1 @@
+(pickup arthur basementbucket storage)

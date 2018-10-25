@@ -1,0 +1,7 @@
+(pickup arthur basementbucket storage)
+(talk-to arthur mel storage)
+(drop arthur basementbucket storage)
+(donothing arthur)
+(pickup arthur basementbucket storage)
+(talk-to arthur mel storage)
+(give arthur basementbucket mel storage)
