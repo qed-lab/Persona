@@ -102,9 +102,10 @@
 	(:goal
 		
 		(and
-			(has jordan loveletter) (has jordan lovecontract) 
-			(has james coin) (has james humanskull) 
+			(and (has jordan loveletter) (has jordan lovecontract) )
+			(and (has james coin) (has james humanskull) )
 		)
 
 	)
 
+)

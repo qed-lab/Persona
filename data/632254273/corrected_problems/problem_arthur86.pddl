@@ -116,8 +116,9 @@
 		
 		(and
 			(has giovanna hairtonic) 
-			(has jordan loveletter) (has jordan lovecontract) 
+			(and (has jordan loveletter) (has jordan lovecontract) )
 		)
 
 	)
 
+)

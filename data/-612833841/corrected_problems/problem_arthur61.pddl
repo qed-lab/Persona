@@ -121,10 +121,11 @@
 	(:goal
 		
 		(and
-			(has ian knightsword) (has ian knightshield) 
+			(and (has ian knightsword) (has ian knightshield) )
 			(has giovanna hairtonic) 
-			(has james coin) (has james humanskull) 
+			(and (has james coin) (has james humanskull) )
 		)
 
 	)
 
+)

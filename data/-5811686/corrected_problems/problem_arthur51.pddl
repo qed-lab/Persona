@@ -116,10 +116,11 @@
 	(:goal
 		
 		(and
-			(has ian knightsword) (has ian knightshield) 
+			(and (has ian knightsword) (has ian knightshield) )
 			(has alli tastycupcake) 
 			(has jordan loveletter) 
 		)
 
 	)
 
+)

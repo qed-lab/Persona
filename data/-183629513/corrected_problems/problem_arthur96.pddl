@@ -133,8 +133,9 @@
 		(and
 			(has giovanna hairtonic) 
 			(has jordan loveletter) 
-			(has james coin) (has james humanskull) (has james candle) 
+			(and (has james coin) (has james humanskull) (has james candle) )
 		)
 
 	)
 
+)

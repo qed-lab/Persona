@@ -103,10 +103,11 @@
 	(:goal
 		
 		(and
-			(has ian knightsword) (has ian knightshield) 
-			(has jordan loveletter) (has jordan lovecontract) 
+			(and (has ian knightsword) (has ian knightshield) )
+			(and (has jordan loveletter) (has jordan lovecontract) )
 			(has james coin) 
 		)
 
 	)
 
+)

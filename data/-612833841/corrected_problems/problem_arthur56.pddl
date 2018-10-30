@@ -115,8 +115,9 @@
 		
 		(and
 			(has giovanna hairtonic) 
-			(has james coin) (has james humanskull) 
+			(and (has james coin) (has james humanskull) )
 		)
 
 	)
 
+)

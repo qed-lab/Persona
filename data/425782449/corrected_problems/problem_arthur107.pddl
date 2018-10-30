@@ -112,8 +112,9 @@
 		(and
 			(has giovanna hairtonic) 
 			(has alli tastycupcake) 
-			(has jordan loveletter) (has jordan lovecontract) 
+			(and (has jordan loveletter) (has jordan lovecontract) )
 		)
 
 	)
 
+)
