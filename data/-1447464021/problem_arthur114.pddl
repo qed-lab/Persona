@@ -73,7 +73,7 @@
 		(doorway storage basement)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has james coin)
 		(has dorian lovecontract)

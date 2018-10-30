@@ -66,7 +66,7 @@
 		(doorway townsquare townarch)
 		(doorway docks junkyard)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has james coin)
 		(has jordan lovecontract)

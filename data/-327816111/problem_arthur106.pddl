@@ -66,7 +66,7 @@
 		(doorway storage basement)
 		(doorway cliff townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has arthur knightshield)
 		(has james humanskull)

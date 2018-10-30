@@ -73,7 +73,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway junkyard docks)
 		(has james coin)

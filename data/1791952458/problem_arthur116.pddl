@@ -83,7 +83,7 @@
 		(doorway docks junkyard)
 		(doorway docks townarch)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has giovanna hairtonic)
 		(has jordan loveletter)

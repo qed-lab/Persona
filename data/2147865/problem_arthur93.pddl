@@ -70,7 +70,7 @@
 		(connected townsquare valley)
 		(connected docks townarch)
 		(connected storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway townarch townsquare)
 		(doorway docks junkyard)

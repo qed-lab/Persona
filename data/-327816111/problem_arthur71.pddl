@@ -65,7 +65,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(has arthur loveletter)

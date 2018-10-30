@@ -78,7 +78,7 @@
 		(doorway townarch docks)
 		(doorway storage basement)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has alli tastycupcake)
 		(has mel basementbucket)

@@ -78,7 +78,7 @@
 		(doorway junkyard docks)
 		(doorway basement storage)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has arthur candle)
 		(has arthur humanskull)

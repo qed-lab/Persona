@@ -73,7 +73,7 @@
 		(doorway townsquare cliff)
 		(doorway docks townarch)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has arthur knightsword)
 		(has arthur shinykey)

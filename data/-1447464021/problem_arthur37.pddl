@@ -60,7 +60,7 @@
 		(doorway townarch docks)
 		(doorway valley townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has arthur mushroom)
 		(has alli ash)

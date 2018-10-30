@@ -68,7 +68,7 @@
 		(doorway docks townarch)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has arthur bouquet)
 		(has arthur mirror)

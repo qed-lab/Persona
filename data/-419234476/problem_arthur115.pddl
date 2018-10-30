@@ -74,7 +74,7 @@
 		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has jordan lovecontract)
 		(has jordan loveletter)

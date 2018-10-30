@@ -73,7 +73,7 @@
 		(doorway townsquare valley)
 		(doorway junkyard docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightsword)
 		(has arthur knightshield)
 		(has alli ash)

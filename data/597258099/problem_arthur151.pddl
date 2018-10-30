@@ -79,7 +79,7 @@
 		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur rope)
 		(has jordan lovecontract)

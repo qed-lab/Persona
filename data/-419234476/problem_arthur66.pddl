@@ -62,7 +62,7 @@
 		(doorway basement storage)
 		(doorway docks junkyard)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james coin)
 		(has jordan loveletter)
 		(has dorian bouquet)

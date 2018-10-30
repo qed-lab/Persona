@@ -73,7 +73,7 @@
 		(doorway valley townsquare)
 		(doorway townsquare valley)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway townarch docks)
 		(has ian knightsword)

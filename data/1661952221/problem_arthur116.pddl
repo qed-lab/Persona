@@ -81,7 +81,7 @@
 		(doorway storage basement)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has jordan loveletter)
 		(has giovanna hairtonic)

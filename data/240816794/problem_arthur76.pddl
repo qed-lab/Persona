@@ -71,7 +71,7 @@
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(has dorian bouquet)
 		(has jordan loveletter)

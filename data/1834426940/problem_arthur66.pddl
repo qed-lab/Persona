@@ -58,7 +58,7 @@
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has alli tastycupcake)
 		(has mel basementbucket)

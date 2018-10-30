@@ -68,7 +68,7 @@
 		(doorway docks junkyard)
 		(doorway townarch townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur coin)
 		(has jordan loveletter)
 		(has arthur silver)

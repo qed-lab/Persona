@@ -48,7 +48,7 @@
 		(doorway docks junkyard)
 		(doorway basement storage)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightsword)
 		(has arthur mushroom)
 		(has arthur book)

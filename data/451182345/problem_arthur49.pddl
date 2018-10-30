@@ -47,7 +47,7 @@
 		(doorway townarch docks)
 		(doorway basement storage)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur ash)
 		(has arthur mushroom)
 		(has arthur hairtonic)

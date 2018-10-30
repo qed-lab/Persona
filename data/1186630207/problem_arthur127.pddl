@@ -77,7 +77,7 @@
 		(doorway docks townarch)
 		(doorway valley townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has mel basementbucket)
 		(has jordan loveletter)

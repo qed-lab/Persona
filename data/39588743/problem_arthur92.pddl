@@ -68,7 +68,7 @@
 		(doorway townsquare townarch)
 		(doorway townsquare valley)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(has dorian bouquet)

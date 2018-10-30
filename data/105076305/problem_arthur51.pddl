@@ -53,7 +53,7 @@
 		(connected townsquare valley)
 		(doorway townsquare cliff)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway valley townsquare)
 		(doorway townsquare valley)

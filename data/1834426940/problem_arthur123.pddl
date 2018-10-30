@@ -69,7 +69,7 @@
 		(doorway junkyard docks)
 		(doorway docks townarch)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has giovanna hairtonic)

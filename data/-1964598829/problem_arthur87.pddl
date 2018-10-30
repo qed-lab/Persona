@@ -73,7 +73,7 @@
 		(doorway docks junkyard)
 		(doorway cliff townsquare)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has alli ash)
 		(has dorian bouquet)

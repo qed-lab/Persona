@@ -60,7 +60,7 @@
 		(doorway valley townsquare)
 		(doorway cliff townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(has jordan loveletter)
 		(has arthur bouquet)

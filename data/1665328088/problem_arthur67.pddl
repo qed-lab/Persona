@@ -65,7 +65,7 @@
 		(doorway townarch docks)
 		(doorway townarch townsquare)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
 		(has arthur mushroom)

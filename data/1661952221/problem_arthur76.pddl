@@ -70,7 +70,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare valley)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway townarch docks)

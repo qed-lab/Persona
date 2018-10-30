@@ -72,7 +72,7 @@
 		(doorway townsquare cliff)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur shinykey)
 		(has arthur knightsword)

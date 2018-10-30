@@ -72,7 +72,7 @@
 		(doorway townsquare townarch)
 		(doorway docks townarch)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has jordan loveletter)
 		(has mel basementbucket)

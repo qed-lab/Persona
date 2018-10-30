@@ -71,7 +71,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has giovanna hairtonic)
 		(has arthur mushroom)

@@ -61,7 +61,7 @@
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway storage basement)
 		(has mel basementbucket)

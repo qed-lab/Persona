@@ -74,7 +74,7 @@
 		(doorway valley townsquare)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(doorway townarch docks)
 		(has arthur book)

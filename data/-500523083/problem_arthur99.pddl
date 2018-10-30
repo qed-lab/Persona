@@ -68,7 +68,7 @@
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur bucket)
 		(has mel basementbucket)
 		(has arthur coin)

@@ -59,7 +59,7 @@
 		(doorway townsquare valley)
 		(doorway docks junkyard)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur loveletter)
 		(has alli ash)

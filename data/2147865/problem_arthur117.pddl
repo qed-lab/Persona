@@ -80,7 +80,7 @@
 		(doorway docks townarch)
 		(doorway townarch townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightshield)
 		(has arthur shinykey)
 		(has alli ash)

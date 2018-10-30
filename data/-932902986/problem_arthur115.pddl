@@ -77,7 +77,7 @@
 		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has arthur bouquet)
 		(has ian knightsword)

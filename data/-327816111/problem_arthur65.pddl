@@ -61,7 +61,7 @@
 		(doorway storage basement)
 		(doorway townarch townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has mel basementbucket)
 		(has arthur rubyring)

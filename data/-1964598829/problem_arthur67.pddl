@@ -72,7 +72,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare townarch)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur bouquet)
 		(has alli ash)

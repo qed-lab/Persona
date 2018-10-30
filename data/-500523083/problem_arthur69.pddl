@@ -68,7 +68,7 @@
 		(doorway townarch townsquare)
 		(doorway townarch docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur candle)
 		(has arthur knightshield)
 		(has jordan loveletter)

@@ -73,7 +73,7 @@
 		(doorway townarch townsquare)
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(has arthur loveletter)

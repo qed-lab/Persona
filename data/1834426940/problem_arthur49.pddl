@@ -50,7 +50,7 @@
 		(doorway docks junkyard)
 		(doorway junkyard docks)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur tastycupcake)
 		(has dorian lovecontract)

@@ -55,7 +55,7 @@
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks junkyard)
 		(has arthur loveletter)

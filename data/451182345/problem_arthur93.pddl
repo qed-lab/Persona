@@ -76,7 +76,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rubyring)
 		(has arthur loveletter)
 		(has arthur bouquet)

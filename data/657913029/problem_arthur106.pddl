@@ -75,7 +75,7 @@
 		(doorway docks townarch)
 		(doorway basement storage)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james humanskull)
 		(has jordan lovecontract)
 		(has alli ash)

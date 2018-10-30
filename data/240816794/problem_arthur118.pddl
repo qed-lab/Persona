@@ -76,7 +76,7 @@
 		(doorway storage basement)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has dorian bouquet)
 		(has arthur silver)

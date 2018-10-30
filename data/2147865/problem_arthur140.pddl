@@ -79,7 +79,7 @@
 		(doorway docks townarch)
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has dorian bouquet)
 		(has mel basementbucket)

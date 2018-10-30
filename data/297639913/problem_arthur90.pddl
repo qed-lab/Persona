@@ -67,7 +67,7 @@
 		(doorway townarch townsquare)
 		(doorway valley townsquare)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has jordan lovecontract)

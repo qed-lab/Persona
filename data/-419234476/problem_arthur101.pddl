@@ -73,7 +73,7 @@
 		(doorway townsquare cliff)
 		(doorway townarch townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has ian knightshield)

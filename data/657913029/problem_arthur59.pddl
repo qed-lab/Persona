@@ -65,7 +65,7 @@
 		(doorway townarch docks)
 		(doorway townsquare valley)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur silver)
 		(has arthur bucket)

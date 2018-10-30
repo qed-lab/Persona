@@ -76,7 +76,7 @@
 		(doorway townsquare townarch)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has jordan loveletter)
 		(has giovanna hairtonic)

@@ -58,7 +58,7 @@
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(has arthur shinykey)
 		(has arthur ash)

@@ -48,7 +48,7 @@
 		(doorway storage basement)
 		(doorway docks townarch)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has arthur loveletter)
 		(has dorian lovecontract)

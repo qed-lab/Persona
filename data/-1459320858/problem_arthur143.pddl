@@ -74,7 +74,7 @@
 		(doorway townarch townsquare)
 		(doorway basement storage)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
 		(has alli ash)

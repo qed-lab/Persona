@@ -78,7 +78,7 @@
 		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has jordan lovecontract)
 		(has giovanna hairtonic)

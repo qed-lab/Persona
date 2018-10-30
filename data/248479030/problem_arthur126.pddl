@@ -78,7 +78,7 @@
 		(doorway townarch docks)
 		(doorway townsquare townarch)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has james candle)

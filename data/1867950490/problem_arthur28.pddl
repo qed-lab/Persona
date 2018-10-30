@@ -46,7 +46,7 @@
 		(doorway townarch docks)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway townsquare cliff)
 		(has alli ash)

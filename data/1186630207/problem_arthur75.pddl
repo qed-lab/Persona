@@ -59,7 +59,7 @@
 		(doorway docks townarch)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(doorway basement storage)
 		(has giovanna hairtonic)

@@ -68,7 +68,7 @@
 		(doorway junkyard docks)
 		(doorway valley townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(has arthur mushroom)
 		(has arthur hairtonic)

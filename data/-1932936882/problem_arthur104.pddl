@@ -78,7 +78,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway docks townarch)
 		(has arthur shinykey)

@@ -76,7 +76,7 @@
 		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has alli tastycupcake)
 		(has dorian bouquet)

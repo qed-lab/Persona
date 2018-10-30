@@ -70,7 +70,7 @@
 		(doorway townsquare townarch)
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway townarch townsquare)
 		(doorway basement storage)

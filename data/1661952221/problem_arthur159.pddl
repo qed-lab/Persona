@@ -79,7 +79,7 @@
 		(doorway townsquare valley)
 		(doorway townarch townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur book)
 		(has arthur mirror)

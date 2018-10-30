@@ -60,7 +60,7 @@
 		(doorway townarch townsquare)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has arthur tastycupcake)
 		(has arthur shinykey)

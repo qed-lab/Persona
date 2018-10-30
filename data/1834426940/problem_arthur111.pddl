@@ -68,7 +68,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
 		(doorway cliff townsquare)

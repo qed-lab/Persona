@@ -75,7 +75,7 @@
 		(doorway storage basement)
 		(doorway valley townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway docks townarch)
 		(has giovanna hairtonic)

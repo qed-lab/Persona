@@ -71,7 +71,7 @@
 		(doorway townsquare cliff)
 		(doorway docks townarch)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(has arthur ash)
 		(has mel basementbucket)

@@ -70,7 +70,7 @@
 		(doorway townsquare cliff)
 		(doorway valley townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james humanskull)
 		(has arthur silver)
 		(has mel basementbucket)

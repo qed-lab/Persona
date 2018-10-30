@@ -71,7 +71,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare valley)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(doorway townsquare townarch)

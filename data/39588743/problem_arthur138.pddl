@@ -80,7 +80,7 @@
 		(doorway storage basement)
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has jordan loveletter)
 		(has ian knightshield)

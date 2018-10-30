@@ -73,7 +73,7 @@
 		(doorway townsquare cliff)
 		(doorway docks junkyard)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has jordan loveletter)

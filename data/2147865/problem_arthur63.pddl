@@ -75,7 +75,7 @@
 		(doorway townarch townsquare)
 		(doorway valley townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(doorway townsquare cliff)
 		(has mel basementbucket)

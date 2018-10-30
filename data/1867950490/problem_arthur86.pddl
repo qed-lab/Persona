@@ -75,7 +75,7 @@
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has mel basementbucket)
 		(has arthur loveletter)

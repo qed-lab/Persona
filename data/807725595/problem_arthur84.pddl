@@ -71,7 +71,7 @@
 		(doorway townsquare valley)
 		(doorway townarch townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur bouquet)
 		(has alli tastycupcake)
 		(has arthur rope)

@@ -80,7 +80,7 @@
 		(doorway docks junkyard)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rope)
 		(has mel basementbucket)
 		(has dorian bouquet)

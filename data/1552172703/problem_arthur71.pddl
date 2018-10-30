@@ -71,7 +71,7 @@
 		(doorway townarch townsquare)
 		(doorway basement storage)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has alli tastycupcake)
 		(has arthur lovecontract)

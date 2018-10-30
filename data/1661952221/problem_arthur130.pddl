@@ -80,7 +80,7 @@
 		(doorway townsquare townarch)
 		(doorway townsquare cliff)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has arthur ash)
 		(has arthur knightsword)

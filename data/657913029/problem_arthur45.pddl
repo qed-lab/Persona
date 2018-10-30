@@ -46,7 +46,7 @@
 		(connected junkyard docks)
 		(connected docks townarch)
 		(connected townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway townsquare townarch)

@@ -68,7 +68,7 @@
 		(doorway townarch townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has jordan lovecontract)
 		(has dorian bouquet)

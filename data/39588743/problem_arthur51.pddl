@@ -65,7 +65,7 @@
 		(doorway townarch docks)
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur candle)
 		(has arthur mirror)
 		(has mel basementbucket)

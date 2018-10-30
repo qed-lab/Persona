@@ -76,7 +76,7 @@
 		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has ian knightsword)
 		(has dorian rubyring)

@@ -69,7 +69,7 @@
 		(doorway docks townarch)
 		(doorway cliff townsquare)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway townarch townsquare)
 		(has arthur ash)

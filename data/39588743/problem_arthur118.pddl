@@ -76,7 +76,7 @@
 		(doorway docks townarch)
 		(doorway junkyard docks)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has alli tastycupcake)
 		(has mel basementbucket)

@@ -71,7 +71,7 @@
 		(doorway valley townsquare)
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur humanskull)
 		(has arthur rubyring)
 		(has mel basementbucket)

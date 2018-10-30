@@ -66,7 +66,7 @@
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james humanskull)
 		(has mel basementbucket)
 		(has james coin)

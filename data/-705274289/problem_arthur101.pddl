@@ -78,7 +78,7 @@
 		(doorway junkyard docks)
 		(doorway townarch townsquare)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has jordan lovecontract)
 		(has ian knightsword)

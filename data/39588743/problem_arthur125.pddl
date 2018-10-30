@@ -76,7 +76,7 @@
 		(doorway docks townarch)
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has arthur book)
 		(has arthur rope)

@@ -79,7 +79,7 @@
 		(doorway townsquare cliff)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur ash)
 		(has ian knightsword)
 		(has arthur rubyring)

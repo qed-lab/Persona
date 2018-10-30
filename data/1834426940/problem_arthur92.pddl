@@ -70,7 +70,7 @@
 		(doorway basement storage)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli tastycupcake)
 		(has mel basementbucket)
 		(has arthur loveletter)

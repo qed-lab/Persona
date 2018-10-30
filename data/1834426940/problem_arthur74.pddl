@@ -58,7 +58,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has mel basementbucket)
 		(has arthur coin)

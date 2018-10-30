@@ -59,7 +59,7 @@
 		(doorway storage basement)
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks townarch)
 		(has arthur mushroom)

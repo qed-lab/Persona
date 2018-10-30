@@ -77,7 +77,7 @@
 		(doorway junkyard docks)
 		(doorway valley townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
 		(has alli ash)

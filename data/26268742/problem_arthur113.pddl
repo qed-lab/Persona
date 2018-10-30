@@ -75,7 +75,7 @@
 		(doorway storage basement)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has giovanna hairtonic)
 		(has ian knightshield)

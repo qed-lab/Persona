@@ -66,7 +66,7 @@
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur silver)
 		(has arthur bucket)

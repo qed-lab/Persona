@@ -69,7 +69,7 @@
 		(doorway docks junkyard)
 		(doorway cliff townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has james coin)
 		(has mel basementbucket)

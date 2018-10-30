@@ -60,7 +60,7 @@
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
 		(has james coin)

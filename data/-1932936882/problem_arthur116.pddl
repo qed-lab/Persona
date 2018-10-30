@@ -77,7 +77,7 @@
 		(doorway valley townsquare)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(doorway docks townarch)
 		(has arthur rubyring)

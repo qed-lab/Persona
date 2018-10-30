@@ -76,7 +76,7 @@
 		(doorway storage basement)
 		(doorway townsquare valley)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has giovanna hairtonic)
 		(has arthur ash)

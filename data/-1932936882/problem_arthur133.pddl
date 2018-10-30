@@ -79,7 +79,7 @@
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has giovanna hairtonic)
 		(has ian knightsword)

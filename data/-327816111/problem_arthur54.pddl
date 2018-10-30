@@ -57,7 +57,7 @@
 		(doorway townsquare valley)
 		(doorway townarch townsquare)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has dorian lovecontract)
 		(has mel basementbucket)

@@ -43,7 +43,7 @@
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway storage basement)
 		(has arthur knightsword)

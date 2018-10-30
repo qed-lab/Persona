@@ -80,7 +80,7 @@
 		(doorway docks townarch)
 		(doorway valley townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has giovanna hairtonic)
 		(has dorian bouquet)

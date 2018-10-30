@@ -77,7 +77,7 @@
 		(doorway valley townsquare)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur mirror)
 		(has arthur shinykey)

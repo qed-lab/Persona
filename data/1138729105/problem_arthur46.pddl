@@ -49,7 +49,7 @@
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur ash)
 		(has dorian lovecontract)
 		(has mel basementbucket)

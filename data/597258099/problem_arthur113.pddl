@@ -76,7 +76,7 @@
 		(doorway docks townarch)
 		(doorway storage basement)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has mel basementbucket)
 		(has jordan lovecontract)

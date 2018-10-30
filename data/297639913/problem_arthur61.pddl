@@ -62,7 +62,7 @@
 		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has mel basementbucket)
 		(has arthur coin)

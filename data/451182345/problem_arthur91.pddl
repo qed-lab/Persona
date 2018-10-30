@@ -77,7 +77,7 @@
 		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur bouquet)
 		(has arthur mirror)
 		(has dorian lovecontract)

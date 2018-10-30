@@ -74,7 +74,7 @@
 		(doorway townarch townsquare)
 		(doorway townarch docks)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has dorian lovecontract)
 		(has james coin)

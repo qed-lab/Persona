@@ -62,7 +62,7 @@
 		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has dorian lovecontract)
 		(has arthur shinykey)

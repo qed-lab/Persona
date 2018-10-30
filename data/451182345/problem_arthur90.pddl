@@ -75,7 +75,7 @@
 		(doorway townarch townsquare)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway townsquare valley)
 		(has arthur bouquet)

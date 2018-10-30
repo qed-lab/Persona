@@ -42,7 +42,7 @@
 		(doorway docks townarch)
 		(doorway townarch docks)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(has dorian lovecontract)
 		(has arthur mushroom)

@@ -79,7 +79,7 @@
 		(doorway basement storage)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(has arthur rope)
 		(has giovanna hairtonic)

@@ -72,7 +72,7 @@
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has jordan loveletter)
 		(has arthur ash)

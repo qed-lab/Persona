@@ -75,7 +75,7 @@
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has james coin)
 		(has dorian bouquet)

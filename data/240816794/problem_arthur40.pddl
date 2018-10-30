@@ -59,7 +59,7 @@
 		(doorway townsquare townarch)
 		(doorway townsquare valley)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway junkyard docks)
 		(has arthur shinykey)

@@ -46,7 +46,7 @@
 		(connected basement storage)
 		(doorway storage basement)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway docks junkyard)
 		(doorway townarch townsquare)

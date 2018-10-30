@@ -76,7 +76,7 @@
 		(doorway basement storage)
 		(doorway townarch docks)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has ian knightshield)
 		(has arthur silver)

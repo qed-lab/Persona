@@ -78,7 +78,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has jordan loveletter)
 		(has arthur hairtonic)

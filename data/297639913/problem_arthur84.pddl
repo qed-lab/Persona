@@ -67,7 +67,7 @@
 		(doorway townsquare cliff)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has arthur rubyring)
 		(has arthur knightshield)

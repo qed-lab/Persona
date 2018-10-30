@@ -72,7 +72,7 @@
 		(doorway townsquare townarch)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has jordan loveletter)
 		(has giovanna hairtonic)

@@ -65,7 +65,7 @@
 		(doorway townarch townsquare)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has alli ash)
 		(has arthur mushroom)

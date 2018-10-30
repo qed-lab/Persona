@@ -69,7 +69,7 @@
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
 		(has jordan lovecontract)

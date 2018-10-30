@@ -66,7 +66,7 @@
 		(doorway townsquare townarch)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur shinykey)
 		(has arthur mushroom)

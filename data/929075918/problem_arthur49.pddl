@@ -65,7 +65,7 @@
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightsword)
 		(has arthur loveletter)
 		(has arthur mushroom)

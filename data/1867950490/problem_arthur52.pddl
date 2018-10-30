@@ -55,7 +55,7 @@
 		(doorway townarch docks)
 		(doorway townarch townsquare)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(has mel basementbucket)
 		(has arthur ash)

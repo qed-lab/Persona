@@ -76,7 +76,7 @@
 		(doorway valley townsquare)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has alli tastycupcake)
 		(has arthur hairtonic)

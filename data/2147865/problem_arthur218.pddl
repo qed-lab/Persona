@@ -77,7 +77,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway townsquare townarch)
 		(has jordan loveletter)

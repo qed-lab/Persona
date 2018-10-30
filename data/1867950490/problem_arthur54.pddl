@@ -56,7 +56,7 @@
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway townarch docks)
 		(has dorian lovecontract)

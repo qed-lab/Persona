@@ -69,7 +69,7 @@
 		(doorway townsquare townarch)
 		(doorway docks townarch)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has dorian bouquet)
 		(has dorian lovecontract)

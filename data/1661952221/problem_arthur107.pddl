@@ -83,7 +83,7 @@
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has alli tastycupcake)
 		(has jordan lovecontract)

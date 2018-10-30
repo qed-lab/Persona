@@ -70,7 +70,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(has james humanskull)
 		(has arthur silver)

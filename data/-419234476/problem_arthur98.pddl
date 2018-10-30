@@ -68,7 +68,7 @@
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway townarch docks)
 		(has james humanskull)

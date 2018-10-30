@@ -78,7 +78,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare townarch)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has jordan loveletter)

@@ -77,7 +77,7 @@
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(has alli tastycupcake)
 		(has giovanna hairtonic)

@@ -78,7 +78,7 @@
 		(doorway townsquare valley)
 		(doorway docks townarch)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(has dorian bouquet)
 		(has mel basementbucket)

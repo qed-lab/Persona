@@ -68,7 +68,7 @@
 		(doorway docks junkyard)
 		(doorway basement storage)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has arthur knightshield)
 		(has james humanskull)

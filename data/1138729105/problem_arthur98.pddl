@@ -73,7 +73,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has arthur rubyring)
 		(has arthur mirror)

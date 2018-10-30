@@ -75,7 +75,7 @@
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway townarch docks)
 		(has arthur coin)

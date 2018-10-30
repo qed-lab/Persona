@@ -73,7 +73,7 @@
 		(doorway basement storage)
 		(doorway townsquare townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli tastycupcake)
 		(has arthur mirror)
 		(has mel basementbucket)

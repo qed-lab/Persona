@@ -76,7 +76,7 @@
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(has jordan lovecontract)
 		(has ian knightsword)

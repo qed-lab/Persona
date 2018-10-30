@@ -72,7 +72,7 @@
 		(doorway docks townarch)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur silver)
 		(has jordan loveletter)
 		(has mel basementbucket)

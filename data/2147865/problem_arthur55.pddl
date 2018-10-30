@@ -68,7 +68,7 @@
 		(doorway townsquare townarch)
 		(doorway docks townarch)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur loveletter)
 		(has dorian lovecontract)

@@ -66,7 +66,7 @@
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has arthur bucket)

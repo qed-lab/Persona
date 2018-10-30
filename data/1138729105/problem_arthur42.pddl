@@ -43,7 +43,7 @@
 		(doorway townarch docks)
 		(doorway townarch townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(has arthur ash)

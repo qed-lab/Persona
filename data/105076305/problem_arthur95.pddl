@@ -74,7 +74,7 @@
 		(doorway docks townarch)
 		(doorway townsquare townarch)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has james humanskull)
 		(has arthur book)

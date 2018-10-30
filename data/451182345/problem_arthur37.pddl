@@ -49,7 +49,7 @@
 		(doorway townarch docks)
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur shinykey)
 		(has arthur book)

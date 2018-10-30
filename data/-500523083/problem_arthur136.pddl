@@ -70,7 +70,7 @@
 		(doorway docks junkyard)
 		(doorway townsquare townarch)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has dorian rubyring)
 		(has arthur silver)

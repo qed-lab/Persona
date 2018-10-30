@@ -48,7 +48,7 @@
 		(doorway townarch docks)
 		(doorway townsquare cliff)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur book)
 		(has dorian lovecontract)
 		(has arthur hairtonic)

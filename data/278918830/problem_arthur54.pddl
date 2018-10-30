@@ -66,7 +66,7 @@
 		(doorway townarch townsquare)
 		(doorway cliff townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur humanskull)
 		(has arthur mushroom)

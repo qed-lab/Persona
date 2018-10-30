@@ -61,7 +61,7 @@
 		(doorway basement storage)
 		(doorway townsquare townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has arthur loveletter)
 		(has mel basementbucket)

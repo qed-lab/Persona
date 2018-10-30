@@ -74,7 +74,7 @@
 		(doorway townsquare valley)
 		(doorway docks junkyard)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(doorway storage basement)
 		(has mel basementbucket)

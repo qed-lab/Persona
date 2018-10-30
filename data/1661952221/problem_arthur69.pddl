@@ -70,7 +70,7 @@
 		(doorway townarch townsquare)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has arthur mirror)
 		(has jordan loveletter)

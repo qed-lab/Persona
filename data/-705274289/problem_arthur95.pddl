@@ -78,7 +78,7 @@
 		(doorway townsquare townarch)
 		(doorway cliff townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has james coin)
 		(has jordan lovecontract)

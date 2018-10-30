@@ -58,7 +58,7 @@
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(doorway townsquare valley)
 		(has alli tastycupcake)

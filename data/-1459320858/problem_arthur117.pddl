@@ -79,7 +79,7 @@
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has arthur knightsword)
 		(has giovanna hairtonic)

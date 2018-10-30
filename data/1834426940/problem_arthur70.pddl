@@ -59,7 +59,7 @@
 		(doorway townsquare valley)
 		(doorway townarch townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has alli tastycupcake)
 		(has mel basementbucket)

@@ -71,7 +71,7 @@
 		(doorway storage basement)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(has arthur mushroom)
 		(has arthur loveletter)

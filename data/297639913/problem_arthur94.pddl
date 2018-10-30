@@ -68,7 +68,7 @@
 		(doorway storage basement)
 		(doorway townsquare valley)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has arthur mushroom)
 		(has arthur knightshield)

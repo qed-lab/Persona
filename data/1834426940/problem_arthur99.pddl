@@ -71,7 +71,7 @@
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rubyring)
 		(has dorian lovecontract)
 		(has alli tastycupcake)

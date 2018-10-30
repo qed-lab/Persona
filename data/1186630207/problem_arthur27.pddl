@@ -42,7 +42,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has arthur tastycupcake)
 		(has dorian lovecontract)

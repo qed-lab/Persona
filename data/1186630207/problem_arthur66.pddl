@@ -62,7 +62,7 @@
 		(doorway townsquare valley)
 		(doorway basement storage)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has mel basementbucket)
 		(has arthur loveletter)

@@ -79,7 +79,7 @@
 		(doorway townsquare cliff)
 		(doorway storage basement)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(has ian knightshield)

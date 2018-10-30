@@ -48,7 +48,7 @@
 		(doorway basement storage)
 		(doorway townarch docks)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(has dorian lovecontract)
 		(has arthur mirror)

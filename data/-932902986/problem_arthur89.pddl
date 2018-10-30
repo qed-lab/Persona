@@ -69,7 +69,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway basement storage)
 		(has arthur knightshield)

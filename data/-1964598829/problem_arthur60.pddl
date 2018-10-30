@@ -70,7 +70,7 @@
 		(doorway storage basement)
 		(doorway basement storage)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(has alli ash)
 		(has arthur shinykey)

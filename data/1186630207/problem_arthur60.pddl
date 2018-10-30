@@ -50,7 +50,7 @@
 		(connected townsquare townarch)
 		(connected townarch townsquare)
 		(connected docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway townsquare townarch)
 		(doorway townarch townsquare)

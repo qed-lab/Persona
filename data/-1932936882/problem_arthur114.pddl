@@ -80,7 +80,7 @@
 		(doorway townsquare townarch)
 		(doorway valley townsquare)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rubyring)
 		(has mel basementbucket)
 		(has arthur loveletter)

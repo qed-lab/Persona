@@ -69,7 +69,7 @@
 		(doorway basement storage)
 		(doorway townsquare townarch)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur candle)
 		(has ian knightshield)
 		(has mel basementbucket)

@@ -78,7 +78,7 @@
 		(doorway townsquare cliff)
 		(doorway docks junkyard)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has alli tastycupcake)
 		(has jordan lovecontract)

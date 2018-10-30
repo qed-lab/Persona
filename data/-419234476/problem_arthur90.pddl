@@ -70,7 +70,7 @@
 		(doorway townsquare valley)
 		(doorway docks townarch)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has arthur knightshield)
 		(has arthur knightsword)

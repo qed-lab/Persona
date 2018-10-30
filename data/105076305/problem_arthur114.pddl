@@ -79,7 +79,7 @@
 		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has jordan loveletter)
 		(has dorian bouquet)

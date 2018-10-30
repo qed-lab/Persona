@@ -79,7 +79,7 @@
 		(doorway storage basement)
 		(doorway basement storage)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli tastycupcake)
 		(has giovanna hairtonic)
 		(has mel basementbucket)

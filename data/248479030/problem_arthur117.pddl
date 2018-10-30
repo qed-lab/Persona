@@ -79,7 +79,7 @@
 		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james coin)
 		(has jordan loveletter)
 		(has dorian bouquet)

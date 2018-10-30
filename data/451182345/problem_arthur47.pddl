@@ -48,7 +48,7 @@
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has dorian lovecontract)
 		(has arthur hairtonic)

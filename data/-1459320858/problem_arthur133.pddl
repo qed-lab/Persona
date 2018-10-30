@@ -76,7 +76,7 @@
 		(doorway docks townarch)
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has arthur rope)

@@ -45,7 +45,7 @@
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(has arthur rope)
 		(has arthur shinykey)

@@ -80,7 +80,7 @@
 		(doorway docks townarch)
 		(doorway storage basement)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has jordan loveletter)
 		(has dorian bouquet)

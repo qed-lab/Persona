@@ -65,7 +65,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare townarch)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james humanskull)
 		(has james coin)
 		(has dorian lovecontract)

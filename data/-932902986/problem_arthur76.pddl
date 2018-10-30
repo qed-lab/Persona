@@ -70,7 +70,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(has arthur loveletter)
 		(has mel basementbucket)

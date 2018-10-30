@@ -59,7 +59,7 @@
 		(doorway townarch docks)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur mushroom)
 		(has dorian lovecontract)

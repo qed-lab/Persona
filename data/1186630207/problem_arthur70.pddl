@@ -62,7 +62,7 @@
 		(doorway townsquare valley)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has giovanna hairtonic)
 		(has mel basementbucket)
 		(has dorian lovecontract)

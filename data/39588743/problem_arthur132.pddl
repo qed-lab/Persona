@@ -76,7 +76,7 @@
 		(doorway docks townarch)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli tastycupcake)
 		(has arthur rope)
 		(has dorian rubyring)

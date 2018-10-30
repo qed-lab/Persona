@@ -79,7 +79,7 @@
 		(doorway valley townsquare)
 		(doorway townsquare valley)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has mel basementbucket)
 		(has arthur bouquet)

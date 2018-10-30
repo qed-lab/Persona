@@ -61,7 +61,7 @@
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur rubyring)
 		(has james coin)

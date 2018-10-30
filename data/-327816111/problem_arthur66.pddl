@@ -62,7 +62,7 @@
 		(doorway townarch townsquare)
 		(doorway basement storage)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur rubyring)
 		(has arthur loveletter)

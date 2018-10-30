@@ -46,7 +46,7 @@
 		(doorway townarch townsquare)
 		(doorway townarch docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway junkyard docks)
 		(has arthur tastycupcake)

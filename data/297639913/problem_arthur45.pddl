@@ -62,7 +62,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has mel basementbucket)
 		(has arthur shinykey)

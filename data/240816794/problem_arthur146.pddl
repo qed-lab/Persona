@@ -76,7 +76,7 @@
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has ian knightshield)
 		(has arthur hairtonic)

@@ -57,7 +57,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare townarch)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway valley townsquare)
 		(has dorian lovecontract)

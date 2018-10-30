@@ -45,7 +45,7 @@
 		(doorway townarch townsquare)
 		(doorway junkyard docks)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has arthur ash)
 		(has dorian lovecontract)

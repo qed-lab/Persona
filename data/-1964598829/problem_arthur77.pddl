@@ -73,7 +73,7 @@
 		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur candle)
 		(has arthur hairtonic)
 		(has arthur loveletter)

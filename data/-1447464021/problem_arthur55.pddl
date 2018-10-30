@@ -62,7 +62,7 @@
 		(doorway docks junkyard)
 		(doorway townarch townsquare)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has arthur shinykey)
 		(has arthur loveletter)

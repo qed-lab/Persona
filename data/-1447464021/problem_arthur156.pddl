@@ -76,7 +76,7 @@
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has ian knightshield)
 		(has ian knightsword)

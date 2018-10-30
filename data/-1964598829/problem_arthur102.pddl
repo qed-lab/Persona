@@ -73,7 +73,7 @@
 		(doorway valley townsquare)
 		(doorway storage basement)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has alli ash)
 		(has jordan lovecontract)

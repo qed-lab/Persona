@@ -65,7 +65,7 @@
 		(connected townsquare cliff)
 		(connected townarch docks)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway townsquare valley)
 		(doorway storage basement)

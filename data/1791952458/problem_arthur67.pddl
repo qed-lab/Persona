@@ -67,7 +67,7 @@
 		(doorway junkyard docks)
 		(doorway docks townarch)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur hairtonic)
 		(has arthur knightsword)

@@ -61,7 +61,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare valley)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has arthur shinykey)
 		(has mel basementbucket)

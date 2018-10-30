@@ -82,7 +82,7 @@
 		(doorway townarch docks)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has dorian bouquet)
 		(has arthur lovecontract)

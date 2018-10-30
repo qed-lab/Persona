@@ -75,7 +75,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
 		(has ian knightsword)

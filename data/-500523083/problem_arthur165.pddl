@@ -69,7 +69,7 @@
 		(doorway townsquare townarch)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur bouquet)
 		(has james coin)

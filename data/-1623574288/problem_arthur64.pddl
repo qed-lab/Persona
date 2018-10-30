@@ -49,7 +49,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare cliff)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur knightsword)
 		(has arthur mirror)

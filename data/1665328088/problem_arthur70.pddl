@@ -67,7 +67,7 @@
 		(doorway townsquare valley)
 		(doorway townsquare townarch)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has mel basementbucket)
 		(has jordan loveletter)

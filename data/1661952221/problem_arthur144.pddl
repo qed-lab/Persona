@@ -82,7 +82,7 @@
 		(doorway townarch townsquare)
 		(doorway valley townsquare)
 		(doorway docks junkyard)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has ian knightshield)
 		(has dorian bouquet)

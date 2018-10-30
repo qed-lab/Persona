@@ -64,7 +64,7 @@
 		(doorway townarch townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has james coin)
 		(has arthur mushroom)
 		(has arthur loveletter)

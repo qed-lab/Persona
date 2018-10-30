@@ -77,7 +77,7 @@
 		(doorway docks junkyard)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has dorian bouquet)

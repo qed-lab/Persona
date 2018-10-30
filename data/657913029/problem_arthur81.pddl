@@ -70,7 +70,7 @@
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur bouquet)
 		(has ian knightsword)
 		(has james coin)

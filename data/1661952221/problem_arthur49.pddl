@@ -62,7 +62,7 @@
 		(doorway storage basement)
 		(doorway townsquare townarch)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
 		(doorway townsquare cliff)

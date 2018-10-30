@@ -74,7 +74,7 @@
 		(doorway valley townsquare)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has james humanskull)
 		(has arthur knightsword)

@@ -61,7 +61,7 @@
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has arthur ash)
 		(has arthur mirror)

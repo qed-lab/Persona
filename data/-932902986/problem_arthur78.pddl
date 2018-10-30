@@ -70,7 +70,7 @@
 		(doorway townarch townsquare)
 		(doorway valley townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway storage basement)
 		(has dorian lovecontract)
 		(has arthur loveletter)

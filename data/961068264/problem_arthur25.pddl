@@ -43,7 +43,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare cliff)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur mushroom)
 		(has arthur shinykey)

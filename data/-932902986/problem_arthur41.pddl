@@ -47,7 +47,7 @@
 		(doorway townarch docks)
 		(doorway basement storage)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
 		(has mel basementbucket)

@@ -62,7 +62,7 @@
 		(doorway basement storage)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(has arthur humanskull)
 		(has jordan lovecontract)

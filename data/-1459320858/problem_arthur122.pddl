@@ -79,7 +79,7 @@
 		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur rope)
 		(has giovanna hairtonic)
 		(has mel basementbucket)

@@ -62,7 +62,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has alli tastycupcake)
 		(has dorian lovecontract)

@@ -81,7 +81,7 @@
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has jordan lovecontract)
 		(has jordan loveletter)

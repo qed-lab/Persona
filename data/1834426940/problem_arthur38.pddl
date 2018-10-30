@@ -44,7 +44,7 @@
 		(doorway townarch docks)
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur tastycupcake)
 		(has arthur shinykey)
 		(has mel basementbucket)

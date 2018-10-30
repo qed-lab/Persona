@@ -78,7 +78,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur shinykey)
 		(has mel basementbucket)
 		(has ian knightsword)

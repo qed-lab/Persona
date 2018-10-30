@@ -68,7 +68,7 @@
 		(doorway townarch docks)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur humanskull)
 		(has james coin)
 		(has arthur loveletter)

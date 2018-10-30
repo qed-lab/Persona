@@ -77,7 +77,7 @@
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has arthur mirror)
 		(has arthur loveletter)

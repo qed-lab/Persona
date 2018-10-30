@@ -77,7 +77,7 @@
 		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has arthur hairtonic)
 		(has dorian rubyring)

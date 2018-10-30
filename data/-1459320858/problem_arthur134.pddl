@@ -77,7 +77,7 @@
 		(doorway basement storage)
 		(doorway docks townarch)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has dorian bouquet)
 		(has arthur knightsword)

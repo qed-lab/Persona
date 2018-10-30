@@ -71,7 +71,7 @@
 		(doorway townsquare townarch)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has alli ash)
 		(has jordan loveletter)

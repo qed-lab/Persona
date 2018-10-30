@@ -61,7 +61,7 @@
 		(doorway townarch townsquare)
 		(doorway docks junkyard)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur bucket)
 		(has mel basementbucket)
 		(has arthur loveletter)

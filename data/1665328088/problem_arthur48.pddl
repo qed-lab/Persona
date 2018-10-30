@@ -49,7 +49,7 @@
 		(connected townarch townsquare)
 		(doorway townarch townsquare)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway basement storage)
 		(doorway storage basement)

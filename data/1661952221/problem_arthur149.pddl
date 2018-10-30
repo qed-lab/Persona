@@ -81,7 +81,7 @@
 		(doorway townarch docks)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has arthur mirror)
 		(has jordan lovecontract)

@@ -73,7 +73,7 @@
 		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has jordan lovecontract)
 		(has alli ash)

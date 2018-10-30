@@ -77,7 +77,7 @@
 		(doorway docks townarch)
 		(doorway townarch docks)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has arthur knightsword)
 		(has arthur hairtonic)

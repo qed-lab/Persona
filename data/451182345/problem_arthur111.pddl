@@ -76,7 +76,7 @@
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur ash)
 		(has arthur mirror)

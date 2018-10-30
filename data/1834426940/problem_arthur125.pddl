@@ -69,7 +69,7 @@
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has jordan lovecontract)
 		(has dorian rubyring)

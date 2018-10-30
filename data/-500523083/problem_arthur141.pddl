@@ -69,7 +69,7 @@
 		(doorway valley townsquare)
 		(doorway townsquare valley)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has jordan lovecontract)
 		(has arthur humanskull)

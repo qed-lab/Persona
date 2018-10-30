@@ -73,7 +73,7 @@
 		(doorway valley townsquare)
 		(doorway cliff townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has jordan loveletter)
 		(has alli tastycupcake)

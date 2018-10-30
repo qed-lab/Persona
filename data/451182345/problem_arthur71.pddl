@@ -73,7 +73,7 @@
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur ash)
 		(has arthur mirror)

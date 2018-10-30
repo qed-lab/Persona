@@ -79,7 +79,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare valley)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has mel basementbucket)
 		(has arthur loveletter)

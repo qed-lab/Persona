@@ -62,7 +62,7 @@
 		(doorway docks townarch)
 		(doorway townsquare cliff)
 		(doorway townsquare valley)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has mel basementbucket)
 		(has arthur mushroom)

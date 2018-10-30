@@ -55,7 +55,7 @@
 		(doorway townarch docks)
 		(doorway townsquare townarch)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(doorway docks townarch)
 		(has arthur book)

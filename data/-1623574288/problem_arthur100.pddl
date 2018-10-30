@@ -78,7 +78,7 @@
 		(doorway storage basement)
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has arthur knightsword)
 		(has arthur rubyring)

@@ -75,7 +75,7 @@
 		(doorway docks junkyard)
 		(doorway townarch townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has arthur lovecontract)
 		(has alli tastycupcake)

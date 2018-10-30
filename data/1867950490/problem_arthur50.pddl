@@ -57,7 +57,7 @@
 		(doorway townsquare valley)
 		(doorway docks junkyard)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur shinykey)
 		(has alli tastycupcake)

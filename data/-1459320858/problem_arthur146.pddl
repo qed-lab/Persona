@@ -75,7 +75,7 @@
 		(doorway docks junkyard)
 		(doorway townarch docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has alli ash)
 		(has arthur rubyring)

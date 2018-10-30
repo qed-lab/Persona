@@ -82,7 +82,7 @@
 		(doorway docks townarch)
 		(doorway valley townsquare)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has mel basementbucket)
 		(has arthur loveletter)

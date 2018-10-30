@@ -64,7 +64,7 @@
 		(doorway townarch docks)
 		(doorway townsquare valley)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur knightshield)
 		(has giovanna hairtonic)

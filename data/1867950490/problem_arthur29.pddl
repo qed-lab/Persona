@@ -47,7 +47,7 @@
 		(doorway docks junkyard)
 		(doorway junkyard docks)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has mel basementbucket)
 		(has arthur loveletter)

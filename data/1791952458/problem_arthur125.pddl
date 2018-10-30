@@ -79,7 +79,7 @@
 		(doorway townarch townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has giovanna hairtonic)

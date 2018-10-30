@@ -48,7 +48,7 @@
 		(doorway docks townarch)
 		(doorway basement storage)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has alli ash)
 		(has dorian lovecontract)

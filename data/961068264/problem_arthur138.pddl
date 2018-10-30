@@ -76,7 +76,7 @@
 		(doorway townarch docks)
 		(doorway junkyard docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(has dorian bouquet)
 		(has arthur candle)

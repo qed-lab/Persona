@@ -63,7 +63,7 @@
 		(doorway storage basement)
 		(doorway valley townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has dorian lovecontract)
 		(has arthur mushroom)

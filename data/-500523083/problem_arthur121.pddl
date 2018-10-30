@@ -71,7 +71,7 @@
 		(doorway townsquare cliff)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur coin)
 		(has dorian rubyring)
 		(has ian knightshield)

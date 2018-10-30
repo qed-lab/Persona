@@ -76,7 +76,7 @@
 		(doorway docks townarch)
 		(doorway townarch docks)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan loveletter)
 		(has arthur mushroom)
 		(has arthur hairtonic)

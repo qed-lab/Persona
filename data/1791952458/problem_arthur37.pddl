@@ -42,7 +42,7 @@
 		(connected townarch docks)
 		(connected townarch townsquare)
 		(connected townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway townarch townsquare)
 		(doorway townarch docks)

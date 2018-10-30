@@ -71,7 +71,7 @@
 		(doorway storage basement)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has mel basementbucket)
 		(has ian knightshield)

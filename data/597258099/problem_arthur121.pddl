@@ -74,7 +74,7 @@
 		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(has jordan lovecontract)
 		(has alli tastycupcake)

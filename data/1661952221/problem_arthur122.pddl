@@ -81,7 +81,7 @@
 		(doorway townarch docks)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur coin)
 		(has jordan lovecontract)
 		(has mel basementbucket)

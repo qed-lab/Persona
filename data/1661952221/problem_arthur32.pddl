@@ -59,7 +59,7 @@
 		(doorway townarch townsquare)
 		(doorway basement storage)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has mel basementbucket)
 		(has arthur mirror)

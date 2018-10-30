@@ -79,7 +79,7 @@
 		(doorway junkyard docks)
 		(doorway valley townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has jordan lovecontract)
 		(has james coin)
 		(has arthur knightsword)

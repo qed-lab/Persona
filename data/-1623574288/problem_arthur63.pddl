@@ -48,7 +48,7 @@
 		(doorway junkyard docks)
 		(doorway storage basement)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(has arthur hairtonic)
 		(has mel basementbucket)

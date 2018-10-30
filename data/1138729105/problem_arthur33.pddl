@@ -46,7 +46,7 @@
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur loveletter)
 		(has alli ash)
 		(has mel basementbucket)

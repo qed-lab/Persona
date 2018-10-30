@@ -60,7 +60,7 @@
 		(connected docks townarch)
 		(connected townarch docks)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare valley)
 		(doorway townarch townsquare)
 		(doorway townarch docks)

@@ -59,7 +59,7 @@
 		(doorway townsquare valley)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway basement storage)
 		(has arthur bucket)

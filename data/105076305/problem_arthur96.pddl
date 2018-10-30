@@ -74,7 +74,7 @@
 		(doorway docks junkyard)
 		(doorway valley townsquare)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(has james humanskull)
 		(has arthur book)

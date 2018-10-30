@@ -74,7 +74,7 @@
 		(doorway junkyard docks)
 		(doorway townarch docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightshield)
 		(has alli ash)
 		(has dorian lovecontract)

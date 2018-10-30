@@ -78,7 +78,7 @@
 		(doorway docks townarch)
 		(doorway docks junkyard)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur shinykey)
 		(has dorian lovecontract)

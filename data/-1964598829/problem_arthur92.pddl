@@ -71,7 +71,7 @@
 		(doorway townarch townsquare)
 		(doorway townsquare townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(doorway cliff townsquare)
 		(has arthur hairtonic)

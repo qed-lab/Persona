@@ -73,7 +73,7 @@
 		(doorway docks junkyard)
 		(doorway docks townarch)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has ian knightshield)
 		(has jordan lovecontract)

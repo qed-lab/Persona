@@ -75,7 +75,7 @@
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur knightsword)
 		(has arthur silver)
 		(has dorian bouquet)

@@ -76,7 +76,7 @@
 		(doorway valley townsquare)
 		(doorway townarch docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has alli ash)
 		(has mel basementbucket)

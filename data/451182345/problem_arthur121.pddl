@@ -75,7 +75,7 @@
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway docks townarch)
 		(has dorian bouquet)

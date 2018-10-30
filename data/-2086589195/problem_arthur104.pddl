@@ -74,7 +74,7 @@
 		(doorway townarch docks)
 		(doorway junkyard docks)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has jordan loveletter)
 		(has mel basementbucket)

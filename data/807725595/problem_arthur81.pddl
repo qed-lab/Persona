@@ -70,7 +70,7 @@
 		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway storage basement)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has arthur ash)
 		(has alli tastycupcake)

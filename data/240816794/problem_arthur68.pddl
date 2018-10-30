@@ -70,7 +70,7 @@
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has jordan loveletter)
 		(has mel basementbucket)

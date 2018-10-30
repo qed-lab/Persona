@@ -70,7 +70,7 @@
 		(doorway basement storage)
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has arthur mushroom)
 		(has mel basementbucket)

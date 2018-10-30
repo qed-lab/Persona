@@ -74,7 +74,7 @@
 		(doorway cliff townsquare)
 		(doorway townsquare townarch)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur silver)
 		(has dorian bouquet)
 		(has jordan loveletter)

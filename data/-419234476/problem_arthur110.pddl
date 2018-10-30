@@ -74,7 +74,7 @@
 		(doorway storage basement)
 		(doorway docks townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has ian knightshield)
 		(has giovanna hairtonic)

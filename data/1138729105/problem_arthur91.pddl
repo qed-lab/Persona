@@ -73,7 +73,7 @@
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has dorian bouquet)
 		(has jordan loveletter)

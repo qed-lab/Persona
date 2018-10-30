@@ -71,7 +71,7 @@
 		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(doorway junkyard docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur tastycupcake)
 		(has dorian bouquet)
 		(has alli ash)

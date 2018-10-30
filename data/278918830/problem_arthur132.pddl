@@ -76,7 +76,7 @@
 		(doorway basement storage)
 		(doorway valley townsquare)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has alli ash)
 		(has arthur tastycupcake)
 		(has arthur hairtonic)

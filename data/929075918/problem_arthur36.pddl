@@ -49,7 +49,7 @@
 		(doorway townarch townsquare)
 		(doorway basement storage)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur rope)
 		(has arthur shinykey)

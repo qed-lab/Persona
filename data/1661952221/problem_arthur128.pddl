@@ -80,7 +80,7 @@
 		(doorway townsquare valley)
 		(doorway townarch docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has jordan loveletter)
 		(has jordan lovecontract)

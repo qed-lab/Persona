@@ -79,7 +79,7 @@
 		(doorway valley townsquare)
 		(doorway storage basement)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has giovanna hairtonic)
 		(has mel basementbucket)

@@ -81,7 +81,7 @@
 		(doorway junkyard docks)
 		(doorway townsquare townarch)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townsquare cliff)
 		(has arthur shinykey)
 		(has dorian bouquet)

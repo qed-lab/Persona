@@ -70,7 +70,7 @@
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian lovecontract)
 		(has arthur loveletter)
 		(has arthur rubyring)

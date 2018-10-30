@@ -78,7 +78,7 @@
 		(doorway townsquare townarch)
 		(doorway cliff townsquare)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks townarch)
 		(has dorian bouquet)
 		(has alli ash)

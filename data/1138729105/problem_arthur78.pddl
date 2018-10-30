@@ -69,7 +69,7 @@
 		(doorway townsquare cliff)
 		(doorway junkyard docks)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway cliff townsquare)
 		(has arthur ash)
 		(has jordan loveletter)

@@ -75,7 +75,7 @@
 		(doorway townsquare townarch)
 		(doorway storage basement)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch docks)
 		(has arthur bouquet)
 		(has james humanskull)

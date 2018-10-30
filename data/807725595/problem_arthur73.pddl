@@ -66,7 +66,7 @@
 		(doorway basement storage)
 		(doorway townsquare townarch)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway valley townsquare)
 		(has arthur ash)

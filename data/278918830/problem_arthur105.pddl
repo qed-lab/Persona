@@ -74,7 +74,7 @@
 		(doorway townsquare cliff)
 		(doorway basement storage)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has james humanskull)
 		(has arthur knightshield)

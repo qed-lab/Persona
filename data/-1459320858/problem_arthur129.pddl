@@ -77,7 +77,7 @@
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(doorway valley townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has dorian bouquet)
 		(has giovanna hairtonic)

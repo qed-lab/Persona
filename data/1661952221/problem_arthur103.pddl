@@ -79,7 +79,7 @@
 		(doorway storage basement)
 		(doorway basement storage)
 		(doorway townarch townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has dorian bouquet)
 		(has arthur mirror)
 		(has mel basementbucket)

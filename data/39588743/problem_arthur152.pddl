@@ -80,7 +80,7 @@
 		(doorway townsquare valley)
 		(doorway junkyard docks)
 		(doorway townarch docks)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has alli tastycupcake)
 		(has dorian bouquet)

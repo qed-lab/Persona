@@ -73,7 +73,7 @@
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway docks junkyard)
 		(has arthur ash)
 		(has james humanskull)

@@ -79,7 +79,7 @@
 		(doorway townsquare cliff)
 		(doorway storage basement)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway townarch townsquare)
 		(doorway basement storage)
 		(has dorian lovecontract)

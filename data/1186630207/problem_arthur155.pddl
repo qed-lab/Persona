@@ -81,7 +81,7 @@
 		(doorway townarch docks)
 		(doorway junkyard docks)
 		(doorway cliff townsquare)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has ian knightsword)
 		(has alli ash)

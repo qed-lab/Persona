@@ -76,7 +76,7 @@
 		(doorway basement storage)
 		(doorway townarch townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has ian knightsword)
 		(has arthur knightshield)
 		(has arthur loveletter)

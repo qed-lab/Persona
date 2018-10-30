@@ -69,7 +69,7 @@
 		(doorway storage basement)
 		(doorway cliff townsquare)
 		(doorway docks townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(doorway basement storage)
 		(has jordan loveletter)
 		(has arthur knightshield)

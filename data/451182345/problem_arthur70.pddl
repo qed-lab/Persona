@@ -69,7 +69,7 @@
 		(doorway junkyard docks)
 		(doorway valley townsquare)
 		(doorway townsquare townarch)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has arthur hairtonic)
 		(has arthur ash)

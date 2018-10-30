@@ -49,7 +49,7 @@
 		(doorway basement storage)
 		(doorway townarch townsquare)
 		(doorway townsquare cliff)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has arthur hairtonic)
 		(has alli tastycupcake)
 		(has arthur knightsword)

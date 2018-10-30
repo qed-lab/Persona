@@ -83,7 +83,7 @@
 		(doorway cliff townsquare)
 		(doorway junkyard docks)
 		(doorway basement storage)
-		(doorway cliff townsqaure)
+		(doorway cliff townsquare)
 		(has mel basementbucket)
 		(has alli ash)
 		(has dorian lovecontract)
