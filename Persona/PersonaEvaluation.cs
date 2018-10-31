@@ -22,13 +22,13 @@ namespace Persona
         {
             // Configurations
 
-            RunBaseline(-1567780657);
+            RunBaseline(-1964598829);
 
-            // RunWindowed();
+            // RunWindowed(-1964598829);
 
             // RunCognitive(IndexterSalienceThreshold.AVERAGE);
 
-            // RunCognitive(IndexterSalienceThreshold.STRICT);
+            // RunCognitive(-1964598829, IndexterSalienceThreshold.STRICT);
 
             // RunBaselineWithConservativeDomainExpansion();
 
