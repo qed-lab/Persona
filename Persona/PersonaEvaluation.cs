@@ -22,21 +22,21 @@ namespace Persona
         {
             // Configurations
 
-            RunBaseline(597258099);
+            // RunBaseline(961068264);
 
-            // RunWindowed(597258099);
+            // RunWindowed(961068264);
 
-           //  RunCognitive(278615819, IndexterSalienceThreshold.AVERAGE);
+            // RunCognitive(297639913, IndexterSalienceThreshold.AVERAGE);
 
-            // RunCognitive(597258099, IndexterSalienceThreshold.STRICT);
+            // RunCognitive(961068264, IndexterSalienceThreshold.STRICT);
 
-            // RunBaselineWithConservativeDomainExpansion();
+            // RunBaselineWithConservativeDomainExpansion(297639913);
 
-            // RunWindowedWithConservativeDomainExpansion();
+            RunWindowedWithConservativeDomainExpansion(297639913);
 
-            // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.AVERAGE);
+            // RunCognitiveWithConservativeDomainExpansion(278615819, IndexterSalienceThreshold.AVERAGE);
 
-            // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.STRICT);
+            // RunCognitiveWithConservativeDomainExpansion(278615819, IndexterSalienceThreshold.STRICT);
 
             // Utility
             // ReachabilityAnalysis.CompressRecallabilityDataFiles();

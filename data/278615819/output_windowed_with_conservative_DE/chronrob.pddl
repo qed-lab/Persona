@@ -1,0 +1,7 @@
+(move-through-entrance arthur cliff mansionentrance mansion)
+(give arthur lovecontract jordan mansion)
+(move-through-entrance arthur mansion mansionexit cliff)
+(move-through-doorway arthur cliff townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)
+(move-through-entrance arthur docks barentrance bar)
