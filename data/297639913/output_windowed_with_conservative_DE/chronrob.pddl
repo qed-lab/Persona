@@ -1,0 +1,7 @@
+(open arthur shopentrance townsquare)
+(move-through-entrance arthur townsquare shopentrance shop)
+(pickup arthur knightshield shop)
+(pickup arthur rubyring shop)
+(move-through-entrance arthur shop shopexit townsquare)
+(move-through-doorway arthur townsquare townarch)
+(open arthur forgeentrance townarch)

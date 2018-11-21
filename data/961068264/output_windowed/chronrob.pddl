@@ -1,0 +1,7 @@
+(give arthur candle james valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-doorway arthur townsquare cliff)
+(pickup arthur knightshield cliff)
+(move-through-doorway arthur cliff townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)

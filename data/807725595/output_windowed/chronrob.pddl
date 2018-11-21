@@ -1,0 +1,7 @@
+(move-through-entrance arthur fort fortexit valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-entrance arthur townsquare shopentrance shop)
+(pickup arthur knightshield shop)
+(move-through-entrance arthur shop shopexit townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-entrance arthur townarch forgeentrance forge)
