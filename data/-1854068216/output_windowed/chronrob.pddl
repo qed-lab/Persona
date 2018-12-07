@@ -1,0 +1,7 @@
+(move-through-entrance arthur cliff mansionentrance mansion)
+(give arthur loveletter jordan mansion)
+(move-through-entrance arthur mansion mansionexit cliff)
+(pickup arthur bouquet cliff)
+(move-through-doorway arthur cliff townsquare)
+(move-through-doorway arthur townsquare townarch)
+(give arthur bouquet dorian townarch)
