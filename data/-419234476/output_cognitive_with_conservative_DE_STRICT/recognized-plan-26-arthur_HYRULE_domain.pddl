@@ -1,0 +1,8 @@
+(close arthur mansionentrance cliff)
+(move-through-doorway arthur cliff townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch townsquare )
+(move-through-doorway arthur townsquare cliff )
+(open arthur mansionentrance cliff )
+(move-through-entrance arthur cliff mansionentrance mansion)
+(give arthur loveletter jordan mansion)

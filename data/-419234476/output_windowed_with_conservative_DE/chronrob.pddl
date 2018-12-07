@@ -1,0 +1,7 @@
+(move-through-entrance arthur townsquare shopentrance shop)
+(give arthur hairtonic giovanna shop)
+(drop arthur mushroom shop)
+(move-through-entrance arthur shop shopexit townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)
+(move-through-entrance arthur docks barentrance bar)

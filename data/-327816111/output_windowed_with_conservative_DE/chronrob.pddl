@@ -1,0 +1,7 @@
+(pickup arthur rubyring townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)
+(move-through-doorway arthur docks junkyard)
+(give arthur tastycupcake alli junkyard)
+(move-through-doorway arthur junkyard docks)
+(move-through-entrance arthur docks barentrance bar)
