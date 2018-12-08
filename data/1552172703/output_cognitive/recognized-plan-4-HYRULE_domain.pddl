@@ -1,4 +1,4 @@
-(open arthur barexit bar)
+(open arthur barexit bar )
 (move-through-entrance arthur bar barexit docks )
 (move-through-doorway arthur docks junkyard )
 (move-through-doorway arthur junkyard docks)

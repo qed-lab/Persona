@@ -184,23 +184,4 @@
 		:effect
 				(closed ?entrance)
 	)
-
-	(:action move-through-door
-		:parameters (?character - character ?from - location ?door - door ?to - location)
-		:precondition
-			(and
-				(player ?character)
-				(at ?character ?from)
-				(not (at ?character ?to))
-				(not (= ?from ?to))
-				(connected ?from ?to)
-				(doorbetween ?door ?from ?to)
-				(not (locked ?door))
-			)
-		:effect
-			(and
-				(not (at ?character ?from))
-				(at ?character ?to)
-			)
-	)
 )
