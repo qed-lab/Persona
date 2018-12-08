@@ -1,0 +1,7 @@
+(give arthur candle james valley)
+(move-through-doorway arthur valley townsquare)
+(pickup arthur silver townsquare)
+(drop arthur silver townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)
+(move-through-entrance arthur docks barentrance bar)

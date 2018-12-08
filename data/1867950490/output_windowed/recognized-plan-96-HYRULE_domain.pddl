@@ -44,6 +44,7 @@
 (move-through-doorway arthur docks townarch)
 (move-through-door arthur townarch towngate townsquare)
 (move-through-doorway arthur townsquare valley)
+(open arthur fortentrance valley)
 (drop arthur rubyring valley )
 (move-through-doorway arthur valley townsquare )
 (move-through-doorway arthur townsquare cliff )

@@ -45,7 +45,6 @@
 (pickup arthur mirror junkyard)
 (move-through-doorway arthur junkyard docks)
 (move-through-doorway arthur docks townarch)
-(drop arthur mirror townarch)
 (move-through-entrance arthur townarch hutentrance hut)
 (drop arthur book hut)
 (pickup arthur book hut )

@@ -92,7 +92,6 @@
 (move-through-entrance arthur townsquare bankentrance bank )
 (move-through-entrance arthur bank bankexit townsquare )
 (move-through-doorway arthur townsquare cliff )
-(pickup arthur humanskull cliff)
 (move-through-doorway arthur cliff townsquare)
 (move-through-doorway arthur townsquare cliff )
 (move-through-entrance arthur cliff mansionentrance mansion )
