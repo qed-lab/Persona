@@ -1,0 +1,7 @@
+(move-through-entrance arthur forge forgeexit townarch)
+(move-through-doorway arthur townarch townsquare)
+(move-through-doorway arthur townsquare valley)
+(give arthur candle james valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)

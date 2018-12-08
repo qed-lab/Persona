@@ -1,6 +1,6 @@
-(open arthur barexit bar)
+(open arthur barexit bar )
 (move-through-entrance arthur bar barexit docks)
-(move-through-doorway arthur docks townarch)
+(move-through-doorway arthur docks townarch )
 (open arthur hutentrance townarch )
 (move-through-entrance arthur townarch hutentrance hut )
 (pickup arthur tastycupcake hut )

@@ -1,0 +1,7 @@
+(move-through-entrance arthur fort fortexit valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-entrance arthur townarch hutentrance hut)
+(move-through-entrance arthur hut hutexit townarch)
+(move-through-doorway arthur townarch docks)
+(move-through-entrance arthur docks barentrance bar)
