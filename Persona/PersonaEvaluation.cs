@@ -8,6 +8,9 @@ using Mediation.PlanTools;
 using Mediation.Interfaces;
 using Mediation.Planners;
 
+using Persona.Graphs;
+using Persona.Playspace;
+
 namespace Persona
 {
     public class PersonaEvaluation
@@ -22,11 +25,11 @@ namespace Persona
         {
             // Configurations
 
-            RunBaseline(597258099);
+            // RunBaseline(597258099);
 
             // RunWindowed(597258099);
 
-           //  RunCognitive(278615819, IndexterSalienceThreshold.AVERAGE);
+            // RunCognitive(278615819, IndexterSalienceThreshold.AVERAGE);
 
             // RunCognitive(597258099, IndexterSalienceThreshold.STRICT);
 
@@ -42,6 +45,7 @@ namespace Persona
             // ReachabilityAnalysis.CompressRecallabilityDataFiles();
             // Utilities.CorrectDetectedObjectsInGameProblemFiles();
             // PlanFailTest();
+            RunPlayspaceAnalysis();
 
             // Test
             // TestGoalCombinations();
@@ -783,6 +787,113 @@ namespace Persona
                 Directory.SetCurrentDirectory(oldWD);
             }
         }
+
+        #endregion
+
+        #region Domain and Player Analysis
+
+        private static void RunPlayspaceAnalysis()
+        {
+            // Record the kind of the system that is running here.
+            string config = "playspace";
+
+            // Load the baseline domain
+            string domainPath = Parser.GetTopDirectory() + @"benchmarks/baselinedomain.pddl";
+            Domain domain = Parser.GetDomain(domainPath, Mediation.Enums.PlanType.StateSpace);
+
+            // Load the baseline problem
+            string problemPath = Parser.GetTopDirectory() + @"benchmarks/baselineproblem.pddl";
+            Problem problem = Parser.GetProblem(problemPath);
+
+            // Create an output folder.
+            string outputFolder = Parser.GetTopDirectory() + @"analysis/Playspace/";
+            Directory.CreateDirectory(outputFolder);
+
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"analysis/Playtraces";
+
+
+            // Store and change the current working directory.
+            string oldWD = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(outputFolder);
+
+            // Create two playspace graphs: one for the tutorial and one for gameplay.
+            PlayspaceGraph tutorialPlayspace = new PlayspaceGraph();
+            PlayspaceGraph gameplayPlayspace = new PlayspaceGraph();
+
+            // For each player
+            foreach (string dataFile in Directory.EnumerateFiles(dataPath, "*.pddl"))
+            {
+                // Get the player's ID.
+                string[] dataPathString = dataFile.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1].Replace(".pddl", ""));
+
+                // Load the player's chronology
+                Plan fullChronology = Parser.GetPlan(dataFile, domain, problem);
+
+                // Extract the tutorial plan and the gameplay plan for this player.
+                Plan tutorialPlan = Utilities.GetTutorialActions(fullChronology);
+                Plan gameplayPlan = Utilities.GetGameplayActions(fullChronology);
+
+                // Expand the respective playspace graphs.
+                ExtendPlayspaceGraphWithPlan(tutorialPlayspace, tutorialPlan);
+                ExtendPlayspaceGraphWithPlan(gameplayPlayspace, gameplayPlan);
+            }
+
+            // Write out the tutorial playspace.
+            string logPath = Directory.GetCurrentDirectory() + @"/tutorial_" + config + ".gv";
+            StreamWriter writer = new StreamWriter(logPath, false);
+            writer.WriteLine(tutorialPlayspace.ToDotLanguageString());
+            writer.Close();
+
+            // Write out the gameplay playspace.
+            logPath = Directory.GetCurrentDirectory() + @"/gameplay_" + config + ".gv";
+            writer = new StreamWriter(logPath, false);
+            writer.WriteLine(gameplayPlayspace.ToDotLanguageString());
+            writer.Close();
+
+            // Restore the old working directory.
+            Directory.SetCurrentDirectory(oldWD);
+        }
+
+        public static void ExtendPlayspaceGraphWithApplicableActions(PlayspaceGraph playspaceGraph, Domain domain)
+        {
+
+        }
+
+
+        /// <summary>
+        /// Extracts the playspace graph of the given plan and adds it to the given playspace graph.
+        /// </summary>
+        /// <returns>The playspace graph expanded with the extracted graph of the given plan.</returns>
+        /// <param name="plan">The playspace graph expanded with the graph of the given plan.</param>
+        public static void ExtendPlayspaceGraphWithPlan(PlayspaceGraph playspaceGraph, Plan plan)
+        {
+            // Clone the initial state.
+            State previous = new State(plan.Initial.Predicates);
+
+            // Iterate the player chronology of observations.
+            for (int planStep = 0; planStep < plan.Steps.Count; planStep++)
+            {
+                // Get the operator in the player's chronology and apply it to the previous state.
+                Operator op = (Operator)plan.Steps[planStep];
+                State next = previous.NewState(op, plan.Problem.Objects);
+
+                // Setup the directed edge data.
+                Node<HashState> source = new Node<HashState>(new HashState(previous));
+                Node<HashState> sink = new Node<HashState>(new HashState(next));
+                DirectedEdge<HashState, HashOperator> playerAction =
+                    new DirectedEdge<HashState, HashOperator>(source, sink, new HashOperator(op));
+
+                // Add to the playspace graph.
+                playspaceGraph.AddDirectedEdge(playerAction);
+
+                previous = next;
+            }
+
+            playspaceGraph.ResetLayerIndexToAddAt();
+        }
+
 
         #endregion
 

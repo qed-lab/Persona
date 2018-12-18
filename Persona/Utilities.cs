@@ -49,18 +49,18 @@ namespace Persona
         };
 
 
-		/// <summary>
-		/// Computes the precision of the forward inferences in the recognized plan.
+        /// <summary>
+        /// Computes the precision of the forward inferences in the recognized plan.
         /// Precision is the number of correct predictions divided by the total
-		/// number of predictions made. 
+        /// number of predictions made. 
         /// 
         /// Assumes that the recognized plan is not empty (returns -1.0 otherwise).
-		/// </summary>
-		public static double PlanRecognitionPrecision(Plan recognizedPlan, Plan actualPlan)
+        /// </summary>
+        public static double PlanRecognitionPrecision(Plan recognizedPlan, Plan actualPlan)
         {
             if (recognizedPlan.Steps.Count == 0)
                 return -1.0;
-                
+
             double numberOfCorrectPredictions = 0;
             int numberOfPredictions = recognizedPlan.Steps.Count;
 
@@ -71,26 +71,26 @@ namespace Persona
 
                 // If the step id isn't greater than the actual plan step count,
                 // it means we can check if it was accurate.
-                if(stepId < actualPlan.Steps.Count)
+                if (stepId < actualPlan.Steps.Count)
                 {
-					
-					IOperator actualStep = actualPlan.Steps.ElementAt(stepId);
+
+                    IOperator actualStep = actualPlan.Steps.ElementAt(stepId);
 
                     // Compare the steps for a match. Assign partial credit for
                     // partial match; 1.0 is a perfect match and counts as 100%
                     // correct prediction for this step.
                     numberOfCorrectPredictions += Operator.PercentageMatch(recognizedStep, actualStep);
-				}
+                }
             }
 
-            return (numberOfCorrectPredictions / (double) numberOfPredictions);
+            return (numberOfCorrectPredictions / (double)numberOfPredictions);
         }
 
         // Computes Precision of Goal Rec
-		public static double GoalRecognitionPrecision(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
-		{
-			if (recognizedGoal.Count == 0)
-				return -1.0;
+        public static double GoalRecognitionPrecision(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
+        {
+            if (recognizedGoal.Count == 0)
+                return -1.0;
 
             bool[] recognizedGoalBitArray = GoalBitArray(recognizedGoal);
             bool[] actualGoalBitArray = GoalBitArray(actualGoal);
@@ -105,14 +105,14 @@ namespace Persona
             // Iterate over the recognized goal bit arrays.
             for (int goalId = 0; goalId < recognizedGoalBitArray.Length; goalId++)
             {
-                if(recognizedGoalBitArray[goalId] == true && actualGoalBitArray[goalId] == true)
+                if (recognizedGoalBitArray[goalId] == true && actualGoalBitArray[goalId] == true)
                 {
                     numberOfCorrectPredictions++;
                 }
             }
 
-            return (numberOfCorrectPredictions / (double) numberOfPredictions);
-		}
+            return (numberOfCorrectPredictions / (double)numberOfPredictions);
+        }
 
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Persona
 
                 // If the step id isn't greater than the actual plan step count,
                 // it means we can check if it was accurate.
-                if(stepId < actualPlan.Steps.Count)
+                if (stepId < actualPlan.Steps.Count)
                 {
                     IOperator actualStep = actualPlan.Steps.ElementAt(stepId);
 
@@ -151,33 +151,33 @@ namespace Persona
         }
 
 
-		// Computes Recall of Goal Rec
-		public static double GoalRecognitionRecall(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
-		{
+        // Computes Recall of Goal Rec
+        public static double GoalRecognitionRecall(List<IPredicate> recognizedGoal, List<IPredicate> actualGoal)
+        {
             if (actualGoal.Count == 0)
-				return -1.0;
+                return -1.0;
 
-			bool[] recognizedGoalBitArray = GoalBitArray(recognizedGoal);
-			bool[] actualGoalBitArray = GoalBitArray(actualGoal);
+            bool[] recognizedGoalBitArray = GoalBitArray(recognizedGoal);
+            bool[] actualGoalBitArray = GoalBitArray(actualGoal);
 
-			double numberOfCorrectPredictions = 0;
+            double numberOfCorrectPredictions = 0;
 
             int numberOfActualGoals = 0;
-			foreach (bool goalBit in actualGoalBitArray)
-				if (goalBit)
-					numberOfActualGoals++;
+            foreach (bool goalBit in actualGoalBitArray)
+                if (goalBit)
+                    numberOfActualGoals++;
 
-			// Iterate over the recognized goal bit arrays.
-			for (int goalId = 0; goalId < recognizedGoalBitArray.Length; goalId++)
-			{
-				if (recognizedGoalBitArray[goalId] == true && actualGoalBitArray[goalId] == true)
-				{
-					numberOfCorrectPredictions++;
-				}
-			}
+            // Iterate over the recognized goal bit arrays.
+            for (int goalId = 0; goalId < recognizedGoalBitArray.Length; goalId++)
+            {
+                if (recognizedGoalBitArray[goalId] == true && actualGoalBitArray[goalId] == true)
+                {
+                    numberOfCorrectPredictions++;
+                }
+            }
 
-			return (numberOfCorrectPredictions / (double)numberOfActualGoals);
-		}
+            return (numberOfCorrectPredictions / (double)numberOfActualGoals);
+        }
 
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Persona
 
             /// Copy over the goal literals (encoded as the preconditions).
             /// Each predicate is guaranteed to be of the form "has ?character ?item"
-            foreach (IPredicate pre in goalOperator.Preconditions) 
+            foreach (IPredicate pre in goalOperator.Preconditions)
             {
                 string[] symbols = pre.Name.ToLower().Split(new char[] { '_' });
                 goalLiterals.Add(Predicate.BuildPositiveGroundLiteral(symbols[0], symbols[1], symbols[2]));
@@ -243,8 +243,8 @@ namespace Persona
             List<IPredicate> wisdomQuestLiterals = new List<IPredicate>();
 
 
-			// Check each step to see which goals are pursued.
-			foreach(Operator step in actualPlan.Steps) 
+            // Check each step to see which goals are pursued.
+            foreach (Operator step in actualPlan.Steps)
             {
                 // Equip Quest
                 if (step.ToString().Equals("(give arthur knightsword ian fort)"))
@@ -266,7 +266,7 @@ namespace Persona
                     loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_letter"]);
 
                 if (step.ToString().Equals("(give arthur rubyring dorian townarch)"))
-                { 
+                {
                     // Only add the rubyring if the bouquet literal hasn't already been added.
                     if (!loveQuestLiterals.Contains(ALL_GOAL_LITERALS["love_bouquet"]))
                         loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_rubyring"]);
@@ -274,8 +274,8 @@ namespace Persona
 
                 if (step.ToString().Equals("(give arthur bouquet dorian townarch)"))
                 {
-					// Only add the bouquet if the rubyring literal hasn't already been added.
-					if (!loveQuestLiterals.Contains(ALL_GOAL_LITERALS["love_rubyring"]))
+                    // Only add the bouquet if the rubyring literal hasn't already been added.
+                    if (!loveQuestLiterals.Contains(ALL_GOAL_LITERALS["love_rubyring"]))
                         loveQuestLiterals.Add(ALL_GOAL_LITERALS["love_bouquet"]);
                 }
 
@@ -314,12 +314,12 @@ namespace Persona
         }
 
 
-		/// <summary>
-		/// Extracts the actual goal from the given actual plan. 
+        /// <summary>
+        /// Extracts the actual goal from the given actual plan. 
         /// This returns a list of disjunctive goals, themselves made from a
         /// list of conjuncted predicates.
-		/// </summary>
-		public static List<List<IPredicate>> ExtractGoals(Problem problem)
+        /// </summary>
+        public static List<List<IPredicate>> ExtractGoals(Problem problem)
         {
             List<List<IPredicate>> goals = new List<List<IPredicate>>();
 
@@ -344,17 +344,104 @@ namespace Persona
             if (adoptedGoals[5])
                 goals.Add(GOAL_LITERAL_LISTS["wisdom"]);
 
-			return goals;
+            return goals;
+        }
+
+        // Removes actions that don't effect a state change in the game.
+        public static Plan RemoveActionsPlayerCannotEffect(Plan plan)
+        {
+            List<IOperator> newSteps = new List<IOperator>();
+
+            foreach (IOperator step in plan.Steps)
+            {
+                // These are useless actions in the plan because they...
+                if (
+                    // ...cannot be used directly by the player
+                    !step.Name.Equals("donothing") &&
+                    !step.Name.Equals("win-the-game")
+                )
+                {
+                    newSteps.Add((IOperator)step.Clone());
+                }
+            }
+
+            IState newInitial = plan.Initial.Clone() as IState;
+            return new Plan(plan.Domain, plan.Problem, newSteps, newInitial);
+        }
+
+        // Gets the tutorial actions in the given play trace as a plan.
+        public static Plan GetTutorialActions(Plan playtrace)
+        {
+            List<IOperator> newSteps = new List<IOperator>();
+            bool containsDelimiterStep = false; // this is needed because some plan traces are faulty.
+
+            foreach (IOperator step in playtrace.Steps)
+            {
+                // Skip
+                if (step.ToString().Equals("(donothing arthur)"))
+                    continue;
+
+                // Once we get to this action, we're done.
+                if (step.ToString().Equals("(close arthur basemententrance bar)"))
+                {
+                    newSteps.Add((IOperator)step.Clone());
+                    containsDelimiterStep = true;
+                    break;
+                }
+
+                // If we're not at the end, keep adding.
+                newSteps.Add((IOperator)step.Clone());
+
+            }
+
+            if (!containsDelimiterStep)
+                newSteps.Clear();
+
+            IState newInitial = playtrace.Initial.Clone() as IState;
+            return new Plan(playtrace.Domain, playtrace.Problem, newSteps, newInitial);
+        }
+
+        // Gets the gameplay actions in the given playtrace (i.e. all actions after the tutorial).
+        public static Plan GetGameplayActions(Plan playtrace)
+        {
+            List<IOperator> newSteps = new List<IOperator>();
+            IState newInitial = playtrace.Initial.Clone() as IState;
+            bool isBeyondTutorialSteps = false;
+
+            foreach (IOperator step in playtrace.Steps)
+            {
+                // Skip
+                if (step.ToString().Equals("(donothing arthur)"))
+                    continue;
+
+                // If we have found the last tutorial action already and we're past it, 
+                // register the step and don't update the state.
+                if (isBeyondTutorialSteps)
+                    newSteps.Add(step);
+
+                // If we're still looking for the last tutorial action...
+                else
+                {
+                    // ...and we just found it, set the flag.
+                    if (step.ToString().Equals("(close arthur basemententrance bar)"))
+                        isBeyondTutorialSteps = true;
+
+                    // Advance the state by the step in the tutorial.
+                    newInitial = (newInitial as State).NewState((step as Operator), playtrace.Problem.Objects);
+                }
+            }
+
+            return new Plan(playtrace.Domain, playtrace.Problem, newSteps, newInitial);
         }
 
 
-		// Removes actions that don't matter for the substance of the game.
-		public static Plan RemoveUselessActions(Plan observations)
-		{
-			List<IOperator> newSteps = new List<IOperator>();
+        // Removes actions that don't matter for the substance of the game.
+        public static Plan RemoveUselessActions(Plan observations)
+        {
+            List<IOperator> newSteps = new List<IOperator>();
 
-			foreach (IOperator step in observations.Steps)
-			{
+            foreach (IOperator step in observations.Steps)
+            {
                 // These are useless actions in the plan because they...
                 if (
                     // ...do not effect a state change
@@ -382,14 +469,14 @@ namespace Persona
                     !step.ToString().Equals("(move-through-entrance arthur basement basementexit bar)") &&
                     !step.ToString().Equals("(close arthur basemententrance bar)")
                 )
-				{
-					newSteps.Add((IOperator)step.Clone());
-				}
-			}
+                {
+                    newSteps.Add((IOperator)step.Clone());
+                }
+            }
 
-			IState newInitial = observations.Initial.Clone() as IState;
-			return new Plan(observations.Domain, observations.Problem, newSteps, newInitial);
-		}
+            IState newInitial = observations.Initial.Clone() as IState;
+            return new Plan(observations.Domain, observations.Problem, newSteps, newInitial);
+        }
 
 
         // Removes actions that aren't carried out by the player.
@@ -418,7 +505,7 @@ namespace Persona
             char[] underscore = new char[] { '_' };
 
             // Go through each of the steps
-            foreach(Operator step in recognizedPlan.Steps)
+            foreach (Operator step in recognizedPlan.Steps)
             {
                 // Skip the "reach-goal" step.
                 if (!step.Name.Contains("reach") && !step.Name.Contains("REACH"))
@@ -482,7 +569,7 @@ namespace Persona
         {
             List<string> symbols = new List<string>();
 
-            foreach(IPredicate p in predicates)
+            foreach (IPredicate p in predicates)
             {
                 symbols.Add(p.Name);
 
@@ -499,102 +586,102 @@ namespace Persona
         /// </summary>
         public static int PredicateLevenshteinDistance(List<IPredicate> p1, List<IPredicate> p2)
         {
-			List<string> sourceSymbolString = PredicatesToSymbolString(p1);
-			List<string> targetSymbolString = PredicatesToSymbolString(p2);
+            List<string> sourceSymbolString = PredicatesToSymbolString(p1);
+            List<string> targetSymbolString = PredicatesToSymbolString(p2);
 
-			if (sourceSymbolString.Count == 0)
-			{
-				if (targetSymbolString.Count == 0)
-					return 0;
+            if (sourceSymbolString.Count == 0)
+            {
+                if (targetSymbolString.Count == 0)
+                    return 0;
 
-				else
-					return targetSymbolString.Count;
-			}
+                else
+                    return targetSymbolString.Count;
+            }
 
-			if (targetSymbolString.Count == 0)
-				return sourceSymbolString.Count;
+            if (targetSymbolString.Count == 0)
+                return sourceSymbolString.Count;
 
-			if (sourceSymbolString.Count > targetSymbolString.Count)
-			{
-				var temp = targetSymbolString;
-				targetSymbolString = sourceSymbolString;
-				sourceSymbolString = temp;
-			}
+            if (sourceSymbolString.Count > targetSymbolString.Count)
+            {
+                var temp = targetSymbolString;
+                targetSymbolString = sourceSymbolString;
+                sourceSymbolString = temp;
+            }
 
-			int m = targetSymbolString.Count;
-			int n = sourceSymbolString.Count;
-			int[,] distance = new int[2, m + 1];
+            int m = targetSymbolString.Count;
+            int n = sourceSymbolString.Count;
+            int[,] distance = new int[2, m + 1];
 
-			// Initialize the distance matrix.
-			for (var j = 1; j <= m; j++)
-				distance[0, j] = j;
-
-
-			int currentRow = 0;
-			for (int i = 1; i <= n; ++i)
-			{
-				currentRow = i & 1;
-				distance[currentRow, 0] = i;
-				int previousRow = currentRow ^ 1;
-
-				for (int j = 1; j <= m; j++)
-				{
-					int cost = (targetSymbolString[j - 1].Equals(sourceSymbolString[i - 1]) ? 0 : 1);
-					distance[currentRow, j] = Math.Min(
-						Math.Min(
-							distance[previousRow, j] + 1,
-							distance[currentRow, j - 1] + 1
-						),
-						distance[previousRow, j - 1] + cost
-					);
-				}
-			}
-
-			return distance[currentRow, m];
-		}
+            // Initialize the distance matrix.
+            for (var j = 1; j <= m; j++)
+                distance[0, j] = j;
 
 
-		public static bool[] GoalBitArray(List<IPredicate> goal)
-		{
-			// A boolean array that identifies whether the goal represented by (index + 1)
-			// is present in the given list of predicates.
-			bool[] goalsPresent = new bool[6];
+            int currentRow = 0;
+            for (int i = 1; i <= n; ++i)
+            {
+                currentRow = i & 1;
+                distance[currentRow, 0] = i;
+                int previousRow = currentRow ^ 1;
+
+                for (int j = 1; j <= m; j++)
+                {
+                    int cost = (targetSymbolString[j - 1].Equals(sourceSymbolString[i - 1]) ? 0 : 1);
+                    distance[currentRow, j] = Math.Min(
+                        Math.Min(
+                            distance[previousRow, j] + 1,
+                            distance[currentRow, j - 1] + 1
+                        ),
+                        distance[previousRow, j - 1] + cost
+                    );
+                }
+            }
+
+            return distance[currentRow, m];
+        }
+
+
+        public static bool[] GoalBitArray(List<IPredicate> goal)
+        {
+            // A boolean array that identifies whether the goal represented by (index + 1)
+            // is present in the given list of predicates.
+            bool[] goalsPresent = new bool[6];
 
             // These are all the predicates representing the respective goals.
 
             // g1 - Equip Quest
             IPredicate g1_1 = ALL_GOAL_LITERALS["equip_sword"];
-			IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
+            IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
 
-			// g2 - Fetch Quest
-			IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
+            // g2 - Fetch Quest
+            IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
 
-			// g3 - Pilgrimage Quest
-			IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
+            // g3 - Pilgrimage Quest
+            IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
 
-			// g4 - Love Quest
-			IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
+            // g4 - Love Quest
+            IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
             IPredicate g4_2a = ALL_GOAL_LITERALS["love_rubyring"];
             IPredicate g4_2b = ALL_GOAL_LITERALS["love_bouquet"];
             IPredicate g4_3 = ALL_GOAL_LITERALS["love_contract"];
 
             // g5 - Wisdom Quest
             IPredicate g5_1 = ALL_GOAL_LITERALS["wisdom_coin"];
-			IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
+            IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
             IPredicate g5_3 = ALL_GOAL_LITERALS["wisdom_candle"];
 
 
-			// Check for membership for each set of goals and flag as appropriate.
-			goalsPresent[0] = (goal.Contains(g1_1) && goal.Contains(g1_2)) ? true : false;
-			goalsPresent[1] = goal.Contains(g2) ? true : false;
-			goalsPresent[2] = goal.Contains(g3) ? true : false;
-			goalsPresent[3] = (goal.Contains(g4_1) && goal.Contains(g4_2a) && goal.Contains(g4_3)) ? true : false;
+            // Check for membership for each set of goals and flag as appropriate.
+            goalsPresent[0] = (goal.Contains(g1_1) && goal.Contains(g1_2)) ? true : false;
+            goalsPresent[1] = goal.Contains(g2) ? true : false;
+            goalsPresent[2] = goal.Contains(g3) ? true : false;
+            goalsPresent[3] = (goal.Contains(g4_1) && goal.Contains(g4_2a) && goal.Contains(g4_3)) ? true : false;
             goalsPresent[4] = (goal.Contains(g4_1) && goal.Contains(g4_2b) && goal.Contains(g4_3)) ? true : false;
-			goalsPresent[5] = (goal.Contains(g5_1) && goal.Contains(g5_2) && goal.Contains(g5_3)) ? true : false;
+            goalsPresent[5] = (goal.Contains(g5_1) && goal.Contains(g5_2) && goal.Contains(g5_3)) ? true : false;
 
-			// Return the bit array.
-			return goalsPresent;
-		}
+            // Return the bit array.
+            return goalsPresent;
+        }
 
         public static List<List<IPredicate>> DisjunctifyGoals(List<IPredicate> goal)
         {
@@ -608,28 +695,28 @@ namespace Persona
             List<IPredicate> loveQuestAdoptedGoals = new List<IPredicate>();
             List<IPredicate> wisdomQuestAdoptedGoals = new List<IPredicate>();
 
-			// These are all the predicates representing the respective goals.
+            // These are all the predicates representing the respective goals.
 
-			// g1 - Equip Quest
-			IPredicate g1_1 = ALL_GOAL_LITERALS["equip_sword"];
-			IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
+            // g1 - Equip Quest
+            IPredicate g1_1 = ALL_GOAL_LITERALS["equip_sword"];
+            IPredicate g1_2 = ALL_GOAL_LITERALS["equip_shield"];
 
-			// g2 - Fetch Quest
-			IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
+            // g2 - Fetch Quest
+            IPredicate g2 = ALL_GOAL_LITERALS["fetch"];
 
-			// g3 - Pilgrimage Quest
-			IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
+            // g3 - Pilgrimage Quest
+            IPredicate g3 = ALL_GOAL_LITERALS["pilgrimage"];
 
-			// g4 - Love Quest
-			IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
-			IPredicate g4_2a = ALL_GOAL_LITERALS["love_rubyring"];
-			IPredicate g4_2b = ALL_GOAL_LITERALS["love_bouquet"];
-			IPredicate g4_3 = ALL_GOAL_LITERALS["love_contract"];
+            // g4 - Love Quest
+            IPredicate g4_1 = ALL_GOAL_LITERALS["love_letter"];
+            IPredicate g4_2a = ALL_GOAL_LITERALS["love_rubyring"];
+            IPredicate g4_2b = ALL_GOAL_LITERALS["love_bouquet"];
+            IPredicate g4_3 = ALL_GOAL_LITERALS["love_contract"];
 
-			// g5 - Wisdom Quest
-			IPredicate g5_1 = ALL_GOAL_LITERALS["wisdom_coin"];
-			IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
-			IPredicate g5_3 = ALL_GOAL_LITERALS["wisdom_candle"];
+            // g5 - Wisdom Quest
+            IPredicate g5_1 = ALL_GOAL_LITERALS["wisdom_coin"];
+            IPredicate g5_2 = ALL_GOAL_LITERALS["wisdom_humanskull"];
+            IPredicate g5_3 = ALL_GOAL_LITERALS["wisdom_candle"];
 
             // Check to see how many goals have been adopted. It is sufficient
             // to check that the first literal of the respective goal has been
@@ -641,7 +728,7 @@ namespace Persona
                 equipQuestAdoptedGoals.Add(g1_1);
                 equipQuestAdoptedGoals.Add(g1_2);
             }
-                
+
             // If the fetch quest is adopted, the goal is present.
             if (goal.Contains(g2))
                 fetchQuestAdoptedGoals.Add(g2);
@@ -649,7 +736,7 @@ namespace Persona
             // If the pilgrimage quest is adopted, the goal is present.
             if (goal.Contains(g3))
                 pilgrimageQuestAdoptedGoals.Add(g3);
-            
+
             // The love quest is broken up into parts. 
             // Such that if the love quest is adopted, not all goals are immediately added.
             if (goal.Contains(g4_1))
@@ -694,7 +781,7 @@ namespace Persona
 
             if (wisdomQuestAdoptedGoals.Count > 0)
                 disjunctedGoals.Add(wisdomQuestAdoptedGoals);
-            
+
 
             return disjunctedGoals;
         }
@@ -708,7 +795,7 @@ namespace Persona
         {
             List<List<List<IPredicate>>> quadruples = new List<List<List<IPredicate>>>();
 
-            if(disjunctedGoals.Count <= 4)
+            if (disjunctedGoals.Count <= 4)
             {
                 quadruples.Add(disjunctedGoals);
             }
@@ -813,7 +900,7 @@ namespace Persona
             List<List<List<IPredicate>>> triples = new List<List<List<IPredicate>>>();
 
             // If there are three goals or less, there's only at most one triple.
-            if(disjunctedGoals.Count <= 3)
+            if (disjunctedGoals.Count <= 3)
             {
                 triples.Add(disjunctedGoals);
             }
@@ -899,22 +986,22 @@ namespace Persona
             else
                 pddl.Append("\n");
 
-            foreach(List<List<IPredicate>> goalList in goalCombinations)
+            foreach (List<List<IPredicate>> goalList in goalCombinations)
             {
                 if (goalCombinations.Count > 3)
                     pddl.Append("\t\t\t(and\n");
 
                 else
                 {
-                    if(goalCombinations.Count == 1 && goalCombinations.ElementAt(0).Count == 1)
+                    if (goalCombinations.Count == 1 && goalCombinations.ElementAt(0).Count == 1)
                         pddl.Append("\t\t\n");
 
                     else
                         pddl.Append("\t\t(and\n");
                 }
-                    
 
-                foreach(List<IPredicate> goal in goalList)
+
+                foreach (List<IPredicate> goal in goalList)
                 {
                     if (goalCombinations.Count > 3)
                         pddl.Append("\t\t\t\t");
@@ -925,8 +1012,8 @@ namespace Persona
                     // Just in case we've adopted a multi-part quest, 
                     if (goalCombinations.Count == 1 && goal.Count > 1)
                         pddl.Append("(and ");
-                    
-                    foreach(IPredicate literal in goal)
+
+                    foreach (IPredicate literal in goal)
                     {
                         pddl.Append(literal + " ");
                     }
@@ -1074,7 +1161,7 @@ namespace Persona
                     // Write the clone problem out to a file
                     problemClone.Domain = "arthur_HYRULE";
                     baselineDomain.Name = "arthur_HYRULE";
-                    Writer.ProblemToPDDL(outputFolder + @"/problem_arthur" + problemNumber + @".pddl", 
+                    Writer.ProblemToPDDL(outputFolder + @"/problem_arthur" + problemNumber + @".pddl",
                                          baselineDomain, problemClone, problemClone.Initial);
 
                     // Go to the next file
@@ -1121,7 +1208,25 @@ namespace Persona
             return !firstNotSecond.Any<T>() && !secondNotFirst.Any<T>();
         }
 
-	}
+        // Assembles a Dictionary:
+        // <precondition, operator> to list of operators that can achieve said precondition.
+        public static Dictionary<Tuple<Predicate, Operator>, List<Operator>> PotentialLinks(Domain domain)
+        {
+            Dictionary<Tuple<Predicate, Operator>, List<Operator>> potentialLinks =
+                new Dictionary<Tuple<Predicate, Operator>, List<Operator>>();
+
+            // Get each operator in the domain.
+            foreach (Operator o in domain.Operators)
+            {
+                Console.WriteLine(o);
+            }
+
+            return potentialLinks;
+        }
+
+        // public static Dictionary<Predicate, List<Operator>> LiteralAchieversMap(Domain)
+
+    }
 
     static class Extensions
     {

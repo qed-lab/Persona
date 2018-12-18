@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace Mediation.PlanTools
             int numberOfFeatures = 1;
 
             // Only continue checking if there is a name match.
-            if(instance.Name.Equals(target.Name))
+            if (instance.Name.Equals(target.Name))
             {
                 // The name matches, so increase the match count.
                 numberOfMatchingFeatures++;
@@ -45,7 +45,7 @@ namespace Mediation.PlanTools
                 }
             }
 
-            return ( (double) numberOfMatchingFeatures / (double) numberOfFeatures);
+            return ((double)numberOfMatchingFeatures / (double)numberOfFeatures);
         }
 
         private static int Counter = -1;
@@ -79,8 +79,8 @@ namespace Mediation.PlanTools
         public List<ITerm> Terms
         {
             get { return Predicate.Terms; }
-            set 
-            { 
+            set
+            {
                 Predicate.Terms = value;
                 UpdateBindings();
             }
@@ -96,8 +96,8 @@ namespace Mediation.PlanTools
         public List<IPredicate> Preconditions
         {
             get { return preconditions; }
-            set 
-            { 
+            set
+            {
                 preconditions = value;
                 UpdatePreconditionBindings();
             }
@@ -107,8 +107,8 @@ namespace Mediation.PlanTools
         public List<IPredicate> Effects
         {
             get { return effects; }
-            set 
-            { 
+            set
+            {
                 effects = value;
                 UpdateEffectBindings();
             }
@@ -138,7 +138,8 @@ namespace Mediation.PlanTools
         // location, this property returns "unknown."
         public string Location
         {
-            get {
+            get
+            {
                 if (string.IsNullOrEmpty(location))
                 {
                     ITerm locationTerm = Terms.Find(
@@ -152,7 +153,7 @@ namespace Mediation.PlanTools
 
                     else
                         location = "unknown";
-                
+
                     return location;
                 }
 
@@ -167,15 +168,16 @@ namespace Mediation.PlanTools
         // and returns them.
         public List<ITerm> Entities
         {
-            get {
+            get
+            {
                 // Lazy init
-                if(entites == null)
+                if (entites == null)
                 {
                     // Create an empty list of terms
                     entites = new List<ITerm>();
 
                     // For each term in this operator,
-                    foreach(ITerm term in Terms)
+                    foreach (ITerm term in Terms)
                     {
                         // check if the term's type is "character" or "item"
                         // add the term as an entity if it is.
@@ -192,8 +194,8 @@ namespace Mediation.PlanTools
         public List<ITerm> ConsentingAgents
         {
             get { return consenting; }
-            set 
-            { 
+            set
+            {
                 consenting = value;
                 UpdateConsentingAgentBindings();
             }
@@ -209,14 +211,14 @@ namespace Mediation.PlanTools
         public Hashtable Bindings
         {
             get { return bindings; }
-            set 
-            { 
+            set
+            {
                 bindings = value;
                 UpdateTerms();
             }
         }
 
-        public Operator ()
+        public Operator()
         {
             location = "";
             predicate = new Predicate();
@@ -270,7 +272,7 @@ namespace Mediation.PlanTools
             entites = null;
         }
 
-        public Operator (string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects)
+        public Operator(string name, List<ITerm> terms, Hashtable bindings, List<IPredicate> preconditions, List<IPredicate> effects)
         {
             location = "";
             this.predicate = new Predicate(name, terms, true);
@@ -422,7 +424,7 @@ namespace Mediation.PlanTools
         }
 
         // Adds a variable/constant binding pair to the operator.
-        public void AddBinding (string variable, string constant)
+        public void AddBinding(string variable, string constant)
         {
             // Create a new hashtable to hold the new bindings.
             Hashtable newBindings = Bindings.Clone() as Hashtable;
@@ -473,9 +475,7 @@ namespace Mediation.PlanTools
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-
             sb.Append(predicate);
-
             return sb.ToString();
         }
 

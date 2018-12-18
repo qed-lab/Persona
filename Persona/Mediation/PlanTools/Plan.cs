@@ -47,7 +47,7 @@ namespace Mediation.PlanTools
         // Access the plan's dependencies.
         public List<CausalLink> Dependencies
         {
-            get 
+            get
             {
                 // If the dependencies are not initialized, create them.
                 if (dependencies == null)
@@ -76,7 +76,8 @@ namespace Mediation.PlanTools
         // Access the plan's causal chains.  These causal chains are made up by chains of steps connected through trabassos.
         public List<List<IOperator>> CausalChains
         {
-            get {
+            get
+            {
                 if (causalChains == null)
                     causalChains = GetTrabassoCausalChains();
 
@@ -87,7 +88,8 @@ namespace Mediation.PlanTools
         // Access the plan's temporal chains. These chains are made up by chains of steps that belong to the same temporal frame.
         public List<List<IOperator>> TemporalChains
         {
-            get {
+            get
+            {
                 if (temporalChains == null)
                     temporalChains = GetTemporalChains();
 
@@ -123,7 +125,7 @@ namespace Mediation.PlanTools
             set { Goal.Predicates = value.Preconditions; }
         }
 
-        public Plan ()
+        public Plan()
         {
             domain = new Domain();
             problem = new Problem();
@@ -133,7 +135,7 @@ namespace Mediation.PlanTools
             goal = new State();
         }
 
-        public Plan (Domain domain, Problem problem, List<IOperator> steps)
+        public Plan(Domain domain, Problem problem, List<IOperator> steps)
         {
             this.domain = domain;
             this.problem = problem;
@@ -154,7 +156,7 @@ namespace Mediation.PlanTools
         }
 
         // Updates a plan by progressing a single step.
-        public Plan GetPlanUpdate (Problem newProblem)
+        public Plan GetPlanUpdate(Problem newProblem)
         {
             // Clone the current plan.
             Plan newPlan = (Plan)Clone();
@@ -184,7 +186,7 @@ namespace Mediation.PlanTools
         }
 
         // Updates a plan by progressing a single step.
-        public Plan GetPlanUpdate (Problem newProblem, Operator action)
+        public Plan GetPlanUpdate(Problem newProblem, Operator action)
         {
             // Clone the current plan.
             Plan newPlan = (Plan)Clone();
@@ -244,7 +246,7 @@ namespace Mediation.PlanTools
         }
 
         // Used for consistent actions.
-        public Plan GetPlanUpdateNoStep (Problem newProblem)
+        public Plan GetPlanUpdateNoStep(Problem newProblem)
         {
             // Clone the current plan.
             Plan newPlan = (Plan)Clone();
@@ -272,13 +274,13 @@ namespace Mediation.PlanTools
         }
 
         // Return the first state of the plan.
-        public State GetFirstState ()
+        public State GetFirstState()
         {
             return (State)Initial.Clone();
         }
 
         // A tree of intermediary world states.
-        public List<State> CreateStateTree ()
+        public List<State> CreateStateTree()
         {
             // Create the state tree.
             List<State> stateTree = new List<State>();
@@ -301,8 +303,8 @@ namespace Mediation.PlanTools
         }
 
         // Draws dependencies between steps in the plan.
-        private void 
-        CreateDependencies ()
+        private void
+        CreateDependencies()
         {
             // Reset the causal links.
             dependencies = new List<CausalLink>();
@@ -443,7 +445,7 @@ namespace Mediation.PlanTools
                     foreach (Predicate effect in allSteps[i].Effects)
                     {
                         if (literal.Equals(effect))
-                                found = allSteps.ElementAt(i).Clone() as Operator;
+                            found = allSteps.ElementAt(i).Clone() as Operator;
 
                         if (found != null)
                         {
@@ -491,7 +493,7 @@ namespace Mediation.PlanTools
                         // Loop through the initial state literals and check to see if the reversed literal exists.
                         foreach (Predicate init in initial.Predicates)
                             if (literal.Equals(init))
-                                inInitial = true;    
+                                inInitial = true;
                     }
                     else
                     {
@@ -500,12 +502,12 @@ namespace Mediation.PlanTools
                         // Loop through the initial state literals and check to see if the reversed literal exists.
                         foreach (Predicate init in initial.Predicates)
                             if (literal.IsInverse(init))
-                                inInitial = false;    
-                    }       
-                    
+                                inInitial = false;
+                    }
+
                     // If the literal was not enabled in the initial state, add it.
-                    if(!inInitial)
-                            trabassos.Add(new CausalLink(flaws.First().precondition, flaws.First().step, found, span));
+                    if (!inInitial)
+                        trabassos.Add(new CausalLink(flaws.First().precondition, flaws.First().step, found, span));
                 }
 
                 // Remove the current flaw from the list.
@@ -577,7 +579,7 @@ namespace Mediation.PlanTools
         }
 
         // Displays the contents of the plan.
-        public override string ToString ()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -588,7 +590,7 @@ namespace Mediation.PlanTools
         }
 
         // Displays the contents of the plan.
-        public string ToStringDetailed ()
+        public string ToStringDetailed()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -599,7 +601,7 @@ namespace Mediation.PlanTools
         }
 
         // Creates a clone of the plan.
-        public Object Clone ()
+        public Object Clone()
         {
             List<IOperator> newSteps = new List<IOperator>();
 
@@ -621,7 +623,7 @@ namespace Mediation.PlanTools
             List<IOperator> newSteps = new List<IOperator>();
 
             for (int i = 0; i < length; i++)
-                newSteps.Add((IOperator) steps.ElementAt(i).Clone());
+                newSteps.Add((IOperator)steps.ElementAt(i).Clone());
 
             IState newInitial = initial.Clone() as IState;
             return new Plan(domain, problem, newSteps, newInitial);
@@ -631,13 +633,13 @@ namespace Mediation.PlanTools
         // Length must be positive and not greater than the length of this plan.
         public Object Suffix(int startingStepIndex)
         {
-			if (startingStepIndex < 0 || startingStepIndex > this.steps.Count)
-				throw new ArgumentException("StartingStepIndex must be positive and not greater than the length of this plan");
+            if (startingStepIndex < 0 || startingStepIndex > this.steps.Count)
+                throw new ArgumentException("StartingStepIndex must be positive and not greater than the length of this plan");
 
-			List<IOperator> newSteps = new List<IOperator>();
+            List<IOperator> newSteps = new List<IOperator>();
 
             for (int i = startingStepIndex; i < this.Steps.Count; i++)
-				newSteps.Add((IOperator)steps.ElementAt(i).Clone());
+                newSteps.Add((IOperator)steps.ElementAt(i).Clone());
 
             // Update the initial state up until the first operator of the suffix.
             State newInitial = initial.Clone() as State;
@@ -652,7 +654,7 @@ namespace Mediation.PlanTools
             newProblem.Initial = newInitial.Predicates;
 
             return new Plan(domain, newProblem, newSteps, newInitial);
-		}
+        }
 
         // Creates a clone of the plan including all steps up until and including the specified id.
         // Assumes that all steps in the plan are ordered in ascending step order.
@@ -698,7 +700,7 @@ namespace Mediation.PlanTools
         {
             List<string> symbols = new List<string>();
 
-            foreach(Operator step in this.Steps)
+            foreach (Operator step in this.Steps)
             {
                 symbols.Add(step.Name);
 
@@ -719,54 +721,54 @@ namespace Mediation.PlanTools
             List<string> targetSymbolString = target.ToSymbolString();
 
             if (sourceSymbolString.Count == 0)
-			{
+            {
                 if (targetSymbolString.Count == 0)
-					return 0;
+                    return 0;
 
-				else
+                else
                     return targetSymbolString.Count;
-			}
+            }
 
-			if (targetSymbolString.Count == 0)
-				return sourceSymbolString.Count;
+            if (targetSymbolString.Count == 0)
+                return sourceSymbolString.Count;
 
-			if (sourceSymbolString.Count > targetSymbolString.Count)
-			{
+            if (sourceSymbolString.Count > targetSymbolString.Count)
+            {
                 var temp = targetSymbolString;
                 targetSymbolString = sourceSymbolString;
                 sourceSymbolString = temp;
-			}
+            }
 
             int m = targetSymbolString.Count;
             int n = sourceSymbolString.Count;
-			int[,] distance = new int[2, m + 1];
+            int[,] distance = new int[2, m + 1];
 
-			// Initialize the distance matrix.
-			for (var j = 1; j <= m; j++)
-				distance[0, j] = j;
+            // Initialize the distance matrix.
+            for (var j = 1; j <= m; j++)
+                distance[0, j] = j;
 
 
-			int currentRow = 0;
-			for (int i = 1; i <= n; ++i)
-			{
-				currentRow = i & 1;
-				distance[currentRow, 0] = i;
-				int previousRow = currentRow ^ 1;
+            int currentRow = 0;
+            for (int i = 1; i <= n; ++i)
+            {
+                currentRow = i & 1;
+                distance[currentRow, 0] = i;
+                int previousRow = currentRow ^ 1;
 
-				for (int j = 1; j <= m; j++)
-				{
+                for (int j = 1; j <= m; j++)
+                {
                     int cost = (targetSymbolString[j - 1].Equals(sourceSymbolString[i - 1]) ? 0 : 1);
-					distance[currentRow, j] = Math.Min(
-						Math.Min(
-							distance[previousRow, j] + 1,
-							distance[currentRow, j - 1] + 1
-						),
-						distance[previousRow, j - 1] + cost
-					);
-				}
-			}
+                    distance[currentRow, j] = Math.Min(
+                        Math.Min(
+                            distance[previousRow, j] + 1,
+                            distance[currentRow, j - 1] + 1
+                        ),
+                        distance[previousRow, j - 1] + cost
+                    );
+                }
+            }
 
-			return distance[currentRow, m];
+            return distance[currentRow, m];
         }
 
         // Returns all the causal chains defined through trabassos in the plan.
@@ -776,12 +778,13 @@ namespace Mediation.PlanTools
 
             // Get all the steps.
             List<IOperator> plan = new List<IOperator>();
-            foreach(Operator step in steps) {
+            foreach (Operator step in steps)
+            {
                 plan.Add(step.Clone() as IOperator);
             }
 
             // While we have steps we're considering,
-            while(plan.Count > 0)
+            while (plan.Count > 0)
             {
                 // Get the last step in the plan.
                 IOperator step = plan.Last();
@@ -804,7 +807,7 @@ namespace Mediation.PlanTools
                     List<CausalLink> trabassosWithHeadS = Trabassos.FindAll(t => t.Head.Equals(s));
 
                     // For each such trabasso,
-                    foreach(CausalLink trabasso in trabassosWithHeadS)
+                    foreach (CausalLink trabasso in trabassosWithHeadS)
                     {
                         // Get the tail of the trabasso
                         IOperator tail = trabasso.Tail;
@@ -812,9 +815,9 @@ namespace Mediation.PlanTools
                         // If we haven't already visited that step, add it to the frontier.
                         if (!visited.Contains(tail) && !frontier.Contains(tail))
                         {
-							// Add the tail of the trabasso to the frontier.
-							frontier.Add(trabasso.Tail);
-						}
+                            // Add the tail of the trabasso to the frontier.
+                            frontier.Add(trabasso.Tail);
+                        }
 
                     }
 
@@ -836,7 +839,7 @@ namespace Mediation.PlanTools
         public bool BelongToSameCausalChain(IOperator stepA, IOperator stepB)
         {
             // Go through each causal chain and check whether the given steps both are part of the same one.
-            foreach(List<IOperator> causalChain in CausalChains)
+            foreach (List<IOperator> causalChain in CausalChains)
             {
                 if (causalChain.Contains(stepA) && causalChain.Contains(stepB))
                     return true;
@@ -850,7 +853,7 @@ namespace Mediation.PlanTools
         public bool BelongToSameTemporalChain(IOperator stepA, IOperator stepB)
         {
             // Go through each temporal chain and check whether the given steps both are part of the same one.
-            foreach(List<IOperator> temporalChain in TemporalChains)
+            foreach (List<IOperator> temporalChain in TemporalChains)
             {
                 if (temporalChain.Contains(stepA) && temporalChain.Contains(stepB))
                     return true;
@@ -861,15 +864,16 @@ namespace Mediation.PlanTools
         }
 
         // Returns all the temporal chains of this plan.
-		private List<List<IOperator>> GetTemporalChains()
-		{
-			List<List<IOperator>> chains = new List<List<IOperator>>();
+        private List<List<IOperator>> GetTemporalChains()
+        {
+            List<List<IOperator>> chains = new List<List<IOperator>>();
 
-			// Get all the steps.
-			List<IOperator> planSteps = new List<IOperator>();
-			foreach (Operator step in steps) {
-				planSteps.Add(step.Clone() as IOperator);
-			}
+            // Get all the steps.
+            List<IOperator> planSteps = new List<IOperator>();
+            foreach (Operator step in steps)
+            {
+                planSteps.Add(step.Clone() as IOperator);
+            }
 
             // Go through all the steps.
             List<IOperator> temporalChain = new List<IOperator>();
@@ -879,13 +883,14 @@ namespace Mediation.PlanTools
                 // Get the next step.
                 IOperator step = planSteps.ElementAt(i);
 
-				// Add the step to this chain.
-				temporalChain.Add(step);
+                // Add the step to this chain.
+                temporalChain.Add(step);
 
                 // If the step is a kind of 'move', it marks a new
                 // temporal frame. Create a new chain and add the step 
                 // the new chain.
-                if(step.Name.Contains("move")) {
+                if (step.Name.Contains("move"))
+                {
 
                     // Add the chain to the others
                     chains.Add(temporalChain);
@@ -899,6 +904,6 @@ namespace Mediation.PlanTools
             }
 
             return chains;
-		}
+        }
     }
 }

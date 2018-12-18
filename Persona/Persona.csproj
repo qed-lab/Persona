@@ -106,6 +106,13 @@
     <Compile Include="Combinatorics\Permutations.cs" />
     <Compile Include="Combinatorics\SmallPrimeUtility.cs" />
     <Compile Include="Combinatorics\Variations.cs" />
+    <Compile Include="Graphs\DirectedEdge.cs" />
+    <Compile Include="Graphs\Node.cs" />
+    <Compile Include="Graphs\AdjacencyListDigraph.cs" />
+    <Compile Include="Graphs\IDirectedGraph.cs" />
+    <Compile Include="Playspace\PlayspaceGraph.cs" />
+    <Compile Include="Playspace\HashState.cs" />
+    <Compile Include="Playspace\HashOperator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -117,6 +124,8 @@
   <ItemGroup>
     <Folder Include="Priority Queue\" />
     <Folder Include="Combinatorics\" />
+    <Folder Include="Graphs\" />
+    <Folder Include="Playspace\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Combinatorics\LICENCE" />
