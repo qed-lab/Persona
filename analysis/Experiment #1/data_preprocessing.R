@@ -1,8 +1,19 @@
 # ================================================ 
+# data_preprocessing.R
+#
+# This code loads and aggregates plan recognition configuration data.
+#
+# Assumptions:
+# 0. All data is within the folder "~/Developer/Persona/analysis/Experiment #1"
+# 1. The folder needs to contain only numbers for it to be considered.
+# 2. All such folders in the experiment directory contain the same amount of files, using a consistent naming scheme.
+
+# ================================================ 
 # Raw Data Import
-# Load all the folders in the Experiment Directory.  The folder needs to contain only numbers for it to be considered.
+# Load all the folders in the Experiment Directory.  
+
 experiment_directory <- "~/Developer/Persona/analysis/Experiment #1"
-folders <- list.files(experiment_directory, pattern="[-]?[0-9]+[.]?[0-9]*", all.files = FALSE, full.names = FALSE)
+folders <- list.files(experiment_directory, pattern="[0-9]+[.]?[0-9]*", all.files = FALSE, full.names = FALSE)
 
 # For each folder (i.e. a player's data folder)
 for(folder in folders) 

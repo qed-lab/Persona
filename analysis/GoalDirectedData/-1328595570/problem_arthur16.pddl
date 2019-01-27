@@ -1,0 +1,73 @@
+(define (problem rob)
+(:domain arthur_HYRULE)
+	(:objects 
+		 barexit barentrance hutentrance forgeentrance hutexit mansionentrance bankentrance - entrance
+		 bar docks townarch hut mansion cliff townsquare junkyard forge - location
+		 arthur mel dorian karina michael jordan - character
+		 towngate - door
+		 shinykey mushroom lovecontract loveletter tastycupcake hairtonic book ash - item
+	)
+	(:init
+		(at hutentrance townarch)
+		(at karina townarch)
+		(at michael hut)
+		(at hutexit hut)
+		(at jordan mansion)
+		(at mel bar)
+		(at barentrance docks)
+		(at mansionentrance cliff)
+		(at forgeentrance townarch)
+		(at arthur townarch)
+		(at dorian townarch)
+		(at barexit bar)
+		(closed forgeentrance)
+		(connected docks junkyard)
+		(connected townarch docks)
+		(connected cliff townsquare)
+		(connected townarch townsquare)
+		(connected townsquare cliff)
+		(connected docks townarch)
+		(doorbetween towngate townsquare townarch)
+		(doorbetween towngate townarch townsquare)
+		(doorway docks townarch)
+		(doorway cliff townsquare)
+		(doorway townsquare cliff)
+		(doorway townarch docks)
+		(doorway docks junkyard)
+		(has arthur hairtonic)
+		(has arthur mushroom)
+		(has arthur loveletter)
+		(has arthur book)
+		(has arthur shinykey)
+		(has arthur tastycupcake)
+		(has dorian lovecontract)
+		(leadsto barentrance bar)
+		(leadsto hutexit townarch)
+		(leadsto hutentrance hut)
+		(leadsto mansionentrance mansion)
+		(leadsto barexit docks)
+		(leadsto forgeentrance forge)
+		(player arthur)
+		(unlocks shinykey bankentrance)
+		(wants-item arthur lovecontract)
+		(wants-item jordan loveletter)
+		(wants-item arthur ash)
+		(wants-item arthur shinykey)
+		(willing-to-give-item arthur loveletter)
+		(willing-to-give-item arthur mushroom)
+		(willing-to-give-item arthur ash)
+		(willing-to-give-item arthur tastycupcake)
+		(willing-to-give-item arthur book)
+		(willing-to-give-item arthur hairtonic)
+		(willing-to-give-item arthur lovecontract)
+		(willing-to-give-item arthur shinykey)
+	)
+	(:goal
+		
+		
+			(has jordan loveletter) 
+		
+
+	)
+
+)

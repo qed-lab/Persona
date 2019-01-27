@@ -1,0 +1,211 @@
+(define (problem rob)
+(:domain arthur_HYRULE)
+	(:objects 
+		 basementexitkey basementbucket shinykey mushroom mirror ash lovecontract loveletter knightsword rope tastycupcake hairtonic book knightshield rubyring coin silver humanskull bouquet candle bucket - item
+		 storage basement bar docks junkyard townarch forge hut townsquare shop bank cliff mansion valley fort - location
+		 basementexit basemententrance barexit barentrance hutentrance forgeentrance forgeexit hutexit shopentrance bankentrance shopexit bankexit mansionentrance mansionexit fortentrance fortexit - entrance
+		 arthur mel oscar alli dorian karina peter matthias michael frank dave giovanna jordan avery roger james ian camille phillip - character
+	)
+	(:init
+		(at silver townsquare)
+		(at dorian townarch)
+		(at arthur valley)
+		(at avery mansion)
+		(at fortentrance valley)
+		(at forgeexit forge)
+		(at rope townarch)
+		(at mushroom townarch)
+		(at knightshield shop)
+		(at forgeentrance townarch)
+		(at shopentrance townsquare)
+		(at book townarch)
+		(at bankexit bank)
+		(at matthias forge)
+		(at jordan mansion)
+		(at mansionexit mansion)
+		(at bucket fort)
+		(at ian fort)
+		(at barexit bar)
+		(at bankentrance townsquare)
+		(at phillip fort)
+		(at mirror townarch)
+		(at ash townarch)
+		(at fortexit fort)
+		(at karina townarch)
+		(at shopexit shop)
+		(at roger mansion)
+		(at rubyring shop)
+		(at camille fort)
+		(at alli junkyard)
+		(at barentrance docks)
+		(at mel bar)
+		(at peter forge)
+		(at mel basement)
+		(at hutexit hut)
+		(at giovanna shop)
+		(at dave townsquare)
+		(at hutentrance townarch)
+		(at james valley)
+		(at rubyring cliff)
+		(at knightsword forge)
+		(at frank townsquare)
+		(at michael hut)
+		(at mansionentrance cliff)
+		(connected townsquare valley)
+		(connected townsquare cliff)
+		(connected cliff townsquare)
+		(connected townarch docks)
+		(connected valley townsquare)
+		(connected docks townarch)
+		(connected junkyard docks)
+		(connected townarch townsquare)
+		(connected docks junkyard)
+		(connected townsquare townarch)
+		(doorway townsquare townarch)
+		(doorway valley townsquare)
+		(doorway townsquare valley)
+		(doorway docks townarch)
+		(doorway townarch docks)
+		(doorway docks junkyard)
+		(doorway junkyard docks)
+		(doorway cliff townsquare)
+		(doorway townsquare cliff)
+		(doorway townarch townsquare)
+		(has jordan lovecontract)
+		(has james humanskull)
+		(has ian knightshield)
+		(has ian knightsword)
+		(has james coin)
+		(has alli tastycupcake)
+		(has jordan loveletter)
+		(has giovanna hairtonic)
+		(has dorian bouquet)
+		(has james candle)
+		(leadsto bankexit townsquare)
+		(leadsto hutentrance hut)
+		(leadsto mansionexit cliff)
+		(leadsto hutexit townarch)
+		(leadsto forgeentrance forge)
+		(leadsto shopentrance shop)
+		(leadsto fortentrance fort)
+		(leadsto bankentrance bank)
+		(leadsto mansionentrance mansion)
+		(leadsto forgeexit townarch)
+		(leadsto barentrance bar)
+		(leadsto fortexit valley)
+		(leadsto shopexit townsquare)
+		(player arthur)
+		(unlocks shinykey bankentrance)
+		(wants-item arthur shinykey)
+		(wants-item dorian rubyring)
+		(willing-to-give-item arthur shinykey)
+	)
+	(:goal
+		(or
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+			(and
+				(has ian knightsword) (has ian knightshield) 
+				(has giovanna hairtonic) 
+				(has alli tastycupcake) 
+				(has jordan loveletter) (has jordan lovecontract) 
+				(has james coin) (has james humanskull) (has james candle) 
+			)
+
+		)
+	)
+
+)
