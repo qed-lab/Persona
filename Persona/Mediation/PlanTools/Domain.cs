@@ -18,6 +18,11 @@ namespace Mediation.PlanTools
     public class Domain : IDomain, IEquatable<Domain>
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
+        /// <summary>
+        /// The defined domains.
+        /// </summary>
+        public static Dictionary<string, Domain> DefinedDomains = new Dictionary<string, Domain>();
+
         public string staticStart;
 
         private string name;
@@ -26,6 +31,26 @@ namespace Mediation.PlanTools
         private Hashtable constantTypes;
         private List<IOperator> operators;
         private List<IPredicate> predicates;
+        private Dictionary<string, List<string>> typeHierarchy;
+
+        public Dictionary<string, List<string>> TypeHierarchy
+        {
+            get
+            {
+                if (typeHierarchy != null)
+                    return typeHierarchy;
+
+                typeHierarchy = new Dictionary<string, List<string>>();
+
+                foreach (string supertype in objectTypes.Keys)
+                {
+                    List<string> subtypes = objectTypes[supertype] as List<string>;
+                    typeHierarchy.Add(supertype, subtypes);
+                }
+
+                return typeHierarchy;
+            }
+        }
 
         // Access the domain's name.
         public string Name
@@ -142,6 +167,8 @@ namespace Mediation.PlanTools
                 objectTypes[type] = typeList;
             }
         }
+
+
 
         // The domain has a list of all sub-types associated with a type.
         public List<string> GetSubTypesOf(string type)

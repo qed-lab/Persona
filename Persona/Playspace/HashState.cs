@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Mediation.Interfaces;
 using Mediation.PlanTools;
 namespace Persona.Playspace
 {
@@ -10,9 +8,13 @@ namespace Persona.Playspace
     public class HashState : IEquatable<HashState>
     {
         /// <summary>
-        /// The predicate literals that represent the state we care about.
+        /// Gets the state this HashState is encapsulating.
         /// </summary>
-        readonly List<IPredicate> literals;
+        /// <value>The state this HashState is encapsulating.</value>
+        public State State { get; private set; }
+
+        // Store the hash code.
+        readonly int hashCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Persona.Playspace.HashState"/> class.
@@ -20,7 +22,8 @@ namespace Persona.Playspace
         /// <param name="state">The State to wrap around.</param>
         public HashState(State state)
         {
-            literals = state.Predicates;
+            State = state;
+            hashCode = ComputeHashCode();
         }
 
         /// <summary>
@@ -32,14 +35,14 @@ namespace Persona.Playspace
         public bool Equals(HashState other)
         {
             // States must have the same number of literals.
-            if (literals.Count != other.literals.Count)
+            if (State.Predicates.Count != other.State.Predicates.Count)
                 return false;
 
-            int arity = literals.Count;
+            int arity = State.Predicates.Count;
 
             // Fail fast; if any predicate at the same index is unequal, return false.
             for (int index = 0; index < arity; index++)
-                if (!literals[index].Equals(other.literals[index]))
+                if (!State.Predicates[index].Equals(other.State.Predicates[index]))
                     return false;
 
             // If all predicates pass the equality test, we have an equal state.
@@ -67,14 +70,20 @@ namespace Persona.Playspace
         /// hash table.</returns>
         public override int GetHashCode()
         {
+            return hashCode;
+        }
+
+        // Auxiliary function to compute the hash code.
+        int ComputeHashCode()
+        {
             unchecked
             {
-                var hashCode = 13;
+                var hash = 13;
 
-                for (int index = 0; index < literals.Count; index++)
-                    hashCode = (hashCode * 7) + literals[index].GetHashCode();
+                for (int index = 0; index < State.Predicates.Count; index++)
+                    hash = (hash * 3) + State.Predicates[index].GetHashCode();
 
-                return hashCode;
+                return hash;
             }
         }
 

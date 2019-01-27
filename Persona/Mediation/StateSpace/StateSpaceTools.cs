@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,15 +7,25 @@ using Mediation.Interfaces;
 using Mediation.Enums;
 using Mediation.PlanTools;
 using Mediation.MediationTree;
+using Mediation.Utilities;
+
+using Persona.Playspace;
 
 namespace Mediation.StateSpace
 {
     public static class StateSpaceTools
     {
+        /// <summary>
+        /// A cache that maps domain+problem names to dictionaries of 
+        /// hashstates to list of ground actions that are applicable.
+        /// </summary>
+        private static Dictionary<string, Dictionary<HashState, List<Operator>>> groundActionsInStateCache =
+            new Dictionary<string, Dictionary<HashState, List<Operator>>>();
+
         private static Hashtable actions;
 
         // Checks to see if a user could possibly perform the action.
-        private static bool ValidAction (Operator template)
+        private static bool ValidAction(Operator template)
         {
             if (template.Predicate.TermAt(0).Type.Equals("character"))
                 return true;
@@ -29,13 +40,85 @@ namespace Mediation.StateSpace
         }
 
         // Finds all possible player actions for the given state.
-        public static List<Operator> GetPlayerActions (Domain domain, Problem problem, State state)
+        public static List<Operator> GetPlayerActions(Domain domain, Problem problem, State state)
         {
             return GetActions(problem.Player.ToLower(), domain, problem, state);
         }
 
+        /// <summary>
+        /// Gets all ground actions of the domain given the problem.
+        /// </summary>
+        /// <returns>The all ground actions of the domain given the problem.</returns>
+        /// <param name="domain">The Domain in question.</param>
+        /// <param name="problem">The Problem in question.</param>
+        public static List<Operator> GetAllGroundActionsInState(Domain domain, Problem problem, State state, Func<Operator, bool> groundActionFilterFunc = null)
+        {
+            // Check the cache first.
+            HashState hashState = new HashState(state);
+            string cacheKey = domain.Name + problem.Name;
+
+            // If there's nothing under this cacheKey, add a dictionary for it.
+            if (!groundActionsInStateCache.ContainsKey(cacheKey))
+                groundActionsInStateCache.Add(cacheKey, new Dictionary<HashState, List<Operator>>());
+
+            // If it's in the cache, return it.
+            if (groundActionsInStateCache[cacheKey].ContainsKey(hashState))
+                return groundActionsInStateCache[cacheKey][hashState];
+
+            // Assemble the list of ground actions.
+            List<Operator> groundActions = new List<Operator>();
+
+            // For each operator in the domain,
+            foreach (IOperator template in domain.Operators)
+            {
+                // Assemble all compatibly-typed objects for each operator parameter.
+                List<List<string>> compatiblyTypedObjects = new List<List<string>>();
+
+                foreach (ITerm term in template.Terms)
+                {
+                    List<string> objectsOfTermType = problem.ObjectsByTypeDictionary[term.Type];
+                    compatiblyTypedObjects.Add(objectsOfTermType);
+                }
+
+                // Get the cartesian product of the compatibly-typed objects.
+                IEnumerable<IEnumerable<string>> allBindings = compatiblyTypedObjects.CartesianProduct();
+
+                // Loop through the cartesian product and create a new ground operator with each.
+                foreach (IEnumerable<string> bindings in allBindings)
+                {
+                    Operator groundAction = template.Clone() as Operator;
+
+                    // Concurrently go through the bindings and the terms, adding the bindings to the operator.
+                    foreach (var entry in bindings.Zip(groundAction.Terms))
+                        groundAction.AddBinding(entry.Value2.Variable, entry.Value1);
+
+                    // Check if the state satisfies the ground action's preconditions.
+                    if (state.Satisfies(groundAction.Preconditions))
+                    {
+                        // If we have specified a filter on ground actions, check that the ground action passes the filter.
+                        if (groundActionFilterFunc != null)
+                        {
+                            // If it does, add it to the ongoing list.
+                            if (groundActionFilterFunc(groundAction))
+                                groundActions.Add(groundAction);
+                        }
+
+                        else
+                        {
+                            // Add the ground action to the ongoing list.
+                            groundActions.Add(groundAction);
+                        }
+                    }
+                }
+            }
+
+            // Store it in the cache, prior to returning it.
+            groundActionsInStateCache[cacheKey].Add(hashState, groundActions);
+            return groundActions;
+        }
+
         // Computes all possible character actions.
-        private static void ComputeCharacterActions (string character, Domain domain, Problem problem)
+        private static void ComputeCharacterActions(string character, Domain domain, Problem problem)
         {
             List<Operator> possibleActions = new List<Operator>();
 
@@ -104,7 +187,7 @@ namespace Mediation.StateSpace
         }
 
         // Finds all possible actions for a given character, domain, and problem.
-        public static List<Operator> GetAllActions (string character, Domain domain, Problem problem)
+        public static List<Operator> GetAllActions(string character, Domain domain, Problem problem)
         {
             if (actions == null)
                 actions = new Hashtable();
@@ -123,7 +206,7 @@ namespace Mediation.StateSpace
         }
 
         // Finds all possible actions for the given character and state.
-        public static List<Operator> GetActions (string character, Domain domain, Problem problem, State state)
+        public static List<Operator> GetActions(string character, Domain domain, Problem problem, State state)
         {
             List<Operator> satisfiedActions = new List<Operator>();
             foreach (Operator action in GetAllActions(character, domain, problem))
@@ -134,7 +217,7 @@ namespace Mediation.StateSpace
         }
 
         // Given a state, return the spanning causal links.
-        public static List<CausalLink> GetSpanningLinks (Plan plan)
+        public static List<CausalLink> GetSpanningLinks(Plan plan)
         {
             // Create an empty list for the spanning causal links.
             List<CausalLink> spanningLinks = new List<CausalLink>();
@@ -149,7 +232,7 @@ namespace Mediation.StateSpace
         }
 
         // Create a list of applicable exceptional actions for a state.
-        public static List<StateSpaceEdge> GetExceptionalActions (Domain domain, Problem problem, Plan plan, State state)
+        public static List<StateSpaceEdge> GetExceptionalActions(Domain domain, Problem problem, Plan plan, State state)
         {
             // Create a list of possible player actions in the current state.
             List<Operator> possibleActions = GetPlayerActions(domain, problem, state);
@@ -180,7 +263,7 @@ namespace Mediation.StateSpace
                             exceptionalActions.Add(new StateSpaceEdge(exceptional, ActionType.Exceptional));
                         }
             }
-                
+
             List<int> remove = new List<int>();
 
             // Remove duplicate actions.
@@ -198,7 +281,7 @@ namespace Mediation.StateSpace
         }
 
         // Create the applicable constituent action for a state.
-        public static StateSpaceEdge GetConstituentAction (Domain domain, Problem problem, Plan plan, State state)
+        public static StateSpaceEdge GetConstituentAction(Domain domain, Problem problem, Plan plan, State state)
         {
             // Iterate through the plan to find the next player step.
             for (int i = 0; i < plan.Steps.Count; i++)
@@ -225,13 +308,13 @@ namespace Mediation.StateSpace
                         i = plan.Steps.Count;
                     }
             }
-            
+
             // Otherwise, return a blank step as the user's constituent action.
             return new StateSpaceEdge(new Operator("do nothing"), ActionType.Constituent);
         }
 
         // Get the set of exceptional and constituent edges.
-        public static List<StateSpaceEdge> GetPossibleActions (Domain domain, Problem problem, Plan plan, State state)
+        public static List<StateSpaceEdge> GetPossibleActions(Domain domain, Problem problem, Plan plan, State state)
         {
             // Make the set of outgoing edges.
             List<StateSpaceEdge> actions = new List<StateSpaceEdge>();
@@ -255,7 +338,7 @@ namespace Mediation.StateSpace
         }
 
         // Creates a list of all possible things the player can do.
-        public static List<StateSpaceEdge> GetAllPossibleActions (Domain domain, Problem problem, Plan plan, State state)
+        public static List<StateSpaceEdge> GetAllPossibleActions(Domain domain, Problem problem, Plan plan, State state)
         {
             // Create a list of possible player actions in the current state.
             List<Operator> possibleActions = GetPlayerActions(domain, problem, state);
@@ -326,7 +409,7 @@ namespace Mediation.StateSpace
                                 exceptions.Add(action);
                             }
             }
-                
+
             // Remove the exceptions from the possible actions.
             foreach (Operator exception in exceptions)
                 possibleActions.Remove(exception);
@@ -378,13 +461,13 @@ namespace Mediation.StateSpace
         }
 
         // Create the applicable constituent action for a state.
-        public static MediationTreeEdge GetConstituentAction (MediationTreeNode node)
+        public static MediationTreeEdge GetConstituentAction(MediationTreeNode node)
         {
-            return GetConstituentAction (node.Problem.Player, node);
+            return GetConstituentAction(node.Problem.Player, node);
         }
 
         // Create the applicable constituent action for a state.
-        public static MediationTreeEdge GetConstituentAction (string actor, MediationTreeNode node)
+        public static MediationTreeEdge GetConstituentAction(string actor, MediationTreeNode node)
         {
             // Iterate through the plan to find the next player step.
             for (int i = 0; i < node.Plan.Steps.Count; i++)
@@ -413,20 +496,20 @@ namespace Mediation.StateSpace
             }
 
             // Otherwise, return a blank step as the user's constituent action.
-            return new MediationTreeEdge (new Operator("do nothing"), ActionType.Constituent, node.ID);
+            return new MediationTreeEdge(new Operator("do nothing"), ActionType.Constituent, node.ID);
         }
 
         // Creates a list of all possible things the player can do.
-        public static List<MediationTreeEdge> GetAllPossibleActions (MediationTreeNode node)
+        public static List<MediationTreeEdge> GetAllPossibleActions(MediationTreeNode node)
         {
-            return GetAllPossibleActions (node.Problem.Player.ToLower(), node);
+            return GetAllPossibleActions(node.Problem.Player.ToLower(), node);
         }
 
         // Creates a list of all possible things a character can do.
         public static List<MediationTreeEdge> GetAllPossibleActions(string character, MediationTreeNode node)
         {
             // Create a list of possible player actions in the current state.
-            List<Operator> possibleActions = GetActions (character, node.Domain, node.Problem, node.State);
+            List<Operator> possibleActions = GetActions(character, node.Domain, node.Problem, node.State);
 
             // Create a list of the causal links that span the state.
             List<CausalLink> spanningLinks = (List<CausalLink>)GetSpanningLinks(node.Plan);

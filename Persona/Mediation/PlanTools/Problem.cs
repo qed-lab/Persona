@@ -25,6 +25,11 @@ namespace Mediation.PlanTools
         private List<List<List<IPredicate>>> goalCombinations;
         private Hashtable typeList;
         private Hashtable objectsByType;
+        private Dictionary<string, List<string>> objectsByTypeDictionary;
+
+        private State initialState;
+
+
 
         // Access the problem's name.
         public string Name
@@ -71,7 +76,14 @@ namespace Mediation.PlanTools
         public List<IPredicate> Initial
         {
             get { return initial; }
-            set { initial = value; }
+            set { initial = value; initialState = new State(value); }
+        }
+
+        // Access the problem's initial state as a state.
+        public State InitialState
+        {
+            get { return initialState; }
+            set { Initial = value.Predicates; }
         }
 
         // Access the problem's intention list.
@@ -131,15 +143,33 @@ namespace Mediation.PlanTools
             }
         }
 
+        // A dictionary that maps object type names to strings.
+        public Dictionary<string, List<string>> ObjectsByTypeDictionary
+        {
+            get
+            {
+                if (objectsByTypeDictionary != null)
+                    return objectsByTypeDictionary;
+
+                objectsByTypeDictionary = ObjectsByType
+                       .Cast<DictionaryEntry>()
+                       .ToDictionary(kvp => (string)kvp.Key, kvp => (List<string>)kvp.Value);
+
+                return objectsByTypeDictionary;
+            }
+        }
+
         // A hashtable that maps types to object names.
         public Hashtable ObjectsByType
         {
             get
             {
-                if (objectsByType != null) return objectsByType;
+                if (objectsByType != null)
+                    return objectsByType;
 
                 objectsByType = new Hashtable();
 
+                // Assemble base types.
                 foreach (IObject obj in objects)
                 {
                     foreach (string type in obj.Types)
@@ -171,6 +201,61 @@ namespace Mediation.PlanTools
                         objectsByType[obj.SubType] = objList;
                     }
                 }
+
+                // Assemble super types.
+                //Domain relevantDomain = PlanTools.Domain.DefinedDomains[domain];
+                //Dictionary<string, List<string>> typeHierarchy = relevantDomain.TypeHierarchy;
+
+                //foreach (string superType in typeHierarchy.Keys)
+                //{
+                //    List<string> objectsToAssociateWithSupertype = new List<string>();
+
+                //    foreach (string subtype in typeHierarchy[superType])
+                //    {
+                //        objectsToAssociateWithSupertype.AddRange()
+                //    }
+                //}
+
+
+
+                //while (superTypes.Count > 0)
+                //{
+                //    // pop the front
+                //    string superType = superTypes[0];
+                //    superTypes.RemoveAt(0);
+
+                //    // check that the supertype's basest subtypes are all in the objectsByTypeDict
+                //    bool goToNextSuperType = false;
+
+                //    List<string> basestSubtypes = relevantDomain.GetBasestSubTypesOf(superType);
+                //    foreach (string basestSubtype in basestSubtypes)
+                //    {
+                //        // if any of them aren't, re-add it to come back later.
+                //        if (!objectsByType.ContainsKey(basestSubtype))
+                //        {
+                //            superTypes.Add(superType);
+                //            goToNextSuperType = true;
+                //            break;
+                //        }
+                //    }
+
+                //    if (goToNextSuperType)
+                //        continue;
+
+                //    // Here, all the basestSubtypes are in the objectsByTypeDict.
+                //    else
+                //    {
+                //        // Here are the objects we're going to associate with the type identified by 'superType'
+                //        List<string> objectsToRegisterWithSupertype = new List<string>();
+
+                //        // Find all objects associated with 'superType''s subtypes, and add them to the list.
+                //        foreach (string basestSubtype in basestSubtypes)
+                //            objectsToRegisterWithSupertype.AddRange(new List<string>(objectsByType[basestSubtype] as List<string>));
+
+                //        // Add to the dictionary of objectsByType.
+                //        objectsByType.Add(superType, objectsToRegisterWithSupertype);
+                //    }
+                //}
 
                 return objectsByType;
             }
@@ -364,10 +449,11 @@ namespace Mediation.PlanTools
 
             // Clone the goals structure.
             List<List<IPredicate>> newGoals = new List<List<IPredicate>>();
-            foreach(List<IPredicate> g in goals)
+            foreach (List<IPredicate> g in goals)
             {
                 List<IPredicate> newG = new List<IPredicate>();
-                foreach (IPredicate goalPred in goal) {
+                foreach (IPredicate goalPred in goal)
+                {
                     newG.Add(goalPred.Clone() as Predicate);
                 }
 
@@ -378,13 +464,13 @@ namespace Mediation.PlanTools
 
             // Clone the goal combinations structure.
             List<List<List<IPredicate>>> newGoalCombinations = new List<List<List<IPredicate>>>();
-            foreach(List<List<IPredicate>> combination in goalCombinations)
+            foreach (List<List<IPredicate>> combination in goalCombinations)
             {
                 List<List<IPredicate>> newCombination = new List<List<IPredicate>>();
-                foreach(List<IPredicate> g in combination)
+                foreach (List<IPredicate> g in combination)
                 {
                     List<IPredicate> newG = new List<IPredicate>();
-                    foreach(IPredicate literal in g)
+                    foreach (IPredicate literal in g)
                     {
                         newG.Add(literal.Clone() as Predicate);
                     }

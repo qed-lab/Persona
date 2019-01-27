@@ -12,7 +12,7 @@ namespace Persona.Playspace
     /// <summary>
     /// Playspace graph.
     /// </summary>
-    public sealed class PlayspaceGraph : IDirectedGraph<HashState, HashOperator>
+    public sealed class PlayspaceGraph : IDirectedGraph<HashState, HashOperator>, IEnumerable<DirectedEdge<HashState, HashOperator>>
     {
         /// <summary>
         /// The layers of the graph.  Each layer represents a time index.
@@ -40,6 +40,32 @@ namespace Persona.Playspace
         public void ResetLayerIndexToAddAt()
         {
             LayerIndexToAddAt = 0;
+        }
+
+        /// <summary>
+        /// Returns the layer of the given edge or -1 if the edge is not within this playspace graph.
+        /// </summary>
+        /// <returns>The layer of the given edge or -1 if the edge is not within this playspace graph.</returns>
+        /// <param name="edge">The edge to look for.</param>
+        public int LayerOf(DirectedEdge<HashState, HashOperator> edge)
+        {
+            int layer = -1;
+
+            for (int i = 0; i <= layers.Count; i++)
+            {
+                foreach (DirectedEdge<HashState, HashOperator> edgeInLayer in layers[i].Keys)
+                {
+                    if (edge.Equals(edgeInLayer))
+                    {
+                        layer = i;
+                        goto Found;
+                    }
+                }
+
+            }
+
+        Found:
+            return layer;
         }
 
         /// <summary>
@@ -120,7 +146,14 @@ namespace Persona.Playspace
                     stringBuilder.Append(sourceLabel);
                     stringBuilder.Append(" -> ");
                     stringBuilder.Append(sinkLabel);
-                    stringBuilder.Append(" [label=\"");
+                    stringBuilder.Append(" [");
+
+                    // If no one traversed the edge, it's an applicable (not executed) action.
+                    // Make it dashed.
+                    if (layer[edge] == 0)
+                        stringBuilder.Append("style=dashed,");
+
+                    stringBuilder.Append("label=\"");
                     stringBuilder.Append(operatorLabel);
                     stringBuilder.Append("\"];\n");
                 }
@@ -191,5 +224,108 @@ namespace Persona.Playspace
         }
 
         #endregion
+
+        #region IEnumerable Methods
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that iterates through the collection.</returns>
+        public IEnumerator<DirectedEdge<HashState, HashOperator>> GetEnumerator()
+        {
+            return new PlayspaceGraphDirectedEdgeEnumerator(this);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that iterates through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        #endregion
+
+        /// <summary>
+        /// Playspace graph directed edge enumerator.
+        /// </summary>
+        class PlayspaceGraphDirectedEdgeEnumerator : IEnumerator<DirectedEdge<HashState, HashOperator>>
+        {
+            /// <summary>
+            /// A List of directed edges of the playspace graph.
+            /// </summary>
+            List<DirectedEdge<HashState, HashOperator>> directedEdges;
+
+            /// <summary>
+            /// Iterator index.
+            /// </summary>
+            int index = -1;
+
+            /// <summary>
+            /// Initializes a new instance of the
+            /// <see cref="T:Persona.Playspace.PlayspaceGraph.PlayspaceGraphDirectedEdgeEnumerator"/> class.
+            /// </summary>
+            /// <param name="playspaceGraph">The PlayspaceGraph to iterate.</param>
+            public PlayspaceGraphDirectedEdgeEnumerator(PlayspaceGraph playspaceGraph)
+            {
+                directedEdges = new List<DirectedEdge<HashState, HashOperator>>();
+
+                // Iterate the layers of the playspace graph.
+                for (int layerIndex = 0; layerIndex < playspaceGraph.layers.Count; layerIndex++)
+                {
+                    // Get the ith layer. 
+                    Dictionary<DirectedEdge<HashState, HashOperator>, int> layer = playspaceGraph.layers[layerIndex];
+
+                    // Add each edge at this layer to the list.
+                    foreach (DirectedEdge<HashState, HashOperator> edge in layer.Keys)
+                        directedEdges.Add(edge);
+                }
+            }
+
+            /// <summary>
+            /// Advances the enumerator to the next element of the collection.
+            /// </summary>
+            /// <returns>
+            /// true if the enumerator was successfully advanced to the next element; 
+            /// false if the enumerator has passed the end of the collection.
+            /// </returns>
+            public bool MoveNext()
+            {
+                if (directedEdges == null)
+                    return false;
+
+                index++;
+                return (index < directedEdges.Count);
+            }
+
+            /// <summary>
+            /// Reset this instance.
+            /// </summary>
+            public void Reset()
+            {
+                index = -1;
+            }
+
+            /// <summary>
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// </summary>
+            public void Dispose()
+            {
+                directedEdges.Clear();
+                directedEdges = null;
+                index = -1;
+            }
+
+            /// <summary>
+            /// Gets the element in the collection at the current position of the enumerator.
+            /// </summary>
+            public DirectedEdge<HashState, HashOperator> Current
+            {
+                get { return directedEdges[index]; }
+            }
+
+            /// <summary>
+            /// Gets the current element in the collection.
+            /// </summary>
+            object IEnumerator.Current => Current;
+        }
     }
 }

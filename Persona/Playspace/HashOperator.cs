@@ -14,6 +14,9 @@ namespace Persona.Playspace
         /// </summary>
         readonly Operator op;
 
+        // stores the hashcode.
+        readonly int hashCode;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Persona.Playspace.HashOperator"/> class.
         /// </summary>
@@ -21,6 +24,7 @@ namespace Persona.Playspace
         public HashOperator(Operator op)
         {
             this.op = op;
+            hashCode = ComputeHashCode();
         }
 
         /// <summary>
@@ -69,20 +73,7 @@ namespace Persona.Playspace
         /// hash table.</returns>
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int hash = 13;
-
-                hash = (hash * 23) + op.Predicate.GetHashCode();
-
-                foreach (IPredicate precondition in op.Preconditions)
-                    hash = (hash * 31) + precondition.GetHashCode();
-
-                foreach (IPredicate effect in op.Effects)
-                    hash = (hash * 7) + effect.GetHashCode();
-
-                return hash;
-            }
+            return hashCode;
         }
 
         /// <summary>
@@ -104,6 +95,25 @@ namespace Persona.Playspace
             stringBuilder.Append(")");
 
             return stringBuilder.ToString();
+        }
+
+        // Auxiliary function to compute the hash code.
+        private int ComputeHashCode()
+        {
+            unchecked
+            {
+                int hash = 13;
+
+                hash = (hash * 23) + op.Predicate.GetHashCode();
+
+                foreach (IPredicate precondition in op.Preconditions)
+                    hash = (hash * 31) + precondition.GetHashCode();
+
+                foreach (IPredicate effect in op.Effects)
+                    hash = (hash * 7) + effect.GetHashCode();
+
+                return hash;
+            }
         }
     }
 }

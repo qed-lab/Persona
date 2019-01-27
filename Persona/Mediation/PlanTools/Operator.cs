@@ -48,6 +48,40 @@ namespace Mediation.PlanTools
             return ((double)numberOfMatchingFeatures / (double)numberOfFeatures);
         }
 
+        /// <summary>
+        /// Checks whether the given operator is actionable by the player. 
+        /// </summary>
+        /// <returns><c>true</c>, if actionable by player, <c>false</c> otherwise.</returns>
+        /// <param name="op">Op.</param>
+        public static bool IsGroundAndActionableByPlayer(Operator op)
+        {
+            // Check if it is ground...
+            foreach (ITerm term in op.Terms)
+                if (!term.Bound)
+                    return false;
+
+            // Check if it is actionable by the player...
+            if (op.Name.Equals("donothing"))
+                return false;
+
+            if (op.Name.Equals("win-the-game"))
+                return false;
+
+            if (op.Name.Equals("talk-to") && op.TermAt(1).Equals("arthur"))
+                return false;
+
+            if (op.Name.Equals("look-at") && op.TermAt(1).Equals("arthur"))
+                return false;
+
+            if (!op.Predicate.TermAt(0).Type.Equals("character"))
+                return false;
+
+            if (!op.TermAt(0).Equals("arthur"))
+                return false;
+
+            return true;
+        }
+
         private static int Counter = -1;
         private IPredicate predicate;
         private List<IPredicate> preconditions;

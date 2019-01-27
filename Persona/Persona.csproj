@@ -113,6 +113,9 @@
     <Compile Include="Playspace\PlayspaceGraph.cs" />
     <Compile Include="Playspace\HashState.cs" />
     <Compile Include="Playspace\HashOperator.cs" />
+    <Compile Include="GoalDirectedDataLogEntry.cs" />
+    <Compile Include="GoalDirectedAnalysis.cs" />
+    <Compile Include="Quest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

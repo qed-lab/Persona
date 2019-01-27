@@ -30,6 +30,9 @@ namespace Persona
             {"love_rubyring", Predicate.BuildPositiveGroundLiteral("has", "dorian", "rubyring")},
             {"love_bouquet", Predicate.BuildPositiveGroundLiteral("has", "dorian", "bouquet")},
             {"love_contract", Predicate.BuildPositiveGroundLiteral("has", "jordan", "lovecontract")},
+            {"love_want_rubyring", Predicate.BuildPositiveGroundLiteral("wants-item", "dorian", "rubyring")},
+            {"love_want_bouquet", Predicate.BuildPositiveGroundLiteral("wants-item", "dorian", "bouquet")},
+
 
             // Wisdom Quest
             {"wisdom_coin", Predicate.BuildPositiveGroundLiteral("has", "james", "coin")},
@@ -1174,6 +1177,13 @@ namespace Persona
             }
         }
 
+        // Returns the arthur domain and problem pair that correspond to the given index.
+        public static Problem GetIndexedArthurProblem(string dataFolder, int index)
+        {
+            string problemPath = dataFolder + @"/problem_arthur" + index + @".pddl";
+            Problem problem = Parser.GetProblem(problemPath);
+            return problem;
+        }
 
         // Returns the arthur domain and problem pair that correspond to the given index.
         public static Tuple<Domain, Problem> GetIndexedArthurDomainAndProblem(string dataFolder, int index)

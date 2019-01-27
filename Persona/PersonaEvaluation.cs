@@ -7,6 +7,7 @@ using Mediation.FileIO;
 using Mediation.PlanTools;
 using Mediation.Interfaces;
 using Mediation.Planners;
+using Mediation.StateSpace;
 
 using Persona.Graphs;
 using Persona.Playspace;
@@ -41,11 +42,17 @@ namespace Persona
 
             // RunCognitiveWithConservativeDomainExpansion(IndexterSalienceThreshold.STRICT);
 
-            // Utility
+            // Utility -- 
+
             // ReachabilityAnalysis.CompressRecallabilityDataFiles();
+
             // Utilities.CorrectDetectedObjectsInGameProblemFiles();
+
             // PlanFailTest();
-            RunPlayspaceAnalysis();
+
+            // RunPlayspaceAnalysis();
+
+            ComputeQuestsAdoptedForAllPlayers();
 
             // Test
             // TestGoalCombinations();
@@ -810,8 +817,7 @@ namespace Persona
             Directory.CreateDirectory(outputFolder);
 
             // Load each folder.
-            string dataPath = Parser.GetTopDirectory() + @"analysis/Playtraces";
-
+            string dataPath = Parser.GetTopDirectory() + @"analysis/FilteredPlaytraces";
 
             // Store and change the current working directory.
             string oldWD = Directory.GetCurrentDirectory();
@@ -828,6 +834,9 @@ namespace Persona
                 string[] dataPathString = dataFile.Split(new char[] { '/' });
                 int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1].Replace(".pddl", ""));
 
+                // Debug:
+                Console.WriteLine("Processing player: " + playerId);
+
                 // Load the player's chronology
                 Plan fullChronology = Parser.GetPlan(dataFile, domain, problem);
 
@@ -841,26 +850,72 @@ namespace Persona
             }
 
             // Write out the tutorial playspace.
+            Console.Write("Writing out the tutorial playspace...");
             string logPath = Directory.GetCurrentDirectory() + @"/tutorial_" + config + ".gv";
             StreamWriter writer = new StreamWriter(logPath, false);
             writer.WriteLine(tutorialPlayspace.ToDotLanguageString());
             writer.Close();
+            Console.WriteLine("done.");
+
+            // Expand the playspace with applicable actions
+            // ExtendPlayspaceGraphWithApplicablePlayerActions(tutorialPlayspace, domain, problem);
+
+            // Write out the tutorial playspace with expanded applicable actions
+            //logPath = Directory.GetCurrentDirectory() + @"/tutorial-with-applicables_" + config + ".gv";
+            //writer = new StreamWriter(logPath, false);
+            //writer.WriteLine(tutorialPlayspace.ToDotLanguageString());
+            //writer.Close();
 
             // Write out the gameplay playspace.
+            Console.Write("Writing out the gameplay playspace...");
             logPath = Directory.GetCurrentDirectory() + @"/gameplay_" + config + ".gv";
             writer = new StreamWriter(logPath, false);
             writer.WriteLine(gameplayPlayspace.ToDotLanguageString());
             writer.Close();
+            Console.WriteLine("done.");
 
             // Restore the old working directory.
             Directory.SetCurrentDirectory(oldWD);
         }
 
-        public static void ExtendPlayspaceGraphWithApplicableActions(PlayspaceGraph playspaceGraph, Domain domain)
+        /// <summary>
+        /// Extends the playspace graph with applicable actions added to each layer.
+        /// </summary>
+        /// <param name="playspaceGraph">Playspace graph.</param>
+        /// <param name="problem">Problem.</param>
+        public static void ExtendPlayspaceGraphWithApplicablePlayerActions(PlayspaceGraph playspaceGraph, Domain domain, Problem problem)
         {
+            // Go through all the edges.
+            foreach (DirectedEdge<HashState, HashOperator> edge in playspaceGraph)
+            {
+                // Given an edge, get the source state.
+                State sourceState = edge.Source.Element.State;
 
+                // Get all the actions that can ever be executed by the player in this state.
+                List<Operator> applicables =
+                    StateSpaceTools.GetAllGroundActionsInState(domain, problem, sourceState,
+                                                               Operator.IsGroundAndActionableByPlayer);
+
+                // Add a directed, untraversed edge for the applicable actions.
+                foreach (Operator applicable in applicables)
+                {
+                    // Apply the operator to it.
+                    State next = sourceState.NewState(applicable, problem.Objects);
+
+                    // Setup the directed edge data.
+                    Node<HashState> source = edge.Source;
+                    Node<HashState> sink = new Node<HashState>(new HashState(next));
+                    DirectedEdge<HashState, HashOperator> applicableAction =
+                        new DirectedEdge<HashState, HashOperator>(source, sink, new HashOperator(applicable));
+
+                    // Add to the playspace graph as an untraversed edge.
+                    playspaceGraph.AddDirectedEdgeAtLayer(applicableAction,
+                                                          playspaceGraph.LayerOf(edge),
+                                                          untraversed: true,
+                                                          updateLayerIndexToAddAt: false);
+                }
+            }
         }
-
 
         /// <summary>
         /// Extracts the playspace graph of the given plan and adds it to the given playspace graph.
@@ -888,11 +943,88 @@ namespace Persona
                 // Add to the playspace graph.
                 playspaceGraph.AddDirectedEdge(playerAction);
 
+                // Update the state.
                 previous = next;
             }
 
             playspaceGraph.ResetLayerIndexToAddAt();
         }
+
+
+        #endregion
+
+        #region Goal Directed Analysis
+
+        public static void ComputeQuestsAdoptedForAllPlayers()
+        {
+            // Record the kind of the system that is running here.
+            string config = "quest_adoption";
+
+            // Load the baseline domain and problem
+            Tuple<Domain, Problem> baseline = Utilities.GetBaselineArthurDomainAndProblem();
+
+            // Load each folder.
+            string dataPath = Parser.GetTopDirectory() + @"analysis/GoalDirectedData/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
+
+            // Assemble all the quest logs by player id.
+            Dictionary<int, Dictionary<Quest, Tuple<int, int>>> allQuestLogs =
+                new Dictionary<int, Dictionary<Quest, Tuple<int, int>>>();
+
+            // For each player
+            foreach (string dataFolder in dataFolders)
+            {
+                // Get the player's ID.
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+                // Create an output folder.
+                string outputFolder = dataFolder + @"/output_" + config + @"/";
+                Directory.CreateDirectory(outputFolder);
+
+                // Store and change the current working directory.
+                string oldWD = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(outputFolder);
+
+                // Load the player's chronology
+                string observationsPath = dataFolder + @"/chronology.pddl";
+                Plan fullChronology = Parser.GetPlan(observationsPath, baseline.Item1, baseline.Item2);
+                Plan playerOnlyChronology = Utilities.RemoveNonPlayerActions(fullChronology);
+
+                // Create the data log.
+                string logPath = Directory.GetCurrentDirectory() + @"/quest-data.csv";
+                StreamWriter writer = new StreamWriter(logPath, false);
+                writer.WriteLine(DataLogEntry.CSVheader());
+
+                // There should be one problem file for every step in the player's chronology.
+                List<Problem> problemsForPlayer = new List<Problem>();
+                for (int i = 0; i < playerOnlyChronology.Steps.Count; i++)
+                {
+                    Problem ithProblem = Utilities.GetIndexedArthurProblem(dataFolder, i);
+                    problemsForPlayer.Add(ithProblem);
+                }
+
+                // Extract the quest log given this information.
+                Dictionary<Quest, Tuple<int, int>> questLog =
+                    GoalDirectedAnalysis.QuestLogInformationWithChronologyIndices(fullChronology, problemsForPlayer);
+
+                // Find the player's data in the /analysis/Experiment #1/{player id} folder.
+                // For each CSV file in that folder
+                // For each row of data,
+                // Get the column [NumberOfPlayerActionsTaken]
+
+
+
+                // Close the log.
+                writer.Close();
+
+                // Restore the old working directory.
+                Directory.SetCurrentDirectory(oldWD);
+            }
+
+            Console.Write("done");
+        }
+
 
 
         #endregion
