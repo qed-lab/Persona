@@ -1,0 +1,61 @@
+(define (problem rob)
+(:domain arthur_HYRULE)
+	(:objects 
+		 basementexitkey basementbucket shinykey mushroom mirror ash lovecontract loveletter knightsword rope tastycupcake - item
+		 storage basement bar docks junkyard townarch forge hut townsquare - location
+		 basementexit basemententrance barexit barentrance hutentrance forgeentrance forgeexit hutexit bankentrance - entrance
+		 arthur mel oscar alli dorian karina peter matthias jordan - character
+	)
+	(:init
+		(at mirror townarch)
+		(at hutexit hut)
+		(at barexit bar)
+		(at tastycupcake hut)
+		(at shinykey townarch)
+		(at mushroom townarch)
+		(at hutentrance townarch)
+		(at rope forge)
+		(at forgeentrance townarch)
+		(at knightsword forge)
+		(at forgeexit forge)
+		(at dorian townarch)
+		(at karina townarch)
+		(at matthias forge)
+		(at mel bar)
+		(at mel basement)
+		(at arthur forge)
+		(at peter forge)
+		(closed hutentrance)
+		(connected townarch docks)
+		(connected townarch townsquare)
+		(connected junkyard docks)
+		(doorway townarch docks)
+		(doorway docks junkyard)
+		(doorway docks townarch)
+		(doorway townarch townsquare)
+		(has dorian lovecontract)
+		(has alli ash)
+		(has arthur loveletter)
+		(leadsto hutexit townarch)
+		(leadsto hutentrance hut)
+		(leadsto forgeexit townarch)
+		(leadsto forgeentrance forge)
+		(player arthur)
+		(unlocks shinykey bankentrance)
+		(wants-item arthur ash)
+		(wants-item arthur lovecontract)
+		(wants-item arthur shinykey)
+		(willing-to-give-item arthur lovecontract)
+		(willing-to-give-item arthur loveletter)
+		(willing-to-give-item arthur ash)
+	)
+	(:goal
+		
+		(and
+			(has alli tastycupcake) 
+			(has jordan loveletter) 
+		)
+
+	)
+
+)

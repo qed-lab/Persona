@@ -1,0 +1,145 @@
+(talk-to arthur mel storage), success
+(pickup arthur basementbucket storage), success
+(talk-to arthur mel storage), success
+(drop arthur basementbucket storage), success
+(pickup arthur basementbucket storage), proximity error
+(pickup arthur basementbucket storage), success
+(give arthur basementbucket mel storage), success
+(give mel basementexitkey arthur storage), success
+(talk-to arthur mel storage), success
+(move-through-doorway arthur storage basement), success
+(look-at arthur basementexit basement), success
+(unlock-entrance arthur basementexitkey basementexit basement), success
+(open arthur basementexit basement), success
+(move-through-entrance arthur basement basementexit bar), success
+(close arthur basemententrance bar), success
+(pickup arthur shinykey bar), proximity error
+(pickup arthur shinykey bar), success
+(move-through-entrance arthur bar barexit docks), failure
+(talk-to arthur oscar bar), success
+(talk-to arthur mel bar), proximity error
+(talk-to arthur mel bar), success
+(move-through-entrance arthur bar barexit docks), failure
+(open arthur barexit bar), success
+(move-through-entrance arthur bar barexit docks), success
+(look-at arthur mushroom docks), success
+(pickup arthur mushroom docks), success
+(move-through-doorway arthur docks junkyard), success
+(look-at arthur alli junkyard), success
+(talk-to arthur alli junkyard), success
+(pickup arthur mirror junkyard), proximity error
+(pickup arthur mirror junkyard), success
+(talk-to arthur alli junkyard), success
+(move-through-doorway arthur junkyard docks), success
+(move-through-doorway arthur docks townarch), success
+(look-at arthur dorian townarch), success
+(talk-to arthur dorian townarch), success
+(give dorian loveletter arthur townarch), success
+(look-at arthur karina townarch), success
+(talk-to arthur karina townarch), success
+(open arthur hutentrance townarch), success
+(move-through-entrance arthur townarch hutentrance hut), success
+(look-at arthur michael hut), success
+(talk-to arthur michael hut), success
+(pickup arthur tastycupcake hut), success
+(pickup arthur hairtonic hut), success
+(pickup arthur book hut), success
+(move-through-entrance arthur hut hutexit townarch), success
+(drop arthur tastycupcake townarch), success
+(drop arthur shinykey townarch), success
+(drop arthur mushroom townarch), success
+(drop arthur mirror townarch), success
+(drop arthur hairtonic townarch), success
+(drop arthur book townarch), success
+(drop arthur loveletter townarch), success
+(pickup arthur tastycupcake townarch), success
+(move-through-doorway arthur townarch docks), success
+(move-through-doorway arthur docks junkyard), success
+(talk-to arthur alli junkyard), success
+(give arthur tastycupcake alli junkyard), success
+(give alli ash arthur junkyard), success
+(drop arthur ash junkyard), success
+(look-at arthur doorway toward docks junkyard), success
+(move-through-doorway arthur junkyard docks), success
+(move-through-doorway arthur docks townarch), success
+(pickup arthur loveletter townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(look-at arthur frank townsquare), success
+(look-at arthur dave townsquare), success
+(talk-to arthur dave townsquare), success
+(talk-to arthur frank townsquare), success
+(look-at arthur doorway toward townarch townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(pickup arthur shinykey townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(talk-to arthur frank townsquare), success
+(unlock-entrance arthur shinykey bankentrance townsquare), success
+(open arthur bankentrance townsquare), success
+(talk-to arthur frank townsquare), success
+(move-through-entrance arthur townsquare bankentrance bank), success
+(pickup arthur silver bank), success
+(pickup arthur coin bank), success
+(move-through-entrance arthur bank bankexit townsquare), success
+(drop arthur silver townsquare), success
+(drop arthur coin townsquare), success
+(pickup arthur coin townsquare), success
+(open arthur shopentrance townsquare), success
+(move-through-entrance arthur townsquare shopentrance shop), success
+(look-at arthur giovanna shop), success
+(talk-to arthur giovanna shop), success
+(pickup arthur knightshield shop), success
+(pickup arthur rubyring shop), success
+(move-through-entrance arthur shop shopexit townsquare), proximity error
+(move-through-entrance arthur shop shopexit townsquare), success
+(drop arthur coin townsquare), success
+(drop arthur knightshield townsquare), success
+(drop arthur rubyring townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(pickup arthur hairtonic townarch), proximity error
+(pickup arthur hairtonic townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(move-through-entrance arthur townsquare shopentrance shop), success
+(give arthur hairtonic giovanna shop), success
+(move-through-entrance arthur shop shopexit townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(open arthur mansionentrance cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(talk-to arthur avery mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(pickup arthur rubyring townsquare), success
+(drop arthur loveletter townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(give arthur rubyring avery mansion), failure
+(look-at arthur avery mansion), success
+(talk-to arthur avery mansion), success
+(give arthur rubyring avery mansion), failure
+(give arthur rubyring avery mansion), failure
+(talk-to arthur roger mansion), success
+(talk-to arthur jordan mansion), proximity error
+(talk-to arthur jordan mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(pickup arthur loveletter townsquare), success
+(drop arthur rubyring townsquare), success
+(move-through-doorway arthur townsquare cliff), proximity error
+(move-through-doorway arthur townsquare cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(give arthur loveletter jordan mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(pickup arthur rubyring townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(give arthur rubyring dorian townarch), success
+(give dorian lovecontract arthur townarch), success
+(move-through-doorway arthur townarch townsquare), success
+(move-through-doorway arthur townsquare cliff), success
+(move-through-entrance arthur cliff mansionentrance mansion), success
+(give arthur lovecontract jordan mansion), success
+(move-through-entrance arthur mansion mansionexit cliff), success
+(move-through-doorway arthur cliff townsquare), success
+(move-through-doorway arthur townsquare townarch), success
+(move-through-doorway arthur townarch docks), success
+(move-through-entrance arthur docks barentrance bar), success
+(talk-to arthur mel bar), success
