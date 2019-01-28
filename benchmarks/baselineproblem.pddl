@@ -31,42 +31,42 @@
         towngate - door
 
         ;; Character Prefabs
-        player wizard orc riddler quartermaster appraiser fortuneteller knight - prefab
-        paladin baron baroness governor majordomo blacksmith banker - prefab
-        citizenone citizentwo apprentice barkeep - prefab
+        ;; player wizard orc riddler quartermaster appraiser fortuneteller knight - prefab
+        ;; paladin baron baroness governor majordomo blacksmith banker - prefab
+        ;; citizenone citizentwo apprentice barkeep - prefab
 
         ;; Location Prefabs
-        sand woods cave town beach junk woodenhouse brickhouse cliffedge - prefab
+        ;; sand woods cave town beach junk woodenhouse brickhouse cliffedge - prefab
 
         ;; Item Prefabs
-        woodendoor gate - prefab
-        sword shield ring key coins skull candlestick cupcake contract letter tonic flowers - prefab
-        lasso openbook pailofwater glassmirror tinymushroom silverbullion cat - prefab
+        ;; woodendoor gate - prefab
+        ;; sword shield ring key coins skull candlestick cupcake contract letter tonic flowers - prefab
+        ;; lasso openbook pailofwater glassmirror tinymushroom silverbullion cat - prefab
    )
    (:init
         ;; Player Character
         (player arthur)
 
         ;; ---- Characters ----
-        (prefab arthur player)
-        (prefab mel wizard)
-        (prefab michael fortuneteller)
-        (prefab ian quartermaster)
-        (prefab alli orc)
-        (prefab giovanna appraiser)
-        (prefab dorian knight)
-        (prefab jordan paladin)
-        (prefab james riddler)
-        (prefab camille baroness)
-        (prefab phillip baron)
-        (prefab roger governor)
-        (prefab avery majordomo)
-        (prefab peter blacksmith)
-        (prefab frank banker)
-        (prefab dave citizenone)
-        (prefab karina citizentwo)
-        (prefab matthias apprentice)
-        (prefab oscar barkeep)
+        ;; (prefab arthur player)
+        ;; (prefab mel wizard)
+        ;; (prefab michael fortuneteller)
+        ;; (prefab ian quartermaster)
+        ;; (prefab alli orc)
+        ;; (prefab giovanna appraiser)
+        ;; (prefab dorian knight)
+        ;; (prefab jordan paladin)
+        ;; (prefab james riddler)
+        ;; (prefab camille baroness)
+        ;; (prefab phillip baron)
+        ;; (prefab roger governor)
+        ;; (prefab avery majordomo)
+        ;; (prefab peter blacksmith)
+        ;; (prefab frank banker)
+        ;; (prefab dave citizenone)
+        ;; (prefab karina citizentwo)
+        ;; (prefab matthias apprentice)
+        ;; (prefab oscar barkeep)
 
         ;; ---- Items ----
         (prefab knightsword sword)
@@ -99,47 +99,47 @@
         (unlocks basementexitkey basementexit)
 
         ;; ---- Locations ----
-        (prefab junkyard junk)
-        (prefab docks beach)
-        (prefab bar woodenhouse)
-        (prefab storage brickhouse)
-        (prefab basement brickhouse)
-        (prefab townarch town)
-        (prefab hut woodenhouse)
-        (prefab forge woodenhouse)
-        (prefab townsquare town)
-        (prefab shop brickhouse)
-        (prefab bank brickhouse)
-        (prefab valley cave)
-        (prefab fort brickhouse)
-        (prefab cliff cliffedge)
-        (prefab mansion brickhouse)
+        ;; (prefab junkyard junk)
+        ;; (prefab docks beach)
+        ;; (prefab bar woodenhouse)
+        ;; (prefab storage brickhouse)
+        ;; (prefab basement brickhouse)
+        ;; (prefab townarch town)
+        ;; (prefab hut woodenhouse)
+        ;; (prefab forge woodenhouse)
+        ;; (prefab townsquare town)
+        ;; (prefab shop brickhouse)
+        ;; (prefab bank brickhouse)
+        ;; (prefab valley cave)
+        ;; (prefab fort brickhouse)
+        ;; (prefab cliff cliffedge)
+        ;; (prefab mansion brickhouse)
 
 
         ;; ---- Entrances ----
-        (prefab barentrance woodendoor)
-        (prefab barexit woodendoor)
+        ;; (prefab barentrance woodendoor)
+        ;; (prefab barexit woodendoor)
 
-        (prefab basemententrance woodendoor)
-        (prefab basementexit woodendoor)
+        ;; (prefab basemententrance woodendoor)
+        ;; (prefab basementexit woodendoor)
 
-        (prefab forgeentrance woodendoor)
-        (prefab forgeexit woodendoor)
+        ;; (prefab forgeentrance woodendoor)
+        ;; (prefab forgeexit woodendoor)
 
-        (prefab hutentrance woodendoor)
-        (prefab hutexit woodendoor)
+        ;; (prefab hutentrance woodendoor)
+        ;; (prefab hutexit woodendoor)
 
-        (prefab shopentrance woodendoor)
-        (prefab shopexit woodendoor)
+        ;; (prefab shopentrance woodendoor)
+        ;; (prefab shopexit woodendoor)
 
-        (prefab bankentrance woodendoor)
-        (prefab bankexit woodendoor)
+        ;; (prefab bankentrance woodendoor)
+        ;; (prefab bankexit woodendoor)
 
-        (prefab fortentrance woodendoor)
-        (prefab fortexit woodendoor)
+        ;; (prefab fortentrance woodendoor)
+        ;; (prefab fortexit woodendoor)
 
-        (prefab mansionentrance woodendoor)
-        (prefab mansionexit woodendoor)
+        ;; (prefab mansionentrance woodendoor)
+        ;; (prefab mansionexit woodendoor)
 
 
 
@@ -158,7 +158,7 @@
         ;; The bar contains the basement, which connects to the storage room.
         (at basemententrance bar)         (leadsto basemententrance basement)
         (at basementexit basement)        (leadsto basementexit bar)
-        (closed basemententrance)			  
+        (closed basemententrance)
 
 
         (connected storage basement)      (doorway storage basement)
@@ -212,12 +212,12 @@
 
 
         ;; ---- Initial Configuration ----
-
-        (at mel bar) 
-        (has mel basementbucket)    
+        (at mel storage)
+        (at basementbucket storage)
+        (has mel basementexitkey)
 
         ;; >>>> Player Configuration <<<<
-        (at arthur bar)         (wants-item arthur ash)
+        (at arthur storage)     (wants-item arthur ash)
                                 (wants-item arthur shinykey)
                                 (wants-item arthur loveletter)
                                 (wants-item arthur lovecontract)
@@ -229,7 +229,7 @@
 
         ;; >>>> Pilgrimage Quest Configuration <<<<
         (at alli junkyard)      (has alli ash)
-                                (wants-item alli tastycupcake) 
+                                (wants-item alli tastycupcake)
                                 ;; (willing-to-give-item alli ash) -> not needed for plan recognition
 
 
@@ -298,27 +298,27 @@
     		;; The game requires the player having to complete three out of five quests.
     		;; However, the player can opt to complete 3/5, 4/5, or 5/5 quests.
     		;; These leads to a combinatorial blowup of the potential win conditions.
-    		
+
     		;; The following win conditions are when the player decides to complete 3/5
     		;; quests.  This is a 5 choose 3 = 10 combinations of goal sets.
-    		
-    		;; 5 choose 3: 
+
+    		;; 5 choose 3:
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has alli tastycupcake))
-    					
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
-    					
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
-    					
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has james coin) (has james humanskull) (has james candle))
-    					
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
@@ -330,7 +330,7 @@
     		(and		(has ian knightsword) (has ian knightshield)
     					(has alli tastycupcake)
     					(has james coin) (has james humanskull) (has james candle))
-    		
+
     		(and		(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract))
@@ -338,19 +338,19 @@
     		(and		(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
-    					
+
     		(and		(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has james coin) (has james humanskull) (has james candle))
-    					
+
     		(and		(has james coin) (has james humanskull) (has james candle)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
     					(has alli tastycupcake))
-    					
+
     		(and		(has james coin) (has james humanskull) (has james candle)
     					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
     					(has alli tastycupcake))
-    					
+
     		(and		(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
     					(has ian knightsword) (has ian knightshield)
     					(has james coin) (has james humanskull) (has james candle))
@@ -358,7 +358,7 @@
     		(and		(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
     					(has ian knightsword) (has ian knightshield)
     					(has james coin) (has james humanskull) (has james candle))
-    					
+
     		(and		(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
     					(has giovanna hairtonic)
     					(has james coin) (has james humanskull) (has james candle))
@@ -366,10 +366,10 @@
     		(and		(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
     					(has giovanna hairtonic)
     					(has james coin) (has james humanskull) (has james candle))
-    					
+
     		;; The following win conditions are when the player decides to complete 4/5
-    		;; quests.  This is a 5 choose 4 = 5 combinations of goal sets.		
-    		
+    		;; quests.  This is a 5 choose 4 = 5 combinations of goal sets.
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has alli tastycupcake)
@@ -379,12 +379,12 @@
     					(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract))
-    						
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has james coin) (has james humanskull) (has james candle))
-    						
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
@@ -404,17 +404,17 @@
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
     					(has james coin) (has james humanskull) (has james candle))
-    						
+
     		(and		(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
     					(has james coin) (has james humanskull) (has james candle))
-    					
+
 			(and		(has giovanna hairtonic)
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian bouquet) (has jordan lovecontract)
     					(has james coin) (has james humanskull) (has james candle))
-			
+
     		;; The following win condition is when the player decides to complete 5/5
     		;; quests.  This is a 5 choose 5 = 1 goal set.
 
@@ -423,7 +423,7 @@
     					(has alli tastycupcake)
     					(has jordan loveletter) (has dorian rubyring) (has jordan lovecontract)
     					(has james coin) (has james humanskull) (has james candle))
-    					
+
     		(and		(has ian knightsword) (has ian knightshield)
     					(has giovanna hairtonic)
     					(has alli tastycupcake)

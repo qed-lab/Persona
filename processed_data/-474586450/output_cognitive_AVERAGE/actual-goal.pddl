@@ -1,0 +1,6 @@
+(has ian knightsword)
+(has ian knightshield)
+(has alli tastycupcake)
+(has james coin)
+(has james humanskull)
+(has james candle)

@@ -1,0 +1,53 @@
+(define (problem rob)
+(:domain arthur_HYRULE)
+	(:objects 
+		 towngate - door
+		 arthur mel dorian karina - character
+		 shinykey mushroom lovecontract loveletter - item
+		 bar docks townarch - location
+		 barexit barentrance hutentrance forgeentrance - entrance
+	)
+	(:init
+		(at barexit bar)
+		(at arthur townarch)
+		(at hutentrance townarch)
+		(at mel bar)
+		(at karina townarch)
+		(at forgeentrance townarch)
+		(at barentrance docks)
+		(at dorian townarch)
+		(closed hutentrance)
+		(closed forgeentrance)
+		(connected docks townarch)
+		(connected townarch townsquare)
+		(connected townarch docks)
+		(connected docks junkyard)
+		(doorbetween towngate townsquare townarch)
+		(doorbetween towngate townarch townsquare)
+		(doorway docks townarch)
+		(doorway townarch docks)
+		(doorway docks junkyard)
+		(has arthur mushroom)
+		(has arthur shinykey)
+		(has dorian lovecontract)
+		(has dorian loveletter)
+		(leadsto forgeentrance forge)
+		(leadsto barexit docks)
+		(leadsto barentrance bar)
+		(leadsto hutentrance hut)
+		(player arthur)
+		(unlocks shinykey bankentrance)
+		(wants-item arthur loveletter)
+		(wants-item arthur lovecontract)
+		(wants-item arthur shinykey)
+		(wants-item arthur ash)
+		(willing-to-give-item arthur ash)
+		(willing-to-give-item arthur lovecontract)
+		(willing-to-give-item arthur shinykey)
+		(willing-to-give-item arthur loveletter)
+		(willing-to-give-item arthur mushroom)
+	)
+	(:goal
+		
+	)
+)

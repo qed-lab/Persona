@@ -1,0 +1,7 @@
+(move-through-doorway arthur townsquare valley)
+(give arthur humanskull james valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-entrance arthur townsquare bankentrance bank)
+(move-through-entrance arthur bank bankexit townsquare)
+(move-through-door arthur townsquare towngate townarch)
+(move-through-doorway arthur townarch docks)

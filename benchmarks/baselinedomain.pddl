@@ -28,7 +28,7 @@
         (willing-to-give-item     ?x - character ?y - item)   ;; character ?x is willing to give item ?y
 
         ;; ---- Rendering ----
-        (prefab     ?x - object ?y - prefab)        ;; the prefab of ?x is ?y
+        ;; (prefab     ?x - object ?y - prefab)        ;; the prefab of ?x is ?y
 
     )
 
@@ -46,6 +46,7 @@
                 (player ?speaker)
                 (at ?speaker ?location)
                 (at ?hearer ?location)
+                (not (= ?speaker ?hearer))
             )
         :effect
             (and
@@ -65,6 +66,7 @@
                 (player ?character)
                 (at ?character ?location)
                 (at ?entity ?location)
+                (not (= ?character ?entity))
             )
         :effect
             (and
@@ -159,6 +161,7 @@
                 (at ?receiver ?location)
                 (not (has ?receiver ?item))
                 (wants-item ?receiver ?item)
+                (not (= ?sender ?receiver))
             )
         :effect
             (and

@@ -1008,10 +1008,16 @@ namespace Persona
                 Dictionary<Quest, Tuple<int, int>> questLog =
                     GoalDirectedAnalysis.QuestLogInformationWithChronologyIndices(fullChronology, problemsForPlayer);
 
+                // We need to add the following columns:
+                // Number of Quests Active, Number of Quests Completed, Q{1,2,3,4,5} Active/Completed.
+
+
+
                 // Find the player's data in the /analysis/Experiment #1/{player id} folder.
                 // For each CSV file in that folder
                 // For each row of data,
                 // Get the column [NumberOfPlayerActionsTaken]
+
 
 
 

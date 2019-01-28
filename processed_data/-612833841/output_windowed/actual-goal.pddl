@@ -1,0 +1,8 @@
+(has ian knightshield)
+(has ian knightsword)
+(has jordan loveletter)
+(has dorian bouquet)
+(has jordan lovecontract)
+(has james coin)
+(has james humanskull)
+(has james candle)

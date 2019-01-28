@@ -1,0 +1,7 @@
+(move-through-entrance arthur shop shopexit townsquare)
+(move-through-doorway arthur townsquare townarch)
+(open arthur forgeentrance townarch)
+(move-through-entrance arthur townarch forgeentrance forge)
+(move-through-entrance arthur forge forgeexit townarch)
+(move-through-doorway arthur townarch docks)
+(open arthur barentrance docks)

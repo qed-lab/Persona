@@ -1,0 +1,5 @@
+(has james candle)
+(has james humanskull)
+(has james coin)
+(has alli tastycupcake)
+(has giovanna hairtonic)

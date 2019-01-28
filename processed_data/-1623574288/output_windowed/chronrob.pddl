@@ -1,0 +1,7 @@
+(move-through-entrance arthur valley fortentrance fort)
+(give arthur knightsword ian fort)
+(give arthur knightshield ian fort)
+(move-through-entrance arthur fort fortexit valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-doorway arthur townsquare townarch)
+(move-through-doorway arthur townarch docks)

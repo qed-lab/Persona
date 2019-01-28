@@ -1,0 +1,7 @@
+(move-through-doorway arthur townsquare valley)
+(give arthur candle james valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-door arthur townsquare towngate townarch)
+(give arthur bouquet dorian townarch)
+(give dorian lovecontract arthur townarch)
+(move-through-doorway arthur townarch docks)

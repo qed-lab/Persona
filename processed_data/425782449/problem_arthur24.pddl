@@ -1,0 +1,53 @@
+(define (problem rob)
+(:domain arthur_HYRULE)
+	(:objects 
+		 arthur mel oscar - character
+		 basementexitkey basementbucket shinykey mushroom - item
+		 storage basement bar docks - location
+		 basementexit basemententrance barexit barentrance - entrance
+	)
+	(:init
+		(at barexit bar)
+		(at arthur docks)
+		(at basementexit basement)
+		(at mel basement)
+		(at mel bar)
+		(at mel storage)
+		(at barentrance docks)
+		(at basemententrance bar)
+		(at oscar bar)
+		(connected docks junkyard)
+		(connected storage basement)
+		(connected basement storage)
+		(connected docks townarch)
+		(doorway docks townarch)
+		(doorway docks junkyard)
+		(doorway storage basement)
+		(doorway basement storage)
+		(has arthur mushroom)
+		(has mel basementbucket)
+		(has arthur shinykey)
+		(leadsto barentrance bar)
+		(leadsto basemententrance basement)
+		(leadsto basementexit bar)
+		(leadsto barexit docks)
+		(player arthur)
+		(unlocks basementexitkey basementexit)
+		(unlocks shinykey bankentrance)
+		(wants-item arthur ash)
+		(wants-item arthur loveletter)
+		(wants-item arthur shinykey)
+		(wants-item arthur lovecontract)
+		(willing-to-give-item arthur shinykey)
+		(willing-to-give-item arthur mushroom)
+		(willing-to-give-item arthur ash)
+		(willing-to-give-item arthur loveletter)
+		(willing-to-give-item arthur lovecontract)
+	)
+	(:goal
+	  (AND
+		
+		(not (locked basementexit))
+	  )
+	)
+)

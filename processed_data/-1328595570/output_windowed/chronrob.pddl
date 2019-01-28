@@ -1,0 +1,7 @@
+(move-through-doorway arthur townsquare valley)
+(give arthur coin james valley)
+(give arthur humanskull james valley)
+(give arthur candle james valley)
+(move-through-doorway arthur valley townsquare)
+(move-through-door arthur townsquare towngate townarch)
+(move-through-doorway arthur townarch docks)
