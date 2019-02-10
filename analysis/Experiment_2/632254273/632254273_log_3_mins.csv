@@ -1,0 +1,26 @@
+(pickup arthur mushroom docks), success,0:09,pick up mushroom
+(move-through-doorway arthur docks townarch), success,0:15,go to doorway toward townarch
+(talk-to arthur karina townarch), success,0:23,talk to karina
+(talk-to arthur dorian townarch), success,0:32,talk to dorian
+(give dorian loveletter arthur townarch), success,0:44,give arthur loveletter
+(look-at arthur loveletter townarch), success,1:00,look at loveletter
+(move-through-doorway arthur townarch docks), success,1:06,go to doorway toward docks
+(look-at arthur doorway toward junkyard docks), success,1:12,look at doorway toward junkyard
+(move-through-doorway arthur docks junkyard), success,1:15,go to doorway toward junkyard
+(look-at arthur mirror junkyard), success,1:19,look at mirror
+(look-at arthur alli junkyard), success,1:22,look at alli
+(pickup arthur mirror junkyard), success,1:30,pick up mirror
+(talk-to arthur alli junkyard), success,1:36,talk to alli
+(move-through-doorway arthur junkyard docks), success,1:55,go to doorway through docks
+(move-through-doorway arthur docks townarch), success,2:05,go to doorway through townarch
+(look-at arthur hutentrance townarch), success,2:15,look at hutentrance
+(open arthur hutentrance townarch), success,2:21,open hutentrance
+(move-through-entrance arthur townarch hutentrance hut), success,2:24,go to hutentrance
+(look-at arthur book hut), success,2:30,look at book
+(look-at arthur hairtonic hut), success,2:31,look at hairtonic
+(look-at arthur tastycupcake hut), success,2:33,look at tastycupcake
+(talk-to arthur michael hut), success,2:36,talk to michael
+(drop arthur mirror hut), success,2:46,drop mirror
+(move-through-entrance arthur hut hutexit townarch), success,2:51,go to hutexit
+(look-at arthur townsquare townarch), success,2:56,look at townsquare
+(look-at arthur townsquare townarch), success,3:00,look at townsquare

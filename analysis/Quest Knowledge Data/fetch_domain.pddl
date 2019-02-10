@@ -2,7 +2,7 @@
 
    (:requirements :adl :typing :universal-preconditions)
 
-   (:types location entity prefab - object
+   (:types location entity - object
            actant portal - entity
            door entrance - portal
            character item - actant
@@ -19,13 +19,9 @@
         ;; ---- Keys and Locks ----
         (closed         ?x - entrance)  ;; entrance ?x is closed
         (locked         ?x - portal)    ;; portal ?x is locked
-        (unlocks        ?x - item       ?y - portal)    ;; item ?x unlocks portal ?y
-        (doorway        ?x - location   ?y - location)  ;; there is no door between ?y and ?z
         (doorbetween    ?x - door       ?y - location   ?z - location) ;; door ?x is between locations ?y and ?z
 
         ;; ---- Game-specific ----
-        (tutorial-has-been-completed)             ;; Is true when the tutorial has been completed.
-        (game-has-been-won)                       ;; Is true when the game has been won!
         (player         ?x - character)           ;; Character ?x is a player.
         (wants-item     ?x - character  ?y - item)            ;; character ?x wants item ?y
         (willing-to-give-item     ?x - character ?y - item)   ;; character ?x is willing to give item ?y

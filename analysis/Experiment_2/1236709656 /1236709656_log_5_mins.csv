@@ -1,0 +1,34 @@
+(move-through-doorway arthur docks junkyard), success,0:08,go to doorway toward junkyard
+(talk-to arthur alli junkyard), success,0:15,talk to alli
+(pickup arthur mirror junkyard), success,0:36,pick up mirror
+(move-through-doorway arthur junkyard docks), success,0:40,go to doorway toward docks
+(drop arthur mirror docks), success,0:48,drop mirror
+(pickup arthur mushroom docks), success,0:54,pick up mushroom
+(move-through-doorway arthur docks junkyard), success,1:00,go to doorway toward junkyard
+(give arthur mushroom alli junkyard),failure,1:09,give mushroom to alli
+(move-through-doorway arthur junkyard docks), success,1:15,go to doorway toward docks
+(drop arthur mushroom docks), success,1:22,drop mushroom
+(move-through-doorway arthur docks townarch), success,1:28,go to doorway toward townarch
+(talk-to arthur karina townarch), success,1:35,talk to karina
+(talk-to arthur dorian townarch), success,1:44,talk to dorian
+(give dorian loveletter arthur townarch), success,1:53,give loveletter to arthur
+(open arthur forgeentrance townarch), success,2:08,open forgeentrance
+(move-through-entrance arthur townarch forgeentrance forge), success,2:11,go to forgeentrance
+(talk-to arthur matthias forge), success,2:18,talk to matthias
+(talk-to arthur peter forge), success,2:26,talk to peter
+(pickup arthur knightsword forge), success,2:33,pick up knightsword
+(move-through-entrance arthur forge forgeexit townarch), success,2:40,go to forgeexit
+(open arthur hutentrance townarch), success,2:54,open hutentrance
+(move-through-entrance arthur townarch hutentrance hut), success,2:58,go to hutentrance
+(talk-to arthur michael hut), success,3:08,talk to michael
+(pickup arthur tastycupcake hut), success,3:29,pickup tastycupcake
+(move-through-entrance arthur hut hutexit townarch), success,3:36,go to hutexit
+(move-through-doorway arthur townarch docks), success,3:45,go to doorway toward docks
+(move-through-doorway arthur docks junkyard), success,3:58,go to doorway toward junkyard
+(give arthur tastycupcake alli junkyard), success,4:09,give tastycupcake to alli
+(give alli ash arthur junkyard), success,4:12,give ash to arthur
+(move-through-doorway arthur junkyard docks), success,4:21,go to doorway toward docks
+(move-through-doorway arthur docks townarch), success,4:28,go to doorway toward townarch
+(move-through-door arthur townarch towngate townsquare), success,4:35,go to doorway toward townsquare
+(talk-to arthur dave townsquare), success,4:42,talk to dave
+(talk-to arthur frank townsquare), success,4:50,talk to frank
