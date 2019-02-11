@@ -13,6 +13,471 @@ namespace Persona
     public static class GoalDirectedAnalysis
     {
         /// <summary>
+        /// Expands the CSV File for the given player with quest log data.
+        /// </summary>
+        /// <returns>A two-dimensional string list, which represents the the CSV File for the given player expanded with quest log data.</returns>
+        /// <param name="pathToCSV">Path to the player's baseline csv file.</param>
+        /// <param name="playerId">Player identifier.</param>
+        /// <param name="fullChronology">Full chronology for the player.</param>
+        /// <param name="questLog">Quest log for the player.</param>
+        public static List<List<string>> ExpandCSVFileWithQuestLogData(string pathToCSV, int playerId, Plan fullChronology, Dictionary<Quest, Tuple<int, int>> questLog)
+        {
+            // Create the new CSV file for the player.
+            List<List<string>> expandedCSVdata = new List<List<string>>();
+
+            // Define the columns for this player/configuration.
+
+            // Quest count
+            int numberOfAdoptedQuestParts = 0;
+            int numberOfCompletedQuestParts = 0;
+            int numberOfActiveQuestParts = 0;
+
+            int numberOfAdoptedQuests = 0;
+            int numberOfCompletedQuests = 0;
+            int numberOfActiveQuests = 0;
+
+            // Quest stage active flags
+            bool equipAdopted = false, equipCompleted = false; // equip
+            bool fetchAdopted = false, fetchCompleted = false; // fetch
+            bool pilgrimageAdopted = false, pilgrimageCompleted = false; // pilgrimage
+            bool loveLetterAdopted = false, loveLetterCompleted = false; // love pt. 1
+            bool loveGiftAdopted = false, loveGiftCompleted = false; // love pt. 2
+            bool loveContractAdopted = false, loveContractCompleted = false; // love pt. 3
+            bool wisdomCoinAdopted = false, wisdomCoinCompleted = false; // wisdom pt. 1
+            bool wisdomHumanskullAdopted = false, wisdomHumanskullCompleted = false; // wisdom pt. 2
+            bool wisdomCandleAdopted = false, wisdomCandleCompleted = false; // wisdom pt. 3
+
+            // Quest aggregate active flags;
+            bool loveAdopted = false;
+            bool wisdomAdopted = false;
+            bool loveCompleted = false;
+            bool wisdomCompleted = false;
+
+            // Quest stage knol flags;
+            double equipKnol = -1.0;
+            double fetchKnol = -1.0;
+            double pilgrimageKnol = -1.0;
+            double loveLetterKnol = -1.0, loveGiftKnol = -1.0, loveContractKnol = -1.0; ;
+            double wisdomCoinKnol = -1.0, wisdomHumanskullKnol = -1.0, wisdomCandleKnol = -1.0;
+
+            // Quest aggregate knol flags;
+            double loveAvgKnol = -1.0;
+            double wisdomAvgKnol = -1.0;
+
+            // Load the CSV file.
+            List<List<string>> csvData = new List<List<string>>();
+
+            using (var reader = new StreamReader(pathToCSV))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string row = reader.ReadLine();
+                    string[] cols = row.Replace(" ", "").Split(','); // trim and split
+                    csvData.Add(new List<string>(cols));
+                }
+            }
+
+            // Find the index of the column [NumberOfPlayerActionsTaken]
+            int actionsTakenColumnIndex = -1;
+            for (int i = 0; i < csvData[0].Count; i++)
+                if (csvData[0][i].Equals("NumberOfPlayerActionsTaken"))
+                {
+                    actionsTakenColumnIndex = i;
+                    break;
+                }
+
+            // Create the header row for the expanded CSV file.
+            expandedCSVdata.Add(new List<string>(csvData[0]));
+            expandedCSVdata[0].Add("NumberOfAdoptedQuestParts");
+            expandedCSVdata[0].Add("NumberOfCompletedQuestParts");
+            expandedCSVdata[0].Add("NumberOfActiveQuestParts");
+
+            expandedCSVdata[0].Add("NumberOfAdoptedQuests");
+            expandedCSVdata[0].Add("NumberOfCompletedQuests");
+            expandedCSVdata[0].Add("NumberOfActiveQuests");
+
+            expandedCSVdata[0].Add("EquipQuest-adopted");
+            expandedCSVdata[0].Add("EquipQuest-complete");
+            expandedCSVdata[0].Add("EquipQuest-knol");
+
+            expandedCSVdata[0].Add("FetchQuest-adopted");
+            expandedCSVdata[0].Add("FetchQuest-complete");
+            expandedCSVdata[0].Add("FetchQuest-knol");
+
+            expandedCSVdata[0].Add("PilgrimageQuest-adopted");
+            expandedCSVdata[0].Add("PilgrimageQuest-complete");
+            expandedCSVdata[0].Add("PilgrimageQuest-knol");
+
+            expandedCSVdata[0].Add("LoveQuest-Letter-adopted");
+            expandedCSVdata[0].Add("LoveQuest-Letter-complete");
+            expandedCSVdata[0].Add("LoveQuest-Letter-knol");
+
+            expandedCSVdata[0].Add("LoveQuest-Gift-adopted");
+            expandedCSVdata[0].Add("LoveQuest-Gift-complete");
+            expandedCSVdata[0].Add("LoveQuest-Gift-knol");
+
+            expandedCSVdata[0].Add("LoveQuest-Letter-adopted");
+            expandedCSVdata[0].Add("LoveQuest-Letter-complete");
+            expandedCSVdata[0].Add("LoveQuest-Letter-knol");
+
+            expandedCSVdata[0].Add("LoveQuest-aggregate-adopted");
+            expandedCSVdata[0].Add("LoveQuest-aggregate-complete");
+            expandedCSVdata[0].Add("LoveQuest-avg-knol");
+
+            expandedCSVdata[0].Add("WisdomQuest-Coin-adopted");
+            expandedCSVdata[0].Add("WisdomQuest-Coin-complete");
+            expandedCSVdata[0].Add("WisdomQuest-Coin-knol");
+
+            expandedCSVdata[0].Add("WisdomQuest-Humanskull-adopted");
+            expandedCSVdata[0].Add("WisdomQuest-Humanskull-complete");
+            expandedCSVdata[0].Add("WisdomQuest-Humanskull-knol");
+
+            expandedCSVdata[0].Add("WisdomQuest-Candle-adopted");
+            expandedCSVdata[0].Add("WisdomQuest-Candle-complete");
+            expandedCSVdata[0].Add("WisdomQuest-Candle-knol");
+
+            expandedCSVdata[0].Add("WisdomQuest-aggregate-adopted");
+            expandedCSVdata[0].Add("WisdomQuest-aggregate-complete");
+            expandedCSVdata[0].Add("WisdomQuest-avg-knol");
+
+            // For each row of data in the CSV file,
+            for (int rowIndex = 1; rowIndex < csvData.Count; rowIndex++)
+            {
+                List<string> row = csvData[rowIndex];
+
+                // Get the column [NumberOfPlayerActionsTaken] and convert to int.
+                string numberOfPlayerActionsTaken = row[actionsTakenColumnIndex];
+                int numberOfPlayerActions = int.Parse(numberOfPlayerActionsTaken);
+
+                // For each quest inside the quest log,
+                foreach (Quest quest in Enum.GetValues(typeof(Quest)))
+                {
+                    Tuple<int, int> questLogEntry = questLog[quest];
+                    int indexOfAdoption = questLogEntry.Item1;
+                    int indexOfCompletion = questLogEntry.Item2;
+
+                    // if the Quest index of adoption != -1 && index of adoption == numberOfPlayerActions
+                    if (indexOfAdoption != -1 && numberOfPlayerActions >= indexOfAdoption)
+                    {
+                        // Set the boolean flag of quest adoption to true.
+                        // Increment the number of active quests.
+                        // Compute the knowledge the player had for the quest.
+                        switch (quest)
+                        {
+                            // Equip Quest
+                            case Quest.Equip_PartI:
+                            case Quest.Equip_PartII:
+                                if (!equipAdopted)
+                                {
+                                    equipAdopted = true;
+                                    numberOfAdoptedQuests++;
+                                    numberOfAdoptedQuestParts++;
+                                    equipKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Fetch Quest
+                            case Quest.Fetch:
+                                if (!fetchAdopted)
+                                {
+                                    fetchAdopted = true;
+                                    numberOfAdoptedQuests++;
+                                    numberOfAdoptedQuestParts++;
+                                    fetchKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Pilgrimage Quest
+                            case Quest.Pilgrimage:
+                                if (!pilgrimageAdopted)
+                                {
+                                    pilgrimageAdopted = true;
+                                    numberOfAdoptedQuests++;
+                                    numberOfAdoptedQuestParts++;
+                                    pilgrimageKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                }
+                                break;
+
+                            // Love Quest: Love Letter
+                            case Quest.Love_PartI:
+                                if (!loveLetterAdopted)
+                                {
+                                    loveLetterAdopted = true;
+                                    loveAdopted = true;
+                                    numberOfAdoptedQuests++;
+                                    numberOfAdoptedQuestParts++;
+                                    loveLetterKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Love Quest: Love Gift
+                            case Quest.Love_PartII:
+                                if (!loveGiftAdopted)
+                                {
+                                    loveGiftAdopted = true;
+                                    numberOfAdoptedQuestParts++;
+                                    loveGiftKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Love Quest: Love Contract
+                            case Quest.Love_PartIII:
+                                if (!loveContractAdopted)
+                                {
+                                    loveContractAdopted = true;
+                                    numberOfAdoptedQuestParts++;
+                                    loveContractKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Wisdom Quest: Coin
+                            case Quest.Wisdom_PartI:
+                                if (!wisdomCoinAdopted)
+                                {
+                                    wisdomCoinAdopted = true;
+                                    wisdomAdopted = true;
+                                    numberOfAdoptedQuests++;
+                                    numberOfAdoptedQuestParts++;
+                                    wisdomCoinKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Wisdom Quest: Humanskull
+                            case Quest.Wisdom_PartII:
+                                if (!wisdomHumanskullAdopted)
+                                {
+                                    wisdomHumanskullAdopted = true;
+                                    numberOfActiveQuestParts++;
+                                    wisdomHumanskullKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+
+                            // Wisdom Quest: Candle
+                            case Quest.Wisdom_PartIII:
+                                if (!wisdomCandleAdopted)
+                                {
+                                    wisdomCandleAdopted = true;
+                                    numberOfAdoptedQuestParts++;
+                                    wisdomCandleKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                }
+                                break;
+                        }
+                    }
+
+                    // Love Average Knowledge Calculation
+                    loveAvgKnol =
+                        (loveLetterKnol > 0 ? loveLetterKnol : 0)
+                        + (loveGiftKnol > 0 ? loveGiftKnol : 0)
+                        + (loveContractKnol > 0 ? loveContractKnol : 0);
+
+                    if (loveAvgKnol > 0)
+                    {
+                        double loveAvgDenominator = (loveLetterAdopted ? 1 : 0) + (loveGiftAdopted ? 1 : 0) + (loveContractAdopted ? 1 : 0); // 1 used to avoid dividing by zero
+                        loveAvgKnol /= loveAvgDenominator;
+                    }
+
+
+                    // Wisdom Average Knowledge Calculation
+                    wisdomAvgKnol =
+                        (wisdomCoinKnol > 0 ? wisdomCoinKnol : 0)
+                        + (wisdomHumanskullKnol > 0 ? wisdomCoinKnol : 0)
+                        + (wisdomCandleKnol > 0 ? wisdomCandleKnol : 0);
+
+                    if (wisdomAvgKnol > 0)
+                    {
+                        double wisdomAvgDenominator = /*(wisdomCoinAdopted ? 1 : 0)*/ 1 + (wisdomHumanskullAdopted ? 1 : 0) + (wisdomCandleAdopted ? 1 : 0); // 1 used to avoid dividing by zero
+                        wisdomAvgKnol /= wisdomAvgDenominator;
+                    }
+
+                    // if the Quest index of completion != -1 && index of completion == numberOfPlayerActionsTaken
+                    if (indexOfCompletion != -1 && numberOfPlayerActions >= indexOfCompletion)
+                    {
+                        // Set the boolean flag of quest completion to true.
+                        // Increment the number of completed quests.
+                        switch (quest)
+                        {
+                            // Equip Quest
+                            case Quest.Equip_PartI:
+                            case Quest.Equip_PartII:
+                                if (equipAdopted && !equipCompleted)
+                                {
+                                    equipCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                    numberOfCompletedQuests++;
+                                }
+                                break;
+
+                            // Fetch Quest
+                            case Quest.Fetch:
+                                if (fetchAdopted && !fetchCompleted)
+                                {
+                                    fetchCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                    numberOfCompletedQuests++;
+                                }
+                                break;
+
+                            // Pilgrimage Quest
+                            case Quest.Pilgrimage:
+                                if (pilgrimageAdopted && !pilgrimageCompleted)
+                                {
+                                    pilgrimageCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                    numberOfCompletedQuests++;
+                                }
+                                break;
+
+                            // Love Quest
+                            case Quest.Love_PartI:
+                                if (loveLetterAdopted && !loveLetterCompleted)
+                                {
+                                    loveLetterCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                }
+                                break;
+
+                            case Quest.Love_PartII:
+                                if (loveGiftAdopted && !loveGiftCompleted)
+                                {
+                                    loveGiftCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                }
+                                break;
+
+                            case Quest.Love_PartIII:
+                                if (loveContractAdopted && !loveContractCompleted)
+                                {
+                                    loveContractCompleted = true;
+                                    numberOfCompletedQuestParts++;
+
+                                    loveCompleted = true;
+                                    numberOfCompletedQuests++;
+                                }
+                                break;
+
+                            case Quest.Wisdom_PartI:
+                                if (wisdomCoinAdopted && !wisdomCoinCompleted)
+                                {
+                                    wisdomCoinCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                }
+                                break;
+
+                            case Quest.Wisdom_PartII:
+                                if (wisdomHumanskullAdopted && !wisdomHumanskullCompleted)
+                                {
+                                    wisdomHumanskullCompleted = true;
+                                    numberOfCompletedQuestParts++;
+                                }
+                                break;
+
+                            case Quest.Wisdom_PartIII:
+                                if (wisdomCandleAdopted && !wisdomCandleCompleted)
+                                {
+                                    wisdomCandleCompleted = true;
+                                    numberOfCompletedQuestParts++;
+
+                                    wisdomCompleted = true;
+                                    numberOfCompletedQuests++;
+                                }
+                                break;
+                        }
+                    }
+                }
+
+                // Calculate aggregate metrics.
+                numberOfActiveQuestParts = numberOfAdoptedQuestParts - numberOfCompletedQuestParts;
+                numberOfActiveQuests = numberOfAdoptedQuests - numberOfCompletedQuests;
+
+                // Compute the new row of data and add it to the data set.
+                List<string> expandedRow = new List<string>(row)
+                {
+                    numberOfAdoptedQuestParts.ToString(),
+                    numberOfCompletedQuestParts.ToString(),
+                    numberOfActiveQuestParts.ToString(),
+
+                    numberOfAdoptedQuests.ToString(),
+                    numberOfCompletedQuests.ToString(),
+                    numberOfActiveQuests.ToString(),
+
+                    equipAdopted.ToString(),
+                    equipCompleted.ToString(),
+                    equipKnol.ToString(),
+
+                    fetchAdopted.ToString(),
+                    fetchCompleted.ToString(),
+                    fetchKnol.ToString(),
+
+                    pilgrimageAdopted.ToString(),
+                    pilgrimageCompleted.ToString(),
+                    pilgrimageKnol.ToString(),
+
+                    loveLetterAdopted.ToString(),
+                    loveLetterCompleted.ToString(),
+                    loveLetterKnol.ToString(),
+
+                    loveGiftAdopted.ToString(),
+                    loveGiftCompleted.ToString(),
+                    loveGiftKnol.ToString(),
+
+                    loveContractAdopted.ToString(),
+                    loveContractCompleted.ToString(),
+                    loveContractKnol.ToString(),
+
+                    loveAdopted.ToString(),
+                    loveCompleted.ToString(),
+                    loveAvgKnol.ToString(),
+
+                    wisdomCoinAdopted.ToString(),
+                    wisdomCoinCompleted.ToString(),
+                    wisdomCoinKnol.ToString(),
+
+                    wisdomHumanskullAdopted.ToString(),
+                    wisdomHumanskullCompleted.ToString(),
+                    wisdomHumanskullKnol.ToString(),
+
+                    wisdomCandleAdopted.ToString(),
+                    wisdomCandleCompleted.ToString(),
+                    wisdomCandleKnol.ToString(),
+
+                    wisdomAdopted.ToString(),
+                    wisdomCompleted.ToString(),
+                    wisdomAvgKnol.ToString()
+                };
+
+                expandedCSVdata.Add(expandedRow);
+            }
+
+            return expandedCSVdata;
+        }
+
+
+        /// <summary>
+        /// Computes the percentage of knowledge the player has relative to the knowledge the player needs to solve the 
+        /// given Quest.
+        /// </summary>
+        /// <returns>The percentage of needed knowledge at the moment of quest adoption.</returns>
+        /// <param name="quest">The quest.</param>
+        /// <param name="playerId">Player identifier.</param>
+        /// <param name="chronologyStepIndex">Chronology step index.</param>
+        /// <param name="fullChronology">Full chronology.</param>
+        public static double KnowledgePercentageAtQuestAdoption(Quest quest, int playerId, int chronologyStepIndex, Plan fullChronology)
+        {
+            // Load the Quest's PDDL Problem
+            Problem questKnowledgeProblem = GetQuestKnowledgeProblem(quest);
+
+            // Load the player's PDDL Problem
+            Problem playerKnowledgeProblem = GetPlayerProblemForChronologyStep(playerId, chronologyStepIndex, fullChronology);
+
+            // Compare the Problems
+            double knowledgePercentageAtQuestAdoption = Problem.InitialStatePercentageMatch(playerKnowledgeProblem, questKnowledgeProblem);
+
+            // Return the comparison.
+            return knowledgePercentageAtQuestAdoption;
+        }
+
+
+        /// <summary>
         /// Returns the quest log for a player at the end of gameplay.
         /// The quest log is a dictionary that maps the quest to two numbers: 
         /// 1) the step id when the quest stage was adopted and 2) the step id when the quest stage was completed.
@@ -93,6 +558,83 @@ namespace Persona
             }
 
             return questLogWithStepIds;
+        }
+
+        /// <summary>
+        /// Gets the quest knowledge problem.
+        /// </summary>
+        /// <returns>The quest knowledge problem.</returns>
+        /// <param name="quest">The corresponding Quest.</param>
+        static Problem GetQuestKnowledgeProblem(Quest quest)
+        {
+            string questPDDLProblemPath = Parser.GetTopDirectory() + @"Quest Knowledge Data/";
+
+            switch (quest)
+            {
+                case Quest.Equip_PartI:
+                case Quest.Equip_PartII:
+                    questPDDLProblemPath += "equip_problem.pddl";
+                    break;
+
+                case Quest.Fetch:
+                    questPDDLProblemPath += "fetch_problem.pddl";
+                    break;
+
+                case Quest.Love_PartI:
+                case Quest.Love_PartII:
+                case Quest.Love_PartIII:
+                    questPDDLProblemPath += "love_problem.pddl";
+                    break;
+
+                case Quest.Pilgrimage:
+                    questPDDLProblemPath += "pilgrimage_problem.pddl";
+                    break;
+
+                case Quest.Wisdom_PartI:
+                case Quest.Wisdom_PartII:
+                case Quest.Wisdom_PartIII:
+                    questPDDLProblemPath += "wisdom_problem.pddl";
+                    break;
+            }
+
+            Problem questProblemPDDL = Parser.GetProblem(questPDDLProblemPath);
+            return questProblemPDDL;
+        }
+
+
+        /// <summary>
+        /// Gets the player's problem file for the chronology step given by the step index.
+        /// </summary>
+        /// <returns>The player's problem file for chronology step.</returns>
+        /// <param name="playerId">Player identifier.</param>
+        /// <param name="chronologyStepIndex">Chronology step index.</param>
+        /// <param name="fullChronology">Full chronology for the player.</param>
+        static Problem GetPlayerProblemForChronologyStep(int playerId, int chronologyStepIndex, Plan fullChronology)
+        {
+            // The Player's Chronology includes NPC actions.
+            // The chronologyStepIndex is the index of the chronology of the player's action.
+            // What we want is the Problem that corresponds to the step in the chronology.
+            // However, a problem file is only generated for a *player's* action.
+            // So, we need to subtract from the index the number of intervening npc actions.
+            int npcActions = 0;
+
+            for (int i = 0; i <= (chronologyStepIndex); i++)
+            {
+                IOperator step = fullChronology.Steps[i];
+
+                // If the step's actor is not arthur, we have an NPC action.
+                if (!step.Actor.Equals("arthur"))
+                    npcActions++;
+            }
+
+            // The problem index to load is (chronologyStepIndex - npcActions).
+            int problemIndex = chronologyStepIndex - npcActions;
+            string problemName = @"problem_arthur" + problemIndex + @".pddl";
+            string problemPath = Parser.GetTopDirectory() + @"/../data/" + playerId + @"/corrected_problems/" + problemName;
+
+            // Load the problem.
+            Problem problem = Parser.GetProblem(problemPath);
+            return problem;
         }
 
         #region Quests

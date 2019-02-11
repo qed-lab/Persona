@@ -52,7 +52,9 @@ namespace Persona
 
             // RunPlayspaceAnalysis();
 
-            ComputeQuestsAdoptedForAllPlayers();
+            // ExpandPerformanceDataWithGoalDirectedAnalysisData();
+
+            // CompileAllGoalDirectedAnalysisData();
 
             // Test
             // TestGoalCombinations();
@@ -955,16 +957,108 @@ namespace Persona
 
         #region Goal Directed Analysis
 
-        public static void ComputeQuestsAdoptedForAllPlayers()
+        // Compile all information on goal directed analysis.
+        public static void CompileAllGoalDirectedAnalysisData()
+        {
+            // Declare the CSV objects.
+            List<List<string>> _baseline = new List<List<string>>();
+            List<List<string>> _windowed = new List<List<string>>();
+            List<List<string>> _cognitive = new List<List<string>>();
+            List<List<string>> _full = new List<List<string>>();
+
+            // Go into each player's folder: /Persona/analysis/Goal Directed Data/{player id}/output_quest_data.
+            string dataPath = Parser.GetTopDirectory() + @"analysis/Goal Directed Data/";
+            string[] dataFolders = Directory.GetDirectories(dataPath);
+
+            // Store and change the current working directory.
+            string oldWD = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(dataPath);
+
+            foreach (string dataFolder in dataFolders)
+            {
+                // Get the player's id.
+                string[] dataPathString = dataFolder.Split(new char[] { '/' });
+                int playerId = Convert.ToInt32(dataPathString[dataPathString.Length - 1]);
+
+                // Declare the player's folder.
+                string playerFolder = dataPath + playerId + @"/output_quest_data/";
+
+                // For each CSV file in the above directory,
+                string[] csvFiles = Directory.GetFiles(playerFolder);
+                foreach (string csvFile in csvFiles)
+                {
+                    // Get the file name.
+                    string[] csvFilePathString = csvFile.Split(new char[] { '/' });
+                    string fileName = csvFilePathString[csvFilePathString.Length - 1];
+
+                    // Read each CSV file and add CSV file data to correct object in the code.
+                    if (fileName.Contains("baseline"))
+                        LoadAndAppendCSVFile(csvFile, _baseline);
+
+                    else if (fileName.Contains("windowed"))
+                        LoadAndAppendCSVFile(csvFile, _windowed);
+
+                    else
+                        LoadAndAppendCSVFile(csvFile, _cognitive);
+                }
+            }
+
+            // Append all individual CSV objects to the full one.
+            _full.AddRange(_baseline);
+            _full.AddRange(_windowed);
+            _full.AddRange(_cognitive);
+
+            // Print out each CSV file to /Persona/analysis/Goal Directed Data/
+            string baselinePath = dataPath + @"_baseline.csv";
+            string windowedPath = dataPath + @"_windowed.csv";
+            string cognitivePath = dataPath + @"_cognitive.csv";
+            string fullPath = dataPath + @"_full.csv";
+
+            Writer.ToCSV(baselinePath, _baseline);
+            Writer.ToCSV(windowedPath, _windowed);
+            Writer.ToCSV(cognitivePath, _cognitive);
+            Writer.ToCSV(fullPath, _full);
+
+            // Restore the working directory.
+            Directory.SetCurrentDirectory(oldWD);
+
+            Console.Write("done");
+        }
+
+        // Loads info from csv file path and appends it to the given two dimensional string list.
+        static void LoadAndAppendCSVFile(string csvFilePath, List<List<string>> csvObjectToAppend)
+        {
+            using (var reader = new StreamReader(csvFilePath))
+            {
+                int rowNumber = 0;
+                while (!reader.EndOfStream)
+                {
+                    string row = (reader.ReadLine()).ToLower();
+
+                    // If the csvObject is empty (we add all rows), or
+                    // If we're not at the first row
+                    if (csvObjectToAppend.Count == 0 || rowNumber != 0)
+                    {
+                        string[] cols = row.Replace(" ", "").Replace("cognitive_strict", "cognitive").Split(','); // trim and split
+                        csvObjectToAppend.Add(new List<string>(cols)); // TODO: need to guard against header rows; how?    
+                    }
+
+                    rowNumber++;
+                }
+            }
+        }
+
+        // Expands (previously computed) performance data with data drawn from the goal analysis.
+        public static void ExpandPerformanceDataWithGoalDirectedAnalysisData()
         {
             // Record the kind of the system that is running here.
-            string config = "quest_adoption";
+            string config = "quest_data";
 
             // Load the baseline domain and problem
             Tuple<Domain, Problem> baseline = Utilities.GetBaselineArthurDomainAndProblem();
 
             // Load each folder.
-            string dataPath = Parser.GetTopDirectory() + @"analysis/GoalDirectedData/";
+            string dataPath = Parser.GetTopDirectory() + @"analysis/Goal Directed Data/";
             string[] dataFolders = Directory.GetDirectories(dataPath);
 
             // Assemble all the quest logs by player id.
@@ -992,9 +1086,7 @@ namespace Persona
                 Plan playerOnlyChronology = Utilities.RemoveNonPlayerActions(fullChronology);
 
                 // Create the data log.
-                string logPath = Directory.GetCurrentDirectory() + @"/quest-data.csv";
-                StreamWriter writer = new StreamWriter(logPath, false);
-                writer.WriteLine(DataLogEntry.CSVheader());
+                string logPath = Directory.GetCurrentDirectory();
 
                 // There should be one problem file for every step in the player's chronology.
                 List<Problem> problemsForPlayer = new List<Problem>();
@@ -1008,21 +1100,31 @@ namespace Persona
                 Dictionary<Quest, Tuple<int, int>> questLog =
                     GoalDirectedAnalysis.QuestLogInformationWithChronologyIndices(fullChronology, problemsForPlayer);
 
-                // We need to add the following columns:
-                // Number of Quests Active, Number of Quests Completed, Q{1,2,3,4,5} Active/Completed.
-
-
-
                 // Find the player's data in the /analysis/Experiment #1/{player id} folder.
+                string systemConfigurationDataForPlayer = Parser.GetTopDirectory() + @"Experiment_1/" + Math.Abs(playerId) + @"/";
+                string[] systemConfigurations = Directory.GetFiles(systemConfigurationDataForPlayer, "*.csv");
+
                 // For each CSV file in that folder
-                // For each row of data,
-                // Get the column [NumberOfPlayerActionsTaken]
+                foreach (string systemConfiguration in systemConfigurations)
+                {
+                    // Compute the expanded CSV data.
+                    List<List<string>> expandedCSVdata =
+                        GoalDirectedAnalysis.ExpandCSVFileWithQuestLogData(systemConfiguration, playerId, fullChronology, questLog);
 
+                    // Get the configuration name.
+                    string[] systemConfigurationPathString = systemConfiguration.Split(new char[] { '/' });
+                    string configurationName = systemConfigurationPathString[systemConfigurationPathString.Length - 1];
 
+                    // Compute the name of the file.
+                    string path = logPath + @"/" + configurationName;
 
+                    // Print out the CSV file.
+                    Writer.ToCSV(path, expandedCSVdata);
+                    Console.WriteLine(playerId + "-" + configurationName);
+                }
 
                 // Close the log.
-                writer.Close();
+                // writer.Close();
 
                 // Restore the old working directory.
                 Directory.SetCurrentDirectory(oldWD);

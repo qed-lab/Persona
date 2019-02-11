@@ -13,6 +13,25 @@ namespace Mediation.PlanTools
     [Serializable]
     public class Problem : IProblem, IEquatable<Problem>
     {
+        /// <summary>
+        /// Returns the match of the instance problem relative to the target.
+        /// Match is returned as a percentage [0.0 being no match, 1.0 being perfect match].
+        /// </summary>
+        public static double InitialStatePercentageMatch(Problem instance, Problem target)
+        {
+            int numberOfMatchingFeatures = 0;
+            int numberOfFeatures = target.initial.Count; // total amount of features to match is the number of initial state literals.
+
+            foreach (Predicate initLiteral in instance.initial)
+            {
+                if (target.initial.Contains(initLiteral))
+                    numberOfMatchingFeatures++;
+            }
+
+            double percentageMatch = (double)numberOfMatchingFeatures / (double)numberOfFeatures;
+            return percentageMatch;
+        }
+
         private string name;
         private string originalName;
         private string domain;

@@ -41,7 +41,7 @@ namespace Mediation.FileIO
                     foreach (IObject obj in problem.Objects)
                         writer.Write(" " + obj.Name);
                 }
-                    
+
                 writer.WriteLine("\t)");
                 writer.Write("\t(:init\n");
                 state.Sort();
@@ -63,16 +63,16 @@ namespace Mediation.FileIO
                 // If we only have conjunctive goals,
                 else
                 {
-	                if (problem.Goal.Count > 1)
-	                    writer.Write("\t(:goal\n\t  (AND\n");
-	                else
-	                    writer.Write("\t(:goal\n");
-	                foreach (IPredicate pred in problem.Goal)
-	                    writer.WriteLine("\t\t" + pred);
-	                if (problem.Goal.Count > 1)
-	                    writer.Write("\t)\n\t)\n)");
-	                else
-	                    writer.Write("\t)\n)\n");
+                    if (problem.Goal.Count > 1)
+                        writer.Write("\t(:goal\n\t  (AND\n");
+                    else
+                        writer.Write("\t(:goal\n");
+                    foreach (IPredicate pred in problem.Goal)
+                        writer.WriteLine("\t\t" + pred);
+                    if (problem.Goal.Count > 1)
+                        writer.Write("\t)\n\t)\n)");
+                    else
+                        writer.Write("\t)\n)\n");
                 }
 
                 writer.Close();
@@ -131,9 +131,9 @@ namespace Mediation.FileIO
                             writer.Write(" "); // add space between parameters as needed
                         }
 
-                        index++;    
+                        index++;
                     }
-                    
+
                     writer.WriteLine(")");
                     writer.WriteLine("\t\t:precondition");
                     if (action.Preconditions.Count > 0)
@@ -184,11 +184,11 @@ namespace Mediation.FileIO
         }
 
         // Creates an action log CSV file with two columns: action, execution-status
-        public static void ActionLogToCSV(string file, List<Utilities.Tuple<string,string>> actionLog)
+        public static void ActionLogToCSV(string file, List<Utilities.Tuple<string, string>> actionLog)
         {
             using (StreamWriter writer = new StreamWriter(file, false))
             {
-                foreach (Utilities.Tuple<string,string> action in actionLog)
+                foreach (Utilities.Tuple<string, string> action in actionLog)
                 {
                     writer.WriteLine(action);
                 }
@@ -214,8 +214,8 @@ namespace Mediation.FileIO
         // Creates a PDDL-like list of literals.
         public static void LiteralsToPDDL(string file, List<IPredicate> literals)
         {
-			using (StreamWriter writer = new StreamWriter(file, false))
-			{
+            using (StreamWriter writer = new StreamWriter(file, false))
+            {
                 if (literals != null)
                 {
                     foreach (IPredicate l in literals)
@@ -224,25 +224,26 @@ namespace Mediation.FileIO
                     }
                 }
 
-				writer.Close();
-			}
+                writer.Close();
+            }
         }
 
+        // 
         public static void DataLogToFile(string file, List<DataLogEntry> log)
         {
-			using (StreamWriter writer = new StreamWriter(file, false))
-			{
+            using (StreamWriter writer = new StreamWriter(file, false))
+            {
                 writer.WriteLine(DataLogEntry.CSVheader());
 
                 foreach (DataLogEntry l in log)
-				{
+                {
                     writer.WriteLine(l.ToCSVString());
-				}
+                }
 
-				writer.Close();
-			}
+                writer.Close();
+            }
         }
-            
+
         // Given a mediation node, creates an HTML representation.
         public static void ToHTML(string directory, PlanSpaceNode root)
         {
@@ -416,9 +417,40 @@ namespace Mediation.FileIO
                 writer.WriteLine("<body>");
                 foreach (Operator action in root.plan.Steps)
                     //if (!action.predicate.Equals("initial") && !action.predicate.Equals("goal"))
-                        writer.WriteLine(action + "<br />");
+                    writer.WriteLine(action + "<br />");
                 writer.WriteLine("</body>");
                 writer.WriteLine("</html>");
+            }
+        }
+
+        // Generates a CSV file within the given file, and with the given data.
+        public static void ToCSV(string file, List<List<string>> data)
+        {
+            using (StreamWriter writer = new StreamWriter(file, false))
+            {
+                foreach (List<string> row in data)
+                {
+                    for (int column = 0; column < row.Count; column++)
+                    {
+                        string columnValue = row[column];
+
+                        writer.Write(columnValue);
+
+                        // If we're not at the end of the row, add a comma
+                        if (column != row.Count - 1)
+                        {
+                            writer.Write(", ");
+                        }
+
+                        // Otherwise, add a new line.
+                        else
+                        {
+                            writer.Write("\n");
+                        }
+                    }
+                }
+
+                writer.Close();
             }
         }
 
