@@ -61,13 +61,13 @@ DoubleMADsFromMedian <- function(x, zero.mad.action="warn"){
 
 # Full data load - these files are created externally, by manually aligning the files produced in the data_preprocessing.
 # (The data joins take too long to finish executing in code.)
-data_file <- "~/Developer/Persona/analysis/Experiment #1/_full.csv"
+data_file <- "~/Developer/Persona/analysis/Experiment_1/_full_flat.csv"
 data <- read.csv(data_file)
 
-data_cols_file <- "~/Developer/Persona/analysis/Experiment #1/_full_cols.csv"
+data_cols_file <- "~/Developer/Persona/analysis/Experiment_1/_full.csv"
 data_cols <- read.csv(data_cols_file)
 
-data_cols_file_withoutbaseline <- "~/Developer/Persona/analysis/Experiment #1/_full_cols_no_baseline.csv"
+data_cols_file_withoutbaseline <- "~/Developer/Persona/analysis/Experiment_1/_full_no_baseline.csv"
 data_cols_withoutbaseline <- read.csv(data_cols_file_withoutbaseline)
 
 

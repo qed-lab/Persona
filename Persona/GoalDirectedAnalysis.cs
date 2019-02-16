@@ -12,6 +12,238 @@ namespace Persona
 {
     public static class GoalDirectedAnalysis
     {
+        public static List<List<string>> AssemblePrePostMetricsForQuestAdoption(List<List<string>> data)
+        {
+            // Find the following columns:
+            // PlayerId, SystemConfiguration, 
+            // PlanRecognitionPrecision, PlanRecognitionRecall, PlanRecognitionF1Score, PlanRecognitionLevenshteinDistance, 
+            // GoalRecognitionPrecision, GoalRecognitionRecall, GoalRecognitionF1Score, GoalRecognitionLevenshteinDistance,
+            // NumberOfAdoptedQuests
+            Dictionary<string, int> columnNameToIndex = new Dictionary<string, int>();
+            for (int i = 0; i < data[0].Count; i++)
+            {
+                string header = data[0][i];
+                switch (header)
+                {
+                    case "planrecognitionprecision":
+                        columnNameToIndex.Add("planrecognitionprecision", i);
+                        break;
+
+                    case "planrecognitionrecall":
+                        columnNameToIndex.Add("planrecognitionrecall", i);
+                        break;
+
+                    case "planrecognitionf1score":
+                        columnNameToIndex.Add("planrecognitionf1score", i);
+                        break;
+
+                    case "planrecognitionlevenshteindistance":
+                        columnNameToIndex.Add("planrecognitionlevenshteindistance", i);
+                        break;
+
+                    case "goalrecognitionprecision":
+                        columnNameToIndex.Add("goalrecognitionprecision", i);
+                        break;
+
+                    case "goalrecognitionrecall":
+                        columnNameToIndex.Add("goalrecognitionrecall", i);
+                        break;
+
+                    case "goalrecognitionf1score":
+                        columnNameToIndex.Add("goalrecognitionf1score", i);
+                        break;
+
+                    case "goalrecognitionlevenshteindistance":
+                        columnNameToIndex.Add("goalrecognitionlevenshteindistance", i);
+                        break;
+
+                    case "numberofadoptedquests":
+                        columnNameToIndex.Add("numberofadoptedquests", i);
+                        break;
+                }
+            }
+
+            // 0. Create 7 x 8 = 56 lists:
+            //  7:
+            //  - one for each value of NumberOfAdoptedQuests: 0, 1, 2, 3, 4, 5
+            //  - one for the aggregate from 1-5.
+            // 
+            //  8: 
+            //  - one for each metric: n + 7x(n)
+            //  PlanRecognitionPrecision, +0 
+            //  PlanRecognitionRecall, +7
+            //  PlanRecognitionF1Score, +14
+            //  PlanRecognitionLevenshteinDistance, +21
+            //  GoalRecognitionPrecision, +28
+            //  GoalRecognitionRecall, +35
+            //  GoalRecognitionF1Score, +42
+            //  GoalRecognitionLevenshteinDistance, +49
+            List<List<string>> lists = new List<List<string>>();
+            for (int i = 0; i < 56; i++)
+                lists.Add(new List<string>());
+
+            for (int i = 1; i < data.Count; i++)
+            {
+                // 1. For each row of the data set,
+                List<string> row = data[i];
+
+                // 2. Get the value of the "NumberOfAdoptedQuests" column.
+                string numOfAdoptedQuests = row[columnNameToIndex["numberofadoptedquests"]];
+                int numberOfAdoptedQuests = int.Parse(numOfAdoptedQuests);
+
+                // 3. Dump the metric columns into the appropriate list above.
+                // encoding trick: 
+                // offset = numberOfAdoptedQuests
+                // list to append to = starting index + offset;
+                // starting index = 7 * index, where
+
+
+                // index = 0 for PlanRecognitionPrecision
+                int index = 0;
+                int listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionprecision"]]);
+
+                if (numberOfAdoptedQuests != 0) // add to the seventh column the aggregate of the 2nd through the 6th.
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionprecision"]]);
+                }
+
+
+
+                // index = 1 for PlanRecognitionRecall
+                index = 1;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionrecall"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionrecall"]]);
+                }
+
+
+
+                // index = 2 for PlanRecognitionF1Score
+                index = 2;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionf1score"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionf1score"]]);
+                }
+
+
+
+                // index = 3 for PlanRecognitionLevenshteinDistance
+                index = 3;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionlevenshteindistance"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["planrecognitionlevenshteindistance"]]);
+                }
+
+
+
+                // index = 4 for GoalRecognitionPrecision
+                index = 4;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionprecision"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionprecision"]]);
+                }
+
+
+
+
+                // index = 5 for GoalRecognitionRecall
+                index = 5;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionrecall"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionrecall"]]);
+
+                }
+
+
+
+                // index = 6 for GoalRecognitionF1Score
+                index = 6;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionf1score"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionf1score"]]);
+                }
+
+
+
+                // index = 7 for GoalRecognitionLevenshteinDistance
+                index = 7;
+                listToAppendTo = index * 7 + numberOfAdoptedQuests;
+                lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionlevenshteindistance"]]);
+
+                if (numberOfAdoptedQuests != 0)
+                {
+                    listToAppendTo += (6 - numberOfAdoptedQuests);
+                    lists[listToAppendTo].Add(row[columnNameToIndex["goalrecognitionlevenshteindistance"]]);
+                }
+            }
+
+            // 4. Assemble the lists as columns, in a CSV-like format.
+            List<List<string>> csvFormat = new List<List<string>>();
+
+            // 1. Get the longest list of data. Let that length be maxCount.  
+            int maxCount = 0;
+            foreach (List<string> list in lists)
+                if (list.Count > maxCount)
+                    maxCount = list.Count;
+
+            // 2. Create maxCount lists and add them to the csvFormat.
+            for (int i = 0; i < maxCount; i++)
+            {
+                List<string> row = new List<string>();
+                csvFormat.Add(row);
+            }
+
+            // 3. For i = 0, and while i < maxCount,
+            for (int i = 0; i < maxCount; i++)
+            {
+                // 3a. Store a reference to the ith row of data.    
+                List<string> row = csvFormat[i];
+
+                // 3b. For all lists,
+                foreach (List<string> list in lists)
+                {
+                    string value = " ";
+
+                    // 3b.1. Store the ith value from that list if it exists. If it doesn't, store an empty string.
+                    if (list.Count > i + 1)
+                        value = list[i];
+
+                    // 3b.2. Add the ith value to the ith row of data.
+                    row.Add(value);
+                }
+            }
+
+            return csvFormat;
+        }
+
+
+
         /// <summary>
         /// Expands the CSV File for the given player with quest log data.
         /// </summary>

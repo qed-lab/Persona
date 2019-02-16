@@ -50,11 +50,15 @@ namespace Persona
 
             // PlanFailTest();
 
+            // Goal Driven Analysis
+
             // RunPlayspaceAnalysis();
 
             // ExpandPerformanceDataWithGoalDirectedAnalysisData();
 
             // CompileAllGoalDirectedAnalysisData();
+
+            CompilePrePostMetricsForGoalDirectedAnalysis();
 
             // Test
             // TestGoalCombinations();
@@ -957,6 +961,67 @@ namespace Persona
 
         #region Goal Directed Analysis
 
+        // Compile the information needed to do a pre/post comparison.
+        public static void CompilePrePostMetricsForGoalDirectedAnalysis()
+        {
+            // Declare the CSV objects.
+            List<List<string>> _baseline = new List<List<string>>();
+            List<List<string>> _windowed = new List<List<string>>();
+            List<List<string>> _cognitive = new List<List<string>>();
+            List<List<string>> _full = new List<List<string>>();
+
+            List<List<string>> _baseline_prePost = new List<List<string>>();
+            List<List<string>> _windowed_prePost = new List<List<string>>();
+            List<List<string>> _cognitive_prePost = new List<List<string>>();
+            List<List<string>> _full_prePost = new List<List<string>>();
+
+            // Go into the primary data folder: /Persona/analysis/Goal Directed Data/
+            string dataPath = Parser.GetTopDirectory() + @"analysis/Goal Directed Data/";
+
+            // Find all the CSV files.
+            string[] csvFiles = Directory.GetFiles(dataPath, "*.csv");
+
+            foreach (string csvFile in csvFiles)
+            {
+                // Get the file name.
+                string[] csvFilePathString = csvFile.Split(new char[] { '/' });
+                string fileName = csvFilePathString[csvFilePathString.Length - 1];
+
+                // Read each CSV file and add CSV file data to correct object in the code.
+                if (fileName.Equals("_baseline.csv"))
+                    LoadAndAppendCSVFile(csvFile, _baseline);
+
+                else if (fileName.Equals("_windowed.csv"))
+                    LoadAndAppendCSVFile(csvFile, _windowed);
+
+                else if (fileName.Equals("_cognitive.csv"))
+                    LoadAndAppendCSVFile(csvFile, _cognitive);
+
+                else if (fileName.Equals("_full.csv"))
+                    LoadAndAppendCSVFile(csvFile, _full);
+            }
+
+            _baseline_prePost = GoalDirectedAnalysis.AssemblePrePostMetricsForQuestAdoption(_baseline);
+            _windowed_prePost = GoalDirectedAnalysis.AssemblePrePostMetricsForQuestAdoption(_windowed);
+            _cognitive_prePost = GoalDirectedAnalysis.AssemblePrePostMetricsForQuestAdoption(_cognitive);
+            _full_prePost = GoalDirectedAnalysis.AssemblePrePostMetricsForQuestAdoption(_full);
+
+            // Print out each CSV file to /Persona/analysis/Goal Directed Data/
+            string baselinePath = dataPath + @"_baseline_prePost.csv";
+            string windowedPath = dataPath + @"_windowed_prePost.csv";
+            string cognitivePath = dataPath + @"_cognitive_prePost.csv";
+            string fullPath = dataPath + @"_full_prePost.csv";
+
+            Writer.ToCSV(baselinePath, _baseline_prePost);
+            Writer.ToCSV(windowedPath, _windowed_prePost);
+            Writer.ToCSV(cognitivePath, _cognitive_prePost);
+            Writer.ToCSV(fullPath, _full_prePost);
+
+            Console.WriteLine("done");
+        }
+
+
+
         // Compile all information on goal directed analysis.
         public static void CompileAllGoalDirectedAnalysisData()
         {
@@ -965,6 +1030,7 @@ namespace Persona
             List<List<string>> _windowed = new List<List<string>>();
             List<List<string>> _cognitive = new List<List<string>>();
             List<List<string>> _full = new List<List<string>>();
+            List<List<string>> _full_flattened = new List<List<string>>();
 
             // Go into each player's folder: /Persona/analysis/Goal Directed Data/{player id}/output_quest_data.
             string dataPath = Parser.GetTopDirectory() + @"analysis/Goal Directed Data/";
@@ -1040,7 +1106,7 @@ namespace Persona
                     if (csvObjectToAppend.Count == 0 || rowNumber != 0)
                     {
                         string[] cols = row.Replace(" ", "").Replace("cognitive_strict", "cognitive").Split(','); // trim and split
-                        csvObjectToAppend.Add(new List<string>(cols)); // TODO: need to guard against header rows; how?    
+                        csvObjectToAppend.Add(new List<string>(cols));
                     }
 
                     rowNumber++;
