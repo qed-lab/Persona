@@ -54,9 +54,9 @@ namespace Persona
 
             // RunPlayspaceAnalysis();
 
-            // ExpandPerformanceDataWithGoalDirectedAnalysisData();
+            ExpandPerformanceDataWithGoalDirectedAnalysisData();
 
-            // CompileAllGoalDirectedAnalysisData();
+            CompileAllGoalDirectedAnalysisData();
 
             CompilePrePostMetricsForGoalDirectedAnalysis();
 
@@ -1071,8 +1071,15 @@ namespace Persona
 
             // Append all individual CSV objects to the full one.
             _full.AddRange(_baseline);
-            _full.AddRange(_windowed);
-            _full.AddRange(_cognitive);
+
+            List<List<string>> _windowedCopy = new List<List<string>>(_windowed);
+            List<List<string>> _cognitiveCopy = new List<List<string>>(_cognitive);
+
+            _windowedCopy.RemoveAt(0); // don't re-add the header
+            _full.AddRange(_windowedCopy);
+
+            _cognitiveCopy.RemoveAt(0); // don't re-add the header
+            _full.AddRange(_cognitiveCopy);
 
             // Print out each CSV file to /Persona/analysis/Goal Directed Data/
             string baselinePath = dataPath + @"_baseline.csv";

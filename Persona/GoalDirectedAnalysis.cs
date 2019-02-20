@@ -212,15 +212,93 @@ namespace Persona
                 if (list.Count > maxCount)
                     maxCount = list.Count;
 
+            // Add header information.
+            List<string> headerRow = new List<string>{
+
+                //  PlanRecognitionPrecision, +0 
+                "PR-Pr-0",
+                "PR-Pr-1",
+                "PR-Pr-2",
+                "PR-Pr-3",
+                "PR-Pr-4",
+                "PR-Pr-5",
+                "PR-Pr-+1",
+
+                //  PlanRecognitionRecall, +7
+                "PR-Re-0",
+                "PR-Re-1",
+                "PR-Re-2",
+                "PR-Re-3",
+                "PR-Re-4",
+                "PR-Re-5",
+                "PR-Re-+1",
+
+                //  PlanRecognitionF1Score, +14
+                "PR-F1-0",
+                "PR-F1-1",
+                "PR-F1-2",
+                "PR-F1-3",
+                "PR-F1-4",
+                "PR-F1-5",
+                "PR-F1-+1",
+
+                //  PlanRecognitionLevenshteinDistance, +21
+                "PR-Dist-0",
+                "PR-Dist-1",
+                "PR-Dist-2",
+                "PR-Dist-3",
+                "PR-Dist-4",
+                "PR-Dist-5",
+                "PR-Dist-+1",
+
+                //  GoalRecognitionPrecision, +28
+                "GR-Pr-0",
+                "GR-Pr-1",
+                "GR-Pr-2",
+                "GR-Pr-3",
+                "GR-Pr-4",
+                "GR-Pr-5",
+                "GR-Pr-+1",
+
+                //  GoalRecognitionRecall, +35
+                "GR-Re-0",
+                "GR-Re-1",
+                "GR-Re-2",
+                "GR-Re-3",
+                "GR-Re-4",
+                "GR-Re-5",
+                "GR-Re-+1",
+
+                //  GoalRecognitionF1Score, +42
+                "GR-F1-0",
+                "GR-F1-1",
+                "GR-F1-2",
+                "GR-F1-3",
+                "GR-F1-4",
+                "GR-F1-5",
+                "GR-F1-+1",
+
+                //  GoalRecognitionLevenshteinDistance, +49
+                "GR-Dist-0",
+                "GR-Dist-1",
+                "GR-Dist-2",
+                "GR-Dist-3",
+                "GR-Dist-4",
+                "GR-Dist-5",
+                "GR-Dist-+1",
+            };
+
+            csvFormat.Add(headerRow); // add the header row.
+
             // 2. Create maxCount lists and add them to the csvFormat.
-            for (int i = 0; i < maxCount; i++)
+            for (int i = 1; i <= maxCount; i++)
             {
                 List<string> row = new List<string>();
                 csvFormat.Add(row);
             }
 
-            // 3. For i = 0, and while i < maxCount,
-            for (int i = 0; i < maxCount; i++)
+            // 3. For i = 1, and while i < maxCount,
+            for (int i = 1; i <= maxCount; i++)
             {
                 // 3a. Store a reference to the ith row of data.    
                 List<string> row = csvFormat[i];
@@ -241,7 +319,6 @@ namespace Persona
 
             return csvFormat;
         }
-
 
 
         /// <summary>
@@ -289,12 +366,25 @@ namespace Persona
             double equipKnol = -1.0;
             double fetchKnol = -1.0;
             double pilgrimageKnol = -1.0;
-            double loveLetterKnol = -1.0, loveGiftKnol = -1.0, loveContractKnol = -1.0; ;
+            double loveLetterKnol = -1.0, loveGiftKnol = -1.0, loveContractKnol = -1.0;
             double wisdomCoinKnol = -1.0, wisdomHumanskullKnol = -1.0, wisdomCandleKnol = -1.0;
+
+            double inverseEquipKnol = 0.0;
+            double inverseFetchKnol = 0.0;
+            double inversePilgrimageKnol = 0.0;
+            double inverseLoveLetterKnol = 0.0, inverseLoveGiftKnol = 0.0, inverseLoveContractKnol = 0.0;
+            double inverseWisdomCoinKnol = 0.0, inverseWisdomHumanskullKnol = 0.0, inverseWisdomCandleKnol = 0.0;
 
             // Quest aggregate knol flags;
             double loveAvgKnol = -1.0;
             double wisdomAvgKnol = -1.0;
+
+            double inverseLoveAvgKnol = 0.0;
+            double inverseWisdomAvgKnol = 0.0;
+
+            // Inverse knol flags;
+            double averageInverseKnowledgeOfActiveQuestParts = 0.0;
+            double averageInverseKnowledgeOfActiveQuests = 0.0;
 
             // Load the CSV file.
             List<List<string>> csvData = new List<List<string>>();
@@ -323,10 +413,12 @@ namespace Persona
             expandedCSVdata[0].Add("NumberOfAdoptedQuestParts");
             expandedCSVdata[0].Add("NumberOfCompletedQuestParts");
             expandedCSVdata[0].Add("NumberOfActiveQuestParts");
+            expandedCSVdata[0].Add("AverageInverseKnowledgeOfActiveQuestParts");
 
             expandedCSVdata[0].Add("NumberOfAdoptedQuests");
             expandedCSVdata[0].Add("NumberOfCompletedQuests");
             expandedCSVdata[0].Add("NumberOfActiveQuests");
+            expandedCSVdata[0].Add("AverageInverseKnowledgeOfActiveQuests");
 
             expandedCSVdata[0].Add("EquipQuest-adopted");
             expandedCSVdata[0].Add("EquipQuest-complete");
@@ -372,6 +464,8 @@ namespace Persona
             expandedCSVdata[0].Add("WisdomQuest-aggregate-complete");
             expandedCSVdata[0].Add("WisdomQuest-avg-knol");
 
+
+
             // For each row of data in the CSV file,
             for (int rowIndex = 1; rowIndex < csvData.Count; rowIndex++)
             {
@@ -404,7 +498,8 @@ namespace Persona
                                     equipAdopted = true;
                                     numberOfAdoptedQuests++;
                                     numberOfAdoptedQuestParts++;
-                                    equipKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    equipKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseEquipKnol = 1.0 - equipKnol;
                                 }
                                 break;
 
@@ -416,6 +511,7 @@ namespace Persona
                                     numberOfAdoptedQuests++;
                                     numberOfAdoptedQuestParts++;
                                     fetchKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    inverseFetchKnol = 1.0 - fetchKnol;
                                 }
                                 break;
 
@@ -427,6 +523,7 @@ namespace Persona
                                     numberOfAdoptedQuests++;
                                     numberOfAdoptedQuestParts++;
                                     pilgrimageKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inversePilgrimageKnol = 1.0 - pilgrimageKnol;
                                 }
                                 break;
 
@@ -438,7 +535,8 @@ namespace Persona
                                     loveAdopted = true;
                                     numberOfAdoptedQuests++;
                                     numberOfAdoptedQuestParts++;
-                                    loveLetterKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    loveLetterKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseLoveLetterKnol = 1.0 - loveLetterKnol;
                                 }
                                 break;
 
@@ -448,7 +546,8 @@ namespace Persona
                                 {
                                     loveGiftAdopted = true;
                                     numberOfAdoptedQuestParts++;
-                                    loveGiftKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    loveGiftKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseLoveGiftKnol = 1.0 - loveGiftKnol;
                                 }
                                 break;
 
@@ -458,7 +557,8 @@ namespace Persona
                                 {
                                     loveContractAdopted = true;
                                     numberOfAdoptedQuestParts++;
-                                    loveContractKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    loveContractKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseLoveContractKnol = 1.0 - loveContractKnol;
                                 }
                                 break;
 
@@ -470,7 +570,8 @@ namespace Persona
                                     wisdomAdopted = true;
                                     numberOfAdoptedQuests++;
                                     numberOfAdoptedQuestParts++;
-                                    wisdomCoinKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    wisdomCoinKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseWisdomCoinKnol = 1.0 - wisdomCoinKnol;
                                 }
                                 break;
 
@@ -480,7 +581,8 @@ namespace Persona
                                 {
                                     wisdomHumanskullAdopted = true;
                                     numberOfActiveQuestParts++;
-                                    wisdomHumanskullKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    wisdomHumanskullKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseWisdomHumanskullKnol = 1.0 - wisdomHumanskullKnol;
                                 }
                                 break;
 
@@ -490,7 +592,8 @@ namespace Persona
                                 {
                                     wisdomCandleAdopted = true;
                                     numberOfAdoptedQuestParts++;
-                                    wisdomCandleKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology); ;
+                                    wisdomCandleKnol = KnowledgePercentageAtQuestAdoption(quest, playerId, indexOfAdoption, fullChronology);
+                                    inverseWisdomCandleKnol = 1.0 - wisdomCandleKnol;
                                 }
                                 break;
                         }
@@ -506,6 +609,8 @@ namespace Persona
                     {
                         double loveAvgDenominator = (loveLetterAdopted ? 1 : 0) + (loveGiftAdopted ? 1 : 0) + (loveContractAdopted ? 1 : 0); // 1 used to avoid dividing by zero
                         loveAvgKnol /= loveAvgDenominator;
+
+                        inverseLoveAvgKnol = 1.0 - loveAvgKnol;
                     }
 
 
@@ -519,6 +624,8 @@ namespace Persona
                     {
                         double wisdomAvgDenominator = /*(wisdomCoinAdopted ? 1 : 0)*/ 1 + (wisdomHumanskullAdopted ? 1 : 0) + (wisdomCandleAdopted ? 1 : 0); // 1 used to avoid dividing by zero
                         wisdomAvgKnol /= wisdomAvgDenominator;
+
+                        inverseWisdomAvgKnol = 1.0 - wisdomAvgKnol;
                     }
 
                     // if the Quest index of completion != -1 && index of completion == numberOfPlayerActionsTaken
@@ -621,16 +728,42 @@ namespace Persona
                 numberOfActiveQuestParts = numberOfAdoptedQuestParts - numberOfCompletedQuestParts;
                 numberOfActiveQuests = numberOfAdoptedQuests - numberOfCompletedQuests;
 
+                // Calculate average inverse knowledge of all active quest parts / quests.
+                double inverseQuestPartKnowledgeNumerator = 0.0;
+                inverseQuestPartKnowledgeNumerator +=
+                    (equipAdopted ? inverseEquipKnol : 0.0) +
+                    (fetchAdopted ? inverseFetchKnol : 0.0) +
+                    (pilgrimageAdopted ? inversePilgrimageKnol : 0.0) +
+                    (loveLetterAdopted ? inverseLoveLetterKnol : 0.0) +
+                    (loveGiftAdopted ? inverseLoveGiftKnol : 0.0) +
+                    (loveContractAdopted ? inverseLoveContractKnol : 0.0) +
+                    (wisdomCoinAdopted ? inverseWisdomCoinKnol : 0.0) +
+                    (wisdomHumanskullAdopted ? inverseWisdomHumanskullKnol : 0.0) +
+                    (wisdomCandleAdopted ? inverseWisdomCandleKnol : 0.0);
+
+                double inverseQuestKnowledgeNumerator = 0.0;
+                inverseQuestKnowledgeNumerator +=
+                    (equipAdopted ? inverseEquipKnol : 0.0) +
+                    (fetchAdopted ? inverseFetchKnol : 0.0) +
+                    (pilgrimageAdopted ? inversePilgrimageKnol : 0.0) +
+                    (loveLetterAdopted ? inverseLoveAvgKnol : 0.0) +
+                    (wisdomCoinAdopted ? inverseWisdomAvgKnol : 0.0);
+
+                averageInverseKnowledgeOfActiveQuestParts = inverseQuestPartKnowledgeNumerator / numberOfAdoptedQuestParts;
+                averageInverseKnowledgeOfActiveQuests = inverseQuestKnowledgeNumerator / numberOfAdoptedQuests;
+
                 // Compute the new row of data and add it to the data set.
                 List<string> expandedRow = new List<string>(row)
                 {
                     numberOfAdoptedQuestParts.ToString(),
                     numberOfCompletedQuestParts.ToString(),
                     numberOfActiveQuestParts.ToString(),
+                    averageInverseKnowledgeOfActiveQuestParts.ToString(),
 
                     numberOfAdoptedQuests.ToString(),
                     numberOfCompletedQuests.ToString(),
                     numberOfActiveQuests.ToString(),
+                    averageInverseKnowledgeOfActiveQuests.ToString(),
 
                     equipAdopted.ToString(),
                     equipCompleted.ToString(),
